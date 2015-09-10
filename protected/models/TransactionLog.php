@@ -13,7 +13,7 @@
  * @property string $date_updated
  *
  * The followings are the available model relations:
- * @property FreevoipAccounts $freevoipAccount
+ * @property FreeVoipAccounts $freevoipAccount
  */
 class TransactionLog extends CActiveRecord
 {
