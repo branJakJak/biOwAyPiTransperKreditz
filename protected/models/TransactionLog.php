@@ -52,7 +52,7 @@ class TransactionLog extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'freevoipAccount' => array(self::BELONGS_TO, 'FreevoipAccounts', 'freevoip_account'),
+			'freevoipAccount' => array(self::BELONGS_TO, 'FreeVoipAccounts', 'freevoip_account'),
 		);
 	}
 
