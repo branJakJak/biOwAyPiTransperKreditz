@@ -121,10 +121,10 @@ return array(
         ),
         // uncomment the following to use a MySQL database
           'db'=>array(
-              'connectionString' => 'mysql:host=localhost;dbname=voiptransfer',
+              'connectionString' => 'mysql:host=localhost;dbname=dncsyste_voip',
               'emulatePrepare' => true,
-              'username' => 'root',
-              'password' => 'root',
+              'username' => 'dncsyste_voip',
+              'password' => 'hitman052529',
               'charset' => 'utf8',
               'tablePrefix' => 'tbl_',
           ),
