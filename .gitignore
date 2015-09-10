@@ -6,4 +6,4 @@ protected/components/UserIdentity.php
 protected/vendor/
 /index.php
 protected/yiic.php
-protected/config/*
+protected/config/main.php
