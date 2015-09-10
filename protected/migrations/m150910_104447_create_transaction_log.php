@@ -13,6 +13,7 @@ class m150910_104447_create_transaction_log extends CDbMigration
 				"date_created"=>"datetime",
 				"date_updated"=>"datetime",
 			));
+		/*asd*/
 	}
 
 	public function safeDown()
