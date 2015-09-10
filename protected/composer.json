@@ -1,0 +1,15 @@
+{
+    "name": "kevin/protected",
+    "authors": [
+        {
+            "name": "kebyang",
+            "email": "kelvo_link@yahoo.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit-selenium": ">=1.2",
+        "phpunit/dbunit": ">=1.2",
+        "phpunit/phpunit-story": "*"    
+    }
+}
