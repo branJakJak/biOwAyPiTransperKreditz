@@ -7,6 +7,7 @@ class UserController extends Controller
 	 */
 	private $_model;
 
+
 	/**
 	 * @return array action filters
 	 */

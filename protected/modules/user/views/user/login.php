@@ -3,6 +3,13 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 $this->breadcrumbs=array(
 	UserModule::t("Login"),
 );
+
+?>
+<div class="span6 offset3" style="padding: 10px">
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>"Private access",
+	));
 ?>
 
 <h1><?php echo UserModule::t("Login"); ?></h1>
@@ -73,7 +80,12 @@ $form = new CForm(array(
         'login'=>array(
             'type'=>'submit',
             'label'=>'Login',
+            'htmlOptions'=>array('class'=>'btn btn-primary'),
+            
         ),
     ),
 ), $model);
 ?>
+
+<?php $this->endWidget();?>
+</div>
