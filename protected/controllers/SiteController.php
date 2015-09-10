@@ -29,6 +29,7 @@ public function accessRules()
 	 */
 	public function actionIndex()
 	{
+		/*asdas*/
         $transactionLogMdl = new TransactionLog();
         $transactionLogMdl->unsetAttributes();
         if (isset($_POST['TransactionLog'])) {
