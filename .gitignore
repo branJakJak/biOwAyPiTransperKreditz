@@ -7,3 +7,4 @@ protected/vendor/
 /index.php
 protected/yiic.php
 protected/config/main.php
+protected/config/console.php
