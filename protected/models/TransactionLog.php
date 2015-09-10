@@ -17,7 +17,12 @@
  */
 class TransactionLog extends CActiveRecord
 {
-	public $pincode = "2580";
+	public function init()
+	{
+		if ($this->isNewRecord) {
+			$this->pincode = 2580;
+		}
+	}
 	/**
 	 * 
 	 * @return string the associated database table name

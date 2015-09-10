@@ -42,7 +42,7 @@ public function accessRules()
 	{
 		/*asdas*/
         $transactionLogMdl = new TransactionLog();
-        $transactionLogMdl->unsetAttributes();
+        
         if (isset($_POST['TransactionLog'])) {
             $transactionLogMdl->attributes = $_POST['TransactionLog'];
             if ($transactionLogMdl->save()) {
