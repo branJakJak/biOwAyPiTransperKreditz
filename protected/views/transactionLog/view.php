@@ -30,3 +30,7 @@ $this->menu=array(
 		'date_updated',
 	),
 )); ?>
+<hr>
+<?php 
+	echo CHtml::link('Resend', array('transactionLog/resend','transactionId'=>$model->id),array('class'=>'btn btn-primary')); 
+?>
