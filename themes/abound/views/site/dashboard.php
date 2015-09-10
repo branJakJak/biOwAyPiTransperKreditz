@@ -24,7 +24,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
                 </span>
                 <span class="summary-number"><?php echo number_format($voipAccountsCount) ?></span>
                 <span class="summary-title"> 
-                    VOIP Accounts
+                    FreeVoip Accounts
                     <?php echo CHtml::link('add new account', array('freeVoipAccounts/create') , array('class'=>'pull-right')); ?>
                 </span>
             </li>
