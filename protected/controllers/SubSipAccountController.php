@@ -172,7 +172,7 @@ class SubSipAccountController extends Controller
 		if (isset($_POST['UpdateSubSipAccount'])) {
 			$updateSubSipAccount->attributes = $_POST['UpdateSubSipAccount'];
 			if ($updateSubSipAccount->update()) {
-				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . Credit is now ".$updateSubSipAccount->amount);
+				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
 				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
 			}
