@@ -38,13 +38,24 @@ $baseUrl = Yii::app()->theme->baseUrl;
                     <?php echo CHtml::link('view all', array('transactionLog/index') , array('class'=>'pull-right')); ?>
                 </span>
             </li>
+            <li>
+                <span class="summary-icon">
+                    <img src="<?php echo $baseUrl ;?>/img/credit.png" width="36" height="36" alt="SIP Credits">
+                </span>
+                <span class="summary-number">
+                    <?php echo number_format($sipAccountCount) ?>
+                </span>
+                <span class="summary-title"> 
+                    SIP Accounts
+                    <?php echo CHtml::link('view all', array('sipAccount/index') , array('class'=>'pull-right')); ?>
+                </span>
+            </li>
         
           </ul>
         </div>
   </div>
 
-
-	<div class="span9">
+	<div class="span5">
         <?php
         		$this->beginWidget('zii.widgets.CPortlet', array(
         			'title'=>'<span class="icon-picture"></span>Transfer Credits',

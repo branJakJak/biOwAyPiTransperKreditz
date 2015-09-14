@@ -35,14 +35,13 @@ public function accessRules()
 	);
 }
 	/**
-	 * This is the default 'index' action that is invoked
+	 * This is the default 'index' action that is invOked
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
 	{
-		/*asdas*/
+		
         $transactionLogMdl = new TransactionLog();
-        
         if (isset($_POST['TransactionLog'])) {
             $transactionLogMdl->attributes = $_POST['TransactionLog'];
             if ($transactionLogMdl->save()) {
@@ -65,15 +64,13 @@ public function accessRules()
         			}
         			Yii::app()->user->setFlash('error', '<strong>Transaction Failed!</strong> We met some error while transferring the amount . <br>But here is your transaction log '.$newTransactionlink . ' , you can resend it later. <br>Reason of failure : '.$reasonOfFailure);
         		}
-
-            	
-            	
             	$this->redirect("/");
             }
         }
 		$voipAccountsCount = FreeVoipAccounts::model()->count();
 		$transactionCount = TransactionLog::model()->count();
-		$this->render('dashboard',compact('voipAccountsCount','transactionCount','transactionLogMdl'));
+		$sipAccountCount = SipAccount::model()->count();
+		$this->render('dashboard',compact('voipAccountsCount','transactionCount','transactionLogMdl','sipAccountCount'));
 	}
 
 	/**
