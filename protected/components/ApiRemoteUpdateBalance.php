@@ -84,7 +84,6 @@ class ApiRemoteUpdateBalance
                 "amount"=>$this->getAmount(),
             );
         $curlURL .= http_build_query($httpParams);
-        die($curlURL);
         $curlres = curl_init($curlURL);
         curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
