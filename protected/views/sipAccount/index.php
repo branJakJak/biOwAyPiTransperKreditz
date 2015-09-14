@@ -52,6 +52,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <h1>
     Sip Accounts
 </h1>
+<small id="updateCounterContainer"></small>
 
 
 <?php $this->widget('zii.widgets.CListView', array(

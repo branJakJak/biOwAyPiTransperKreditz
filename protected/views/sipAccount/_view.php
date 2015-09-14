@@ -4,10 +4,11 @@
 
 
 /*check status at remote server */
-$remoteChecker = new ApiRemoteStatusChecker($data->id);
-$remoteChecker->checkAllSubAccounts();
+// $remoteChecker = new ApiRemoteStatusChecker($data->id);
+// $remoteChecker->checkAllSubAccounts();
 
 
+$baseUrl = Yii::app()->theme->baseUrl; 
 
 ?>
 
@@ -33,15 +34,27 @@ $remoteChecker->checkAllSubAccounts();
 					// 'username',
 					'customer_name',
 					'account_status',
-					'balance',
+					// 'balance',
 					'exact_balance',
+					array(
+						'class'=>'CButtonColumn',
+						'template'=>'{update_balance}',
+						'buttons'=>array(
+							'update_balance'=>array(
+								'label'=>"Update Balance",
+								'imageUrl'=>$baseUrl."/img/1442268678_shopcartdown_32x32.png",
+								'url'=>'$this->grid->controller->createUrl("/subSipAccount/updateBalance", array("subAccount"=>$data->id))',
+							),
+						)
+					),
 					array(
 						'class'=>'CButtonColumn',
 						'template'=>'{view}',
 						'buttons'=>array(
-								'view'=>array(
-									'url'=>'$this->grid->controller->createUrl("/subSipAccount/view", array("id"=>$data->id))',
-								),
+							'view'=>array(
+								'label'=>"View Information",
+								'url'=>'$this->grid->controller->createUrl("/subSipAccount/view", array("id"=>$data->id))',
+							),
 						)
 					),
 				),
@@ -55,7 +68,7 @@ $remoteChecker->checkAllSubAccounts();
 		'type'=>'primary',
 		'buttons'=>array(
 			array('label'=>'Action', 'items'=>array(
-				array('label'=>'Create Client Account', 'url'=>$this->createUrl("/subSipAccount/create",array("SubSipAccount[parent_sip]" => $data->id)) ),
+				array('label'=>'Register Client Account', 'url'=>$this->createUrl("/subSipAccount/create",array("SubSipAccount[parent_sip]" => $data->id)) ),
 				'---',
 				array('label'=>'View Current SIP Account', 'url'=>array('view', 'id'=>$data->id)),
 			)),

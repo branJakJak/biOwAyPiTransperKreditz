@@ -28,7 +28,7 @@ class SubSipAccountController extends Controller
 	{
         return array(
             array('allow',
-                'actions'=>array('create','update','index','view','admin','delete'),
+                'actions'=>array('create','update','index','view','admin','delete','updateBalance'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -161,5 +161,25 @@ class SubSipAccountController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	public function actionUpdateBalance($subAccount)
+	{
+		$updateSubSipAccount = new UpdateSubSipAccount();
+		if (isset($_GET['subAccount'])) {
+			$updateSubSipAccount->subSipOwner = intval($_GET['subAccount']);
+		}
+		$subsipmodel = $updateSubSipAccount->getSubSipAccountModel();
+		if (isset($_POST['UpdateSubSipAccount'])) {
+			$updateSubSipAccount->attributes = $_POST['UpdateSubSipAccount'];
+			if ($updateSubSipAccount->update()) {
+				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . Credit is now ".$updateSubSipAccount->amount);
+			}else{
+				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
+			}
+			$updateSubSipAccount->unsetAttributes();
+		}else{
+			Yii::app()->user->setFlash('info', 'You are about to update the balance of <strong>'.$subsipmodel->customer_name.'</strong>');
+		}
+		$this->render('updateBalance',compact('updateSubSipAccount','subsipmodel'));
 	}
 }
