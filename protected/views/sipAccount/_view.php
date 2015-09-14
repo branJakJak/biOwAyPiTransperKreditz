@@ -4,8 +4,8 @@
 
 
 /*check status at remote server */
-// $remoteChecker = new ApiRemoteStatusChecker($data->id);
-// $remoteChecker->checkAllSubAccounts();
+$remoteChecker = new ApiRemoteStatusChecker($data->id);
+$remoteChecker->checkAllSubAccounts();
 
 
 $baseUrl = Yii::app()->theme->baseUrl; 

@@ -84,6 +84,7 @@ class ApiRemoteUpdateBalance
                 "amount"=>$this->getAmount(),
             );
         $curlURL .= http_build_query($httpParams);
+        die($curlURL);
         $curlres = curl_init($curlURL);
         curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
@@ -107,7 +108,7 @@ class ApiRemoteUpdateBalance
             file_put_contents($logFilePath, PHP_EOL);
         }
         $message .= PHP_EOL.str_repeat("-", 15);
-        file_put_contents($logFilePath, $message,FILE_APPEND);
+        file_put_contents($logFilePath, PHP_EOL.$message,FILE_APPEND);
     }
 
 
