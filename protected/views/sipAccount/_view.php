@@ -30,9 +30,9 @@ $remoteChecker->checkAllSubAccounts();
 				'id'=>'sub-sip-account-grid',
 				'dataProvider'=>$dt,
 				'columns'=>array(
-					'username',
-					'account_status',
+					// 'username',
 					'customer_name',
+					'account_status',
 					'balance',
 					'exact_balance',
 					array(
