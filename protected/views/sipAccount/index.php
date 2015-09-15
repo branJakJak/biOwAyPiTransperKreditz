@@ -50,7 +50,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
     ),
 )); ?>
 <h1>
-    Sip Accounts
+    Sip Accounts <small>[bestvoipreselling]</small>
 </h1>
 <small id="updateCounterContainer"></small>
 

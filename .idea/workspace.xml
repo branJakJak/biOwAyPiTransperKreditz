@@ -39,7 +39,7 @@
       <file leaf-file-name="ApiRemoteUpdateBalance.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteUpdateBalance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="48" selection-start="3107" selection-end="3107" vertical-scroll-proportion="0.6504673">
+            <state line="106" column="35" selection-start="3030" selection-end="3030" vertical-scroll-proportion="0.5869159">
               <folding />
             </state>
           </provider>
@@ -265,6 +265,17 @@
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
+  <component name="PublishConfig">
+    <servers>
+      <server id="c4121e1a-426e-4496-a113-547da1647e96">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </server>
+    </servers>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
@@ -292,7 +303,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1376" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -469,7 +480,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteUpdateBalance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="48" selection-start="3107" selection-end="3107" vertical-scroll-proportion="0.6504673">
+        <state line="106" column="35" selection-start="3030" selection-end="3030" vertical-scroll-proportion="0.5869159">
           <folding />
         </state>
       </provider>
