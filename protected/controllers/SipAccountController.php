@@ -118,15 +118,15 @@ class SipAccountController extends Controller
         foreach ($allModels as $currentModel) {
             foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
                 $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
-                $currentSubSipAccount = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
+                $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
                 /*notify*/
                 // $checker = new SipAccountNotifier();
                 // $checker->check($currentSubSipAccount);
                 /*end of notify*/
-                if ($currentSubSipAccount->balance <= 5) {
-                    $voipAccountBlocker->block($currentSubSipAccount->parentSip, $currentSubSipAccount);
+                if ($tempSubSip->balance <= 5) {
+                    $voipAccountBlocker->block($tempSubSip->parentSip, $tempSubSip);
                 } else {
-                    $voipAccountBlocker->unblock($currentSubSipAccount->parentSip, $currentSubSipAccount);
+                    $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
                 }
                 $remoteChecker->checkAllSubAccounts();
             }
