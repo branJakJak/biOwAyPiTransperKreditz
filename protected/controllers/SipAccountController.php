@@ -129,9 +129,10 @@ class SipAccountController extends Controller
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $voipAccountBlocker->block($tempSubSip->parentSip, $tempSubSip);
-                } else {
-                    $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
-                }
+                } 
+                // else {
+                //     $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
+                // }
                 
             }
         }

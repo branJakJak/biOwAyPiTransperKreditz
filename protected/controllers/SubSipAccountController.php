@@ -180,9 +180,10 @@ class SubSipAccountController extends Controller
 
                 if (doubleval($childCur->exact_balance) <= 5) {
                     $voipAccountBlocker->block($childCur->parentSip, $childCur);
-                } else {
-                    $voipAccountBlocker->unblock($childCur->parentSip, $childCur);
                 }
+                // else {
+                //     $voipAccountBlocker->unblock($childCur->parentSip, $childCur);
+                // }
 				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
 				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
