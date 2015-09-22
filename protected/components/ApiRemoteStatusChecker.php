@@ -43,18 +43,6 @@ class ApiRemoteStatusChecker
 	}
 	protected function check($command,$username , $password , $customer , $customerpassword,SubSipAccount $currentSubSipAccount)
 	{
-        /*notify*/
-        // $checker = new SipAccountNotifier();
-        // $checker->check($currentSubSipAccount);
-        /*end of notify*/
-
-        /*check blocked*/
-        if ($currentSubSipAccount->balance <= 5) {
-        	$this->accountBlocker->block($currentSubSipAccount->parentSip,$currentSubSipAccount);
-        }else{
-        	$this->accountBlocker->unblock($currentSubSipAccount->parentSip,$currentSubSipAccount);
-        }
-
         $curlURL = "https://77.72.173.130/API/Request.ashx?";
 		$httparams = compact('command','username','password','customer','customerpassword');
 		$curlURL .= http_build_query($httparams);
