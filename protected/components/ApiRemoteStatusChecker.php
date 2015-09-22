@@ -79,6 +79,8 @@ class ApiRemoteStatusChecker
             /*check blocked*/
             if ($currentSubSipAccount->balance <= 5) {
             	$this->accountBlocker->block($currentSubSipAccount->parentSip,$currentSubSipAccount);
+            }else{
+            	$this->accountBlocker->unblock($currentSubSipAccount->parentSip,$currentSubSipAccount);
             }
             /*end of check blocked*/
             if (!$currentSubSipAccount->save()) {
