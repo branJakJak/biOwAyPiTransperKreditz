@@ -27,12 +27,7 @@ class SipAccountNotifier
 		$mail->setTo($this->notifyEmails);
 		$mail->setSubject('APIVOIP - credit limit');
 		$mail->setBody($messagetemplate);
-		if ($mail->send()) {
-			echo "Sent";
-		}else{
-			echo "Cant send";
-		}
-		die();
+		$mail->send()
 
 	}
 }
