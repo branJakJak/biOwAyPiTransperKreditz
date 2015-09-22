@@ -117,7 +117,7 @@ class SipAccountController extends Controller
         $allModels = SipAccount::model()->findAll();
         foreach ($allModels as $currentModel) {
             foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
-                $remoteChecker = new ApiRemoteStatusChecker($currentSubSipAccount->id);
+                $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
                 $currentSubSipAccount = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
                 /*notify*/
                 // $checker = new SipAccountNotifier();
