@@ -17,8 +17,8 @@
 					'itemCssClass'=>'item-test',
                     'encodeLabel'=>false,
                     'items'=>array(
-                        array('label'=>'Dashboard', 'url'=>array('/site/index')),
-                        array('label'=>'List SIP Accounts', 'url'=>array('/sipAccount/index')),
+                        array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'List SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
                         array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     ),
