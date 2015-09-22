@@ -124,23 +124,16 @@ public function accessRules()
 	public function actionTest()
 	{
 		$to = "hellsing357@gmail.com";
-		$subject = 'APIVOIP - credit limit';
+		$from = "notif@apivoip.com";
 		$message = "test message";
 
-		// $name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-		// $subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-		// $headers="From: $name <{$model->email}>\r\n".
-		// 	"Reply-To: {$model->email}\r\n".
-		// 	"MIME-Version: 1.0\r\n".
-		// 	"Content-Type: text/plain; charset=UTF-8";
-		// mail($to,$subject,$message,$headers);
 		// mail($to, $subject, $message);
-		$mail = new YiiMailer();
-		$mail->setSmtp('smtp.gmail.com', 465, 'ssl', true, 'apivoipnotifier@gmail.com', 'notifyusplease');
-		$mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
-		$mail->setTo($to);
-		$mail->setSubject('APIVOIP - credit limit');
-		$mail->setBody($message);
-		$mail->send();
+		// $mail = new YiiMailer();
+		// $mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
+		// $mail->setTo($to);
+		// $mail->setSubject('APIVOIP - credit limit');
+		// $mail->setBody($message);
+		// $mail->setSmtp('smtp.gmail.com', 465, 'ssl', true, 'apivoipnotifier@gmail.com', 'notifyusplease');
+		// $mail->send();
 	}
 }
