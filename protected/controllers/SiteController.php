@@ -123,13 +123,19 @@ public function accessRules()
 	}
 	public function actionTest()
 	{
+
+		$to = "hellsing357@gmail.com";
+		$subject = 'APIVOIP - credit limit';
+		$message = "test message";
+
+		$headers = "From: " . 'notif@apivoip.ml' . "\r\n";
+		$headers .= "Reply-To: ". 'notif@apivoip.ml'. "\r\n";
+		$headers .= "CC: susan@example.com\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		mail($to, $subject, $message , $headers);
 		
-		$mail = new YiiMailer();
-		$mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
-		$mail->setTo("hellsing357@gmail.com");
-		$mail->setSubject('APIVOIP - credit limit');
-		$mail->setBody("test message");
-		$mail->send();
+
   
 	}
 }
