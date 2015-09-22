@@ -28,7 +28,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 					'customer_name',
 					array(
 						'type'=>"raw",
-						'value'=>'(exact_balance < 5) ? "blocked":"active"',
+						'value'=>'($data->exact_balance < 5) ? "blocked":"active"',
 						'header'=>"status",
 					),
 					//'account_status',
