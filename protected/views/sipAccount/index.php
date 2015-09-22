@@ -46,7 +46,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
     'fade'=>true, 
     'closeText'=>'×',
     'alerts'=>array( 
-	    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+	    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success
+	    'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // info
     ),
 )); ?>
 <h1>

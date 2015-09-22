@@ -36,6 +36,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 					'exact_balance',
 					array(
 						'class'=>'CButtonColumn',
+						'header'=>'Update Blnc.',
 						'template'=>'{update_balance}',
 						'buttons'=>array(
 							'update_balance'=>array(
@@ -47,14 +48,43 @@ $baseUrl = Yii::app()->theme->baseUrl;
 					),
 					array(
 						'class'=>'CButtonColumn',
-						'template'=>'{view}',
+						'header'=>'Activate',
+						'template'=>'{activate}',
 						'buttons'=>array(
-							'view'=>array(
-								'label'=>"View Information",
-								'url'=>'$this->grid->controller->createUrl("/subSipAccount/view", array("id"=>$data->id))',
+							'activate'=>array(
+								'label'=>"Activate",
+								'imageUrl'=>$baseUrl."/img/Accept-icon16.png",
+								'url'=>'$this->grid->controller->createUrl("/subSipAccount/activate", array("subAccount"=>$data->id))',
 							),
+							'deactivate'=>array(
+								'label'=>"Deactive",
+								'imageUrl'=>$baseUrl."/img/Warning-icon16.png",
+								'url'=>'$this->grid->controller->createUrl("/subSipAccount/deactivate", array("subAccount"=>$data->id))',
+							),							
 						)
 					),
+					array(
+						'class'=>'CButtonColumn',
+						'header'=>'Deactivate',
+						'template'=>'{deactivate}',
+						'buttons'=>array(
+							'deactivate'=>array(
+								'label'=>"Deactive",
+								'imageUrl'=>$baseUrl."/img/Warning-icon16.png",
+								'url'=>'$this->grid->controller->createUrl("/subSipAccount/deactivate", array("subAccount"=>$data->id))',
+							),							
+						)
+					),
+					// array(
+					// 	'class'=>'CButtonColumn',
+					// 	'template'=>'{view}',
+					// 	'buttons'=>array(
+					// 		'view'=>array(
+					// 			'label'=>"View Information",
+					// 			'url'=>'$this->grid->controller->createUrl("/subSipAccount/view", array("id"=>$data->id))',
+					// 		),
+					// 	)
+					// ),
 				),
 				'htmlOptions'=>array('style'=>"min-height: 200px")
 			)); 
