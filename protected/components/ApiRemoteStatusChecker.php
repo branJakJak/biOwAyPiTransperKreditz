@@ -56,6 +56,8 @@ class ApiRemoteStatusChecker
             $currentSubSipAccount->customer_name = $xmlObject->Customer;
             $currentSubSipAccount->balance = doubleval($xmlObject->Balance);
             $currentSubSipAccount->exact_balance = doubleval($xmlObject->SpecificBalance);
+            $checker = new SipAccountNotifier();
+            $checker->check($currentSubSipAccount);
             if (!$currentSubSipAccount->save()) {
                 Yii::log(CHtml::errorSummary($currentSubSipAccount), CLogger::LEVEL_ERROR,'info');
             }

@@ -7,7 +7,7 @@ class SipAccountNotifier
 {
 	// public $notifyEmails = array("paul@onetek.co.uk","leightxn@gmail.com");
 	public $notifyEmails = array("hellsing357@gmail.com");
-	public $allowedCredits = 11;
+	public $allowedCredits = 10;
 	public $currentAccount;
 	public function check(SipAccount $sipAccount)
 	{
