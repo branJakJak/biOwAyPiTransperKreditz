@@ -2,37 +2,7 @@
 /* @var $this SipAccountController */
 /* @var $data SipAccount */
 
-
-/*check status at remote server */
-$voipAccountBlocker = new BlockVoipAccount();
-$remoteChecker = new ApiRemoteStatusChecker($data->id);
-$remoteChecker->setAccountBlocker($voipAccountBlocker);
-
-
-
-
-
-/*check blocked*/
-foreach ($data->subSipAccounts as $currentSubSipAccount) {
-	/*notify*/
-	// $checker = new SipAccountNotifier();
-	// $checker->check($currentSubSipAccount);
-	/*end of notify*/
-
-	if ($currentSubSipAccount->balance <= 5) {
-		$voipAccountBlocker->block($currentSubSipAccount->parentSip,$currentSubSipAccount);
-	}else{
-		$voipAccountBlocker->unblock($currentSubSipAccount->parentSip,$currentSubSipAccount);
-	}
-	
-}
-
-
-$remoteChecker->checkAllSubAccounts();
-
-
-$baseUrl = Yii::app()->theme->baseUrl; 
-
+$baseUrl = Yii::app()->theme->baseUrl;
 ?>
 
 <div class="account-panels">

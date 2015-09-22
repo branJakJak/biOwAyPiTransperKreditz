@@ -8,6 +8,7 @@
     <file path="/SipAccountNotifier.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442939592277" ignored="false" />
     <file path="/BlockVoipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946481144" ignored="false" />
     <file path="/ApiRemoteStatusChecker.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946583693" ignored="false" />
+    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442949646868" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,53 +27,7 @@
     <favorites_list name="VOIPTransferCredits" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="UpdateSubSipAccount.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/UpdateSubSipAccount.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SipAccountNotifier.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="59" selection-start="360" selection-end="360" vertical-scroll-proportion="-8.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlockVoipAccount.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/components/BlockVoipAccount.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="-8.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApiRemoteStatusChecker.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="1" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.8045977">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SipAccount.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/SipAccount.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="22" selection-start="164" selection-end="166" vertical-scroll-proportion="-3.9230769">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -82,8 +37,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SiteController.php" />
         <option value="$PROJECT_DIR$/themes/abound/views/site/dashboard.php" />
         <option value="$PROJECT_DIR$/protected/views/sipAccount/index.php" />
         <option value="$PROJECT_DIR$/protected/migrations/m150914_124552_add_status_to_sip_account.php" />
@@ -98,6 +51,8 @@
         <option value="$PROJECT_DIR$/protected/config/development.php" />
         <option value="$PROJECT_DIR$/protected/components/BlockVoipAccount.php" />
         <option value="$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
+        <option value="$PROJECT_DIR$/protected/views/sipAccount/_view.php" />
       </list>
     </option>
   </component>
@@ -206,7 +161,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="subSipAccount" />
+              <option name="myItemId" value="sipAccount" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -349,7 +304,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -357,7 +312,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2739726" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2739726" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -443,21 +398,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/migrations/m150910_104650_create_foreign_key_freevoip_transaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/ContactForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/LoginForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/abound/views/site/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -493,6 +433,55 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/development.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="6" selection-start="896" selection-end="896" vertical-scroll-proportion="0.635514">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="115" selection-end="115" vertical-scroll-proportion="0.2035928">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="26" selection-start="627" selection-end="627" vertical-scroll-proportion="0.44111776">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="62" selection-start="4268" selection-end="4268" vertical-scroll-proportion="0.70233464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="43" selection-start="2556" selection-end="2556" vertical-scroll-proportion="0.5440613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/BlockVoipAccount.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="0.41308412">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="59" selection-start="360" selection-end="360" vertical-scroll-proportion="0.42337164">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/UpdateSubSipAccount.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -502,35 +491,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/SipAccount.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="22" selection-start="164" selection-end="166" vertical-scroll-proportion="-3.9230769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/development.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="6" selection-start="896" selection-end="896" vertical-scroll-proportion="0.635514">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="59" selection-start="360" selection-end="360" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/BlockVoipAccount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="587" selection-end="587" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="1" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.8045977">
+        <state line="6" column="22" selection-start="164" selection-end="166" vertical-scroll-proportion="0.1906542">
           <folding />
         </state>
       </provider>
