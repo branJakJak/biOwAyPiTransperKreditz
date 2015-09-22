@@ -123,14 +123,16 @@ public function accessRules()
 	}
 	public function actionTest()
 	{
+		$to = "hellsing357@gmail.com";
+		$subject = 'APIVOIP - credit limit';
+		$message = "test message";
+
 		$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
 		$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
 		$headers="From: $name <{$model->email}>\r\n".
 			"Reply-To: {$model->email}\r\n".
 			"MIME-Version: 1.0\r\n".
 			"Content-Type: text/plain; charset=UTF-8";
-
 		mail($to,$subject,$message,$headers);
-  
 	}
 }
