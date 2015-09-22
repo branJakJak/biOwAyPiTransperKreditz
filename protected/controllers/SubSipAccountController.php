@@ -171,6 +171,10 @@ class SubSipAccountController extends Controller
 			$updateSubSipAccount->attributes = $_POST['UpdateSubSipAccount'];
 			$updateSubSipAccount->subSipOwner = intval($subAccount);
 			if ($updateSubSipAccount->update()) {
+				/* update the database too */
+				$childCur = SubSipAccount::model()->findByPk($subAccount);
+				$remoteChecker = new ApiRemoteStatusChecker($childCur->parent_sip);
+				$remoteChecker->checkAllSubAccounts();
 				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
 				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
