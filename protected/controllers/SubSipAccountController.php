@@ -28,7 +28,7 @@ class SubSipAccountController extends Controller
 	{
         return array(
             array('allow',
-                'actions'=>array('create','update','index','view','admin','delete','updateBalance'),
+                'actions'=>array('create','update','index','view','admin','delete','updateBalance','activate','deactivate'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -174,7 +174,7 @@ class SubSipAccountController extends Controller
 				/* update the database too */
 				$childCur = SubSipAccount::model()->findByPk($subAccount);
 				$voipAccountBlocker = new BlockVoipAccount();
-				
+
 				$remoteChecker = new ApiRemoteStatusChecker($childCur->parent_sip);
 				$remoteChecker->checkAllSubAccounts();
 
@@ -183,8 +183,6 @@ class SubSipAccountController extends Controller
                 } else {
                     $voipAccountBlocker->unblock($childCur->parentSip, $childCur);
                 }
-
-
 				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
 				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
@@ -194,5 +192,21 @@ class SubSipAccountController extends Controller
 			Yii::app()->user->setFlash('info', 'You are about to update the balance of <strong>'.$subsipmodel->customer_name.'</strong>');
 		}
 		$this->render('updateBalance',compact('updateSubSipAccount','subsipmodel'));
+	}
+	public function actionActivate($subAccount)
+	{
+		$voipAccountBlocker = new BlockVoipAccount();
+		$childCur = SubSipAccount::model()->findByPk($subAccount);
+		$voipAccountBlocker->unblock($childCur->parentSip, $childCur);
+		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> activated");
+		$this->redirect(Yii::app()->request->urlReferrer);
+	}
+	public function actionDeactivate($subAccount)
+	{
+		$voipAccountBlocker = new BlockVoipAccount();
+		$childCur = SubSipAccount::model()->findByPk($subAccount);
+		$voipAccountBlocker->block($childCur->parentSip, $childCur);
+		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
+		$this->redirect(Yii::app()->request->urlReferrer);
 	}
 }
