@@ -116,19 +116,23 @@ class SipAccountController extends Controller
         /*retrieve all accounts model*/
         $allModels = SipAccount::model()->findAll();
         foreach ($allModels as $currentModel) {
+            $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
+            $remoteChecker->checkAllSubAccounts();
             foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
-                $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
+                //retrieve updated subsip
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
+
                 /*notify*/
                 // $checker = new SipAccountNotifier();
                 // $checker->check($currentSubSipAccount);
                 /*end of notify*/
+                
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $voipAccountBlocker->block($tempSubSip->parentSip, $tempSubSip);
                 } else {
                     $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
                 }
-                $remoteChecker->checkAllSubAccounts();
+                
             }
         }
         $dataProvider = new CActiveDataProvider('SipAccount');
