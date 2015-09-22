@@ -22,7 +22,7 @@ public function accessRules()
 {
 	return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-			'actions'=>array('error','login','logout'),
+			'actions'=>array('error','login','logout','test'),
 			'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -120,5 +120,16 @@ public function accessRules()
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+	public function actionTest()
+	{
+		
+		$mail = new YiiMailer();
+		$mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
+		$mail->setTo("hellsing357@gmail.com");
+		$mail->setSubject('APIVOIP - credit limit');
+		$mail->setBody("test message");
+		$mail->send();
+  
 	}
 }
