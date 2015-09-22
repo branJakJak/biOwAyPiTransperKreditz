@@ -123,7 +123,7 @@ class SipAccountController extends Controller
                 // $checker = new SipAccountNotifier();
                 // $checker->check($currentSubSipAccount);
                 /*end of notify*/
-                if ($tempSubSip->balance <= 5) {
+                if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $voipAccountBlocker->block($tempSubSip->parentSip, $tempSubSip);
                 } else {
                     $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
