@@ -28,6 +28,6 @@ class SipAccountNotifier
 		$mail->setSubject('APIVOIP - credit limit');
 		$mail->setBody($messagetemplate);
 		$mail->send()
-
+  
 	}
 }
