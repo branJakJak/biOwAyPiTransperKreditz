@@ -9,7 +9,7 @@ class SipAccountNotifier
 	public $notifyEmails = array("hellsing357@gmail.com");
 	public $allowedCredits = 10;
 	public $currentAccount;
-	public function check(SipAccount $sipAccount)
+	public function check(SubSipAccount $sipAccount)
 	{
 		$this->currentAccount = $sipAccount;
 		if ($sipAccount->balance < $this->allowedCredits) {
