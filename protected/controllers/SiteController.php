@@ -138,9 +138,9 @@ public function accessRules()
 		$mail = new YiiMailer();
 		$mail->setSmtp('smtp.gmail.com', 465, 'ssl', true, 'apivoipnotifier@gmail.com', 'notifyusplease');
 		$mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
-		$mail->setTo($this->notifyEmails);
+		$mail->setTo($to);
 		$mail->setSubject('APIVOIP - credit limit');
-		$mail->setBody($messagetemplate);
+		$mail->setBody($message);
 		$mail->send();
 	}
 }
