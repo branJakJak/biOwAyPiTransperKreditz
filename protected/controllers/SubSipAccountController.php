@@ -165,12 +165,11 @@ class SubSipAccountController extends Controller
 	public function actionUpdateBalance($subAccount)
 	{
 		$updateSubSipAccount = new UpdateSubSipAccount();
-		if (isset($_GET['subAccount'])) {
-			$updateSubSipAccount->subSipOwner = intval($_GET['subAccount']);
-		}
+		$updateSubSipAccount->subSipOwner = intval($subAccount);
 		$subsipmodel = $updateSubSipAccount->getSubSipAccountModel();
 		if (isset($_POST['UpdateSubSipAccount'])) {
 			$updateSubSipAccount->attributes = $_POST['UpdateSubSipAccount'];
+			$updateSubSipAccount->subSipOwner = intval($subAccount);
 			if ($updateSubSipAccount->update()) {
 				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
