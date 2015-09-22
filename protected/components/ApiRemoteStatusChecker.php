@@ -72,8 +72,8 @@ class ApiRemoteStatusChecker
             $currentSubSipAccount->exact_balance = doubleval($xmlObject->SpecificBalance);
 
             /*notify*/
-            $checker = new SipAccountNotifier();
-            $checker->check($currentSubSipAccount);
+            // $checker = new SipAccountNotifier();
+            // $checker->check($currentSubSipAccount);
             /*end of notify*/
 
             /*check blocked*/
