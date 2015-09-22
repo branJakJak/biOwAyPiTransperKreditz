@@ -199,6 +199,9 @@ class SubSipAccountController extends Controller
 		$voipAccountBlocker = new BlockVoipAccount();
 		$childCur = SubSipAccount::model()->findByPk($subAccount);
 		$voipAccountBlocker->unblock($childCur->parentSip, $childCur);
+        $remoteChecker = new ApiRemoteStatusChecker($childCur->parentSip);
+        $remoteChecker->checkAllSubAccounts();
+
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> activated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
@@ -207,6 +210,9 @@ class SubSipAccountController extends Controller
 		$voipAccountBlocker = new BlockVoipAccount();
 		$childCur = SubSipAccount::model()->findByPk($subAccount);
 		$voipAccountBlocker->block($childCur->parentSip, $childCur);
+        $remoteChecker = new ApiRemoteStatusChecker($childCur->parentSip);
+        $remoteChecker->checkAllSubAccounts();
+		
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
