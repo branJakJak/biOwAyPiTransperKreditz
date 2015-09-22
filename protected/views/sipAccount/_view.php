@@ -3,12 +3,18 @@
 /* @var $data SipAccount */
 
 $baseUrl = Yii::app()->theme->baseUrl;
+$status = 'none';
+if (count($data->subSipAccounts) > 0) {
+	$singleSubSip = $data->subSipAccounts[0];
+	$status = $singleSubSip->account_status;
+}
+
 ?>
 
 <div class="account-panels">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>"<strong>".CHtml::encode($data->username)." - ".CHtml::encode($data->account_status)."</strong>",
+			'title'=>"<strong>".CHtml::encode($data->username)." - ".CHtml::encode($status)."</strong>",
 			'titleCssClass'=>''
 		));
 	?>
@@ -31,7 +37,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 					// 	'value'=>'($data->exact_balance < 5) ? "blocked":"active"',
 					// 	'header'=>"status",
 					// ),
-					'account_status',
+					// 'account_status',
 					// 'balance',
 					'exact_balance',
 					array(
