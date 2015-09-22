@@ -123,19 +123,14 @@ public function accessRules()
 	}
 	public function actionTest()
 	{
+		$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+		$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+		$headers="From: $name <{$model->email}>\r\n".
+			"Reply-To: {$model->email}\r\n".
+			"MIME-Version: 1.0\r\n".
+			"Content-Type: text/plain; charset=UTF-8";
 
-		$to = "hellsing357@gmail.com";
-		$subject = 'APIVOIP - credit limit';
-		$message = "test message";
-
-		$headers = "From: " . 'notif@apivoip.ml' . "\r\n";
-		$headers .= "Reply-To: ". 'notif@apivoip.ml'. "\r\n";
-		$headers .= "CC: susan@example.com\r\n";
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		mail($to, $subject, $message , $headers);
-		
-
+		mail($to,$subject,$message,$headers);
   
 	}
 }
