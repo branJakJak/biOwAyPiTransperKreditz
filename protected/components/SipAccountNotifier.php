@@ -18,7 +18,8 @@ class SipAccountNotifier
 	}
 	public function notifyEmailAddress()
 	{
-		$checkoutLink = CHtml::link('Check account', Yii::app()->createAbsoluteUrl->createAbsoluteUrl('subSipAccount/updateBalance', array('subAccount' => $this->currentAccount->id)));
+
+		$checkoutLink = CHtml::link('Check account', Yii::app()->createAbsoluteUrl('subSipAccount/updateBalance', array('subAccount' => $this->currentAccount->id)));
 		$messagetemplate = sprintf("Account <strong>%s</strong> has reached credit limit. %s",$this->currentAccount->username , $checkoutLink);
 		$mail = new YiiMailer();
 		$mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
