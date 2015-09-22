@@ -1,11 +1,15 @@
-<?php 
+<?php
 
 /**
-* 
-*/
+ *
+ * Class ApiRemoteStatusChecker
+ * @property $accountBlocker BlockVoipAccount
+ */
 class ApiRemoteStatusChecker
 {
 	public $sipAccountModel;
+	protected $accountBlocker;
+
 	function __construct($sipAccountId)
 	{
 		$this->sipAccountModel = SipAccount::model()->findByPk($sipAccountId);
@@ -13,6 +17,16 @@ class ApiRemoteStatusChecker
 			throw new CHttpException(404,"Cant find SIP Account Model");
 		}
 	}
+
+	public function getAccountBlocker() {
+	    return $this->accountBlocker;
+	}
+	
+	public function setAccountBlocker($accountBlocker) {
+	    $this->accountBlocker = $accountBlocker;
+	    return $this;
+	}
+
 	public function checkAllSubAccounts()
 	{
 		/*get all sub accounts */
@@ -27,9 +41,9 @@ class ApiRemoteStatusChecker
 			);
 		}
 	}
-	protected function check($command,$username , $password , $customer , $customerpassword,$currentSubSipAccount)
+	protected function check($command,$username , $password , $customer , $customerpassword,SubSipAccount $currentSubSipAccount)
 	{
-		$curlURL = "https://77.72.173.130/API/Request.ashx?";
+        $curlURL = "https://77.72.173.130/API/Request.ashx?";
 		$httparams = compact('command','username','password','customer','customerpassword');
 		$curlURL .= http_build_query($httparams);
 		$curlres = curl_init($curlURL);
@@ -56,8 +70,17 @@ class ApiRemoteStatusChecker
             $currentSubSipAccount->customer_name = $xmlObject->Customer;
             $currentSubSipAccount->balance = doubleval($xmlObject->Balance);
             $currentSubSipAccount->exact_balance = doubleval($xmlObject->SpecificBalance);
+
+            /*notify*/
             $checker = new SipAccountNotifier();
             $checker->check($currentSubSipAccount);
+            /*end of notify*/
+
+            /*check blocked*/
+            if ($currentSubSipAccount->balance <= 5) {
+            	$this->accountBlocker->block($currentSubSipAccount->parentSip,$currentSubSipAccount);
+            }
+            /*end of check blocked*/
             if (!$currentSubSipAccount->save()) {
                 Yii::log(CHtml::errorSummary($currentSubSipAccount), CLogger::LEVEL_ERROR,'info');
             }

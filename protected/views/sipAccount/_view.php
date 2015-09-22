@@ -4,7 +4,9 @@
 
 
 /*check status at remote server */
+$voipAccountBlocker = new BlockVoipAccount();
 $remoteChecker = new ApiRemoteStatusChecker($data->id);
+$remoteChecker->setAccountBlocker(,$data)
 $remoteChecker->checkAllSubAccounts();
 
 
