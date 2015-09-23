@@ -123,8 +123,8 @@ class SipAccountController extends Controller
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
 
                 /*notify*/
-                // $checker = new SipAccountNotifier();
-                // $checker->check($currentSubSipAccount);
+                $checker = new SipAccountNotifier();
+                $checker->check($currentSubSipAccount);
                 /*end of notify*/
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {

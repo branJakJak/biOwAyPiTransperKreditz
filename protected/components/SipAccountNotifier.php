@@ -11,9 +11,17 @@ class SipAccountNotifier
 	public function check(SubSipAccount $sipAccount)
 	{
 		$this->currentAccount = $sipAccount;
-		if ($sipAccount->balance < $this->allowedCredits) {
-			$this->notifyEmailAddress();
-		}
+		if (is_null($sipAccount->last_checked_bal)) {
+            $this->notifyEmailAddress();
+		}else{
+            if ($sipAccount->exact_balance != $sipAccount->last_checked_bal && $sipAccount->last_checked_bal > 10 and $sipAccount->exact_balance < 10) {
+                $this->notifyEmailAddress();
+            }
+        }
+//		if ($sipAccount->balance < $this->allowedCredits) {
+//
+//			$this->notifyEmailAddress();
+//		}
 	}
 	public function notifyEmailAddress()
 	{

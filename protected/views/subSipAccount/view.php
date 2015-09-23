@@ -33,6 +33,7 @@ $this->menu=array(
 		'customer_name',
 		'balance',
 		'exact_balance',
+		'last_checked_bal',
 		'date_created',
 		'date_updated',
 	),

@@ -38,6 +38,13 @@
 	</div>
 
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'last_checked_bal'); ?>
+		<?php echo $form->passwordField($model,'last_checked_bal',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'last_checked_bal'); ?>
+	</div>
+
+
 	<div class="row buttons">
 		<button type="submit" class="btn btn-primary">Create</button>
 	</div>

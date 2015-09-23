@@ -68,6 +68,7 @@ class ApiRemoteStatusChecker
                 $currentSubSipAccount->account_status = 'blocked';
             }
             $currentSubSipAccount->customer_name = $xmlObject->Customer;
+            $currentSubSipAccount->last_checked_bal = $currentSubSipAccount->exact_balance;
             $currentSubSipAccount->balance = doubleval($xmlObject->Balance);
             $currentSubSipAccount->exact_balance = doubleval($xmlObject->SpecificBalance);
 
