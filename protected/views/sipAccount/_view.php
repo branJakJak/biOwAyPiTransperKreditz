@@ -14,7 +14,7 @@ if (count($data->subSipAccounts) > 0) {
 <div class="account-panels">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>"<strong>".CHtml::encode($data->username)." - ".CHtml::encode($status)."</strong>",
+			'title'=>"<strong>".CHtml::encode($data->username)." - ".CHtml::encode($data->vicidial_identification)."</strong>",
 			'titleCssClass'=>''
 		));
 	?>
