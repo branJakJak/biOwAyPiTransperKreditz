@@ -62,11 +62,13 @@ class ApiRemoteStatusChecker
                 Yii::log("CHtml::errorSummary($currentSubSipAccount)", CLogger::LEVEL_ERROR,'info');
             }
 		}else{
-            if ($xmlObject->Blocked == "False") {
-                $currentSubSipAccount->account_status = 'active';
-            }else{
-                $currentSubSipAccount->account_status = 'blocked';
-            }
+
+            // if ($xmlObject->Blocked == "False") {
+            //     $currentSubSipAccount->account_status = 'active';
+            // }else{
+            //     $currentSubSipAccount->account_status = 'blocked';
+            // }
+            
             $currentSubSipAccount->customer_name = $xmlObject->Customer;
             $currentSubSipAccount->last_checked_bal = $currentSubSipAccount->exact_balance;
             $currentSubSipAccount->balance = doubleval($xmlObject->Balance);
