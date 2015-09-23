@@ -8,6 +8,7 @@
  * @property string $username
  * @property string $password
  * @property string $account_status
+ * @property string $vicidial_identification
  * @property string $date_created
  * @property string $date_updated
  *
@@ -16,6 +17,7 @@
  */
 class SipAccount extends CActiveRecord
 {
+	public $vicidial_identification;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -35,7 +37,7 @@ class SipAccount extends CActiveRecord
 			array('username', 'unique'),
 			array('username, password', 'required'),
 			array('username, password', 'length', 'max'=>255),
-			array('date_created, date_updated , account_status', 'safe'),
+			array('date_created, date_updated , account_status,vicidial_identification', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, username, password, date_created, date_updated', 'safe', 'on'=>'search'),
@@ -64,6 +66,7 @@ class SipAccount extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'account_status' => 'Status',
+			'vicidial_identification' => 'Vicidial Indentification',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -91,6 +94,7 @@ class SipAccount extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('account_status',$this->account_status,true);
+		$criteria->compare('vicidial_identification',$this->vicidial_identification,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 

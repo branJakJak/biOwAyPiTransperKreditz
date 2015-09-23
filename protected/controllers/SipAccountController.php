@@ -112,7 +112,6 @@ class SipAccountController extends Controller
      */
     public function actionIndex()
     {
-        $voipAccountBlocker = new BlockVoipAccount();
         /*retrieve all accounts model*/
         $allModels = SipAccount::model()->findAll();
         foreach ($allModels as $currentModel) {
@@ -128,12 +127,9 @@ class SipAccountController extends Controller
                 /*end of notify*/
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
-                    $voipAccountBlocker->block($tempSubSip->parentSip, $tempSubSip);
-                } 
-                // else {
-                //     $voipAccountBlocker->unblock($tempSubSip->parentSip, $tempSubSip);
-                // }
-                
+                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
+                    $deactivatorObj->run();
+                }
             }
         }
         $dataProvider = new CActiveDataProvider('SipAccount');
