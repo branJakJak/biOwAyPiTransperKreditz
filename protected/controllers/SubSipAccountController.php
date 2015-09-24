@@ -177,17 +177,10 @@ class SubSipAccountController extends Controller
 			if ($updateSubSipAccount->update()) {
 				/* update the database too */
 				$childCur = SubSipAccount::model()->findByPk($subAccount);
-				$voipAccountBlocker = new BlockVoipAccount();
 
-				$remoteChecker = new ApiRemoteStatusChecker($childCur->parent_sip);
-				$remoteChecker->checkAllSubAccounts();
-
-                if (doubleval($childCur->exact_balance) <= 5) {
-                    $voipAccountBlocker->block($childCur->parentSip, $childCur);
-                }
-                // else {
-                //     $voipAccountBlocker->unblock($childCur->parentSip, $childCur);
-                // }
+				// $remoteChecker = new ApiRemoteStatusChecker($childCur->parent_sip);
+				// $remoteChecker->checkAllSubAccounts();
+				
 				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
 			}else{
 				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
