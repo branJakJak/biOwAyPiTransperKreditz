@@ -125,10 +125,7 @@ class SipAccountController extends Controller
                 //retrieve updated subsip
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
 
-                /*notify*/
-                $checker = new SipAccountNotifier();
-                $checker->check($currentSubSipAccount);
-                /*end of notify*/
+
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $deactivatorObj = new DeactivateVicidialUser($currentModel);
