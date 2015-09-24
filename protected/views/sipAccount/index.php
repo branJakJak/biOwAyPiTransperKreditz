@@ -37,7 +37,7 @@ $this->menu=array(
 		alertify.success('Updating data.. Please wait....');
 		$.fn.yiiListView.update("sipAccountListView");
 	}
-	setInterval(updateListViewData, 5 * 60 * 1000);
+	setInterval(updateListViewData, 5 * 1000);
 </script>
 
 <?php 
