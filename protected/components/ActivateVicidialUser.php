@@ -23,7 +23,7 @@ class ActivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVic
         $rawResult = explode("|", $rawResult);
 
         $finalData = array(
-            "success" => (str_pos($rawResult[0], "SUCCESS") !== FALSE) ? true : false,
+            "success" => (strpos($rawResult[0], "SUCCESS") !== FALSE) ? true : false,
             "status_message" => isset($rawResult[0]) ? trim($rawResult[0]) : null,
             "remote_user" => isset($rawResult[1]) ? trim($rawResult[1]) : null,
             "username" => isset($rawResult[2]) ? trim($rawResult[2]) : null,
