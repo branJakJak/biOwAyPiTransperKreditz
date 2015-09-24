@@ -131,8 +131,8 @@ class SipAccountController extends Controller
                 /*end of notify*/
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
-                    // $deactivatorObj = new DeactivateVicidialUser($currentModel);
-                    // $deactivatorObj->run();
+                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
+                    $deactivatorObj->run();
                 }
             }
         }
