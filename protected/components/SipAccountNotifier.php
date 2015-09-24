@@ -14,7 +14,7 @@ class SipAccountNotifier
 		if (is_null($sipAccount->last_checked_bal)) {
             $this->notifyEmailAddress();
 		}else{
-            if ($sipAccount->exact_balance != $sipAccount->last_checked_bal && $sipAccount->last_checked_bal > 10 and $sipAccount->exact_balance < 10) {
+            if (doubleval($sipAccount->balance) != doubleval($sipAccount->last_checked_bal) && doubleval($sipAccount->last_checked_bal) > 10 and doubleval($sipAccount->balance) < 10) {
                 $this->notifyEmailAddress();
             }
         }
