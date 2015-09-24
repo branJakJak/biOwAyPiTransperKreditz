@@ -31,10 +31,10 @@ class SipAccountController extends Controller
                 'actions' => array('create', 'update', 'index', 'view'),
                 'users' => array('@'),
             ),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions'=>array('admin','delete'),
+                'roles'=>array('administrator'),
+            ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
@@ -131,8 +131,8 @@ class SipAccountController extends Controller
                 /*end of notify*/
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
-                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
-                    $deactivatorObj->run();
+                    // $deactivatorObj = new DeactivateVicidialUser($currentModel);
+                    // $deactivatorObj->run();
                 }
             }
         }

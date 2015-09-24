@@ -28,12 +28,12 @@ class SubSipAccountController extends Controller
 	{
         return array(
             array('allow',
-                'actions'=>array('create','update','index','view','updateBalance','activate','deactivate'),
+                'actions'=>array('create','update','view','updateBalance','activate','deactivate'),
                 'users'=>array('@'),
             ),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','delete','index'),
+				'roles'=>array('administrator'),
 			),
             array('deny',  // deny all users
                 'users'=>array('*'),

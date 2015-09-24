@@ -18,10 +18,6 @@ class SipAccountNotifier
                 $this->notifyEmailAddress();
             }
         }
-//		if ($sipAccount->balance < $this->allowedCredits) {
-//
-//			$this->notifyEmailAddress();
-//		}
 	}
 	public function notifyEmailAddress()
 	{

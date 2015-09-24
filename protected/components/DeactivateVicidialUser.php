@@ -21,7 +21,6 @@ class DeactivateVicidialUser extends RemoteVicidialBase implements  UpdateRemote
         curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
         $rawResult = curl_exec($curlres);
         $rawResult= explode("|", $rawResult);
-
         $finalData = array(
             "success"=>  (  str_pos($rawResult[0],"SUCCESS") !== FALSE ) ? true:false,
             "status_message"=>isset($rawResult[0]) ? trim($rawResult[0]):null,
