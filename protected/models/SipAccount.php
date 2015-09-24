@@ -125,7 +125,14 @@ class SipAccount extends CActiveRecord
             ),
         );
     }
-
+    public function getStatusLabel()
+    {
+    	$message = "Active";
+    	if ($this->account_status == "blocked") {
+    		$message = "Deactivated";
+    	}
+    	return $message;
+    }
     
 
 }
