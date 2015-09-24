@@ -38,7 +38,7 @@ $this->menu=array(
 		$.fn.yiiListView.update("sipAccountListView");
 		setTimeout(updateListViewData, 5 * 1000);
 	}
-	setTimeout(updateListViewData, 5 * 1000);
+	setTimeout(updateListViewData, 10 * 1000);
 </script>
 
 <?php 
