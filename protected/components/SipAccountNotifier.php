@@ -5,7 +5,7 @@
 */
 class SipAccountNotifier
 {
-	public $notifyEmails = array("apivoipnotifier@gmail.com","leightxn@gmail.com","hellsing357@gmail.com","webgeekzs2015@gmail.com","pcgeekz05@gmail.com");
+	public $notifyEmails = array("apivoipnotifier@gmail.com","leightxn@gmail.com","hellsing357@gmail.com","webgeekzs2015@gmail.com");
 	public $allowedCredits = 10;
 	public $currentAccount;
 	public function check(SubSipAccount $sipAccount)
