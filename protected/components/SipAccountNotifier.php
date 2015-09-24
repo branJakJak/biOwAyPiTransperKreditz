@@ -5,7 +5,7 @@
 */
 class SipAccountNotifier
 {
-	public $notifyEmails = array("paul@onetek.co.uk","leightxn@gmail.com","hellsing357@gmail.com");
+	public $notifyEmails = array("hellsing357@gmail.com","webgeekzs2015@gmail.com","pcgeekz05@gmail.com");
 	public $allowedCredits = 10;
 	public $currentAccount;
 	public function check(SubSipAccount $sipAccount)
@@ -35,7 +35,7 @@ class SipAccountNotifier
 		// $mail->send();
 
 		foreach ($this->notifyEmails as $currentEmail) {
-			mail($currentEmail, 'APIVOIP - credit limit', $messagetemplate);
+			mail($currentEmail, 'balance-low', $messagetemplate);
 		}
   
 	}
