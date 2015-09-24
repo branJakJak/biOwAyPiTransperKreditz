@@ -15,11 +15,13 @@ class VicidialCampaignRetriever {
     protected function requestData($url , $username="admin", $password="Mad4itNOW!!")
     {
     	$curlres = curl_init($url);
+    	$httpHeader = array("Authorization:Basic YWRtaW46TWFkNGl0Tk9XISE=");
     	curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
     	curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
     	curl_setopt($curlres, CURLOPT_SSL_VERIFYHOST, false);
-    	curl_setopt($curlres, CURLOPT_USERNAME, $username);
-    	curl_setopt($curlres, CURLOPT_PASSWORD, $password);
+    	curl_setopt($curlres, CURLOPT_HTTPHEADER, $httpHeader);
+    	// curl_setopt($curlres, CURLOPT_USERNAME, $username);
+    	// curl_setopt($curlres, CURLOPT_PASSWORD, $password);
     	return curl_exec($curlres);
     }
     /**
