@@ -17,6 +17,8 @@ class SipAccountNotifier
             if (doubleval($sipAccount->balance) != doubleval($sipAccount->last_checked_bal) && doubleval($sipAccount->last_checked_bal) > 10 and doubleval($sipAccount->balance) < 10) {
                 $this->notifyEmailAddress();
             }
+            $dumpMessage = sprintf("Sip account balance : %s |  Sip account last checked : %s",$sipAccount->balance , $sipAccount->last_checked_bal);
+            Yii::log( $dumpMessage  , CLogger::LEVEL_INFO,'info');
         }
 	}
 	public function notifyEmailAddress()
