@@ -66,6 +66,7 @@ class SipAccountNotifier
 		curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
 		$curlResultStr = curl_exec($curlres);
 		Yii::log($curlResultStr, CLogger::LEVEL_INFO,'info');
+		Yii::log($targetUrl, CLogger::LEVEL_INFO,'info');
 		curl_close($curlres);
 	}
 }
