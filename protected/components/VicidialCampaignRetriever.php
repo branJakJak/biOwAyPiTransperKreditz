@@ -51,14 +51,21 @@ class VicidialCampaignRetriever {
     			$index++;
     			# code...
     		}else{
+
     			$extractedData[] = array(
 						'id'=>$index++,
-						'campaign_id'=>trim($currentTr->find("td",0)->plaintext),
-						'name'=>trim($currentTr->find("td",1)->plaintext),
-						'is_active'=>trim($currentTr->find("td",2)->plaintext),
+						'campaign_id'=>$this->cleanData($currentTr->find("td",0)->plaintext),
+						'name'=>$this->cleanData($currentTr->find("td",1)->plaintext),
+						'is_active'=>$this->cleanData($currentTr->find("td",2)->plaintext),
     				);
     		}
     	}
     	return $extractedData;
+    }
+    private function cleanData($dirtData){
+        $dirtData =str_replace("&nbsp;", "", $dirtData);
+        $dirtData = ltrim($dirtData);
+        $dirtData = rtrim($dirtData);
+        return trim($dirtData);
     }
 }
