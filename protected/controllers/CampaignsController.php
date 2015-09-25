@@ -46,14 +46,21 @@ class CampaignsController extends Controller
     }
     public function actionActivate($campaign)
     {
+        $campaign = trim($campaign);
+        $campaign = ltrim($campaign);
+        $campaign = rtrim($campaign);
         $activateObj = new ActivateCampaign($campaign);
         $activateObj->activate();
-        
+
         Yii::app()->user->setFlash('success', '<strong>$campaign Activated!</strong> Campaign $campaign is now activated.');
         $this->redirect(Yii::app()->request->urlReferrer);
     }
     public function actionDeactivate($campaign)
     {
+        $campaign = trim($campaign);
+        $campaign = ltrim($campaign);
+        $campaign = rtrim($campaign);
+        
         $activateObj = new DeactivateCampaign($campaign);
         $activateObj->deactivate();
 
