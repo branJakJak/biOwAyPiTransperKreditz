@@ -46,12 +46,18 @@ class CampaignsController extends Controller
     }
     public function actionActivate($campaign)
     {
-        Yii::app()->user->setFlash('info', '<strong>Oh snap!</strong> This is still in development.');
+        $activateObj = new ActivateCampaign($campaign);
+        $activateObj->activate();
+        
+        Yii::app()->user->setFlash('success', '<strong>$campaign Activated!</strong> Campaign $campaign is now activated.');
         $this->redirect(Yii::app()->request->urlReferrer);
     }
     public function actionDeactivate($campaign)
     {
-        Yii::app()->user->setFlash('info', '<strong>Oh snap!</strong> This is still in development.');
+        $activateObj = new DeactivateCampaign($campaign);
+        $activateObj->deactivate();
+
+        Yii::app()->user->setFlash('success', '<strong>$campaign Deactivated!</strong> Campaign $campaign is now deactivated.');
         $this->redirect(Yii::app()->request->urlReferrer);
     }
 
