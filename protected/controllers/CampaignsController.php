@@ -41,6 +41,9 @@ class CampaignsController extends Controller
     {
         $campaignRetriever = new VicidialCampaignRetriever();
         $listCampaignsArr = $campaignRetriever->retrieve();
+        print_r($listCampaignsArr);
+        var_dump($listCampaignsArr);
+        die();
         $gridDataProvider = new CArrayDataProvider($listCampaignsArr);
         $this->render('index',compact('gridDataProvider'));
     }
