@@ -52,7 +52,7 @@ class CampaignsController extends Controller
         $activateObj = new ActivateCampaign($campaign);
         $activateObj->activate();
 
-        Yii::app()->user->setFlash('success', '<strong>$campaign Activated!</strong> Campaign $campaign is now activated.');
+        Yii::app()->user->setFlash('success', "<strong>$campaign Activated!</strong> Campaign $campaign is now activated.");
         $this->redirect(Yii::app()->request->urlReferrer);
     }
     public function actionDeactivate($campaign)
@@ -64,7 +64,7 @@ class CampaignsController extends Controller
         $activateObj = new DeactivateCampaign($campaign);
         $activateObj->deactivate();
 
-        Yii::app()->user->setFlash('success', '<strong>$campaign Deactivated!</strong> Campaign $campaign is now deactivated.');
+        Yii::app()->user->setFlash('success', "<strong>$campaign Deactivated!</strong> Campaign $campaign is now deactivated.");
         $this->redirect(Yii::app()->request->urlReferrer);
     }
 
