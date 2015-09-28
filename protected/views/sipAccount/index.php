@@ -130,7 +130,10 @@ $this->widget(
 	            "y"=> 80,
 	            "floating"=> 'true',
 	            "borderWidth"=> 1,
-	            //"backgroundColor"=> '((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || "#FFFFFF")',
+  				"labelFormatter"=> new CJavaScriptExpression("function() {
+    var lastVal = this.yData[this.yData.length - 1];
+				                    return '<span style=\"color:' + this.color + '\">' + this.name + ':</span> <b>' + lastVal + '</b> </n>';
+			}"),
 	            "shadow"=> 'true',
 	            "color"=> 'white',
 			),
