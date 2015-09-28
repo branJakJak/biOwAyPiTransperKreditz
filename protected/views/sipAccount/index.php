@@ -116,12 +116,22 @@ $this->widget(
         		'type'=>"bar"
     		),
 			"plotOptions"=>array(
-
 	  			"bar"=>array(
 	                'dataLabels' => array(
 	                    "enabled"=> "true"
 	                )
 	            )
+			),
+			'legend'=>array(
+	   			"layout"=> 'vertical',
+	            "align"=> 'right',
+	            "verticalAlign"=> 'top',
+	            "x"=> -40,
+	            "y"=> 80,
+	            "floating"=> 'true',
+	            "borderWidth"=> 1,
+	            "backgroundColor"=> '((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')',
+	            "shadow"=> 'true'
 			),
             'title' => array(
                 'text' => 'SIP Account Balance Report',
