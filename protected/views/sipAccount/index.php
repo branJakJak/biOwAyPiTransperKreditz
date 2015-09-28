@@ -130,7 +130,7 @@ $this->widget(
 	            "y"=> 80,
 	            "floating"=> 'true',
 	            "borderWidth"=> 1,
-	            "backgroundColor"=> '((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || "#FFFFFF")',
+	            //"backgroundColor"=> '((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || "#FFFFFF")',
 	            "shadow"=> 'true',
 	            "color"=> 'white',
 			),
