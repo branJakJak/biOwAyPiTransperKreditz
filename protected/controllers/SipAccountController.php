@@ -156,7 +156,6 @@ class SipAccountController extends Controller
         }
         echo CJSON::encode($finalArr);
     }
->>>>>>> Stashed changes
 
     /**
      * Manages all models.
