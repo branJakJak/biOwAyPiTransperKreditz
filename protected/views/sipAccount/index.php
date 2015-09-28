@@ -69,17 +69,18 @@ $this->widget(
         		'type'=>"bar"
     		),
 			"plotOptions"=>array(
-	  			"bar"=>[
-	                'dataLabels' => [
+
+	  			"bar"=>array(
+	                'dataLabels' => array(
 	                    "enabled"=> "true"
-	                ]
-	            ]
+	                )
+	            )
 			),
             'title' => array(
                 'text' => 'SIP Account Balance Report',
             ),
             'xAxis' => array(
-                'categories' => ['Balance'],
+                'categories' => array('Balance'),
                 'title'=>array("text"=>null)
             ),
             'yAxis' => array(
