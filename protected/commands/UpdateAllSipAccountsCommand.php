@@ -16,7 +16,7 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand
             $remoteChecker->checkAllSubAccounts();
             foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
                 //retrieve updated subsip
-                echo "Checking $currentSubSipAccount->username under $currentModel->username";
+                echo "Checking $currentSubSipAccount->username under $currentModel->username. ".PHP_EOL;
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $deactivatorObj = new DeactivateVicidialUser($currentModel);
