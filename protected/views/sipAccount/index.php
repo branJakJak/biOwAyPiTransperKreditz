@@ -55,7 +55,9 @@ Yii::app()->clientScript->registerScript('asdasd', '
 		  	jQuery.each(window.chartData.series, function(index, currentChartSeries) {
 		  		jQuery.each(data, function(index, currentRemoteValue) {
 					if (currentChartSeries.name == currentRemoteValue.name) {
-						currentChartSeries.setData([currentRemoteValue.data]);
+						// currentChartSeries.setData([currentRemoteValue.name,currentRemoteValue.data]);
+						currentChartSeries.setData([{name:currentRemoteValue.name,value:currentRemoteValue.data}]);
+
 					}else{
 						console.log(currentChartSeries);
 						console.log(currentRemoteValue);
@@ -125,8 +127,8 @@ $this->widget(
                 'text' => 'SIP Account Balance Report',
             ),
             'xAxis' => array(
-                'categories' => array(),
-                'title'=>array("text"=>array('Balance')),
+                'categories' => array("Balance"),
+                'title'=>array("text"=>null),
             ),
             'yAxis' => array(
             	"min"=>0,
