@@ -59,8 +59,8 @@ Yii::app()->clientScript->registerScript('asdasd', '
 						currentChartSeries.setData([{name:currentRemoteValue.name,value:currentRemoteValue.data}]);
 
 					}else{
-						console.log(currentChartSeries);
-						console.log(currentRemoteValue);
+						// console.log(currentChartSeries);
+						// console.log(currentRemoteValue);
 					}		  			
 		  		});
 		  	});
