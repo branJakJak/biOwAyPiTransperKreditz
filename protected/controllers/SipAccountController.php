@@ -124,8 +124,6 @@ class SipAccountController extends Controller
             foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
                 //retrieve updated subsip
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
-
-
                 
                 if (doubleval($tempSubSip->exact_balance) <= 5) {
                     $deactivatorObj = new DeactivateVicidialUser($currentModel);
@@ -134,6 +132,7 @@ class SipAccountController extends Controller
             }
         }
         $dataProvider = new CActiveDataProvider('SipAccount');
+        $dataProvider->pagination = false;
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
