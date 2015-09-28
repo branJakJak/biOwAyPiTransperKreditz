@@ -146,7 +146,7 @@ $this->widget(
                 'text' => 'SIP Account Balance Report',
             ),
             'xAxis' => array(
-                'categories' => array("Balance"),
+                'categories' =>	SipAccount::getSipAccountsAsArr(),
                 'title'=>array("text"=>null),
             ),
             'yAxis' => array(
