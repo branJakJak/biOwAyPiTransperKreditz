@@ -116,21 +116,20 @@ class SipAccountController extends Controller
      */
     public function actionIndex()
     {
-        /*retrieve all accounts model*/
-        $allModels = SipAccount::model()->findAll();
-        foreach ($allModels as $currentModel) {
-            $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
-            $remoteChecker->checkAllSubAccounts();
-            foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
-                //retrieve updated subsip
-                $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
-                
-                if (doubleval($tempSubSip->exact_balance) <= 5) {
-                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
-                    $deactivatorObj->run();
-                }
-            }
-        }
+        // /*retrieve all accounts model*/
+        // $allModels = SipAccount::model()->findAll();
+        // foreach ($allModels as $currentModel) {
+        //     // $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
+        //     // $remoteChecker->checkAllSubAccounts();
+        //     foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
+        //         //retrieve updated subsip
+        //         $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
+        //         if (doubleval($tempSubSip->exact_balance) <= 5) {
+        //             $deactivatorObj = new DeactivateVicidialUser($currentModel);
+        //             $deactivatorObj->run();
+        //         }
+        //     }
+        // }
 
         $chartDataRetriever = new SipAccountChartData();
         $chartData = $chartDataRetriever->retrieve();
