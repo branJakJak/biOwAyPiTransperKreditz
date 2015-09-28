@@ -116,7 +116,7 @@ $this->widget(
         		'type'=>"bar"
     		),
         	'series' => array(
-        		'pointPadding'=>2,
+        		'pointPadding'=>0.3,
         		'groupPadding'=>2
     		),
 			"plotOptions"=>array(
