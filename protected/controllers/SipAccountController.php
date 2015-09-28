@@ -165,9 +165,7 @@ class SipAccountController extends Controller
         $chartData = $chartDataRetriever->retrieve();
         $finalArr = array();
         foreach ($chartData as $currentChartData) {
-            foreach (range(0, 25) as $key => $value) {
-                $finalArr[] = array($currentChartData['name'],$currentChartData['data'][0]);
-            }
+            $finalArr[] = array($currentChartData['name'],$currentChartData['data'][0]);
         }
         echo CJSON::encode($finalArr);
     }
