@@ -16,7 +16,7 @@ class SipAccountChartData
                 		$currentSubSipAccount = $currentModel->subSipAccounts[0];
                 		$finalData[] = array(
                 				"name"=>$currentModel->username,
-                				"data"=>[doubleval($currentSubSipAccount->exact_balance)],
+                				"data"=>array(doubleval($currentSubSipAccount->exact_balance)),
                 			);
                 	}
                 }
