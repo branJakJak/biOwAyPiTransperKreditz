@@ -32,10 +32,13 @@ class ApiRemoteStatusChecker
 		/*get all sub accounts */
 		foreach ($this->sipAccountModel->subSipAccounts as $currentSubSipAccount) {
 
-                /*notify*/
-                $checker = new SipAccountNotifier();
-                $checker->check($currentSubSipAccount);
-                /*end of notify*/
+
+				if (Yii::app()->params['notifyEnabled']) {
+	                /*notify*/
+	                $checker = new SipAccountNotifier();
+	                $checker->check($currentSubSipAccount);
+	                /*end of notify*/
+				}
 			
 			$this->check(
 				"getuserinfo",
