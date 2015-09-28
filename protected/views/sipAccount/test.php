@@ -114,7 +114,11 @@ $this->widget(
                 ),
 
             ),
-            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
+            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData)),
+           'htmlOptions' => array(
+        	    'style' => 'min-width: 310px; height: 400px; margin: 0 auto'
+        	)
+
         )
     )
 );
