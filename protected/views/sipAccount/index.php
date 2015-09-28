@@ -15,6 +15,15 @@ $this->menu=array(
 	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
 	//array('label'=>'Manage SipAccount', 'url'=>array('admin')),
 );
+
+Yii::app()->clientScript->registerScript('asdasd', '
+
+	setTimeout(function() {
+		window.chartData = highchartyw2;
+	}, 500);
+
+	', CClientScript::POS_READY);
+
 ?>
 
 <style type="text/css">
@@ -33,6 +42,20 @@ $this->menu=array(
 
 
 <script type="text/javascript">
+	function updateChartData () {
+		jQuery.ajax({
+		  url: '/sipAccount/getBarChartReportData',
+		  type: 'GET',
+		  dataType: 'json',
+		  success: function(data, textStatus, xhr) {
+		    window.chartData.series[0].setData(data)
+		  },
+		});
+		setTimeout(updateChartData, 3 * 1000);
+	}
+	setTimeout(updateChartData, 3 * 1000);
+
+
 	function updateListViewData() {
 		alertify.success('Updating data.. Please wait....');
 		$.fn.yiiListView.update("sipAccountListView");
@@ -61,6 +84,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <?php 
+
 $this->widget(
     'yiiwheels.widgets.highcharts.WhHighCharts',
     array(
@@ -81,15 +105,22 @@ $this->widget(
             ),
             'xAxis' => array(
                 'categories' => array('Balance'),
-                'title'=>array("text"=>null)
+                'title'=>array("text"=>null),
+                "labels"=>array(
+                	"style"=>array(
+                		'font-size'=>"20px",
+                		"fontWeight"=> 'bold'
+            		)
+            	)                
             ),
             'yAxis' => array(
             	"min"=>0,
                 'title' => array(
                     'text' =>  null,
                 ),
+
             ),
-            'series' =>$chartData
+            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
         )
     )
 );

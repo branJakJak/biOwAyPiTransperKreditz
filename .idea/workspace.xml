@@ -17,6 +17,7 @@
     <file path="$PROJECT_DIR$/protected/models/SipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443109954011" ignored="false" />
     <file path="/CampaignsController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443124643376" ignored="false" />
     <file path="/VicidialCampaignRetriever.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443120577694" ignored="false" />
+    <file path="/index.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443443572662" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +36,17 @@
     <favorites_list name="VOIPTransferCredits" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="126" column="33" selection-start="2983" selection-end="2983" vertical-scroll-proportion="0.5084112">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -45,7 +56,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/components/BlockVoipAccount.php" />
         <option value="$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php" />
         <option value="$PROJECT_DIR$/protected/views/sipAccount/_view.php" />
         <option value="$PROJECT_DIR$/protected/models/SubSipAccount.php" />
@@ -61,6 +71,7 @@
         <option value="$PROJECT_DIR$/protected/components/RemoteVicidialAuthenticator.php" />
         <option value="$PROJECT_DIR$/protected/controllers/CampaignsController.php" />
         <option value="$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php" />
+        <option value="$PROJECT_DIR$/protected/views/sipAccount/index.php" />
       </list>
     </option>
   </component>
@@ -101,6 +112,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -133,9 +145,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VOIPTransferCredits" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VOIPTransferCredits" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VOIPTransferCredits" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VOIPTransferCredits" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sipAccount" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -182,7 +233,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -190,7 +241,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24429224" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24809742" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -276,11 +327,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/components/UpdateRemoteVicidialAccount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="18" selection-end="45" vertical-scroll-proportion="0.0953271" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/StatusReportVicidialUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="79" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.7684825" />
@@ -333,39 +379,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="31" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.38122606">
-          <folding />
-        </state>
+        <state line="48" column="31" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.38122606" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/campaigns/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.8045977">
-          <folding>
-            <marker date="1443124839027" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1443124839027" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1443124839027" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="61" column="0" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.8045977" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/CampaignsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.6504673">
-          <folding />
-        </state>
+        <state line="65" column="0" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.6504673" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="40" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.03256705">
-          <folding />
-        </state>
+        <state line="32" column="40" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.03256705" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/FreeVoipAccountsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="61" selection-end="1107" vertical-scroll-proportion="0.0317757">
+        <state line="42" column="0" selection-start="61" selection-end="1107" vertical-scroll-proportion="0.0317757" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="33" selection-start="2983" selection-end="2983" vertical-scroll-proportion="0.5084112">
           <folding />
         </state>
       </provider>
