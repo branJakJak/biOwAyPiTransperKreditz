@@ -106,12 +106,6 @@ $this->widget(
             'xAxis' => array(
                 'categories' => array('Balance'),
                 'title'=>array("text"=>null),
-                "labels"=>array(
-                	"style"=>array(
-                		'font-size'=>"20px",
-                		"fontWeight"=> 'bold'
-            		)
-            	)                
             ),
             'yAxis' => array(
             	"min"=>0,
