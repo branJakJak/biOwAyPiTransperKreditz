@@ -115,6 +115,10 @@ $this->widget(
         	'chart' => array(
         		'type'=>"bar"
     		),
+        	'series' => array(
+        		'pointPadding'=>2,
+        		'groupPadding'=>2
+    		),
 			"plotOptions"=>array(
 	  			"bar"=>array(
 	                'dataLabels' => array(
@@ -130,6 +134,7 @@ $this->widget(
 	            "y"=> 80,
 	            "floating"=> 'true',
 	            "borderWidth"=> 1,
+	            "backgroundColor"=> '#FFFFFF',
   				"labelFormatter"=> new CJavaScriptExpression("function() {
     var lastVal = this.yData[this.yData.length - 1];
 				                    return '<span style=\"color:' + this.color + '\">' + this.name + ':</span> <b>' + lastVal + '</b> </n>';
