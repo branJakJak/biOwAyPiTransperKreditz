@@ -133,6 +133,14 @@ class SipAccount extends CActiveRecord
     	}
     	return $message;
     }
-    
+	public static function getSipAccountsAsArr()
+    {
+    	$allAccountsArr= array();
+    	$allmodels = SipAccount::model()->findAll();
+    	foreach ($allmodels as $curModel) {
+    		$allAccountsArr[] = $curModel->username;
+    	}
+    	return $allAccountsArr;
+    }    
 
 }
