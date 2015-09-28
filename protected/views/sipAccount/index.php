@@ -5,25 +5,29 @@
 $this->breadcrumbs=array(
 	'Sip Accounts',
 );
+$this->menu=array(
+	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
+	//array('label'=>'Manage SipAccount', 'url'=>array('admin')),
+);
 
 $baseUrl = Yii::app()->theme->baseUrl; 
 $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
 $cs->registerCssFile($baseUrl.'/css/alertify.min.css');
 
-$this->menu=array(
-	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
-	//array('label'=>'Manage SipAccount', 'url'=>array('admin')),
-);
+// $cs->registerCssFile($baseUrl.'/bower_components/angular-chart.js/dist/angular-chart.css');
+// $cs->registerScriptFile($baseUrl.'/js/Chart.min.js'  , CClientScript::POS_END);
+// $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
+// $cs->registerScriptFile($baseUrl.'/bower_components/angular-chart.js/angular-chart.js'  , CClientScript::POS_END);
+// $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
+
+
 
 Yii::app()->clientScript->registerScript('asdasd', '
-
 	setTimeout(function() {
-		//window.chartData = highchartyw2;
+		window.chartData = highchartyw2;
 	}, 500);
-
 	', CClientScript::POS_READY);
-
 ?>
 
 <style type="text/css">
@@ -53,7 +57,7 @@ Yii::app()->clientScript->registerScript('asdasd', '
 		});
 		setTimeout(updateChartData, 3 * 1000);
 	}
-	//setTimeout(updateChartData, 3 * 1000);
+	setTimeout(updateChartData, 3 * 1000);
 
 
 	function updateListViewData() {
@@ -63,6 +67,14 @@ Yii::app()->clientScript->registerScript('asdasd', '
 	}
 	setTimeout(updateListViewData, 60 * 1000);
 </script>
+
+
+
+<div ng-app="angularChart">
+<div ng-controller="IndexCtrl">
+	
+
+
 
 <?php 
 
@@ -77,59 +89,52 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <?php
-	// $this->beginWidget('zii.widgets.CPortlet', array(
-	// 	'title'=>'SIP Account Balance',
-	// ));
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'SIP Account Balance',
+	));
 ?>
 
 
 <?php 
 
-// $this->widget(
-//     'yiiwheels.widgets.highcharts.WhHighCharts',
-//     array(
-//         'pluginOptions' => array(
-//         	'chart' => array(
-//         		'type'=>"bar"
-//     		),
-// 			"plotOptions"=>array(
+$this->widget(
+    'yiiwheels.widgets.highcharts.WhHighCharts',
+    array(
+        'pluginOptions' => array(
+        	'chart' => array(
+        		'type'=>"bar"
+    		),
+			"plotOptions"=>array(
 
-// 	  			"bar"=>array(
-// 	                'dataLabels' => array(
-// 	                    "enabled"=> "true"
-// 	                )
-// 	            )
-// 			),
-//             'title' => array(
-//                 'text' => 'SIP Account Balance Report',
-//             ),
-//             'xAxis' => array(
-//                 'categories' => array('Balance'),
-//                 'title'=>array("text"=>null),
-//                 "labels"=>array(
-//                 	"style"=>array(
-//                 		'font-size'=>"20px",
-//                 		"fontWeight"=> 'bold'
-//             		)
-//             	)                
-//             ),
-//             'yAxis' => array(
-//             	"min"=>0,
-//                 'title' => array(
-//                     'text' =>  null,
-//                 ),
+	  			"bar"=>array(
+	                'dataLabels' => array(
+	                    "enabled"=> "true"
+	                )
+	            )
+			),
+            'title' => array(
+                'text' => 'SIP Account Balance Report',
+            ),
+            'xAxis' => array(
+                'categories' => array(),
+                'title'=>array("text"=>null),
+            ),
+            'yAxis' => array(
+            	"min"=>0,
+                'title' => array(
+                    'text' =>  null,
+                ),
 
-//             ),
-//             'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
-//         )
-//     )
-// );
+            ),
+            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
+        ),
+		'htmlOptions'=>array('style'=>'height: 700px')
+    )
+);
 
 ?>
-
-
 <?php
-	// $this->endWidget();
+	$this->endWidget();
 ?>
 
 
@@ -155,3 +160,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
         'date_created'=>'Date Created',
     ),	
 )); ?>
+
+</div>
+</div>
