@@ -52,7 +52,16 @@ Yii::app()->clientScript->registerScript('asdasd', '
 		  type: 'GET',
 		  dataType: 'json',
 		  success: function(data, textStatus, xhr) {
-		    window.chartData.series[0].setData(data)
+		  	jQuery.each(window.chartData.series, function(index, currentChartSeries) {
+		  		jQuery.each(data, function(index, currentRemoteValue) {
+					if (currentChartSeries.name == currentRemoteValue.name) {
+						currentChartSeries.setData([currentRemoteValue.data]);
+					}else{
+						console.log(currentChartSeries);
+						console.log(currentRemoteValue);
+					}		  			
+		  		});
+		  	});
 		  },
 		});
 		setTimeout(updateChartData, 3 * 1000);
