@@ -53,7 +53,7 @@ Yii::app()->clientScript->registerScript('asdasd', '
 		});
 		setTimeout(updateChartData, 3 * 1000);
 	}
-	setTimeout(updateChartData, 3 * 1000);
+	//setTimeout(updateChartData, 3 * 1000);
 
 
 	function updateListViewData() {
@@ -77,59 +77,59 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>'SIP Account Balance',
-	));
+	// $this->beginWidget('zii.widgets.CPortlet', array(
+	// 	'title'=>'SIP Account Balance',
+	// ));
 ?>
 
 
 <?php 
 
-$this->widget(
-    'yiiwheels.widgets.highcharts.WhHighCharts',
-    array(
-        'pluginOptions' => array(
-        	'chart' => array(
-        		'type'=>"bar"
-    		),
-			"plotOptions"=>array(
+// $this->widget(
+//     'yiiwheels.widgets.highcharts.WhHighCharts',
+//     array(
+//         'pluginOptions' => array(
+//         	'chart' => array(
+//         		'type'=>"bar"
+//     		),
+// 			"plotOptions"=>array(
 
-	  			"bar"=>array(
-	                'dataLabels' => array(
-	                    "enabled"=> "true"
-	                )
-	            )
-			),
-            'title' => array(
-                'text' => 'SIP Account Balance Report',
-            ),
-            'xAxis' => array(
-                'categories' => array('Balance'),
-                'title'=>array("text"=>null),
-                "labels"=>array(
-                	"style"=>array(
-                		'font-size'=>"20px",
-                		"fontWeight"=> 'bold'
-            		)
-            	)                
-            ),
-            'yAxis' => array(
-            	"min"=>0,
-                'title' => array(
-                    'text' =>  null,
-                ),
+// 	  			"bar"=>array(
+// 	                'dataLabels' => array(
+// 	                    "enabled"=> "true"
+// 	                )
+// 	            )
+// 			),
+//             'title' => array(
+//                 'text' => 'SIP Account Balance Report',
+//             ),
+//             'xAxis' => array(
+//                 'categories' => array('Balance'),
+//                 'title'=>array("text"=>null),
+//                 "labels"=>array(
+//                 	"style"=>array(
+//                 		'font-size'=>"20px",
+//                 		"fontWeight"=> 'bold'
+//             		)
+//             	)                
+//             ),
+//             'yAxis' => array(
+//             	"min"=>0,
+//                 'title' => array(
+//                     'text' =>  null,
+//                 ),
 
-            ),
-            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
-        )
-    )
-);
+//             ),
+//             'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
+//         )
+//     )
+// );
 
 ?>
 
 
 <?php
-	$this->endWidget();
+	// $this->endWidget();
 ?>
 
 
