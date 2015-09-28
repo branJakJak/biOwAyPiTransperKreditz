@@ -131,7 +131,8 @@ $this->widget(
 	            "floating"=> 'true',
 	            "borderWidth"=> 1,
 	            "backgroundColor"=> '((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || "#FFFFFF")',
-	            "shadow"=> 'true'
+	            "shadow"=> 'true',
+	            "color"=> 'white',
 			),
             'title' => array(
                 'text' => 'SIP Account Balance Report',
