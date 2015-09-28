@@ -28,7 +28,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','test'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -141,6 +141,20 @@ class SipAccountController extends Controller
             'dataProvider' => $dataProvider,
             'chartData'=>$chartData
         ));
+    }
+    public function actionTest()
+    {
+        $allModels = SipAccount::model()->findAll();
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
+
+        $dataProvider = new CActiveDataProvider('SipAccount');
+        $dataProvider->pagination = false;
+        $this->render('test', array(
+            'dataProvider' => $dataProvider,
+            'chartData'=>$chartData
+        ));
+        
     }
     /**
      * Retrieves bar chart report data as json data
