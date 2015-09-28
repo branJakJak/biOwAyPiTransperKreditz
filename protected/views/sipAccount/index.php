@@ -19,7 +19,7 @@ $this->menu=array(
 Yii::app()->clientScript->registerScript('asdasd', '
 
 	setTimeout(function() {
-		window.chartData = highchartyw2;
+		//window.chartData = highchartyw2;
 	}, 500);
 
 	', CClientScript::POS_READY);
