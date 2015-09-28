@@ -137,6 +137,13 @@ class SipAccountController extends Controller
             'dataProvider' => $dataProvider,
         ));
     }
+    /**
+     * Retrieves bar chart report data as json data
+     */
+    public function actionGetBarChartReportData()
+    {
+        
+    }
 
     /**
      * Manages all models.

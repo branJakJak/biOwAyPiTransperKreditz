@@ -8,3 +8,5 @@ protected/vendor/
 protected/yiic.php
 protected/config/main.php
 protected/config/console.php
+.phpintel
+.idea
