@@ -51,10 +51,65 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	    'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // info
     ),
 )); ?>
+
+
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'SIP Account Balance',
+	));
+?>
+
+
+<?php 
+$this->widget(
+    'yiiwheels.widgets.highcharts.WhHighCharts',
+    array(
+        'pluginOptions' => array(
+        	'chart' => array(
+        		'type'=>"bar"
+    		),
+			"plotOptions"=>array(
+	  			"bar"=>[
+	                'dataLabels' => [
+	                    "enabled"=> "true"
+	                ]
+	            ]
+			),
+            'title' => array(
+                'text' => 'SIP Account Balance Report',
+            ),
+            'xAxis' => array(
+                'categories' => ['Balance'],
+                'title'=>array("text"=>null)
+            ),
+            'yAxis' => array(
+            	"min"=>0,
+                'title' => array(
+                    'text' =>  null,
+                ),
+            ),
+            'series' =>$chartData
+        )
+    )
+);
+
+?>
+
+
+<?php
+	$this->endWidget();
+?>
+
+
+
+<hr>
+
+
 <h1>
     Sip Accounts <small>[bestvoipreselling]</small>
+	<small id="updateCounterContainer"></small>
 </h1>
-<small id="updateCounterContainer"></small>
+<hr>
 
 
 <?php $this->widget('zii.widgets.CListView', array(

@@ -28,7 +28,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -131,10 +131,15 @@ class SipAccountController extends Controller
                 }
             }
         }
+
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
+
         $dataProvider = new CActiveDataProvider('SipAccount');
         $dataProvider->pagination = false;
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'chartData'=>$chartData
         ));
     }
     /**
@@ -142,7 +147,10 @@ class SipAccountController extends Controller
      */
     public function actionGetBarChartReportData()
     {
-        
+        header("Content-Type: application/json");
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
+        echo CJSON::encode($chartData);
     }
 
     /**
