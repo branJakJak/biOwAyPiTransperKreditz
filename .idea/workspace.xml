@@ -8,7 +8,7 @@
     <file path="/SipAccountNotifier.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443000011508" ignored="false" />
     <file path="/BlockVoipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946481144" ignored="false" />
     <file path="/ApiRemoteStatusChecker.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946583693" ignored="false" />
-    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007459639" ignored="false" />
+    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443450668399" ignored="false" />
     <file path="/StatusReportVicidialUser.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007181743" ignored="false" />
     <file path="/a.dummy" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443006028155" ignored="false" />
     <file path="/DeactivateVicidialUser.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007048100" ignored="false" />
@@ -36,6 +36,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< Updated upstream
       <file leaf-file-name="SipAccountNotifier.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,11 +63,20 @@
                 <marker date="1443124839027" expanded="true" signature="2152:2191" placeholder="..." />
                 <marker date="1443124839027" expanded="true" signature="2152:2180" placeholder="..." />
                 <marker date="1443124839027" expanded="true" signature="2152:2179" placeholder="..." />
+=======
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="17" selection-start="2275" selection-end="2275" vertical-scroll-proportion="-9.807693">
+              <folding>
+                <element signature="e#1908#1925#0" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="VicidialCampaignRetriever.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -80,6 +90,12 @@
         <entry file="file://$PROJECT_DIR$/protected/controllers/FreeVoipAccountsController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="42" column="0" selection-start="61" selection-end="1107" vertical-scroll-proportion="0.0">
+=======
+      <file leaf-file-name="SipAccountController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="155" column="44" selection-start="4895" selection-end="4895" vertical-scroll-proportion="0.68598133">
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -103,7 +119,6 @@
         <option value="$PROJECT_DIR$/protected/components/UpdateRemoteVicidialAccount.php" />
         <option value="$PROJECT_DIR$/protected/components/ActivateVicidialUser.php" />
         <option value="$PROJECT_DIR$/protected/components/StatusReportVicidialUser.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
         <option value="$PROJECT_DIR$/protected/controllers/SubSipAccountController.php" />
         <option value="$PROJECT_DIR$/protected/components/DeactivateVicidialUser.php" />
         <option value="$PROJECT_DIR$/protected/components/SipAccountNotifier.php" />
@@ -111,6 +126,11 @@
         <option value="$PROJECT_DIR$/protected/components/RemoteVicidialAuthenticator.php" />
         <option value="$PROJECT_DIR$/protected/controllers/CampaignsController.php" />
         <option value="$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php" />
+<<<<<<< Updated upstream
+=======
+        <option value="$PROJECT_DIR$/protected/views/sipAccount/index.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -344,6 +364,7 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/protected/components/UpdateRemoteVicidialAccount.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="10" selection-start="18" selection-end="45" vertical-scroll-proportion="0.0953271" />
@@ -354,6 +375,8 @@
         <state line="26" column="79" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.7684825" />
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/protected/migrations/m150914_124552_add_status_to_sip_account.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="1" selection-start="367" selection-end="367" vertical-scroll-proportion="0.4448598" />
@@ -367,11 +390,6 @@
     <entry file="file://$PROJECT_DIR$/protected/controllers/SubSipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="208" column="24" selection-start="5931" selection-end="5931" vertical-scroll-proportion="0.6091954" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="5" selection-start="4253" selection-end="4253" vertical-scroll-proportion="0.34953272" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/ActivateVicidialUser.php">
@@ -433,7 +451,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state line="31" column="53" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.5862069">
+=======
+        <state line="100" column="17" selection-start="2275" selection-end="2275" vertical-scroll-proportion="-9.807693">
+          <folding>
+            <element signature="e#1908#1925#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../yii/framework/web/CArrayDataProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="21" selection-start="13" selection-end="31" vertical-scroll-proportion="0.0635514">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="155" column="44" selection-start="4895" selection-end="4895" vertical-scroll-proportion="0.68598133">
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>

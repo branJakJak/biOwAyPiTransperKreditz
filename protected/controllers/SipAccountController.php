@@ -118,25 +118,45 @@ class SipAccountController extends Controller
     {
         /*retrieve all accounts model*/
         $allModels = SipAccount::model()->findAll();
-        foreach ($allModels as $currentModel) {
-            $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
-            $remoteChecker->checkAllSubAccounts();
-            foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
-                //retrieve updated subsip
-                $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
-                
-                if (doubleval($tempSubSip->exact_balance) <= 5) {
-                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
-                    $deactivatorObj->run();
-                }
-            }
-        }
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
         $dataProvider = new CActiveDataProvider('SipAccount');
         $dataProvider->pagination = false;
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
     }
+    public function actionTest()
+    {
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
+
+        $chartDataProviderArr = new CArrayDataProvider($chartData);
+
+        $dataProvider = new CActiveDataProvider('SipAccount');
+        $dataProvider->pagination = false;
+        $this->render('test', array(
+            'dataProvider' => $dataProvider,
+            'chartData'=>$chartData,
+            'chartDataProviderArr'=>$chartDataProviderArr,
+        ));
+        
+    }
+    /**
+     * Retrieves bar chart report data as json data
+     */
+    public function actionGetBarChartReportData()
+    {
+        // header("Content-Type: application/json");
+        $chartDataRetriever = new SipAccountChartData();
+        $chartData = $chartDataRetriever->retrieve();
+        $finalArr = array();
+        foreach ($chartData as $currentChartData) {
+            $finalArr[] = array($currentChartData['name'],$currentChartData['data'][0]);
+        }
+        echo CJSON::encode($finalArr);
+    }
+>>>>>>> Stashed changes
 
     /**
      * Manages all models.

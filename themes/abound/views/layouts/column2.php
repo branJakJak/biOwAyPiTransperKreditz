@@ -17,6 +17,14 @@
 			));?>
 		</div>
         <br>
+        <div>
+        	<?php echo $this->clips['sidebar']; ?>
+
+        <?php 
+        echo $this->clips[ 'sideBarCol2Clip' ];
+        ?>
+        
+        </div>
 	
     </div><!--/span-->
     <div class="span9">
