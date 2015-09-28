@@ -139,7 +139,7 @@ $this->widget(
             ),
             'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
         ),
-		'htmlOptions'=>array('style'=>'height: 700px')
+		'htmlOptions'=>array('style'=>'height: 500px')
     )
 );
 
