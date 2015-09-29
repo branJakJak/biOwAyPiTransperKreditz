@@ -98,6 +98,9 @@ $javascriptCode = <<<EOL
 EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
+Yii::app()->clientScript->registerScript('updateChartData', '
+	setTimeout(updateChartData, 3 * 1000);
+	', CClientScript::POS_READY);
 
 ?>
 
@@ -128,7 +131,6 @@ Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CC
 		});
 		setTimeout(updateChartData, 3 * 1000);
 	}
-	setTimeout(updateChartData, 3 * 1000);
 </script>
 
 
