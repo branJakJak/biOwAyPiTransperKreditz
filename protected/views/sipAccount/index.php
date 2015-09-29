@@ -61,6 +61,9 @@ $javascriptCode = <<<EOL
             	renderTo:"chartContainer",
                 type: 'bar'
             },
+	 		title: {
+	            text: 'Credit Balance'
+	        },            
             legend: { enabled: false},
             xAxis: {
                 categories: $sipAccountsStr,
@@ -159,7 +162,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	));
 ?>
 
-<div id="chartContainer"></div>
+<div id="chartContainer" style="min-height: 700px;"></div>
 
 <?php
 	$this->endWidget();
