@@ -47,7 +47,12 @@ $sipAccountsStr .= ']';
 $seriesData = SipAccount::getSeriesDataAsArr();
 foreach ($seriesData as $key => $currentSeriesData) {
     $curDataContainer = array();
-    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#".ColorGenerator::generateHexColor());
+    if($currentSeriesData >= 10){
+		$curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
+    }else{
+    	$curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+    }
+    
     $seriesData[$key] = $curDataContainer;
 }
 
@@ -56,6 +61,8 @@ $seriesDataStr = json_encode($seriesData);
 
 $javascriptCode = <<<EOL
 
+	window.originalColorMap = new Object();
+
 	window.options = {
             chart: {
             	renderTo:"chartContainer",
@@ -63,13 +70,33 @@ $javascriptCode = <<<EOL
             },
 	 		title: {
 	            text: 'Credit Balance'
-	        },            
+	        },
+			credits: {
+			   enabled: false
+			},
             legend: { enabled: false},
             xAxis: {
                 categories: $sipAccountsStr,
 	  			title: {
 	                text: null
 	            },
+	            labels:{
+	            	formatter:function(){
+	            		this.getRandomColor = function() {
+						    var letters = '0123456789ABCDEF'.split('');
+						    var color = '#';
+						    for (var i = 0; i < 6; i++ ) {
+						        color += letters[Math.floor(Math.random() * 16)];
+						    }
+						    return color;
+						}
+						if (!window.originalColorMap[this.value]) {
+							window.originalColorMap[this.value] = this.getRandomColor();
+						}
+	            		/*generate random color*/
+	            		return '<span style="color: '+window.originalColorMap[this.value]+';">' + this.value + '</span>';
+	            	}
+	            }
             },
 	 		yAxis: {
 	            title: {
@@ -96,15 +123,15 @@ $javascriptCode = <<<EOL
             }]
         };
 	
-	window.originalColor = [];
+	
 	//iterate all original color
-	jQuery.each(window.options.series[0].data, function(index, val) {
-		window.originalColor.push(val.color);
-		if (val.y < 10) {
-			window.options.series[0].data[index].color = "red";
-		}
-	  //iterate through array or object
-	});
+	// jQuery.each(window.options.series[0].data, function(index, val) {
+	// 	window.originalColor.push(val.color);
+	// 	if (val.y < 10) {
+	// 		window.options.series[0].data[index].color = "red";
+	// 	}
+	//   //iterate through array or object
+	// });
 
 	window.chartObj = new Highcharts.Chart(window.options);
 
@@ -146,7 +173,7 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 			  if (val.y < 10) {
 			  	data[index].color =  "red";
 			  }else if(val.y >= 10 && window.chartObj.series[0].data[index].color == "red"){
-			  	data[index].color = window.originalColor[index];
+			  	data[index].color = "#7CB5EC";
 
 			  	// if (window.chartObj.series[0].data[index].color == 'red') {
 			  	// 	//@TDODO - load color before

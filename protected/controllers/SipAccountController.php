@@ -165,10 +165,9 @@ class SipAccountController extends Controller
         // $chartData = $chartDataRetriever->retrieve();
         $seriesData = SipAccount::getSeriesDataAsArr();
         foreach ($seriesData as $key => $value) {
-            
             $curDataContainer = array();
             //$value += rand(0,20);
-            $curDataContainer = array("y"=>$value,"color"=>"#".ColorGenerator::generateHexColor());
+            $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
             $seriesData[$key] = $curDataContainer;
 
         }
