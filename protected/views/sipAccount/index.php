@@ -44,14 +44,13 @@ foreach ($sipAccounts as $currentSipAccount) {
 rtrim($sipAccountsStr,',');
 $sipAccountsStr .= ']';
 
-
 $seriesData = SipAccount::getSeriesDataAsArr();
 foreach ($seriesData as $key => $currentSeriesData) {
     $curDataContainer = array();
     if ($currentSeriesData < 10) {
         $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
     }else{
-        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#95CEFF");
+        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#".ColorGenerator::generateHexColor());
     }
     $seriesData[$key] = $curDataContainer;
 }
@@ -134,6 +133,21 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 		  type: 'GET',
 		  dataType: 'json',
 		  success: function(data, textStatus, xhr) {
+
+			jQuery.each(data, function(index, val) {
+				//console.log(val.y)
+			  if (val.y < 10) {
+			  	data[index].color =  "red";
+			  }else{
+			  	if (window.chartObj.series[0].data[index].color == 'red') {
+			  		window.chartObj.series[0].data[index].color = val.color;
+			  	}else{
+			  		data[index].color = window.chartObj.series[0].data[index].color;
+			  		//val.color = window.chartObj.series[0].data[index].color;
+			  	}
+			  }
+			});
+
 		  	window.chartObj.series[0].setData(data,true);
 
 			jQuery.each(window.chartObj.series[0].data, function(index, val) {

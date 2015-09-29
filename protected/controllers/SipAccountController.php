@@ -163,8 +163,17 @@ class SipAccountController extends Controller
         header("Content-Type: application/json");
         // $chartDataRetriever = new SipAccountChartData();
         // $chartData = $chartDataRetriever->retrieve();
-        
         $seriesData = SipAccount::getSeriesDataAsArr();
+        foreach ($seriesData as $key => $value) {
+            
+            $curDataContainer = array();
+            if ($value < 10) {
+                $curDataContainer = array("y"=>$value,"color"=>"red");
+            }else{
+                $curDataContainer = array("y"=>$value,"color"=>"#".ColorGenerator::generateHexColor());
+            }
+            $seriesData[$key] = $curDataContainer;
+        }
         echo CJSON::encode($seriesData);
     }
 
