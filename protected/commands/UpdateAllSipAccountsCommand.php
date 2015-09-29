@@ -9,6 +9,7 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand
 	{
 		Yii::import('application.models.*');
 		Yii::import('application.components.*');
+        Yii::import('ext.YiiMailer.YiiMailer');
         /*retrieve all accounts model*/
         $allModels = SipAccount::model()->findAll();
         foreach ($allModels as $currentModel) {
@@ -22,6 +23,7 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand
                 if (doubleval($tempSubSip->exact_balance) <= 3) {
                     $deactivatorObj = new DeactivateVicidialUser($currentModel);
                     $deactivatorObj->run();
+                    mail("hellsing357@gmail.com", 'balance-low', "$currentModel->username deactivated");
                 }
             }
         }
