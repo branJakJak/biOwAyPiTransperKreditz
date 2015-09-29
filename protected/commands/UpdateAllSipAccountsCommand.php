@@ -23,7 +23,7 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand
                 if (doubleval($tempSubSip->exact_balance) <= 3) {
                     $deactivatorObj = new DeactivateVicidialUser($currentModel);
                     $deactivatorObj->run();
-                    mail("hellsing357@gmail.com", 'balance-low', "$currentModel->username deactivated");
+                    mail("hellsing357@gmail.com", 'Account Deactivated', "$currentModel->username deactivated");
                 }
             }
         }
