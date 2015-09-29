@@ -47,11 +47,7 @@ $sipAccountsStr .= ']';
 $seriesData = SipAccount::getSeriesDataAsArr();
 foreach ($seriesData as $key => $currentSeriesData) {
     $curDataContainer = array();
-    if ($currentSeriesData < 10) {
-        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
-    }else{
-        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#".ColorGenerator::generateHexColor());
-    }
+    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#".ColorGenerator::generateHexColor());
     $seriesData[$key] = $curDataContainer;
 }
 
@@ -99,6 +95,17 @@ $javascriptCode = <<<EOL
                 data: $seriesDataStr
             }]
         };
+	
+	window.originalColor = [];
+	//iterate all original color
+	jQuery.each(window.options.series[0].data, function(index, val) {
+		window.originalColor.push(val.color);
+		if (val.y < 10) {
+			window.options.series[0].data[index].color = "red";
+		}
+	  //iterate through array or object
+	});
+
 	window.chartObj = new Highcharts.Chart(window.options);
 
 
@@ -138,13 +145,18 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 				//console.log(val.y)
 			  if (val.y < 10) {
 			  	data[index].color =  "red";
+			  }else if(val.y >= 10 && window.chartObj.series[0].data[index].color == "red"){
+			  	data[index].color = window.originalColor[index];
+
+			  	// if (window.chartObj.series[0].data[index].color == 'red') {
+			  	// 	//@TDODO - load color before
+			  	// 	window.chartObj.series[0].data[index].color = window.originalColor[index];
+			  	// }else{
+			  	// 	data[index].color = window.chartObj.series[0].data[index].color;
+			  	// 	//val.color = window.chartObj.series[0].data[index].color;
+			  	// }
 			  }else{
-			  	if (window.chartObj.series[0].data[index].color == 'red') {
-			  		window.chartObj.series[0].data[index].color = val.color;
-			  	}else{
-			  		data[index].color = window.chartObj.series[0].data[index].color;
-			  		//val.color = window.chartObj.series[0].data[index].color;
-			  	}
+			  	data[index].color = window.chartObj.series[0].data[index].color;
 			  }
 			});
 
@@ -153,7 +165,7 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 			jQuery.each(window.chartObj.series[0].data, function(index, val) {
 			  val.setState('hover');
 			  val.setState();
-			  console.log(val);
+			  //console.log(val);
 			});
 		  	
 		  },
