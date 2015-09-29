@@ -28,6 +28,7 @@ Yii::app()->clientScript->registerScript('liveupdatelistview', '
 		alertify.success("Updating data.. Please wait....");
 		$.fn.yiiListView.update("sipAccountListView");
 		setTimeout(updateListViewData, 60 * 1000);
+		setTimeout(updateChartData, 3 * 1000);
 	}
 	setTimeout(updateListViewData, 60 * 1000);
 
@@ -197,7 +198,7 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 		  	
 		  },
 		});
-		setTimeout(updateChartData, 3 * 1000);
+		//setTimeout(updateChartData, 3 * 1000);
 	}
 </script>
 
