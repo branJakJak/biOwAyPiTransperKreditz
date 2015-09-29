@@ -162,7 +162,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	));
 ?>
 
-<div id="chartContainer" style="min-height: 600px;"></div>
+<div id="chartContainer"></div>
 
 <?php
 	$this->endWidget();
