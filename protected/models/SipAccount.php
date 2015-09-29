@@ -142,5 +142,16 @@ class SipAccount extends CActiveRecord
     	}
     	return $allAccountsArr;
     }    
+    public static function getSeriesDataAsArr()
+    {
+    	$allSeriesData= array();
+    	$allmodels = SipAccount::model()->findAll();
+    	foreach ($allmodels as $curModel) {
+    		if (count($curModel->subSipAccounts) > 0) {
+    			$allSeriesData[] = doubleval($curModel->subSipAccounts[0]->exact_balance);
+    		}
+    	}
+    	return $allSeriesData;
+    }
 
 }

@@ -161,9 +161,11 @@ class SipAccountController extends Controller
     public function actionGetBarChartReportData()
     {
         header("Content-Type: application/json");
-        $chartDataRetriever = new SipAccountChartData();
-        $chartData = $chartDataRetriever->retrieve();
-        echo CJSON::encode($chartData);
+        // $chartDataRetriever = new SipAccountChartData();
+        // $chartData = $chartDataRetriever->retrieve();
+        
+        $seriesData = SipAccount::getSeriesDataAsArr();
+        echo CJSON::encode($seriesData);
     }
 
     /**

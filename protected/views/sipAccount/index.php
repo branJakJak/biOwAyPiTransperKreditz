@@ -14,20 +14,91 @@ $baseUrl = Yii::app()->theme->baseUrl;
 $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
 $cs->registerCssFile($baseUrl.'/css/alertify.min.css');
+$cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 
 // $cs->registerCssFile($baseUrl.'/bower_components/angular-chart.js/dist/angular-chart.css');
-// $cs->registerScriptFile($baseUrl.'/js/Chart.min.js'  , CClientScript::POS_END);
 // $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
 // $cs->registerScriptFile($baseUrl.'/bower_components/angular-chart.js/angular-chart.js'  , CClientScript::POS_END);
+// $cs->registerScriptFile($baseUrl.'/js/Chart.min.js'  , CClientScript::POS_END);
 // $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
+Yii::app()->clientScript->registerScript('liveupdatelistview', '
+
+	function updateListViewData() {
+		alertify.success("Updating data.. Please wait....");
+		$.fn.yiiListView.update("sipAccountListView");
+		setTimeout(updateListViewData, 60 * 1000);
+	}
+	setTimeout(updateListViewData, 60 * 1000);
+
+', CClientScript::POS_READY);
 
 
-Yii::app()->clientScript->registerScript('asdasd', '
-	setTimeout(function() {
-		window.chartData = highchartyw2;
-	}, 500);
-	', CClientScript::POS_READY);
+
+
+$sipAccounts = SipAccount::getSipAccountsAsArr();
+$sipAccountsStr = "[";
+foreach ($sipAccounts as $currentSipAccount) {
+	$sipAccountsStr .= "\"$currentSipAccount\"".',';
+}
+rtrim($sipAccountsStr,',');
+$sipAccountsStr .= ']';
+
+
+$seriesData = SipAccount::getSeriesDataAsArr();
+$seriesDataStr = "[";
+foreach ($seriesData as $currentSeriesData) {
+	$seriesDataStr .= $currentSeriesData.',';
+}
+rtrim($seriesDataStr,',');
+$seriesDataStr .= ']';
+
+
+$javascriptCode = <<<EOL
+
+	options = {
+            chart: {
+            	renderTo:"chartContainer",
+                type: 'bar'
+            },
+            legend: { enabled: false},
+            xAxis: {
+                categories: $sipAccountsStr,
+	  			title: {
+	                text: null
+	            },
+            },
+	 		yAxis: {
+	            title: {
+	                text: null,
+	            },
+	        },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000',
+                        style: {fontWeight: 'bolder'},
+                        //formatter: function() {return this.x + ': ' this.y},
+                        inside: true,
+                        //rotation: 270
+                    },
+                    pointPadding: 0.1,
+                    groupPadding: 0
+                }
+            },
+
+            series: [{
+                data: $seriesDataStr
+            }]
+        };
+	window.chartObj = new Highcharts.Chart(options);    
+
+
+EOL;
+Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
+
+
 ?>
 
 <style type="text/css">
@@ -52,31 +123,12 @@ Yii::app()->clientScript->registerScript('asdasd', '
 		  type: 'GET',
 		  dataType: 'json',
 		  success: function(data, textStatus, xhr) {
-		  	jQuery.each(window.chartData.series, function(index, currentChartSeries) {
-		  		jQuery.each(data, function(index, currentRemoteValue) {
-					if (currentChartSeries.name == currentRemoteValue.name) {
-						// currentChartSeries.setData([currentRemoteValue.name,currentRemoteValue.data]);
-						currentChartSeries.setData([{name:currentRemoteValue.name,value:currentRemoteValue.data}]);
-
-					}else{
-						// console.log(currentChartSeries);
-						// console.log(currentRemoteValue);
-					}		  			
-		  		});
-		  	});
+		  	window.chartObj.series[0].setData(data);
 		  },
 		});
 		setTimeout(updateChartData, 3 * 1000);
 	}
 	setTimeout(updateChartData, 3 * 1000);
-
-
-	function updateListViewData() {
-		alertify.success('Updating data.. Please wait....');
-		$.fn.yiiListView.update("sipAccountListView");
-		setTimeout(updateListViewData, 60 * 1000);
-	}
-	setTimeout(updateListViewData, 60 * 1000);
 </script>
 
 
@@ -105,70 +157,11 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	));
 ?>
 
+<div id="chartContainer"></div>
 
-<?php 
-
-$this->widget(
-    'yiiwheels.widgets.highcharts.WhHighCharts',
-    array(
-        'pluginOptions' => array(
-        	'chart' => array(
-        		'type'=>"bar"
-    		),
-        	'series' => array(
-        		'pointPadding'=>0.3,
-        		'groupPadding'=>2
-    		),
-			"plotOptions"=>array(
-	  			"bar"=>array(
-	                'dataLabels' => array(
-	                    "enabled"=> "true"
-	                )
-	            )
-			),
-			'legend'=>array(
-	   			"layout"=> 'vertical',
-	            "align"=> 'right',
-	            "verticalAlign"=> 'top',
-	            "x"=> -40,
-	            "y"=> 80,
-	            "floating"=> 'true',
-	            "borderWidth"=> 1,
-	            "backgroundColor"=> '#FFFFFF',
-  				"labelFormatter"=> new CJavaScriptExpression("function() {
-    var lastVal = this.yData[this.yData.length - 1];
-				                    return '<span style=\"color:' + this.color + '\">' + this.name + ':</span> <b>' + lastVal + '</b> </n>';
-			}"),
-	            "shadow"=> 'true',
-	            "color"=> 'white',
-			),
-            'title' => array(
-                'text' => 'SIP Account Balance Report',
-            ),
-            'xAxis' => array(
-                'categories' =>	 array("Balance"),
-                'title'=>array("text"=>null),
-            ),
-            'yAxis' => array(
-            	"min"=>0,
-                'title' => array(
-                    'text' =>  null,
-                ),
-
-            ),
-            'series' => new CJavaScriptExpression("window.customData = ".json_encode($chartData))
-        ),
-		'htmlOptions'=>array('style'=>'height: 500px')
-    )
-);
-
-?>
 <?php
 	$this->endWidget();
 ?>
-
-
-
 <hr>
 
 
