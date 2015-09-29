@@ -46,17 +46,22 @@ $sipAccountsStr .= ']';
 
 
 $seriesData = SipAccount::getSeriesDataAsArr();
-$seriesDataStr = "[";
-foreach ($seriesData as $currentSeriesData) {
-	$seriesDataStr .= $currentSeriesData.',';
+foreach ($seriesData as $key => $currentSeriesData) {
+    $curDataContainer = array();
+    if ($currentSeriesData < 10) {
+        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+    }else{
+        $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#95CEFF");
+    }
+    $seriesData[$key] = $curDataContainer;
 }
-rtrim($seriesDataStr,',');
-$seriesDataStr .= ']';
+
+$seriesDataStr = json_encode($seriesData);
 
 
 $javascriptCode = <<<EOL
 
-	options = {
+	window.options = {
             chart: {
             	renderTo:"chartContainer",
                 type: 'bar'
@@ -95,14 +100,14 @@ $javascriptCode = <<<EOL
                 data: $seriesDataStr
             }]
         };
-	window.chartObj = new Highcharts.Chart(options);    
+	window.chartObj = new Highcharts.Chart(window.options);
 
 
 EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
 Yii::app()->clientScript->registerScript('updateChartData', '
-	setTimeout(updateChartData, 3 * 1000);
+	//setTimeout(updateChartData, 3 * 1000);
 	', CClientScript::POS_READY);
 
 ?>
@@ -129,7 +134,14 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 		  type: 'GET',
 		  dataType: 'json',
 		  success: function(data, textStatus, xhr) {
-		  	window.chartObj.series[0].setData(data);
+		  	window.chartObj.series[0].setData(data,true);
+
+			jQuery.each(window.chartObj.series[0].data, function(index, val) {
+			  val.setState('hover');
+			  val.setState();
+			  console.log(val);
+			});
+		  	
 		  },
 		});
 		setTimeout(updateChartData, 3 * 1000);
