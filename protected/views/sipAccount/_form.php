@@ -30,6 +30,11 @@
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'vicidial_identification'); ?>
+		<?php echo $form->textField($model,'vicidial_identification',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'vicidial_identification'); ?>
+	</div>
 
 
 	<div class="row">

@@ -28,9 +28,13 @@ class SubSipAccountController extends Controller
 	{
         return array(
             array('allow',
-                'actions'=>array('create','update','index','view','admin','delete'),
+                'actions'=>array('create','update','view','updateBalance','activate','deactivate'),
                 'users'=>array('@'),
             ),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete','index'),
+				'roles'=>array('administrator'),
+			),
             array('deny',  // deny all users
                 'users'=>array('*'),
             ),
@@ -161,5 +165,50 @@ class SubSipAccountController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	public function actionUpdateBalance($subAccount)
+	{
+		$updateSubSipAccount = new UpdateSubSipAccount();
+		$updateSubSipAccount->subSipOwner = intval($subAccount);
+		$subsipmodel = $updateSubSipAccount->getSubSipAccountModel();
+		if (isset($_POST['UpdateSubSipAccount'])) {
+			$updateSubSipAccount->attributes = $_POST['UpdateSubSipAccount'];
+			$updateSubSipAccount->subSipOwner = intval($subAccount);
+			if ($updateSubSipAccount->update()) {
+				/* update the database too */
+				$childCur = SubSipAccount::model()->findByPk($subAccount);
+
+				// $remoteChecker = new ApiRemoteStatusChecker($childCur->parent_sip);
+				// $remoteChecker->checkAllSubAccounts();
+				
+				Yii::app()->user->setFlash("success","Success , Credits was successfully transfered . ");
+			}else{
+				Yii::app()->user->setFlash("error","Update failed , We cant seem to update the balance today.");
+			}
+			$updateSubSipAccount->unsetAttributes();
+		}else{
+			Yii::app()->user->setFlash('info', 'You are about to update the balance of <strong>'.$subsipmodel->customer_name.'</strong>');
+		}
+		$this->render('updateBalance',compact('updateSubSipAccount','subsipmodel'));
+	}
+	public function actionActivate($subAccount)
+	{
+        /**
+         * @var SubSipAccount $childCur
+         */
+		$childCur = SubSipAccount::model()->findByPk($subAccount);
+        $activatorObj = new ActivateVicidialUser($childCur->parentSip);
+        $activatorObj->run();
+		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> activated");
+		$this->redirect(Yii::app()->request->urlReferrer);
+	}
+	public function actionDeactivate($subAccount)
+	{
+        $childCur = SubSipAccount::model()->findByPk($subAccount);
+        $activatorObj = new DeactivateVicidialUser($childCur->parentSip);
+        $activatorObj->run();
+
+		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
+		$this->redirect(Yii::app()->request->urlReferrer);
 	}
 }

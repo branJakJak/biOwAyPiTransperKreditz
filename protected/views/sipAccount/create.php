@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 
 $this->menu = array(
-	array('label'=>'<i class="icon-list"></i> List SipAccount', 'url'=>array('index')),
+	//array('label'=>'<i class="icon-list"></i> List SipAccount', 'url'=>array('index')),
 );
 
 ?>

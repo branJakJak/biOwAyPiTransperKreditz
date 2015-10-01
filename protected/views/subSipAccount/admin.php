@@ -49,6 +49,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'parent_sip',
 		'username',
 		'password',
+		'last_checked_bal',
+		'exact_balance',
 		'date_created',
 		'date_updated',
 		array(

@@ -22,7 +22,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		// 'ext.YiiMailer.YiiMailer',
+		'ext.YiiMailer.YiiMailer',
 	),
 
 	'modules'=>array(
@@ -45,7 +45,6 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-
         'bootstrap' => array(
             'class' => 'bootstrap.components.TbApi',
         ),

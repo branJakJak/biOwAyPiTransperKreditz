@@ -12,14 +12,16 @@
  * @property string $customer_name
  * @property double $balance
  * @property double $exact_balance
- * @property string $date_created
+ * @property string $last_checked_bal
  * @property string $date_updated
+ * @property string $date_created
  *
  * The followings are the available model relations:
  * @property SipAccount $parentSip
  */
 class SubSipAccount extends CActiveRecord
 {
+	public $last_checked_bal;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -37,12 +39,12 @@ class SubSipAccount extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password', 'required'),
-			array('parent_sip,balance,exact_balance', 'numerical'),
+			array('parent_sip,balance,exact_balance,last_checked_bal', 'numerical'),
 			array('username, password,customer_name', 'length', 'max'=>255),
 			array('date_created, date_updated,account_status', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, parent_sip, username, password, date_created, date_updated', 'safe', 'on'=>'search'),
+			array('id, parent_sip, username, password,last_checked_bal ,date_created, date_updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +74,7 @@ class SubSipAccount extends CActiveRecord
 			'customer_name' => 'Customer Name',
 			'balance' => 'Balance',
 			'exact_balance' => 'Exact Balance',
+			'last_checked_bal' => 'Last Balance Checked',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -103,6 +106,7 @@ class SubSipAccount extends CActiveRecord
 		$criteria->compare('customer_name',$this->customer_name,true);
 		$criteria->compare('balance',$this->balance,true);
 		$criteria->compare('exact_balance',$this->exact_balance,true);
+		$criteria->compare('last_checked_bal',$this->last_checked_bal,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 

@@ -5,6 +5,7 @@ $this->pageTitle=Yii::app()->name;
 $baseUrl = Yii::app()->theme->baseUrl; 
 ?>
 <?php
+
 $gridDataProvider = new CArrayDataProvider(array(
     array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS','usage'=>'<span class="inlinebar">1,3,4,5,3,5</span>'),
     array('id'=>2, 'firstName'=>'Jacob', 'lastName'=>'Thornton', 'language'=>'JavaScript','usage'=>'<span class="inlinebar">1,3,16,5,12,5</span>'),
@@ -12,6 +13,7 @@ $gridDataProvider = new CArrayDataProvider(array(
 	array('id'=>4, 'firstName'=>'Jacob', 'lastName'=>'Thornton', 'language'=>'JavaScript','usage'=>'<span class="inlinebar">1,3,16,5,12,5</span>'),
     array('id'=>5, 'firstName'=>'Stu', 'lastName'=>'Dent', 'language'=>'HTML','usage'=>'<span class="inlinebar">1,3,4,5,3,5</span>'),
 ));
+
 ?>
 
 <div class="row-fluid">

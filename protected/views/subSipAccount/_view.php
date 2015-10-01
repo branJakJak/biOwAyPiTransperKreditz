@@ -21,6 +21,10 @@
 	<?php echo CHtml::encode($data->password); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('last_checked_bal')); ?>:</b>
+	<?php echo CHtml::encode($data->last_checked_bal); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('date_created')); ?>:</b>
 	<?php echo CHtml::encode($data->date_created); ?>
 	<br />

@@ -24,6 +24,7 @@ $this->menu=array(
 		'id',
 		'username',
 		'password',
+		'vicidial_identification',
 		'date_created',
 		'date_updated',
 	),
