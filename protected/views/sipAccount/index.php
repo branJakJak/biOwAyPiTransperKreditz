@@ -156,6 +156,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" >
 	<strong >Activate All</strong>
 </strong>
+<strong style="margin-left: 40px;">
+	<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" >
+	<strong >Deactivate All</strong>
+</strong>
 <hr>
 <table class="table">
 	<thead>

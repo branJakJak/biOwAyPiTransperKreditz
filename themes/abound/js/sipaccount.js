@@ -18,6 +18,23 @@
 		  		currentController.activateAllAccountsFunc();
 		  	}
 		});
+		$scope.$watch('deactivateAllAccounts',function(newVal, oldVal){
+		  	if (newVal) {
+		  		/* get all sip accounts */
+		  		currentController.deactivateAllAccountsFunc();
+		  	}
+		});
+		this.activateAllAccountsFunc = function(){
+			angular.forEach($scope.sipAccounts, function(curData, index){
+				curData.account_status = "active";
+			});
+		}
+
+		this.deactivateAllAccountsFunc = function(){
+			angular.forEach($scope.sipAccounts, function(curData, index){
+				curData.account_status = "blocked";
+			});
+		}
 		/**
 		 * Gets appropriate clas
 		 * @return string            The class name
@@ -58,11 +75,6 @@
 
 		this.syncWithRemoteApi = function(mainSipAccount){
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
-		}
-		this.activateAllAccountsFunc = function(){
-			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.account_status = "active";
-			});
 		}
 		this.globalUpdate = function(){
 			defer  = $q.defer();
