@@ -48,8 +48,13 @@
 							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - syncwith remote api - before synchronizing data*/
 							currentController.syncWithRemoteApi().then(function(){
-								currentController.synchronizeData();
-								alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
+								currentController
+									.synchronizeData()
+									.then(function(){
+										alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
+									}, function(){
+										alertify.success("We met some error while synchronizing the data to the database");
+									})
 							}, function(){
 								alertify.error("Something went wrong while synchronizing to the api");
 							});
@@ -107,14 +112,16 @@
 		 */
 		this.synchronizeData = function(){
 			$scope.globalUpdateText = "Updating data...";
-			$http.get("/freeVoipAccounts/getList").then(function(response){
+			return $http.get("/freeVoipAccounts/getList")
+			.then(function(response){
 				$scope.freeVoipAccts = response.data;
 				console.log($scope.freeVoipAccts);
 				$scope.globalUpdateText = "Global Update";
 			}, function(){
 				alertify.error('We met some problems while retrieving the list of FreeVoip Accounts');
 				$scope.globalUpdateText = "Global Update";
-			}).then(function(){
+			})
+			.then(function(){
 				$http.get("/sipAccount/sipData").then(function(response){
 					$scope.sipAccounts = response.data;
 					$scope.globalUpdateText = "Global Update";
