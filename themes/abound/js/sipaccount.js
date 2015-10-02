@@ -45,7 +45,13 @@
 			});
 
 			 $q.all(updateStack).then(function(){
-				currentController.synchronizeData();
+			 	alertify.success("Success : Accounts updated");
+			 	alertify.success("Please wait while we refresh the data.");
+				currentController.synchronizeData().then(function(){
+					alertify.success("Success : All the data are now refreshed.");
+				}, function(){
+					alertify.error("Something went wrong while refreshing the data.");
+				});
 			 }, function(){
 			 	alertify.success("Something went wrong while refreshing the data");
 			 });
