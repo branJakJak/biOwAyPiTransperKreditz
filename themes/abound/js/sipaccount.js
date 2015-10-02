@@ -45,10 +45,11 @@
 					currentController.topUpSubSip(mainSipId,subSipId,credits)
 					.then(function(response){
 						if (response.data.success) {
-							alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
+							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - syncwith remote api - before synchronizing data*/
 							currentController.syncWithRemoteApi().then(function(){
 								currentController.synchronizeData();
+								alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
 							}, function(){
 								alertify.error("Something went wrong while synchronizing to the api");
 							});
