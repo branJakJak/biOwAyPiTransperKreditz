@@ -160,6 +160,7 @@ class SipAccountController extends Controller
             );
             foreach ($asteriskData as $currentAsteriskData) {
                 if ($currentAsteriskData['main_user'] === $currentModel->username) {
+                    $curTempContainer['campaign_name'] = $currentAsteriskData['campaign'];
                     $curTempContainer['vici_ip_address'] = $currentAsteriskData['server_ip'];
                 }
             }

@@ -5,7 +5,7 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', []);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q', function ($scope,$http,$q) {
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout', function ($scope,$http,$q,$timeout) {
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
@@ -16,9 +16,34 @@
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
 		  		currentController.activateAllAccountsFunc();
-		  		console.log(newVal);
 		  	}
 		});
+
+		this.constantDataRefresh = function(){
+			$timeout(function(){
+				/*get fresh balance data*/
+				$http.get("/sipAccount/sipData").then(function(response){
+					/* iterate through data and set teh fresh data to sipAccounts*/
+					angular.forEach(response.data, function(freshData, index){
+						angular.forEach($scope.sipAccounts, function(oldData, index){
+							if (  freshData.parent_sip_id === oldData.parent_sip_id  ) {
+								oldData.subSipAccounts[0].balance = freshData.subSipAccounts[0].balance;
+								oldData.subSipAccounts[0].exact_balance = freshData.subSipAccounts[0].balance;
+							}
+						});
+					});
+					$scope.globalUpdateText = "Global Update";
+				}, function(response){
+					alertify.error("We met some problems while retrieving the data");
+					$scope.globalUpdateText = "Global Update";
+				}).then(function(){
+					currentController.constantDataRefresh();
+				}, function(){
+					//when something went wrong
+				});
+			}, 5000);
+		}
+
 
 		this.syncWithRemoteApi = function(mainSipAccount){
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
@@ -98,13 +123,26 @@
 			
 		}
 		this.updateSingleRow = function(currentRow){
-			alertify.success("Updating current data.Please wait.");
-			this.updateCurrentRowInfo(currentRow)
-				.then(function(){
-					alertify.success("Success : Current data updated.");
-				}, function(){
-					alertify.error("We cant seem to update this data . Please try again later.");
-				});
+			alertify.confirm(
+				"Activate account", 
+				"Are you sure you want to activate this account ?", 
+				function(){
+					alertify.success("Updating current data.Please wait.");
+					currentController.updateCurrentRowInfo(currentRow)
+					.then(function(){
+						alertify.success("Success : Current data updated.");
+					}, function(){
+						alertify.error("We cant seem to update this data . Please try again later.");
+					});
+				},
+				function(){
+					if (currentRow.account_status === "active") {
+						currentRow.account_status = "blocked";
+					}else{
+						currentRow.account_status = "active";
+					}
+				}
+			);
 		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
@@ -148,7 +186,6 @@
 			return $http.get("/freeVoipAccounts/getList")
 			.then(function(response){
 				$scope.freeVoipAccts = response.data;
-				console.log($scope.freeVoipAccts);
 				$scope.globalUpdateText = "Global Update";
 			}, function(){
 				alertify.error('We met some problems while retrieving the list of FreeVoip Accounts');
@@ -169,6 +206,7 @@
 		}
 		/*initialize data*/
 		this.synchronizeData();
+		this.constantDataRefresh();
 	}])
 })();
 

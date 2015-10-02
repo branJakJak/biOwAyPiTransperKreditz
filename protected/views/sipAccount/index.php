@@ -165,6 +165,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Balance</th>
 			<th>Vici User</th>
 			<th>Active</th>
+			<th>Campaign</th>
 			<th>IP Address</th>
 			<th>Add Balance</th>
 			<th>Balance From</th>
@@ -183,31 +184,21 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>{{value.subSipAccounts[0].balance}}</td>
 			<td>{{value.vicidial_identification}}</td>
 			<td>
-				<input type="checkbox" ng-model="value.account_status"
+				<input ng-click="indexCtrl.updateSingleRow(value)"  type="checkbox" ng-model="value.account_status"
            			ng-true-value="'active'" ng-false-value="'blocked'">
 			</td>
+			<td>{{value.campaign_name}}</td>
 			<td>
 				{{value.vici_ip_address}}
 			</td>
-			<td><input ng-model="topUpCredits" type="number" name="" class="" value="" min="0" max="" title=""></td>
+			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" max="" title=""></td>
 			<td>
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
 				</select>
 			</td>
 			<td>
-				<div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Modify <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id, topUpCredits)">Top-up</a>
-						</li>
-						<li>
-							<a href=""  ng-click="indexCtrl.updateSingleRow(value)">Update Info</a>
-						</li>
-					</ul>
-				</div>
-				
+				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id,topUpCreditsVal)">Top-up</a>
 			</td>
 		</tr>
 	</tbody>
