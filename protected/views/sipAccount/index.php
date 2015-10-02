@@ -104,7 +104,8 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 <div ng-app="sipAccountModule">
 <div ng-controller="IndexCtrl as indexCtrl" >
 
-
+<?php if (false): ?>
+	
 <div class='headerBtnToggle' ng-show="false" ng-cloak>
 	<button type="button" class="btn btn-default">
 		<img src="<?php echo $baseUrl ?>/img/chart-icon.png"> 
@@ -115,6 +116,8 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 		Show Table
 	</button>
 </div>
+
+<?php endif ?>
 
 <hr>
 
