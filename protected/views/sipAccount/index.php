@@ -157,7 +157,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	<strong >Activate All</strong>
 </strong>
 <hr>
-<table class="table table-hover">
+<table class="table">
 	<thead>
 		<tr>
 			<th>Main Account</th>
@@ -178,7 +178,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<i class="fa fa-spinner fa-spin"></i> Loading ...
 			</td>
 		</tr>
-		<tr ng-repeat="(key, value) in sipAccounts">
+		<tr ng-repeat="(key, value) in sipAccounts" ng-class="indexCtrl.getRowClass(value)">
 			<td>{{value.username}}</td>
 			<td>{{value.subSipAccounts[0].customer_name}}</td>
 			<td>{{value.subSipAccounts[0].balance}}</td>
@@ -200,6 +200,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id,topUpCreditsVal)">Top-up</a>
 			</td>
+
 		</tr>
 	</tbody>
 </table>

@@ -18,7 +18,17 @@
 		  		currentController.activateAllAccountsFunc();
 		  	}
 		});
-
+		/**
+		 * Gets appropriate clas
+		 * @return string            The class name
+		 */
+		this.getRowClass = function(currentRow){
+			classNameContainer = "activateAccount";
+			if (currentRow.account_status === "blocked") {
+				classNameContainer = "blockedAccount";
+			}
+			return classNameContainer;
+		}
 		this.constantDataRefresh = function(){
 			$timeout(function(){
 				/*get fresh balance data*/

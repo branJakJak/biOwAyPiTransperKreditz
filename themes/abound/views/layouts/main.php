@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free yii themes, free web application theme">
     <meta name="author" content="Webapplicationthemes.com">
-	<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+	 <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -32,22 +33,16 @@
     <?php
       $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js'  , CClientScript::POS_END);
       $cs->registerScriptFile($baseUrl.'/js/jquery-migrate-1.2.1.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.sparkline.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.min.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.pie.min.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/charts.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.knob.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.masonry.min.js' , CClientScript::POS_END);
-      $cs->registerScriptFile($baseUrl.'/js/styleswitcher.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.sparkline.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.min.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.pie.min.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/charts.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.knob.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.masonry.min.js' , CClientScript::POS_END);
+      // $cs->registerScriptFile($baseUrl.'/js/styleswitcher.js' , CClientScript::POS_END);
     ?>    
       <!-- styles for style switcher -->
       	<link rel="stylesheet" type="text/css" href="<?php echo $baseUrl;?>/css/style-blue.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style2" href="<?php echo $baseUrl;?>/css/style-brown.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style3" href="<?php echo $baseUrl;?>/css/style-green.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style4" href="<?php echo $baseUrl;?>/css/style-grey.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style5" href="<?php echo $baseUrl;?>/css/style-orange.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style6" href="<?php echo $baseUrl;?>/css/style-purple.css" />
-        <link rel="alternate stylesheet" type="text/css" media="screen" title="style7" href="<?php echo $baseUrl;?>/css/style-red.css" />
         <style type="text/css"> 
           .errorSummary{
             background-color:red;

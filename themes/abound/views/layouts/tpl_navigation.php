@@ -1,3 +1,12 @@
+<?php 
+Yii::app()->clientScript->registerCss('quickNavFix', '
+
+.mySubNav > li > a{
+    color: black !important;
+}
+');
+
+?>
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
     <div class="container">
@@ -32,6 +41,24 @@
 <div class="subnav navbar navbar-fixed-top">
     <div class="navbar-inner">
     	<div class="container">
+            <?php if (isset($this->menu)): ?>
+                <?php 
+                    $this->menu = array_merge(
+                        array(
+                            array('label'=>'<i class="icon icon-home"></i>  Dashboard ', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
+                            array('label'=>'<i class=" icon-list"></i>  List Accounts ', 'url'=>array('/sipAccount/index'),'itemOptions'=>array('class'=>'')),
+                        ),$this->menu
+                        );
+                ?>
+                <?php $this->widget('zii.widgets.CMenu',array(
+                        'htmlOptions'=>array('class'=>'pull-left nav mySubNav'),
+                        'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
+                        'itemCssClass'=>'item-test',
+                        'encodeLabel'=>false,
+                        'items'=>$this->menu,
+                    )); 
+            ?>
+            <?php endif ?>
     	</div><!-- container -->
     </div><!-- navbar-inner -->
 </div><!-- subnav -->

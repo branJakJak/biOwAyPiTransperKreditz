@@ -6,23 +6,7 @@
 <?php $this->beginContent('//layouts/main'); ?>
 
   <div class="row-fluid">
-	<div class="span3">
-		<div class="sidebar-nav">
-		  <?php $this->widget('zii.widgets.CMenu', array(
-			/*'type'=>'list',*/
-			'encodeLabel'=>false,
-			'items'=>array(
-				array('label'=>'<i class="icon icon-home"></i>  Dashboard ', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
-				array('label'=>'<i class=" icon-list"></i>  List Accounts ', 'url'=>array('/sipAccount/index'),'itemOptions'=>array('class'=>'')),
-				
-				array('label'=>'OPERATIONS','items'=>$this->menu),
-			),
-			));?>
-		</div>
-        <br>
-	
-    </div><!--/span-->
-    <div class="span9">
+    <div class="span12">
     
     <?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -32,8 +16,9 @@
         )); ?><!-- breadcrumbs -->
     <?php endif?>
     
-    <!-- Include content pages -->
-    <?php echo $content; ?>
+    <div class="span10 offset1">
+      <?php echo $content; ?>
+    </div>
 
 	</div><!--/span-->
   </div><!--/row-->

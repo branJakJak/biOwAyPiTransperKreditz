@@ -14,7 +14,6 @@
 			'htmlOptions'=>array('class'=>'breadcrumb')
         )); ?><!-- breadcrumbs -->
     <?php endif?>
-    
 	<?php echo $content; ?>
 </div><!-- content -->
 
