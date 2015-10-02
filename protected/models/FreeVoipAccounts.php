@@ -15,6 +15,7 @@
  */
 class FreeVoipAccounts extends CActiveRecord
 {
+	public $pincode = 2580;
 	/**
 	 * 
 	 * @return string the associated database table name

@@ -32,6 +32,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'customer_name'); ?>
+		<?php echo $form->textField($model,'customer_name',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'customer_name'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'password'); ?>
@@ -46,11 +52,16 @@
 
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'balance'); ?>
+		<?php echo $form->textField($model,'balance',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'balance'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'exact_balance'); ?>
 		<?php echo $form->textField($model,'exact_balance',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'exact_balance'); ?>
 	</div>
-
 
 	<div class="row buttons">
 		<button type="submit" class="btn btn-primary">Create</button>

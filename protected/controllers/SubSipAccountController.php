@@ -28,7 +28,7 @@ class SubSipAccountController extends Controller
 	{
         return array(
             array('allow',
-                'actions'=>array('create','update','view','updateBalance','activate','deactivate'),
+                'actions'=>array('create','update','view','updateBalance','activate','deactivate','ajaxActivate','ajaxDeactivate'),
                 'users'=>array('@'),
             ),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -202,6 +202,14 @@ class SubSipAccountController extends Controller
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> activated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
+	public function actionAjaxActivate($subAccount)
+	{
+		header("Content-Type: application/json");
+		$childCur = SubSipAccount::model()->findByPk($subAccount);
+        $activatorObj = new ActivateVicidialUser($childCur->parentSip);
+        $activatorObj->run();
+        echo json_encode(array("success"=>true,"message"=>"Account activated"));
+	}
 	public function actionDeactivate($subAccount)
 	{
         $childCur = SubSipAccount::model()->findByPk($subAccount);
@@ -210,5 +218,13 @@ class SubSipAccountController extends Controller
 
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
 		$this->redirect(Yii::app()->request->urlReferrer);
+	}
+	public function actionAjaxDeactivate($subAccount)
+	{
+		header("Content-Type: application/json");
+        $childCur = SubSipAccount::model()->findByPk($subAccount);
+        $activatorObj = new DeactivateVicidialUser($childCur->parentSip);
+        $activatorObj->run();
+        echo json_encode(array("success"=>false,"message"=>"Account deactivated"));
 	}
 }

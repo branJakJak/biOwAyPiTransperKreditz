@@ -5,19 +5,6 @@
     <ignored path="VOIPTransferCredits.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
-    <file path="/SipAccountNotifier.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443000011508" ignored="false" />
-    <file path="/BlockVoipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946481144" ignored="false" />
-    <file path="/ApiRemoteStatusChecker.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1442946583693" ignored="false" />
-    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007459639" ignored="false" />
-    <file path="/StatusReportVicidialUser.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007181743" ignored="false" />
-    <file path="/a.dummy" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443006028155" ignored="false" />
-    <file path="/DeactivateVicidialUser.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007048100" ignored="false" />
-    <file path="/UpdateRemoteVicidialAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443006295463" ignored="false" />
-    <file path="/SubSipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443007617484" ignored="false" />
-    <file path="$PROJECT_DIR$/protected/models/SipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443109954011" ignored="false" />
-    <file path="/CampaignsController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443124643376" ignored="false" />
-    <file path="/VicidialCampaignRetriever.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443120577694" ignored="false" />
-    <file path="/index.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1443443572662" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +24,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="33" selection-start="2983" selection-end="2983" vertical-scroll-proportion="0.5084112">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SipAccountChartData.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/components/SipAccountChartData.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SipAccountController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="48" selection-start="516" selection-end="516" vertical-scroll-proportion="-11.115385">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopUpController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/controllers/TopUpController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="59" selection-start="2919" selection-end="2938" vertical-scroll-proportion="0.5233645">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SipAccount.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/SipAccount.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -56,14 +79,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php" />
-        <option value="$PROJECT_DIR$/protected/views/sipAccount/_view.php" />
         <option value="$PROJECT_DIR$/protected/models/SubSipAccount.php" />
         <option value="$PROJECT_DIR$/protected/components/RemoteVicidialBase.php" />
         <option value="$PROJECT_DIR$/protected/components/UpdateRemoteVicidialAccount.php" />
         <option value="$PROJECT_DIR$/protected/components/ActivateVicidialUser.php" />
         <option value="$PROJECT_DIR$/protected/components/StatusReportVicidialUser.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
         <option value="$PROJECT_DIR$/protected/controllers/SubSipAccountController.php" />
         <option value="$PROJECT_DIR$/protected/components/DeactivateVicidialUser.php" />
         <option value="$PROJECT_DIR$/protected/components/SipAccountNotifier.php" />
@@ -72,6 +92,9 @@
         <option value="$PROJECT_DIR$/protected/controllers/CampaignsController.php" />
         <option value="$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php" />
         <option value="$PROJECT_DIR$/protected/views/sipAccount/index.php" />
+        <option value="$PROJECT_DIR$/protected/components/SipAccountChartData.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/TopUpController.php" />
       </list>
     </option>
   </component>
@@ -112,7 +135,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -187,24 +209,15 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../yii/framework" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
-  </component>
-  <component name="PublishConfig">
-    <servers>
-      <server id="c4121e1a-426e-4496-a113-547da1647e96">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </server>
-    </servers>
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -232,7 +245,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -241,7 +254,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24809742" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26027396" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -327,84 +340,74 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/components/StatusReportVicidialUser.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="79" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.7684825" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/migrations/m150914_124552_add_status_to_sip_account.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="1" selection-start="367" selection-end="367" vertical-scroll-proportion="0.4448598" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/DeactivateVicidialUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="45" selection-start="945" selection-end="945" vertical-scroll-proportion="0.26915887" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SubSipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="24" selection-start="5931" selection-end="5931" vertical-scroll-proportion="0.6091954" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="5" selection-start="4253" selection-end="4253" vertical-scroll-proportion="0.34953272" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/ActivateVicidialUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="10" selection-start="463" selection-end="463" vertical-scroll-proportion="0.046728972" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="34" selection-start="288" selection-end="288" vertical-scroll-proportion="0.36381322" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/RemoteVicidialAuthenticator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="1" selection-start="649" selection-end="649" vertical-scroll-proportion="1.1906614" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/HtmlDomParser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="43" selection-start="494" selection-end="494" vertical-scroll-proportion="0.5622568" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../yii/framework/zii/widgets/grid/CButtonColumn.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="36" selection-start="7234" selection-end="7234" vertical-scroll-proportion="0.5311284" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="31" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.38122606" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/campaigns/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.8045977" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/CampaignsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1988" selection-end="1988" vertical-scroll-proportion="0.6504673" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/SipAccountNotifier.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="40" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.03256705" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/FreeVoipAccountsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="61" selection-end="1107" vertical-scroll-proportion="0.0317757" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/sipAccount/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="33" selection-start="2983" selection-end="2983" vertical-scroll-proportion="0.5084112">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/SipAccountChartData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/SipAccount.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="48" selection-start="516" selection-end="516" vertical-scroll-proportion="-11.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/TopUpController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="59" selection-start="2919" selection-end="2938" vertical-scroll-proportion="0.5233645">
           <folding />
         </state>
       </provider>

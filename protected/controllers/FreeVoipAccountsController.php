@@ -28,7 +28,7 @@ class FreeVoipAccountsController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','index','view'),
+				'actions'=>array('create','update','index','view','getList'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,7 +51,14 @@ class FreeVoipAccountsController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
-
+	public function actionGetList()
+	{
+		header("Content-Type: application/json");
+		$criteria = new CDbCriteria;
+		$criteria->select = "username";
+		$allAccts = FreeVoipAccounts::model()->findAll($criteria);
+		echo CJSON::encode($allAccts);
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

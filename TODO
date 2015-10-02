@@ -1,0 +1,56 @@
+
+
+
+@TODO-APILOG-APILOG ticking and updating
+what i was thinking aswel is a
+button on bottom for a global submit 
+as in say we wanted to deactivate 
+all the accounts or just say 2 accounts 
+then we can untick the boxes 
+and to a global submit. 
+
+
+
+
+@TODO-APILOG 
+AsteriskCarriers::getData
+
+retrieve all data and show to table 
+@DONE
+
+@TODO-APILOG activate and deactivate 
+when clicked  , do the same 
+action
+
+
+@TODO-APILOG transfer / top up 
+freevoip ---> bestvoip  credits transfer pala yun
+on top up , when user top up a credit 
+using the process freevoip to bestvoip 
+the sub account should also be topped up 
+with the same amount of the one used 
+
+
+@TODO-APILOG balance from 
+balance from is what freevoip account 
+we want the balance to be from 
+ ie 
+ drop down contents 
+ helpdirect-uk 
+ and callnetamerica3
+
+
+
+@TODO-APILOG show ip address
+sorry ip of the vici dialer that the vici user is linked to
+@DONE
+
+
+
+@TODO - during updating / activating / deactivating 
+show user that an update is ongoing
+
+
+@NEXT  -activate all accounts 
+when clicked iterates data 
+at update their account_status to activated

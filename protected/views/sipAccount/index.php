@@ -7,57 +7,21 @@ $this->breadcrumbs=array(
 );
 $this->menu=array(
 	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
-	//array('label'=>'Manage SipAccount', 'url'=>array('admin')),
 );
 
 $baseUrl = Yii::app()->theme->baseUrl; 
 $cs = Yii::app()->getClientScript();
+/*angular*/
+$cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
+
+
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
-$cs->registerCssFile($baseUrl.'/css/alertify.min.css');
+$cs->registerCssFile($baseUrl.'/css/alertify.css');
+$cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 $cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 
-// $cs->registerCssFile($baseUrl.'/bower_components/angular-chart.js/dist/angular-chart.css');
-// $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/bower_components/angular-chart.js/angular-chart.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/js/Chart.min.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
-
-Yii::app()->clientScript->registerScript('liveupdatelistview', '
-
-	function updateListViewData() {
-		alertify.success("Updating data.. Please wait....");
-		$.fn.yiiListView.update("sipAccountListView");
-		setTimeout(updateListViewData, 60 * 1000);
-		setTimeout(updateChartData, 3 * 1000);
-	}
-	setTimeout(updateListViewData, 60 * 1000);
-
-', CClientScript::POS_READY);
-
-
-
-
-$sipAccounts = SipAccount::getSipAccountsAsArr();
-$sipAccountsStr = "[";
-foreach ($sipAccounts as $currentSipAccount) {
-	$sipAccountsStr .= "\"$currentSipAccount\"".',';
-}
-rtrim($sipAccountsStr,',');
-$sipAccountsStr .= ']';
-
-$seriesData = SipAccount::getSeriesDataAsArr();
-foreach ($seriesData as $key => $currentSeriesData) {
-    $curDataContainer = array();
-    if($currentSeriesData >= 10){
-		$curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
-    }else{
-    	$curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
-    }
-    
-    $seriesData[$key] = $curDataContainer;
-}
-
-$seriesDataStr = json_encode($seriesData);
 
 
 $javascriptCode = <<<EOL
@@ -125,18 +89,7 @@ $javascriptCode = <<<EOL
         };
 	
 	
-	//iterate all original color
-	// jQuery.each(window.options.series[0].data, function(index, val) {
-	// 	window.originalColor.push(val.color);
-	// 	if (val.y < 10) {
-	// 		window.options.series[0].data[index].color = "red";
-	// 	}
-	//   //iterate through array or object
-	// });
-
 	window.chartObj = new Highcharts.Chart(window.options);
-
-
 EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
@@ -146,68 +99,24 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 
 ?>
 
-<style type="text/css">
-	.account-panels {
-		min-width : 350px;
-		max-width : 450px;
-		float:left;
-		margin: 10px 5px;
-
-		padding: 10px;
-	}
-	.list-view .summary {
-		text-align: left;
-	}
-</style>
 
 
-<script type="text/javascript">
-	function updateChartData () {
-		jQuery.ajax({
-		  url: '/sipAccount/getBarChartReportData',
-		  type: 'GET',
-		  dataType: 'json',
-		  success: function(data, textStatus, xhr) {
-
-			jQuery.each(data, function(index, val) {
-				//console.log(val.y)
-			  if (val.y < 10) {
-			  	data[index].color =  "red";
-			  }else if(val.y >= 10 && window.chartObj.series[0].data[index].color == "red"){
-			  	data[index].color = "#7CB5EC";
-
-			  	// if (window.chartObj.series[0].data[index].color == 'red') {
-			  	// 	//@TDODO - load color before
-			  	// 	window.chartObj.series[0].data[index].color = window.originalColor[index];
-			  	// }else{
-			  	// 	data[index].color = window.chartObj.series[0].data[index].color;
-			  	// 	//val.color = window.chartObj.series[0].data[index].color;
-			  	// }
-			  }else{
-			  	data[index].color = window.chartObj.series[0].data[index].color;
-			  }
-			});
-
-		  	window.chartObj.series[0].setData(data,true);
-
-			jQuery.each(window.chartObj.series[0].data, function(index, val) {
-			  val.setState('hover');
-			  val.setState();
-			  //console.log(val);
-			});
-		  	
-		  },
-		});
-		//setTimeout(updateChartData, 3 * 1000);
-	}
-</script>
+<div ng-app="sipAccountModule">
+<div ng-controller="IndexCtrl as indexCtrl" >
 
 
+<div class='headerBtnToggle' ng-show="false" ng-cloak>
+	<button type="button" class="btn btn-default">
+		<img src="<?php echo $baseUrl ?>/img/chart-icon.png"> 
+		Show Chart
+	</button>
+	<button type="button" class="btn btn-default">
+		<img src="<?php echo $baseUrl ?>/img/Generate-tables-icon.png"> 
+		Show Table
+	</button>
+</div>
 
-<div ng-app="angularChart">
-<div ng-controller="IndexCtrl">
-	
-
+<hr>
 
 
 <?php 
@@ -238,22 +147,76 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 <h1>
     Sip Accounts <small>[bestvoipreselling]</small>
-	<small id="updateCounterContainer"></small>
 </h1>
 <hr>
-
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'id'=>'sipAccountListView',
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-	'template'=>'<div class="pull-left" >{summary}<h5>{sorter}</h5></div><div class="clearfix"></div><br><hr>{items}<br>{pager}',
-   	'sortableAttributes'=>array(
-        'username',
-        'account_status',
-        'date_created'=>'Date Created',
-    ),	
-)); ?>
+<strong>
+	<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" >
+	<strong >Activate All</strong>
+</strong>
+<hr>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Main Account</th>
+			<th>Sub User</th>
+			<th>Balance</th>
+			<th>Vici User</th>
+			<th>Active</th>
+			<th>IP Address</th>
+			<th>Add Balance</th>
+			<th>Balance From</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody ng-cloak>
+		<tr>
+			<td colspan="8" ng-hide="sipAccounts.length !== 0">
+				<i class="fa fa-spinner fa-spin"></i> Loading ...
+			</td>
+		</tr>
+		<tr ng-repeat="(key, value) in sipAccounts">
+			<td>{{value.username}}</td>
+			<td>{{value.subSipAccounts[0].customer_name}}</td>
+			<td>{{value.subSipAccounts[0].balance}}</td>
+			<td>{{value.vicidial_identification}}</td>
+			<td>
+				<input type="checkbox" ng-model="value.account_status"
+           			ng-true-value="'active'" ng-false-value="'blocked'">
+			</td>
+			<td>
+				{{value.vici_ip_address}}
+			</td>
+			<td><input ng-model="topUpCredits" type="number" name="" class="" value="" min="0" max="" title=""></td>
+			<td>
+				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
+					 <option value="">-- Select Account --</option>
+				</select>
+			</td>
+			<td>
+				<div class="btn-group">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Modify <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id, topUpCredits)">Top-up</a>
+						</li>
+						<li>
+							<a href=""  ng-click="indexCtrl.updateCurrentRowInfo(value)">Update Info</a>
+						</li>
+					</ul>
+				</div>
+				
+			</td>
+		</tr>
+	</tbody>
+</table>
+<hr>
+<button type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">{{globalUpdateText}}</button>
 
 </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

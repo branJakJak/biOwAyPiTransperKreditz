@@ -1,0 +1,21 @@
+.account-panels {
+	min-width : 350px;
+	max-width : 450px;
+	float:left;
+	margin: 10px 5px;
+
+	padding: 10px;
+}
+.list-view .summary {
+	text-align: left;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	width:80px;
+}
+select{
+	width: 140px !important;
+}
+.headerBtnToggle button{
+	margin-left: 20px;
+}

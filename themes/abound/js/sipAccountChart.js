@@ -1,21 +1,30 @@
+function updateChartData () {
+	jQuery.ajax({
+	  url: '/sipAccount/getBarChartReportData',
+	  type: 'GET',
+	  dataType: 'json',
+	  success: function(data, textStatus, xhr) {
+		jQuery.each(data, function(index, val) {
+		  if (val.y < 10) {
+		  	data[index].color =  "red";
+		  }else if(val.y >= 10 && window.chartObj.series[0].data[index].color == "red"){
+		  	data[index].color = "#7CB5EC";
 
-/**
-* angular chart` Module
-*
-* Description
-*/
-var angularChart = angular.module('angularChart', ['chart.js']);
-angularChart.controller('IndexCtrl', ['$scope','$http', function($scope,$http){
+		  }else{
+		  	data[index].color = window.chartObj.series[0].data[index].color;
+		  }
+		});
 
-	$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-	$scope.series = ['Series A', 'Series B'];
+	  	window.chartObj.series[0].setData(data,true);
 
-	$scope.data = [
-	    [65, 59, 80, 81, 56, 55, 40, 40, 40, 40, 40, 40],
-	  ];
-
-	this.retrieveReportData = function(){
-		
-	}
-	
-}])
+		jQuery.each(window.chartObj.series[0].data, function(index, val) {
+		  val.setState('hover');
+		  val.setState();
+		  //console.log(val);
+		});
+	  	
+	  },
+	});
+	//independently update the chart
+	setTimeout(updateChartData, 3 * 1000);
+}

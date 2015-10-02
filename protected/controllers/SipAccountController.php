@@ -28,7 +28,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','test'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -116,20 +116,23 @@ class SipAccountController extends Controller
      */
     public function actionIndex()
     {
-        // /*retrieve all accounts model*/
-        // $allModels = SipAccount::model()->findAll();
-        // foreach ($allModels as $currentModel) {
-        //     // $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
-        //     // $remoteChecker->checkAllSubAccounts();
-        //     foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
-        //         //retrieve updated subsip
-        //         $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
-        //         if (doubleval($tempSubSip->exact_balance) <= 5) {
-        //             $deactivatorObj = new DeactivateVicidialUser($currentModel);
-        //             $deactivatorObj->run();
-        //         }
-        //     }
-        // }
+        $this->layout = "column2";
+        $seriesData = SipAccount::getSeriesDataAsArr();
+        foreach ($seriesData as $key => $currentSeriesData) {
+            $curDataContainer = array();
+            if($currentSeriesData >= 10){
+                $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
+            }else{
+                $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+            }
+            
+            $seriesData[$key] = $curDataContainer;
+        }
+        $seriesDataStr = json_encode($seriesData);
+
+        $sipAccounts = SipAccount::getSipAccountsAsArr();
+        $sipAccountsStr = json_encode($sipAccounts);
+
 
         $chartDataRetriever = new SipAccountChartData();
         $chartData = $chartDataRetriever->retrieve();
@@ -138,23 +141,48 @@ class SipAccountController extends Controller
         $dataProvider->pagination = false;
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-            'chartData'=>$chartData
+            'chartData'=>$chartData,
+            'seriesDataStr'=>$seriesDataStr,
+            'sipAccountsStr'=>$sipAccountsStr,
         ));
     }
-    public function actionTest()
+    public function actionSipData()
     {
-        $allModels = SipAccount::model()->findAll();
-        $chartDataRetriever = new SipAccountChartData();
-        $chartData = $chartDataRetriever->retrieve();
-
-        $dataProvider = new CActiveDataProvider('SipAccount');
-        $dataProvider->pagination = false;
-        $this->render('test', array(
-            'dataProvider' => $dataProvider,
-            'chartData'=>$chartData
-        ));
-        
+        $finalArr = array();
+        $allModels = SipAccount::model()->with("subSipAccounts")->findAll();
+        $asteriskData = AsteriskCarriers::getData();
+        foreach ($allModels as $currentModel) {
+            $curTempContainer = array(
+                    "parent_sip_id"=>$currentModel->id,
+                    "username"=>$currentModel->username,
+                    "vicidial_identification"=>$currentModel->vicidial_identification,
+                    "account_status"=>$currentModel->account_status
+            );
+            foreach ($asteriskData as $currentAsteriskData) {
+                if ($currentAsteriskData['main_user'] === $currentModel->username) {
+                    $curTempContainer['vici_ip_address'] = $currentAsteriskData['server_ip'];
+                }
+            }
+            foreach($currentModel->subSipAccounts as $currentSubSipAccount) {
+                $curTempContainer['subSipAccounts'][] = array(
+                        "sub_sip_id"=>$currentSubSipAccount->id,
+                        "username"=>$currentSubSipAccount->username,
+                        "account_status"=>$currentSubSipAccount->account_status,
+                        "customer_name"=>$currentSubSipAccount->customer_name,
+                        "balance"=>$currentSubSipAccount->balance,
+                        "exact_balance"=>$currentSubSipAccount->exact_balance,
+                );
+            }
+            $finalArr[] = $curTempContainer;
+        }
+        echo CJSON::encode($finalArr);
     }
+    public function actionRemoteAsteriskInfo()
+    {
+        header("Content-Type: application/json");
+        echo json_encode(AsteriskCarriers::getData());
+    }
+
     /**
      * Retrieves bar chart report data as json data
      */

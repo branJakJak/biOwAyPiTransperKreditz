@@ -124,10 +124,10 @@ public function accessRules()
 	}
 	public function actionTest()
 	{
-		$to = "hellsing357@gmail.com";
-		$from = "notif@apivoip.com";
-		$message = "test message";
-
+		print_r(AsteriskCarriers::getData());
+		// $command = Yii::app()->asterisk_db->createCommand("select * from user_carrier");
+		// $allResults = $command->queryAll();
+		// echo json_encode($allResults);
 		// mail($to, $subject, $message);
 		// $mail = new YiiMailer();
 		// $mail->setFrom('notif@apivoip.ml', 'apivoip notifier');

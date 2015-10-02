@@ -10,3 +10,4 @@ protected/config/main.php
 protected/config/console.php
 .phpintel
 .idea
+error_log
