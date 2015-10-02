@@ -22,9 +22,9 @@ function updateChartData () {
 		  val.setState();
 		  //console.log(val);
 		});
-	  	
+		// chaining
+	  	setTimeout(updateChartData, 3 * 1000);	
 	  },
 	});
-	//independently update the chart
-	setTimeout(updateChartData, 3 * 1000);
+	
 }
