@@ -74,24 +74,34 @@
 			
 			
 		}
+		this.updateSingleRow = function(currentRow){
+			alertify.success("Updating current data.Please wait.");
+			this.updateCurrentRowInfo(currentRow)
+				.then(function(){
+					alertify.success("Success : Current data updated.");
+				}, function(){
+					alertify.error("We cant seem to update this data . Please try again later.");
+				});
+		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
 			activateUrlTarget = "/subSipAccount/ajaxActivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id;
 			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id;
 			/*check status*/
 			if (currentRow.account_status === "active") {
-				$http.get(activateUrlTarget).then(function(){
+				return $http.get(activateUrlTarget).then(function(){
 					currentController.synchronizeData();
 				}, function(){
 
 				});
 			}else{
-				$http.get(deActivateUrlTarget).then(function(){
+				return $http.get(deActivateUrlTarget).then(function(){
 					currentController.synchronizeData();
 				}, function(){
 
 				});
 			}
+
 		}
 		this.topUpMainSip = function(freeVoipUsername , mainSipId , credits){
 			return $http.post('/topUp/mainSip',  {

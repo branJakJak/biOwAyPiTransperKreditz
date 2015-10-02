@@ -200,7 +200,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 							<a href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id, topUpCredits)">Top-up</a>
 						</li>
 						<li>
-							<a href=""  ng-click="indexCtrl.updateCurrentRowInfo(value)">Update Info</a>
+							<a href=""  ng-click="indexCtrl.updateSingleRow(value)">Update Info</a>
 						</li>
 					</ul>
 				</div>
