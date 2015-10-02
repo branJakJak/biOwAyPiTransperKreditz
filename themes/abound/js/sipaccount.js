@@ -21,7 +21,7 @@
 		});
 
 		this.syncWithRemoteApi = function(mainSipAccount){
-			return $http.get("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
+			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
