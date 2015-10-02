@@ -221,7 +221,7 @@ class SipAccountController extends Controller
         header("Content-Type: application/json");
         $jsonMessage = array("success"=>false,"message"=>"Incomplete parameter");
         $postedJson = file_get_contents("php://input");
-        $postedJson = json_decode($postedJson);
+        $postedJson = json_decode($postedJson,true);
         if (isset($postedJson['mainSipAccount'])) {
             $postedJson['mainSipAccount'] = doubleval($postedJson['mainSipAccount']);
             $currentModel = SipAccount::model()->findByPk($postedJson['mainSipAccount']);
