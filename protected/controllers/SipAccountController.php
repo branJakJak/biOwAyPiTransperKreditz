@@ -28,7 +28,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -215,6 +215,29 @@ class SipAccountController extends Controller
         $this->render('admin', array(
             'model' => $model,
         ));
+    }
+    public function actionSyncApi()
+    {
+        header("Content-Type: application/json");
+        $jsonMessage = array("success"=>true,"message"=>"Data synced");
+        /*retrieve all accounts model*/
+        $allModels = SipAccount::model()->findAll();
+        foreach ($allModels as $currentModel) {
+            $remoteChecker = new ApiRemoteStatusChecker($currentModel->id);
+            $remoteChecker->checkAllSubAccounts();
+            foreach ($currentModel->subSipAccounts as $currentSubSipAccount) {
+                //retrieve updated subsip
+                $jsonMessage['reports'][] = "Checking $currentSubSipAccount->username under $currentModel->username. |".date("Y-m-d H:i:s").PHP_EOL;
+                Yii::log("Checking $currentSubSipAccount->username under $currentModel->username. | ".date("Y-m-d H:i:s"), CLogger::LEVEL_INFO,'info');
+                $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
+                if (doubleval($tempSubSip->exact_balance) <= 3) {
+                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
+                    $deactivatorObj->run();
+                    mail("hellsing357@gmail.com", 'Account Deactivated', "$currentModel->username deactivated");
+                }
+            }
+        }
+        echo json_encode($jsonMessage);
     }
 
     /**

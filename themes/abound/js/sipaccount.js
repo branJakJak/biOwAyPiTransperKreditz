@@ -19,6 +19,10 @@
 		  		console.log(newVal);
 		  	}
 		});
+
+		this.syncWithRemoteApi = function(){
+			return $http.get("/sipAccount/syncApi");
+		}
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curData.account_status = "active";
@@ -42,7 +46,13 @@
 					.then(function(response){
 						if (response.data.success) {
 							alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
-							currentController.synchronizeData();
+							/*@TODO - syncwith remote api - before synchronizing data*/
+							currentController.syncWithRemoteApi().then(function(){
+								currentController.synchronizeData();
+							}, function(){
+								alertify.error("Something went wrong while synchronizing to the api");
+							});
+							
 						}else{
 							alertify.error("Failed : Sorry we cant update this sub account at the moment. Cause of failure : "+response.data.message);
 						}

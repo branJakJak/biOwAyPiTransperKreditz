@@ -27,6 +27,7 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand
                 }
             }
         }
+        
 	}	
 
 }

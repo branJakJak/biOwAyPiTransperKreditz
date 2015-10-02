@@ -210,7 +210,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	</tbody>
 </table>
 <hr>
-<button type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">{{globalUpdateText}}</button>
+<button ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">{{globalUpdateText}}</button>
 
 </div>
 </div>
