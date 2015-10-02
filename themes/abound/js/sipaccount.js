@@ -34,9 +34,9 @@
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
 				if (curData.account_status === "active") {
-					curPromise = $http.get("/subSipAccount/ajaxActivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id);
+					curPromise = $http.get("/subSipAccount/ajaxActivate?subAccount="+curData.subSipAccounts[0].sub_sip_id);
 				}else{
-					curPromise = $http.get("/subSipAccount/ajaxDeactivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id);
+					curPromise = $http.get("/subSipAccount/ajaxDeactivate?subAccount="+curData.subSipAccounts[0].sub_sip_id);
 				}
 				curPromise.then(function(){
  					defer.resolve();
