@@ -123,7 +123,11 @@ class SipAccountController extends Controller
             if($currentSeriesData >= 10){
                 $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
             }else{
-                $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+                if ($currentSeriesData > 3) {
+                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"orange");
+                }else{
+                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+                }
             }
             
             $seriesData[$key] = $curDataContainer;
@@ -196,7 +200,16 @@ class SipAccountController extends Controller
         foreach ($seriesData as $key => $value) {
             $curDataContainer = array();
             //$value += rand(0,20);
-            $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
+            if ($value >= 10) {
+                $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
+            }else{
+                if ($value >= 3) {
+                    $curDataContainer = array("y"=>$value,"color"=>"orange");
+                }else{
+                    $curDataContainer = array("y"=>$value,"color"=>"red");
+                }
+            }
+            
             $seriesData[$key] = $curDataContainer;
 
         }

@@ -45,23 +45,6 @@ $javascriptCode = <<<EOL
 	  			title: {
 	                text: null
 	            },
-	            labels:{
-	            	formatter:function(){
-	            		this.getRandomColor = function() {
-						    var letters = '0123456789ABCDEF'.split('');
-						    var color = '#';
-						    for (var i = 0; i < 6; i++ ) {
-						        color += letters[Math.floor(Math.random() * 16)];
-						    }
-						    return color;
-						}
-						if (!window.originalColorMap[this.value]) {
-							window.originalColorMap[this.value] = this.getRandomColor();
-						}
-	            		/*generate random color*/
-	            		return '<span style="color: '+window.originalColorMap[this.value]+';">' + this.value + '</span>';
-	            	}
-	            }
             },
 	 		yAxis: {
 	            title: {
@@ -74,9 +57,7 @@ $javascriptCode = <<<EOL
                         enabled: true,
                         color: '#000',
                         style: {fontWeight: 'bolder'},
-                        //formatter: function() {return this.x + ': ' this.y},
                         inside: true,
-                        //rotation: 270
                     },
                     pointPadding: 0.1,
                     groupPadding: 0
@@ -153,11 +134,11 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 </h1>
 <hr>
 <strong>
-	<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" >
+	<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 	<strong >Activate All</strong>
 </strong>
 <strong style="margin-left: 40px;">
-	<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" >
+	<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 	<strong >Deactivate All</strong>
 </strong>
 <hr>
