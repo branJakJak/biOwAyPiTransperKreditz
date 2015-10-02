@@ -5,7 +5,7 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', []);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http', function ($scope,$http) {
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q', function ($scope,$http,$q) {
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
@@ -29,10 +29,27 @@
 			});
 		}
 		this.globalUpdate = function(){
+			defer  = $q.defer();
+			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				currentController.updateCurrentRowInfo(curData);
+				curPromise = null;
+				if (curData.account_status === "active") {
+					curPromise = $http.get("/subSipAccount/ajaxActivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id);
+				}else{
+					curPromise = $http.get("/subSipAccount/ajaxDeactivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id);				}
+				}
+				curPromise.then(function(){
+ 					defer.resolve();
+				}, function(){});
+				updateStack.push(curPromise);
 			});
-			currentController.synchronizeData();
+
+			 $q.all(updateStack).then(function(){
+				currentController.synchronizeData();
+			 }, function(){
+			 	alertify.success("Something went wrong while refreshing the data");
+			 });
+			
 		}
 		this.topUpCredits = function(freeVoipUsername,mainSipId,subSipId , credits){
 			alertify.success("Updating credits..Please wait..");
