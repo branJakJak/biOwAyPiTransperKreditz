@@ -20,8 +20,8 @@
 		  	}
 		});
 
-		this.syncWithRemoteApi = function(){
-			return $http.get("/sipAccount/syncApi");
+		this.syncWithRemoteApi = function(mainSipAccount){
+			return $http.get("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
@@ -47,7 +47,7 @@
 						if (response.data.success) {
 							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - syncwith remote api - before synchronizing data*/
-							currentController.syncWithRemoteApi().then(function(){
+							currentController.syncWithRemoteApi(mainSipId).then(function(){
 								currentController
 									.synchronizeData()
 									.then(function(){
