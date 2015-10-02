@@ -8,12 +8,13 @@ as in say we wanted to deactivate
 all the accounts or just say 2 accounts 
 then we can untick the boxes 
 and to a global submit. 
-
+@DONE
 
 
 
 @TODO-APILOG 
 AsteriskCarriers::getData
+@DONE
 
 retrieve all data and show to table 
 @DONE
@@ -21,6 +22,9 @@ retrieve all data and show to table
 @TODO-APILOG activate and deactivate 
 when clicked  , do the same 
 action
+@DONE
+
+
 
 
 @TODO-APILOG transfer / top up 
@@ -29,7 +33,7 @@ on top up , when user top up a credit
 using the process freevoip to bestvoip 
 the sub account should also be topped up 
 with the same amount of the one used 
-
+@DONE
 
 @TODO-APILOG balance from 
 balance from is what freevoip account 
@@ -38,7 +42,7 @@ we want the balance to be from
  drop down contents 
  helpdirect-uk 
  and callnetamerica3
-
+@DONE
 
 
 @TODO-APILOG show ip address
@@ -49,8 +53,43 @@ sorry ip of the vici dialer that the vici user is linked to
 
 @TODO - during updating / activating / deactivating 
 show user that an update is ongoing
+@DONE
+
 
 
 @NEXT  -activate all accounts 
 when clicked iterates data 
 at update their account_status to activated
+@DONE
+
+
+
+@Tturn on chart update 
+@DONE
+
+@TODO - 
+trigger also 
+@DONE
+
+
+@TODO
+ one update and one topup or better still put update button next to the chcheck box and replace modify with top up button ??
+
+
+
+@TODO
+
+just realising aswell later on we may need to add a exrta coloum to say what type of vb the user is doing as boss man had me to add new type of vb just now ...but that can come later ..
+
+- say what type of vb the user is doing-
+as in vb we started on was the type of message and what product its for as in say user 100 - 1200 is currently on accidents vb message now tone tool 1300 has just been put on Debt message.
+Like a type of campaign, Idealy the mor info we see the better for managing so many users, its only litrally just happened with new type of vb message
+@DOBE
+we can just add them ion the sql view later on down the road
+
+.activateAccount{
+	
+}
+.blockedAccount{
+	
+}
