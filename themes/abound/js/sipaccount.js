@@ -27,6 +27,7 @@
 					angular.forEach(response.data, function(freshData, index){
 						angular.forEach($scope.sipAccounts, function(oldData, index){
 							if (  freshData.parent_sip_id === oldData.parent_sip_id  ) {
+								oldData.account_status = freshData.account_status;
 								oldData.subSipAccounts[0].balance = freshData.subSipAccounts[0].balance;
 								oldData.subSipAccounts[0].exact_balance = freshData.subSipAccounts[0].balance;
 							}
