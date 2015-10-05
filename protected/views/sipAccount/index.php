@@ -179,6 +179,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Add Balance</th>
 			<th>Balance From</th>
 			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody ng-cloak>
@@ -212,7 +213,17 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id,topUpCreditsVal)">Top-up</a>
 			</td>
-
+			<td>
+				<div class="btn-group">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cogs fa-lg"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="/subSipAccount/create?SubSipAccount[parent_sip]={{value.parent_sip_id}}"><i class="fa fa-plus-circle"></i> Add Sub Sip Account</a></li>
+						<li class='hidden'><a href="#"><i class="fa fa-warning"></i> Delete account</a></li>
+						<!-- <li><a href="#">Separated link</a></li> -->
+					</ul>
+				</div>
+				
+			</td>
 		</tr>
 	</tbody>
 </table>

@@ -18,6 +18,15 @@ $this->menu=array(
 ?>
 
 <h1>View SubSipAccount #<?php echo $model->id; ?></h1>
+<hr>
+<?php
+$this->widget('bootstrap.widgets.TbAlert', array(
+    'fade'=>true, // use transitions?
+    'closeText'=>'×', // close link text - if set to false, no close link is displayed
+    'alerts'=>array( // configurations per alert type
+	    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+    ),
+)); ?>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
