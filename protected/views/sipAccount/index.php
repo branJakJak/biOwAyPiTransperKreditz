@@ -169,7 +169,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>{{value.subSipAccounts[0].balance}}</td>
 			<td>{{value.vicidial_identification}}</td>
 			<td>
-				<input ng-click="indexCtrl.updateSingleRow(value)"  type="checkbox" ng-model="value.account_status"
+				<input type="checkbox" ng-model="value.account_status"
            			ng-true-value="'active'" ng-false-value="'blocked'">
 			</td>
 			<td>{{value.campaign_name}}</td>
