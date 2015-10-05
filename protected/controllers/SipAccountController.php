@@ -59,14 +59,12 @@ class SipAccountController extends Controller
     public function actionCreate()
     {
         $model = new SipAccount;
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
         if (isset($_POST['SipAccount'])) {
             $model->attributes = $_POST['SipAccount'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+            if ($model->save()){
+                Yii::app()->user->setFlash("success","Main SIP Account Registered.<br><strong>Please continue </strong> filling up the rest of the form.");
+                $this->redirect(array('subSipAccount/create', 'SubSipAccount[parent_sip]' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -169,7 +167,7 @@ class SipAccountController extends Controller
                 }
             }
             foreach($currentModel->subSipAccounts as $currentSubSipAccount) {
-                $curTempContainer['subSipAccounts'][] = array(
+                $curTempContainer['subSipAccounts'][0] = array(
                         "sub_sip_id"=>$currentSubSipAccount->id,
                         "username"=>$currentSubSipAccount->username,
                         "account_status"=>$currentSubSipAccount->account_status,
@@ -177,8 +175,9 @@ class SipAccountController extends Controller
                         "balance"=>$currentSubSipAccount->balance,
                         "exact_balance"=>$currentSubSipAccount->exact_balance,
                 );
+                $finalArr[] = $curTempContainer;
             }
-            $finalArr[] = $curTempContainer;
+            
         }
         echo CJSON::encode($finalArr);
     }

@@ -77,6 +77,7 @@
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		this.globalUpdate = function(){
+			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
 			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
@@ -142,8 +143,6 @@
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the main SIP account.Try again later.");
 			})
-			
-			
 		}
 		this.updateSingleRow = function(currentRow){
 			alertify.confirm(

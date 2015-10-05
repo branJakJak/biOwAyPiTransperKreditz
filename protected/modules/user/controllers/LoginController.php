@@ -18,16 +18,30 @@ class LoginController extends Controller
 				// validate user input and redirect to previous page if valid
 				if($model->validate()) {
 					$this->lastViset();
-					if (Yii::app()->user->returnUrl=='/index.php')
+					//LOG THE uSER
+					$userRequestOjb = new UserRequest;
+					$userRequestOjb->user_agent = @$_SERVER['HTTP_USER_AGENT'];
+					$userRequestOjb->ip_address = @$_SERVER['REMOTE_ADDR'];
+					$userRequestOjb->url_refferer = @Yii::app()->user->returnUrl;
+					$userRequestOjb->save();
+					//END OF USER LOG
+					
+					if (Yii::app()->user->returnUrl=='/index.php'){
 						$this->redirect(Yii::app()->controller->module->returnUrl);
-					else
+					}
+					else{
 						$this->redirect(Yii::app()->user->returnUrl);
+					}
+
+
 				}
 			}
+			
 			// display the login form
 			$this->render('/user/login',array('model'=>$model));
-		} else
+		} else{
 			$this->redirect(Yii::app()->controller->module->returnUrl);
+		}
 	}
 	
 	private function lastViset() {

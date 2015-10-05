@@ -7,6 +7,7 @@
 
 
 <div id="content">
+	<div class="span10 offset1">
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
             'links'=>$this->breadcrumbs,
@@ -15,6 +16,7 @@
         )); ?><!-- breadcrumbs -->
     <?php endif?>
 	<?php echo $content; ?>
+	</div>
 </div><!-- content -->
 
 

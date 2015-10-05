@@ -93,3 +93,26 @@ we can just add them ion the sql view later on down the road
 .blockedAccount{
 	
 }
+
+
+        $seriesData = SipAccount::getSeriesDataAsArr();
+        foreach ($seriesData as $key => $currentSeriesData) {
+            $curDataContainer = array();
+            if($currentSeriesData >= 10){
+                $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
+            }else{
+                if ($currentSeriesData > 3) {
+                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"orange");
+                }else{
+                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+                }
+            }
+            
+            $seriesData[$key] = $curDataContainer;
+        }
+        $seriesDataStr = json_encode($seriesData);
+
+
+
+@TODO - when check all is click
+

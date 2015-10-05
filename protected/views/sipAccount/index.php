@@ -22,8 +22,6 @@ $cs->registerCssFile($baseUrl.'/css/alertify.css');
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 $cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 
-
-
 $javascriptCode = <<<EOL
 
 	window.originalColorMap = new Object();
@@ -85,22 +83,6 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 <div ng-app="sipAccountModule">
 <div ng-controller="IndexCtrl as indexCtrl" >
 
-<?php if (false): ?>
-	
-<div class='headerBtnToggle' ng-show="false" ng-cloak>
-	<button type="button" class="btn btn-default">
-		<img src="<?php echo $baseUrl ?>/img/chart-icon.png"> 
-		Show Chart
-	</button>
-	<button type="button" class="btn btn-default">
-		<img src="<?php echo $baseUrl ?>/img/Generate-tables-icon.png"> 
-		Show Table
-	</button>
-</div>
-
-<?php endif ?>
-
-<hr>
 
 
 <?php 
@@ -113,6 +95,48 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	    'info'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // info
     ),
 )); ?>
+
+
+
+<hr>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Recent Logins',
+	));
+?>
+<?php 
+	$this->widget('zii.widgets.grid.CGridView', array(
+	    'dataProvider' => UserRequest::model()->getRecentLogins(),
+	    'template' => "{summary}\n{items}\n{pager}",
+	    'columns'=>array(
+			array(
+				'name'=>'ip_address', 
+				'header'=>'IP Address',
+				'type'=>'raw',
+				'value'=>'$data->ip_address',
+			),
+			array(
+				'header'=>'Location',
+				'type'=>'raw',
+				'value'=>'$data->getFlagImageLabel()',
+			),
+			array(
+				'name'=>'date_created', 
+				'header'=>'Last access',
+				'type'=>'raw',
+				'value'=>'$data->date_created',
+			),
+		)
+	));
+?>
+<?php
+	$this->endWidget();
+?>
+
+
+<div class="clearfix"></div>
+<hr>
+
 
 
 <?php
@@ -163,7 +187,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<i class="fa fa-spinner fa-spin"></i> Loading ...
 			</td>
 		</tr>
+
 		<tr ng-repeat="(key, value) in sipAccounts" ng-class="indexCtrl.getRowClass(value)">
+			<div>
+			</div>
 			<td>{{value.username}}</td>
 			<td>{{value.subSipAccounts[0].customer_name}}</td>
 			<td>{{value.subSipAccounts[0].balance}}</td>

@@ -66,8 +66,10 @@ class SubSipAccountController extends Controller
 		if(isset($_POST['SubSipAccount']))
 		{
 			$model->attributes=$_POST['SubSipAccount'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash("success","Sub SIP Account Registered.");
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(

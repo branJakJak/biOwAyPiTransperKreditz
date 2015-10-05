@@ -13,27 +13,27 @@ class SiteController extends Controller
 			'accessControl', 
 		);
 	}	
-/**
- * Specifies the access control rules.
- * This method is used by the 'accessControl' filter.
- * @return array access control rules
- */
-public function accessRules()
-{
-	return array(
-		array('allow',  // allow all users to perform 'index' and 'view' actions
-			'actions'=>array('error','login','logout','test'),
-			'users'=>array('*'),
-		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-			'actions'=>array('index'),
-			'users'=>array('@'),
-		),
-		array('deny',  // deny all users
-			'users'=>array('*'),
-		),
-	);
-}
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('error','login','logout','test'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('index'),
+				'users'=>array('@'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 	/**
 	 * This is the default 'index' action that is invOked
 	 * when an action is not explicitly requested by users.
@@ -124,7 +124,27 @@ public function accessRules()
 	}
 	public function actionTest()
 	{
-		print_r(AsteriskCarriers::getData());
+		Yii::import('ext.EGeoIP.*');
+		$geoIp = new EGeoIP();
+		$geoIp->locate('122.53.31.203'); // use your IP
+
+
+echo 'Information regarding IP: <b>'.$geoIp->ip.'</b><br/>';
+echo 'City: '.$geoIp->city.'<br>';
+echo 'Region: '.$geoIp->region.'<br>';
+echo 'Area Code: '.$geoIp->areaCode.'<br>';
+echo 'DMA: '.$geoIp->dma.'<br>';
+echo 'Country Code: '.$geoIp->countryCode.'<br>';
+echo 'Country Name: '.$geoIp->countryName.'<br>';
+echo 'Continent Code: '.$geoIp->continentCode.'<br>';
+echo 'Latitude: '.$geoIp->latitude.'<br>';
+echo 'Longitude: '.$geoIp->longitude.'<br>';
+echo 'Currency Symbol: '.$geoIp->currencySymbol.'<br>';
+echo 'Currency Code: '.$geoIp->currencyCode.'<br>';
+echo 'Currency Converter: '.$geoIp->currencyConverter.'<br/>';
+ 
+		
+		// print_r(AsteriskCarriers::getData());
 		// $command = Yii::app()->asterisk_db->createCommand("select * from user_carrier");
 		// $allResults = $command->queryAll();
 		// echo json_encode($allResults);
