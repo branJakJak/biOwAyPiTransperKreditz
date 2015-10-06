@@ -222,7 +222,6 @@
 			promise1 =  $http.get("/freeVoipAccounts/getList")
 			.then(function(response){
 				$scope.freeVoipAccts = response.data;
-				$scope.globalUpdateText = "Global Update";
 			}, function(){
 				alertify.error('We met some problems while retrieving the list of FreeVoip Accounts');
 				$scope.globalUpdateText = "Global Update";
@@ -231,7 +230,6 @@
 
 			promise2 = $http.get("/sipAccount/sipData").then(function(response){
 				$scope.sipAccounts = response.data;
-				$scope.globalUpdateText = "Global Update";
 			}, function(response){
 				alertify.error("We met some problems while retrieving the data");
 				$scope.globalUpdateText = "Global Update";
@@ -239,6 +237,7 @@
 			updateStack.push(promise2);
 
 			return $q.all(updateStack).then(function(){
+				$scope.globalUpdateText = "Global Update";
 			}, function(){
 				alertify.error('We met some problems while setting the value of SIP Data');
 				$scope.globalUpdateText = "Global Update";
