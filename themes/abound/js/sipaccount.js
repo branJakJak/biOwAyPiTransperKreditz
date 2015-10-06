@@ -83,10 +83,7 @@
 		}
 		
 		this.globalUpdate = function(){
-			if ($scope.currentRefreshPromise) {
-				$timeout.cancel($scope.currentRefreshPromise);
-				$scope.continueConstantRefresh = false;
-			}
+			$timeout.cancel($scope.currentRefreshPromise);
 			
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
@@ -111,7 +108,7 @@
 			 	
 			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
-					
+
 					$scope.continueConstantRefresh = true;
 					currentController.constantDataRefresh();
 
