@@ -8,7 +8,7 @@
     <file path="/TopUpController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444139362129" ignored="false" />
     <file path="/ApiRemoteStatusChecker.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444139769064" ignored="false" />
     <file path="/BestVOIPInformationRetriever.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444145152717" ignored="false" />
-    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444145245513" ignored="false" />
+    <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444145308977" ignored="false" />
     <file path="/ChartInfoDataArr.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444140758439" ignored="false" />
     <file path="/RemoteVoipResult.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444145106816" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,7 +33,7 @@
       <file leaf-file-name="SipAccountController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="44" selection-start="5305" selection-end="5305" vertical-scroll-proportion="0.8045977">
+            <state line="156" column="14" selection-start="5122" selection-end="5122" vertical-scroll-proportion="0.348659">
               <folding />
             </state>
           </provider>
@@ -544,7 +544,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="44" selection-start="5305" selection-end="5305" vertical-scroll-proportion="0.8045977">
+        <state line="156" column="14" selection-start="5122" selection-end="5122" vertical-scroll-proportion="0.348659">
           <folding />
         </state>
       </provider>
