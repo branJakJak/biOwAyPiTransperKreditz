@@ -206,11 +206,12 @@ class SubSipAccountController extends Controller
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> activated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
-	public function actionAjaxActivate($subAccount)
+	public function actionAjaxActivate($vicidial_identification)
 	{
 		header("Content-Type: application/json");
-		$childCur = SubSipAccount::model()->findByPk($subAccount);
-        $activatorObj = new ActivateVicidialUser($childCur->parentSip);
+		$sipAccount = new SipAccount();
+        $sipAccount->vicidial_identification = $vicidial_identification;
+        $activatorObj = new ActivateVicidialUser($sipAccount);
         $activatorObj->run();
         echo json_encode(array("success"=>true,"message"=>"Account activated"));
 	}
@@ -219,15 +220,15 @@ class SubSipAccountController extends Controller
         $childCur = SubSipAccount::model()->findByPk($subAccount);
         $activatorObj = new DeactivateVicidialUser($childCur->parentSip);
         $activatorObj->run();
-
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
-	public function actionAjaxDeactivate($subAccount)
+	public function actionAjaxDeactivate($vicidial_identification)
 	{
 		header("Content-Type: application/json");
-        $childCur = SubSipAccount::model()->findByPk($subAccount);
-        $activatorObj = new DeactivateVicidialUser($childCur->parentSip);
+        $sipAccount = new SipAccount();
+        $sipAccount->vicidial_identification = $vicidial_identification;
+        $activatorObj = new DeactivateVicidialUser($sipAccount);
         $activatorObj->run();
         echo json_encode(array("success"=>false,"message"=>"Account deactivated"));
 	}
