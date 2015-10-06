@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 ?>
-<div class="span6 offset3" style="padding: 10px">
+<div class="span6 " style="padding: 10px">
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(
 		'title'=>"Private access",

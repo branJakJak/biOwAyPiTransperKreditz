@@ -40,7 +40,6 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		
         $transactionLogMdl = new TransactionLog();
         if (isset($_POST['TransactionLog'])) {
             $transactionLogMdl->attributes = $_POST['TransactionLog'];

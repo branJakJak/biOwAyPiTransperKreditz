@@ -99,43 +99,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <hr>
-<?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>'Recent Logins',
-	));
-?>
-<?php 
-	$this->widget('zii.widgets.grid.CGridView', array(
-	    'dataProvider' => UserRequest::model()->getRecentLogins(),
-	    'template' => "{summary}\n{items}\n{pager}",
-	    'columns'=>array(
-			array(
-				'name'=>'ip_address', 
-				'header'=>'IP Address',
-				'type'=>'raw',
-				'value'=>'$data->ip_address',
-			),
-			array(
-				'header'=>'Location',
-				'type'=>'raw',
-				'value'=>'$data->getFlagImageLabel()',
-			),
-			array(
-				'name'=>'date_created', 
-				'header'=>'Last access',
-				'type'=>'raw',
-				'value'=>'$data->date_created',
-			),
-		)
-	));
-?>
-<?php
-	$this->endWidget();
-?>
-
-
-<div class="clearfix"></div>
-<hr>
 
 
 
@@ -233,6 +196,44 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 </div>
 </div>
 <br>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Recent Logins',
+	));
+?>
+<?php 
+	$this->widget('zii.widgets.grid.CGridView', array(
+	    'dataProvider' => UserRequest::model()->getRecentLogins(),
+	    'template' => "{summary}\n{items}\n{pager}",
+	    'columns'=>array(
+			array(
+				'name'=>'ip_address', 
+				'header'=>'IP Address',
+				'type'=>'raw',
+				'value'=>'$data->ip_address',
+			),
+			array(
+				'header'=>'Location',
+				'type'=>'raw',
+				'value'=>'$data->getFlagImageLabel()',
+			),
+			array(
+				'name'=>'date_created', 
+				'header'=>'Last access',
+				'type'=>'raw',
+				'value'=>'$data->date_created',
+			),
+		)
+	));
+?>
+<?php
+	$this->endWidget();
+?>
+
+
+<div class="clearfix"></div>
+<hr>
+
 <br>
 <br>
 <br>
