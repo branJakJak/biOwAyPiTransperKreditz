@@ -7,7 +7,7 @@
     <ignored path=".idea/dataSources.local.xml" />
     <file path="/TopUpController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444139362129" ignored="false" />
     <file path="/ApiRemoteStatusChecker.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444139769064" ignored="false" />
-    <file path="/BestVOIPInformationRetriever.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444140124165" ignored="false" />
+    <file path="/BestVOIPInformationRetriever.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444144395896" ignored="false" />
     <file path="/SipAccountController.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444142159683" ignored="false" />
     <file path="$PROJECT_DIR$/protected/models/SipAccount.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444140587874" ignored="false" />
     <file path="/ChartInfoDataArr.php" changelist="37a6397d-44b4-423c-9af3-aa45c2ba0b0d" time="1444140758439" ignored="false" />
@@ -33,7 +33,7 @@
       <file leaf-file-name="SipAccountController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="9" selection-start="5069" selection-end="5069" vertical-scroll-proportion="0.42911878">
+            <state line="158" column="36" selection-start="5212" selection-end="5212" vertical-scroll-proportion="0.59195405">
               <folding />
             </state>
           </provider>
@@ -80,9 +80,9 @@
         <option value="$PROJECT_DIR$/protected/components/SipAccountChartData.php" />
         <option value="$PROJECT_DIR$/protected/controllers/TopUpController.php" />
         <option value="$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php" />
-        <option value="$PROJECT_DIR$/protected/components/bestvoipAPI/BestVOIPInformationRetriever.php" />
         <option value="$PROJECT_DIR$/protected/components/bestvoipAPI/ChartInfoDataArr.php" />
         <option value="$PROJECT_DIR$/protected/controllers/SipAccountController.php" />
+        <option value="$PROJECT_DIR$/protected/components/bestvoipAPI/BestVOIPInformationRetriever.php" />
       </list>
     </option>
   </component>
@@ -454,13 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="1751" selection-end="1879" vertical-scroll-proportion="0.4377432">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/VicidialCampaignRetriever.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="49" selection-start="373" selection-end="373" vertical-scroll-proportion="0.033932135">
@@ -510,13 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/bestvoipAPI/BestVOIPInformationRetriever.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="714" selection-end="714" vertical-scroll-proportion="0.5084112">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/SipAccountChartData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="20" selection-start="87" selection-end="87" vertical-scroll-proportion="-5.230769">
@@ -524,9 +510,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteStatusChecker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="90" selection-start="1430" selection-end="1491" vertical-scroll-proportion="0.26915887">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/bestvoipAPI/BestVOIPInformationRetriever.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="442" selection-end="442" vertical-scroll-proportion="0.3813084">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="9" selection-start="5069" selection-end="5069" vertical-scroll-proportion="0.42911878">
+        <state line="158" column="36" selection-start="5212" selection-end="5212" vertical-scroll-proportion="0.59195405">
           <folding />
         </state>
       </provider>

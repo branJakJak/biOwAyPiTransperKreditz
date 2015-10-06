@@ -2,9 +2,14 @@
 
 class BestVOIPInformationRetriever {
     public function getInfo($masterUsername ,$masterPassword , $subUsername  , $subPassword){
-        $command = 'getuserinfo';
         $curlURL = "https://77.72.173.130/API/Request.ashx?";
-        $httparams = compact('command','masterUsername','masterPassword','subUsername','subPassword');
+        $httparams = array(
+            'command'=>'getuserinfo',
+            'username'=>$masterUsername,
+            'password'=>$masterPassword,
+            'customer'=>$subUsername,
+            'customerpassword'=>$subPassword
+        );
         $curlURL .= http_build_query($httparams);
         $curlres = curl_init($curlURL);
         curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
