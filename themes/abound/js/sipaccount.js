@@ -53,20 +53,30 @@
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
 				$http.get("/sipAccount/sipData").then(function(response){
-					/* iterate through data and set teh fresh data to sipAccounts*/
-					angular.forEach(response.data, function(freshData, index){
-						angular.forEach($scope.sipAccounts, function(oldData, index){
-							if (  freshData.vici_user === oldData.vici_user  ) {
-								//oldData.status = freshData.status;
-								oldData.balance = freshData.balance;
-								oldData.exact_balance = freshData.exact_balance;
-							}
+
+					if ($scope.continueConstantRefresh) {
+						
+						/* iterate through data and set teh fresh data to sipAccounts*/
+						angular.forEach(response.data, function(freshData, index){
+							angular.forEach($scope.sipAccounts, function(oldData, index){
+								if (  freshData.vici_user === oldData.vici_user  ) {
+									//oldData.status = freshData.status;
+									oldData.balance = freshData.balance;
+									oldData.exact_balance = freshData.exact_balance;
+								}
+							});
 						});
-					});
-					$scope.globalUpdateText = "Global Update";
+						$scope.globalUpdateText = "Global Update";
+
+					}
+
+
 				}, function(response){
-					alertify.error("We met some problems while retrieving the data");
-					$scope.globalUpdateText = "Global Update";
+					if ($scope.continueConstantRefresh) {
+						alertify.error("We met some problems while retrieving the data");
+						$scope.globalUpdateText = "Global Update";
+					}
+
 				}).then(function(){
 					if ($scope.continueConstantRefresh) {
 						currentController.constantDataRefresh();
