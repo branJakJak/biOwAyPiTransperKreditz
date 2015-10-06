@@ -212,8 +212,8 @@ class SubSipAccountController extends Controller
 		$sipAccount = new SipAccount();
         $sipAccount->vicidial_identification = $vicidial_identification;
         $activatorObj = new ActivateVicidialUser($sipAccount);
-        $activatorObj->run();
-        echo json_encode(array("success"=>true,"message"=>"Account activated"));
+        $reqREs = $activatorObj->run();
+        echo json_encode(array("success"=>true,"message"=>"Account activated","result"=>$reqREs));
 	}
 	public function actionDeactivate($subAccount)
 	{
@@ -229,7 +229,7 @@ class SubSipAccountController extends Controller
         $sipAccount = new SipAccount();
         $sipAccount->vicidial_identification = $vicidial_identification;
         $activatorObj = new DeactivateVicidialUser($sipAccount);
-        $activatorObj->run();
-        echo json_encode(array("success"=>false,"message"=>"Account deactivated"));
+        $reqRes = $activatorObj->run();
+        echo json_encode(array("success"=>false,"message"=>"Account deactivated","result"=>$reqRes));
 	}
 }
