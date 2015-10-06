@@ -136,7 +136,7 @@ class SipAccountController extends Controller
             );
             //register chart data array
             $chartDataArr = array(
-                "name"=>$currentSeriesData['main_user'],
+                "name"=>$currentSeriesData['sub_user'],
                 "data"=>$remoteVoipRes->getBalance(),
             );
 
