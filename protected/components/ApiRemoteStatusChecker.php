@@ -53,9 +53,9 @@ class ApiRemoteStatusChecker
 	protected function check($command,$username , $password , $customer , $customerpassword,SubSipAccount $currentSubSipAccount)
 	{
         $curlURL = "https://77.72.173.130/API/Request.ashx?";
-		$httparams = compact('command','username','password','customer','customerpassword');
-		$curlURL .= http_build_query($httparams);
-		$curlres = curl_init($curlURL);
+        $httparams = compact('command','username','password','customer','customerpassword');
+        $curlURL .= http_build_query($httparams);
+        $curlres = curl_init($curlURL);
 		curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curlres, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);

@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 
 <?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
-<div class="success">
+<div class="success">                                                                                                                                                                                                                                                              
 	<?php echo Yii::app()->user->getFlash('loginMessage'); ?>
 </div>
 

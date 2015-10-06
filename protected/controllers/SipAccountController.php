@@ -115,35 +115,50 @@ class SipAccountController extends Controller
     public function actionIndex()
     {
         $this->layout = "column2";
-        $seriesData = SipAccount::getSeriesDataAsArr();
-        foreach ($seriesData as $key => $currentSeriesData) {
+        $chartDataRetriever = new ChartInfoDataArr;
+        $rawData = $chartDataRetriever->getData();
+        $seriesData = array();
+        $sipAccounts = array();
+        $chartDataArr = array();
+        $remoteApiDataretriever = new BestVOIPInformationRetriever();
+
+
+        var_dump($rawData);
+        die();
+        foreach ($rawData as $key => $currentSeriesData) {
             $curDataContainer = array();
-            if($currentSeriesData >= 10){
-                $curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
+            //collect sip accounts
+            $sipAccounts[$key] = $currentSeriesData['main_user'];
+            //retrieve remote api information
+            $xmlObj = $remoteApiDataretriever->getInfo(
+                $currentSeriesData['main_user'],
+                $currentSeriesData['main_pass'],
+                $currentSeriesData['sub_user'],
+                $currentSeriesData['sub_pass']
+            );
+            //register chart data array
+            $chartDataArr = array(
+                "name"=>$currentSeriesData['main_user'],
+                "data"=>$xmlObj->balance,
+            );
+
+            if($currentSeriesData['exact_balance'] >= 10){
+                $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"#7CB5EC");
             }else{
-                if ($currentSeriesData > 3) {
-                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"orange");
+                if ($currentSeriesData['exact_balance'] > 3) {
+                    $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
+                    $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"red");
                 }
             }
-            
+            //register series data
             $seriesData[$key] = $curDataContainer;
         }
         $seriesDataStr = json_encode($seriesData);
-
-        $sipAccounts = SipAccount::getSipAccountsAsArr();
         $sipAccountsStr = json_encode($sipAccounts);
 
-
-        $chartDataRetriever = new SipAccountChartData();
-        $chartData = $chartDataRetriever->retrieve();
-
-        $dataProvider = new CActiveDataProvider('SipAccount');
-        $dataProvider->pagination = false;
         $this->render('index', array(
-            'dataProvider' => $dataProvider,
-            'chartData'=>$chartData,
+            'chartData'=>$chartDataArr,
             'seriesDataStr'=>$seriesDataStr,
             'sipAccountsStr'=>$sipAccountsStr,
         ));
@@ -151,33 +166,19 @@ class SipAccountController extends Controller
     public function actionSipData()
     {
         $finalArr = array();
-        $allModels = SipAccount::model()->with("subSipAccounts")->findAll();
+        /*data asterisk data as primary data source*/
         $asteriskData = AsteriskCarriers::getData();
-        foreach ($allModels as $currentModel) {
-            $curTempContainer = array(
-                    "parent_sip_id"=>$currentModel->id,
-                    "username"=>$currentModel->username,
-                    "vicidial_identification"=>$currentModel->vicidial_identification,
-                    "account_status"=>$currentModel->account_status
+        $voipInfoRetriever = new BestVOIPInformationRetriever();
+        foreach ($asteriskData as $key => $currentAsteriskData) {
+            $xmlObject = $voipInfoRetriever->getInfo(
+                $currentAsteriskData['main_user'],
+                $currentAsteriskData['main_pass'],
+                $currentAsteriskData['sub_user'],
+                $currentAsteriskData['sub_pass']
             );
-            foreach ($asteriskData as $currentAsteriskData) {
-                if ($currentAsteriskData['main_user'] === $currentModel->username) {
-                    $curTempContainer['campaign_name'] = $currentAsteriskData['campaign'];
-                    $curTempContainer['vici_ip_address'] = $currentAsteriskData['server_ip'];
-                }
-            }
-            foreach($currentModel->subSipAccounts as $currentSubSipAccount) {
-                $curTempContainer['subSipAccounts'][0] = array(
-                        "sub_sip_id"=>$currentSubSipAccount->id,
-                        "username"=>$currentSubSipAccount->username,
-                        "account_status"=>$currentSubSipAccount->account_status,
-                        "customer_name"=>$currentSubSipAccount->customer_name,
-                        "balance"=>$currentSubSipAccount->balance,
-                        "exact_balance"=>$currentSubSipAccount->exact_balance,
-                );
-                $finalArr[] = $curTempContainer;
-            }
-            
+            $currentAsteriskData['id'] = $key;
+            $currentAsteriskData['balance'] = doubleval($xmlObject->Balance);
+            $currentAsteriskData['exact_balance'] = doubleval($xmlObject->SpecificBalance);
         }
         echo CJSON::encode($finalArr);
     }
