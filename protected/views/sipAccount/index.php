@@ -139,8 +139,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Active</th>
 			<th>Campaign</th>
 			<th>IP Address</th>
-			<th>Add Balance</th>
 			<th> # of lines </th>
+			<th>Add Balance</th>
 			<th>Balance From</th>
 			<th></th>
 
