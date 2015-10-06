@@ -140,9 +140,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Campaign</th>
 			<th>IP Address</th>
 			<th>Add Balance</th>
+			<th> # of lines </th>
 			<th>Balance From</th>
 			<th></th>
-			<th></th>
+
 		</tr>
 	</thead>
 	<tbody ng-cloak>
@@ -168,6 +169,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.server_ip}}
 			</td>
+			<td>
+				{{value.number_of_lines}}
+			</td>
 			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" title=""></td>
 			<td>
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
@@ -180,17 +184,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 					{{value.topUpText}} 
 				</a>
 			</td>
-			<td>
-				<div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cogs fa-lg"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="/subSipAccount/create?SubSipAccount[parent_sip]={{value.parent_sip_id}}"><i class="fa fa-plus-circle"></i> Add Sub Sip Account</a></li>
-						<li class='hidden'><a href="#"><i class="fa fa-warning"></i> Delete account</a></li>
-						<!-- <li><a href="#">Separated link</a></li> -->
-					</ul>
-				</div>
-				
-			</td>
+
 		</tr>
 	</tbody>
 </table>
