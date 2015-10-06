@@ -155,17 +155,17 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		<tr ng-repeat="(key, value) in sipAccounts" ng-class="indexCtrl.getRowClass(value)">
 			<div>
 			</div>
-			<td>{{value.username}}</td>
-			<td>{{value.subSipAccounts[0].customer_name}}</td>
-			<td>{{value.subSipAccounts[0].balance}}</td>
-			<td>{{value.vicidial_identification}}</td>
+			<td>{{value.main_user}}</td>
+			<td>{{value.sub_user}}</td>
+			<td>{{value.balance}}</td>
+			<td>{{value.vici_user}}</td>
 			<td>
-				<input type="checkbox" ng-model="value.account_status"
-           			ng-true-value="'active'" ng-false-value="'blocked'">
+				<input type="checkbox" ng-model="value.status"
+           			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
 			</td>
-			<td>{{value.campaign_name}}</td>
+			<td>{{value.campaign}}</td>
 			<td>
-				{{value.vici_ip_address}}
+				{{value.server_ip}}
 			</td>
 			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" max="" title=""></td>
 			<td>
@@ -174,7 +174,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</select>
 			</td>
 			<td>
-				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.parent_sip_id,value.subSipAccounts[0].sub_sip_id,topUpCreditsVal)">Top-up</a>
+				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)">Top-up</a>
 			</td>
 			<td>
 				<div class="btn-group">

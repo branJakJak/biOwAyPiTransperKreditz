@@ -30,10 +30,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SipAccountController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SipAccountController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="156" column="14" selection-start="5122" selection-end="5122" vertical-scroll-proportion="0.348659">
+            <state line="162" column="44" selection-start="5348" selection-end="5348" vertical-scroll-proportion="-12.230769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiRemoteUpdateBalance.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteUpdateBalance.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="86" column="39" selection-start="2197" selection-end="2197" vertical-scroll-proportion="0.66728973">
               <folding />
             </state>
           </provider>
@@ -437,13 +446,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/components/RemoteVicidialBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="6" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/ActivateCampaign.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="5" selection-start="125" selection-end="125" vertical-scroll-proportion="0.3448276">
@@ -544,7 +546,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="14" selection-start="5122" selection-end="5122" vertical-scroll-proportion="0.348659">
+        <state line="162" column="44" selection-start="5348" selection-end="5348" vertical-scroll-proportion="-12.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/ApiRemoteUpdateBalance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="39" selection-start="2197" selection-end="2197" vertical-scroll-proportion="0.66728973">
           <folding />
         </state>
       </provider>

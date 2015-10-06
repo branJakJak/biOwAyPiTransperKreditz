@@ -106,31 +106,27 @@
 			 });
 			
 		}
-		this.topUpCredits = function(freeVoipUsername,mainSipId,subSipId , credits){
+		this.topUpCredits = function(freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
+			
 			alertify.success("Updating credits..Please wait..");
 			/*top up account main SIP account using freeVoipUsername*/
 			currentController
-			.topUpMainSip(freeVoipUsername,mainSipId,credits)
+			.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
 			.then(function(response){
 				if (response.data.success) {
 					/*top up sub sip account using main sip account*/
-					currentController.topUpSubSip(mainSipId,subSipId,credits)
+					currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
 					.then(function(response){
 						if (response.data.success) {
 							alertify.success("Please wait while we synchronize the data from the API");
-							/*@TODO - syncwith remote api - before synchronizing data*/
-							currentController.syncWithRemoteApi(mainSipId).then(function(){
-								currentController
-									.synchronizeData()
-									.then(function(){
-										alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
-									}, function(){
-										alertify.success("We met some error while synchronizing the data to the database");
-									})
-							}, function(){
-								alertify.error("Something went wrong while synchronizing to the api");
+							/*@TODO - sync using /sipData instead*/
+							currentController
+								.synchronizeData()
+								.then(function(){
+									alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
+								}, function(){
+									alertify.success("We met some error while synchronizing the data to the database");
 							});
-							
 						}else{
 							alertify.error("Failed : Sorry we cant update this sub account at the moment. Cause of failure : "+response.data.message);
 						}
@@ -186,17 +182,20 @@
 			}
 
 		}
-		this.topUpMainSip = function(freeVoipUsername , mainSipId , credits){
+		this.topUpMainSip = functiontopUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits){
 			return $http.post('/topUp/mainSip',  {
 				'freeVoipUsername' : freeVoipUsername,
-				'mainSipId' : mainSipId,
+				'mainUsername' : mainUsername,
+				'mainPassword' : mainPassword,
 				'credits' : credits,
 			});
 		}
-		this.topUpSubSip = function(mainSipId , subSipId , credits){
+		this.topUpSubSip = function(mainUsername,mainPassword,subUsername,subPassword,credits){
 			return $http.post('/topUp/subSip',  {
-			 	'mainSipId' : mainSipId,
-			 	'subSipId' : subSipId,
+				'mainUsername' : mainUsername,
+				'mainPassword' : mainPassword,
+			 	'subUsername' : subUsername,
+			 	'subPassword' : subPassword,
 			 	'credits' : credits,
 			})
 		}

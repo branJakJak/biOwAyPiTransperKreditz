@@ -179,6 +179,7 @@ class SipAccountController extends Controller
             $currentAsteriskData['id'] = $key;
             $currentAsteriskData['balance'] = doubleval($xmlObject->Balance);
             $currentAsteriskData['exact_balance'] = doubleval($xmlObject->SpecificBalance);
+            $finalArr = $currentAsteriskData;
         }
         echo CJSON::encode($finalArr);
     }

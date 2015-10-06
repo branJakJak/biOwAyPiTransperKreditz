@@ -49,22 +49,21 @@ class TopUpController extends Controller
 		header("Content-Type: application/json");
 		$jsonMessage = array("success"=>false,"message"=>"incomplete data/parameter");
 		$postedData = json_decode(file_get_contents("php://input"),true);
-		if (isset($postedData['freeVoipUsername']) && isset($postedData['mainSipId']) && isset($postedData['credits'])) {
+		if (isset($postedData['freeVoipUsername']) && isset($postedData['mainUsername']) && isset($postedData['mainPassword']) && isset($postedData['credits'])) {
 	        /**
 	         * @var SubSipAccount @model
 	         */
 	        $criteria = new CDbCriteria;
 	        $criteria->compare("username",$postedData['freeVoipUsername']);
 	        $freeVoipAccount = FreeVoipAccounts::model()->find($criteria);
-	        $mainSipModel = SipAccount::model()->findByPk($postedData['mainSipId']);
-	        if (is_null($freeVoipAccount) || is_null($mainSipModel)) {
-				$jsonMessage = array("success"=>false,"message"=>"Cant find FreeVOIP Account / Main SIP Record");
+	        if (is_null($freeVoipAccount) ) {
+				$jsonMessage = array("success"=>false,"message"=>"Cant find FreeVOIP Account");
 	        }else{
 		        $rmt = new RemoteTransferFund();
 		        $remoteResult = $rmt->commitTransaction(
 		        	$freeVoipAccount->username,
 		            $freeVoipAccount->password,
-		            $mainSipModel->username,
+		            $postedData['mainUsername'],
 		            doubleval($postedData['credits']),
 		            $freeVoipAccount->pincode
 		        );
@@ -84,7 +83,7 @@ class TopUpController extends Controller
 		$jsonMessage = array("success"=>false,"message"=>"incomplete data/parameter");
 		$postedData = json_decode(file_get_contents("php://input"),true);
 
-		if (isset($postedData['mainSipId']) && isset($postedData['subSipId']) && isset($postedData['credits'])) {
+		if (isset($postedData['subUsername']) && isset($postedData['subPassword']) && isset($postedData['credits'])) {
 	        /**
 	         * @var SubSipAccount @model
 	         */
