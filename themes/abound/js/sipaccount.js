@@ -101,6 +101,7 @@
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
 			 	$scope.continueConstantRefresh = false;
+			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
 					$scope.continueConstantRefresh = true;
 					alertify.success("Success : All the data are now refreshed.");
@@ -128,6 +129,7 @@
 						if (response.data.success) {
 							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - sync using /sipData instead*/
+							$scope.globalUpdateText = "Updating data...";
 							currentController
 								.synchronizeData()
 								.then(function(){
@@ -180,6 +182,7 @@
 			if (currentRow.status === "ACTIVE") {
 				return $http.get(activateUrlTarget).then(function(){
 					$scope.continueConstantRefresh = true;
+					$scope.globalUpdateText = "Updating data...";
 					currentController.synchronizeData();
 				}, function(){
 
@@ -187,6 +190,7 @@
 			}else{
 				return $http.get(deActivateUrlTarget).then(function(){
 					$scope.continueConstantRefresh = true;
+					$scope.globalUpdateText = "Updating data...";
 					currentController.synchronizeData();
 				}, function(){
 
@@ -215,7 +219,7 @@
 		 * Updates the data value
 		 */
 		this.synchronizeData = function(){
-			$scope.globalUpdateText = "Updating data...";
+			
 			defer  = $q.defer();
 			updateStack  = [];
 			
@@ -244,6 +248,7 @@
 			});
 		}
 		/*initialize data*/
+		$scope.globalUpdateText = "Loading data...";
 		this.synchronizeData();
 		this.constantDataRefresh();
 	}])
