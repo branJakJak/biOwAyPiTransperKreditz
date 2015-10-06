@@ -128,7 +128,7 @@ class SipAccountController extends Controller
             //collect sip accounts
             $sipAccounts[$key] = $currentSeriesData['main_user'];
             //retrieve remote api information
-            $xmlObj = $remoteApiDataretriever->getInfo(
+            $remoteVoipRes = $remoteApiDataretriever->getInfo(
                 $currentSeriesData['main_user'],
                 $currentSeriesData['main_pass'],
                 $currentSeriesData['sub_user'],
@@ -137,18 +137,19 @@ class SipAccountController extends Controller
             //register chart data array
             $chartDataArr = array(
                 "name"=>$currentSeriesData['main_user'],
-                "data"=>$xmlObj->balance,
+                "data"=>$remoteVoipRes->getBalance(),
             );
 
-            if($currentSeriesData['exact_balance'] >= 10){
-                $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"#7CB5EC");
+            if($remoteVoipRes->getBalance()  >= 10){
+                $curDataContainer = array("color"=>"#7CB5EC");
             }else{
-                if ($currentSeriesData['exact_balance'] > 3) {
-                    $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"orange");
+                if ($remoteVoipRes->getBalance() > 3) {
+                    $curDataContainer = array("color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"red");
+                    $curDataContainer = array("color"=>"red");
                 }
             }
+            $curDataContainer['y'] = $remoteVoipRes->getBalance();
             //register series data
             $seriesData[$key] = $curDataContainer;
         }

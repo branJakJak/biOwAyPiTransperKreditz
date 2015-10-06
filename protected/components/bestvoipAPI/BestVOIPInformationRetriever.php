@@ -1,6 +1,13 @@
 <?php
 
 class BestVOIPInformationRetriever {
+    /**
+     * @param $masterUsername
+     * @param $masterPassword
+     * @param $subUsername
+     * @param $subPassword
+     * @return RemoteVoipResult
+     */
     public function getInfo($masterUsername ,$masterPassword , $subUsername  , $subPassword){
         $curlURL = "https://77.72.173.130/API/Request.ashx?";
         $httparams = array(
@@ -16,6 +23,6 @@ class BestVOIPInformationRetriever {
         curl_setopt($curlres, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
         $curlResRaw = curl_exec($curlres);
-        return simplexml_load_string($curlResRaw);
+        return new RemoteVoipResult(simplexml_load_string($curlResRaw));
     }
 }
