@@ -119,7 +119,8 @@
 			 });
 			
 		}
-		this.topUpCredits = function(freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
+		this.topUpCredits = function(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
+			value.topUpText = "Loading..";
 			
 			alertify.success("Updating credits..Please wait..");
 			$scope.continueConstantRefresh = false;
@@ -133,6 +134,7 @@
 					.then(function(response){
 
 						if (response.data.success) {
+							value.topUpText = "Syncing..";
 							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - sync using /sipData instead*/
 							$scope.globalUpdateText = "Updating data...";
@@ -140,6 +142,7 @@
 								.synchronizeData()
 								.then(function(){
 									$scope.continueConstantRefresh = true;
+									value.topUpText = "Done";
 									alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
 								}, function(){
 									alertify.success("We met some error while synchronizing the data to the database");

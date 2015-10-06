@@ -175,7 +175,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</select>
 			</td>
 			<td>
-				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)">Top-up</a>
+				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
+					<i class="fa fa-spinner fa-spin" ng-show="topUpText !== 'Top-up' "></i>
+					{{topUpText}}
+				</a>
 			</td>
 			<td>
 				<div class="btn-group">
