@@ -118,11 +118,11 @@
 			 $q.all(updateStack).then(function(){
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
-			 	$scope.tempCounterDataUpdateReport = "Finalizing";
+			 	$scope.updateDataReport = "Finalizing";
 			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
 
-					$scope.tempCounterDataUpdateReport = "";
+					$scope.updateDataReport = "";
 					$scope.tempCounterDataUpdateReport = 1;
 					
 					$scope.continueConstantRefresh = true;
