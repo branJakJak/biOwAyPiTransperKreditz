@@ -30,10 +30,11 @@ class ActivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVic
         );
 
         /*update the current model status*/
-        $this->remote_user->account_status = "active";
-        if (!$this->remote_user->save()) {
-            throw new Exception("Cant update Account having username {$this->remote_user->username}");
-        }
+        // $this->remote_user->account_status = "active";
+        // if (!$this->remote_user->save()) {
+        //     throw new Exception("Cant update Account having username {$this->remote_user->username}");
+        // }
+        
         return $finalData;
     }
 }

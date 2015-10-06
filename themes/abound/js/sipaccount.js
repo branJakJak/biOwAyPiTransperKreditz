@@ -11,6 +11,7 @@
 		$scope.freeVoipAccts = [];
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
+		$scope.continueConstantRefresh = true;
 
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
@@ -65,7 +66,9 @@
 					alertify.error("We met some problems while retrieving the data");
 					$scope.globalUpdateText = "Global Update";
 				}).then(function(){
-					currentController.constantDataRefresh();
+					if ($scope.continueConstantRefresh) {
+						currentController.constantDataRefresh();
+					}
 				}, function(){
 					//when something went wrong
 				});
@@ -96,7 +99,9 @@
 			 $q.all(updateStack).then(function(){
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
+			 	$scope.continueConstantRefresh = false;
 				currentController.synchronizeData().then(function(){
+					$scope.continueConstantRefresh = true;
 					alertify.success("Success : All the data are now refreshed.");
 				}, function(){
 					alertify.error("Something went wrong while refreshing the data.");
@@ -109,6 +114,7 @@
 		this.topUpCredits = function(freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
 			
 			alertify.success("Updating credits..Please wait..");
+			$scope.continueConstantRefresh = false;
 			/*top up account main SIP account using freeVoipUsername*/
 			currentController
 			.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
@@ -117,12 +123,14 @@
 					/*top up sub sip account using main sip account*/
 					currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
 					.then(function(response){
+
 						if (response.data.success) {
 							alertify.success("Please wait while we synchronize the data from the API");
 							/*@TODO - sync using /sipData instead*/
 							currentController
 								.synchronizeData()
 								.then(function(){
+									$scope.continueConstantRefresh = true;
 									alertify.success("SUCCESS : Main SIP account and sub SIP account are up-to-date")
 								}, function(){
 									alertify.success("We met some error while synchronizing the data to the database");
@@ -164,17 +172,20 @@
 		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
+			$scope.continueConstantRefresh = false;
 			activateUrlTarget = "/subSipAccount/ajaxActivate?vicidial_identification="+currentRow.vici_user;
 			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?vicidial_identification="+currentRow.vici_user;
 			/*check status*/
 			if (currentRow.account_status === "active") {
 				return $http.get(activateUrlTarget).then(function(){
+					$scope.continueConstantRefresh = true;
 					currentController.synchronizeData();
 				}, function(){
 
 				});
 			}else{
 				return $http.get(deActivateUrlTarget).then(function(){
+					$scope.continueConstantRefresh = true;
 					currentController.synchronizeData();
 				}, function(){
 
