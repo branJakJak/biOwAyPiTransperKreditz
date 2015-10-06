@@ -182,7 +182,7 @@
 			}
 
 		}
-		this.topUpMainSip = functiontopUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits){
+		this.topUpMainSip = function topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits){
 			return $http.post('/topUp/mainSip',  {
 				'freeVoipUsername' : freeVoipUsername,
 				'mainUsername' : mainUsername,
