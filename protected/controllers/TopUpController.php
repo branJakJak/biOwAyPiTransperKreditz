@@ -95,10 +95,10 @@ class TopUpController extends Controller
 			isset($postedData['credits'])
 		) {
 			$remoteAcctUpdated = new ApiRemoteUpdateBalance(
-				$postedData['mainPassword'],
-				$postedData['mainUsername'], 
 				$postedData['subPassword'],
-				$postedData['subUsername'],
+				$postedData['subUsername'], 
+				$postedData['mainPassword'],
+				$postedData['mainUsername'],
 				$postedData['credits']
 			);
 	        $remoteAcctUpdated->update();
