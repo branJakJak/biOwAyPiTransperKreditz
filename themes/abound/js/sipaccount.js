@@ -27,13 +27,13 @@
 		});
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.account_status = "ACTIVE";
+				curData.status = "ACTIVE";
 			});
 		}
 
 		this.deactivateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.account_status = "INACTIVE";
+				curData.status = "INACTIVE";
 			});
 		}
 		/**
@@ -42,7 +42,7 @@
 		 */
 		this.getRowClass = function(currentRow){
 			classNameContainer = "activateAccount";
-			if (currentRow.account_status === "INACTIVE") {
+			if (currentRow.status === "INACTIVE") {
 				classNameContainer = "blockedAccount";
 			}
 			return classNameContainer;
@@ -55,7 +55,7 @@
 					angular.forEach(response.data, function(freshData, index){
 						angular.forEach($scope.sipAccounts, function(oldData, index){
 							if (  freshData.vici_user === oldData.vici_user  ) {
-								//oldData.account_status = freshData.account_status;
+								//oldData.status = freshData.status;
 								oldData.balance = freshData.balance;
 								oldData.exact_balance = freshData.exact_balance;
 							}
@@ -86,7 +86,7 @@
 			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
-				if (curData.account_status === "ACTIVE") {
+				if (curData.status === "ACTIVE") {
 					curPromise = $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+curData.vici_user);
 				}else{
 					curPromise = $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+curData.vici_user);
@@ -163,10 +163,10 @@
 					});
 				},
 				function(){
-					if (currentRow.account_status === "ACTIVE") {
-						currentRow.account_status = "blocked";
+					if (currentRow.status === "ACTIVE") {
+						currentRow.status = "blocked";
 					}else{
-						currentRow.account_status = "active";
+						currentRow.status = "active";
 					}
 				}
 			);
@@ -177,7 +177,7 @@
 			activateUrlTarget = "/subSipAccount/ajaxActivate?vicidial_identification="+currentRow.vici_user;
 			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?vicidial_identification="+currentRow.vici_user;
 			/*check status*/
-			if (currentRow.account_status === "ACTIVE") {
+			if (currentRow.status === "ACTIVE") {
 				return $http.get(activateUrlTarget).then(function(){
 					$scope.continueConstantRefresh = true;
 					currentController.synchronizeData();
