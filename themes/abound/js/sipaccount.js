@@ -14,7 +14,7 @@
 		$scope.globalUpdateText = 'Global Update';
 		$scope.continueConstantRefresh = true;
 		$scope.tempCounterDataUpdateReport = 1;
-
+		$scope.currentRefreshPromise = null;
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -50,7 +50,7 @@
 			return classNameContainer;
 		}
 		this.constantDataRefresh = function(){
-			$timeout(function(){
+			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
 				$http.get("/sipAccount/sipData").then(function(response){
 					/* iterate through data and set teh fresh data to sipAccounts*/
@@ -83,6 +83,10 @@
 		}
 		
 		this.globalUpdate = function(){
+			if ($scope.currentRefreshPromise) {
+				$timeout.cancel($scope.currentRefreshPromise);
+				$scope.continueConstantRefresh = false;
+			}
 			
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
@@ -102,14 +106,15 @@
 			});
 
 			 $q.all(updateStack).then(function(){
-			 	
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
-			 	$scope.continueConstantRefresh = false;
+			 	
 			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
 					
 					$scope.continueConstantRefresh = true;
+					currentController.constantDataRefresh();
+
 					alertify.success("Success : All the data are now refreshed.");
 				}, function(){
 					alertify.error("Something went wrong while refreshing the data.");
@@ -150,6 +155,9 @@
 						}else{
 							alertify.error("Failed : Sorry we cant update this sub account at the moment. Cause of failure : "+response.data.message);
 						}
+
+
+
 					}, function(){
 						alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
 					})
