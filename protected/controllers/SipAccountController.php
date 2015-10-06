@@ -141,12 +141,12 @@ class SipAccountController extends Controller
             );
 
             if($currentSeriesData['exact_balance'] >= 10){
-                $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"#7CB5EC");
+                $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"#7CB5EC");
             }else{
                 if ($currentSeriesData['exact_balance'] > 3) {
-                    $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"orange");
+                    $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$currentSeriesData['exact_balance'],"color"=>"red");
+                    $curDataContainer = array("y"=>$xmlObj->balance,"color"=>"red");
                 }
             }
             //register series data
