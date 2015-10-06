@@ -33,7 +33,7 @@
       <file leaf-file-name="SipAccountController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="40" selection-start="5349" selection-end="5349" vertical-scroll-proportion="0.6896552">
+            <state line="159" column="39" selection-start="5310" selection-end="5310" vertical-scroll-proportion="1.0153257">
               <folding />
             </state>
           </provider>
@@ -526,7 +526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SipAccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="40" selection-start="5349" selection-end="5349" vertical-scroll-proportion="0.6896552">
+        <state line="159" column="39" selection-start="5310" selection-end="5310" vertical-scroll-proportion="1.0153257">
           <folding />
         </state>
       </provider>

@@ -123,8 +123,6 @@ class SipAccountController extends Controller
         $remoteApiDataretriever = new BestVOIPInformationRetriever();
 
 
-        var_dump($rawData);
-        die();
         foreach ($rawData as $key => $currentSeriesData) {
             $curDataContainer = array();
             //collect sip accounts
@@ -156,6 +154,7 @@ class SipAccountController extends Controller
         }
         $seriesDataStr = json_encode($seriesData);
         $sipAccountsStr = json_encode($sipAccounts);
+
 
         $this->render('index', array(
             'chartData'=>$chartDataArr,
