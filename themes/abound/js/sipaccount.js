@@ -53,7 +53,7 @@
 					/* iterate through data and set teh fresh data to sipAccounts*/
 					angular.forEach(response.data, function(freshData, index){
 						angular.forEach($scope.sipAccounts, function(oldData, index){
-							if (  freshData.parent_sip_id === oldData.parent_sip_id  ) {
+							if (  freshData.vici_user === oldData.vici_user  ) {
 								//oldData.account_status = freshData.account_status;
 								oldData.balance = freshData.balance;
 								oldData.exact_balance = freshData.exact_balance;
