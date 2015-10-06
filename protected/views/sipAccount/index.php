@@ -139,7 +139,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Active</th>
 			<th>
 				Campaign
-				<select ng-model></select>
 			</th>
 			<th>IP Address</th>
 			<th> # of lines </th>
