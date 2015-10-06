@@ -49,7 +49,12 @@ class TopUpController extends Controller
 		header("Content-Type: application/json");
 		$jsonMessage = array("success"=>false,"message"=>"incomplete data/parameter");
 		$postedData = json_decode(file_get_contents("php://input"),true);
-		if (isset($postedData['freeVoipUsername']) && isset($postedData['mainUsername']) && isset($postedData['mainPassword']) && isset($postedData['credits'])) {
+		if (
+			isset($postedData['freeVoipUsername']) && 
+			isset($postedData['mainUsername']) && 
+			isset($postedData['mainPassword']) && 
+			isset($postedData['credits'])
+		) {
 	        /**
 	         * @var SubSipAccount @model
 	         */
@@ -82,20 +87,23 @@ class TopUpController extends Controller
 		header("Content-Type: application/json");
 		$jsonMessage = array("success"=>false,"message"=>"incomplete data/parameter");
 		$postedData = json_decode(file_get_contents("php://input"),true);
-
-		if (isset($postedData['subUsername']) && isset($postedData['subPassword']) && isset($postedData['credits'])) {
-	        /**
-	         * @var SubSipAccount @model
-	         */
-	         $updateSubSipAccount = new UpdateSubSipAccount();
-	         $updateSubSipAccount->subSipOwner = $postedData['subSipId'];
-	         $updateSubSipAccount->amount = $postedData['credits'];
-	         $updateSubSipAccount->update();
+		if (
+			isset($postedData['mainUsername']) && 
+			isset($postedData['mainPassword']) && 
+			isset($postedData['subUsername']) && 
+			isset($postedData['subPassword']) && 
+			isset($postedData['credits'])
+		) {
+			$remoteAcctUpdated = new ApiRemoteUpdateBalance(
+				$postedData['mainPassword'],
+				$postedData['mainUsername'], 
+				$postedData['subPassword'],
+				$postedData['subUsername'],
+				$postedData['credits']
+			);
+	        $remoteAcctUpdated->update();
 			$jsonMessage = array("success"=>true,"message"=>"Main SIP Updated");
-		}else{
-
 		}
 		echo json_encode($jsonMessage);
 	}
-
 }
