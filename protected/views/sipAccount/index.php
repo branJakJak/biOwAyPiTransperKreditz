@@ -137,7 +137,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Balance</th>
 			<th>Vici User</th>
 			<th>Active</th>
-			<th>Campaign</th>
+			<th>
+				Campaign
+				<select ng-model></select>
+			</th>
 			<th>IP Address</th>
 			<th> # of lines </th>
 			<th>Add Balance</th>

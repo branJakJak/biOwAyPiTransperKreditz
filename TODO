@@ -95,7 +95,13 @@ we can just add them ion the sql view later on down the road
 
 @TODO - all the data get it from 
 do all the work is just done in vici,
-the apivoip adds the info and we use the api voip only for topping up
+@DONE
+
+
+the apivoip adds the 
+info and we use the api voip only for topping up
+
+
 
 
 
@@ -103,3 +109,17 @@ the apivoip adds the info and we use the api voip only for topping up
 so instead of managing it through here it would be better for to taking the INFO from Vici
 
 
+
+
+https://77.72.173.130/API/Request.ashx?command=getuserinfo&username=mslopportunity&password=Iich3tail&customer=mich*mslopportunity&customerpassword=Iich3tail&
+
+defer  = $q.defer();
+updateStack  = [];
+$q.all(updateStack)
+
+
+@TODO - global 
+adding of credits
+
+jawdroppingcalls
+Mad4itNOW!!
