@@ -15,6 +15,8 @@
 		$scope.continueConstantRefresh = true;
 		$scope.tempCounterDataUpdateReport = 1;
 		$scope.currentRefreshPromise = null;
+
+		$scope.updateDataReport = "";
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -107,6 +109,8 @@
 				}
 				curPromise.then(function(){
  					defer.resolve();
+ 					$scope.updateDataReport = "( "+$scope.tempCounterDataUpdateReport+"/"+$scope.sipAccounts.length+" )"
+ 					$scope.tempCounterDataUpdateReport += 1;
 				}, function(){});
 				updateStack.push(curPromise);
 			});
@@ -114,10 +118,13 @@
 			 $q.all(updateStack).then(function(){
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
-			 	
+			 	$scope.tempCounterDataUpdateReport = "Finalizing";
 			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
 
+					$scope.tempCounterDataUpdateReport = "";
+					$scope.tempCounterDataUpdateReport = 1;
+					
 					$scope.continueConstantRefresh = true;
 					currentController.constantDataRefresh();
 

@@ -177,7 +177,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
 					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
-					{{value.topUpText}}
+					{{value.topUpText}} 
 				</a>
 			</td>
 			<td>
