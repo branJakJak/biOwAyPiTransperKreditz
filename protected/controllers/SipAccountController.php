@@ -153,9 +153,6 @@ class SipAccountController extends Controller
             //register series data
             $seriesData[$key] = $curDataContainer;
         }
-        var_dump($seriesData);
-        die();
-
         $seriesDataStr = json_encode($seriesData);
         $sipAccountsStr = json_encode($sipAccounts);
 
