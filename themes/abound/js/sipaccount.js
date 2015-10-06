@@ -55,8 +55,8 @@
 						angular.forEach($scope.sipAccounts, function(oldData, index){
 							if (  freshData.parent_sip_id === oldData.parent_sip_id  ) {
 								//oldData.account_status = freshData.account_status;
-								oldData.subSipAccounts[0].balance = freshData.subSipAccounts[0].balance;
-								oldData.subSipAccounts[0].exact_balance = freshData.subSipAccounts[0].balance;
+								oldData.balance = freshData.balance;
+								oldData.exact_balance = freshData.exact_balance;
 							}
 						});
 					});
@@ -83,9 +83,9 @@
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
 				if (curData.account_status === "active") {
-					curPromise = $http.get("/subSipAccount/ajaxActivate?subAccount="+curData.subSipAccounts[0].sub_sip_id);
+					curPromise = $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+curData.vici_user);
 				}else{
-					curPromise = $http.get("/subSipAccount/ajaxDeactivate?subAccount="+curData.subSipAccounts[0].sub_sip_id);
+					curPromise = $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+curData.vici_user);
 				}
 				curPromise.then(function(){
  					defer.resolve();
@@ -164,8 +164,8 @@
 		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
-			activateUrlTarget = "/subSipAccount/ajaxActivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id;
-			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?subAccount="+currentRow.subSipAccounts[0].sub_sip_id;
+			activateUrlTarget = "/subSipAccount/ajaxActivate?vicidial_identification="+currentRow.vici_user;
+			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?vicidial_identification="+currentRow.vici_user;
 			/*check status*/
 			if (currentRow.account_status === "active") {
 				return $http.get(activateUrlTarget).then(function(){
