@@ -13,7 +13,7 @@
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
 		$scope.continueConstantRefresh = true;
-		$scope.tempCounterDataUpdateReport = 0;
+		$scope.tempCounterDataUpdateReport = 1;
 
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
@@ -83,7 +83,7 @@
 		}
 		
 		this.globalUpdate = function(){
-			$scope.tempCounterDataUpdateReport = 0;
+			$scope.tempCounterDataUpdateReport = 1;
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
@@ -99,17 +99,23 @@
  					defer.resolve();
 				}, function(){},function(){
 					$scope.tempCounterDataUpdateReport += 1;
-					$scope.updateDataReport = "("+$scope.tempCounterDataUpdateReport+"/"+$scope.sipAccounts.length+")"
+					if ($scope.tempCounterDataUpdateReport ===  $scope.sipAccounts.length) {
+						$scope.updateDataReport = " - Finalizing...";
+					}
+					$scope.updateDataReport = " - ("+$scope.tempCounterDataUpdateReport+"/"+$scope.sipAccounts.length+")";
+
 				});
 				updateStack.push(curPromise);
 			});
 
 			 $q.all(updateStack).then(function(){
+			 	$scope.updateDataReport = "Done";
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
 			 	$scope.continueConstantRefresh = false;
 			 	$scope.globalUpdateText = "Updating data...";
 				currentController.synchronizeData().then(function(){
+					$scope.updateDataReport = "";
 					$scope.continueConstantRefresh = true;
 					alertify.success("Success : All the data are now refreshed.");
 				}, function(){
