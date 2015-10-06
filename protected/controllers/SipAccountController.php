@@ -126,7 +126,7 @@ class SipAccountController extends Controller
         foreach ($rawData as $key => $currentSeriesData) {
             $curDataContainer = array();
             //collect sip accounts
-            $sipAccounts[$key] = $currentSeriesData['main_user'];
+            $sipAccounts[$key] = $currentSeriesData['sub_user'];
             //retrieve remote api information
             $remoteVoipRes = $remoteApiDataretriever->getInfo(
                 $currentSeriesData['main_user'],
