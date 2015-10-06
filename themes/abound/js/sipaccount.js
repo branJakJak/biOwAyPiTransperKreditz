@@ -80,6 +80,7 @@
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		this.globalUpdate = function(){
+			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
 			updateStack  = [];

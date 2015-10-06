@@ -191,7 +191,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	</tbody>
 </table>
 <hr>
-<button ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">{{globalUpdateText}}</button>
+<button ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">
+	<i class="fa fa-spinner fa-spin" ng-show="globalUpdateText === 'Updating data...' "></i>
+	{{globalUpdateText}}
+</button>
 
 </div>
 </div>
