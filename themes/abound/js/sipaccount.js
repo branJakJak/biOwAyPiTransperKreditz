@@ -9,9 +9,11 @@
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
+		$scope.updateDataReport = "";
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
 		$scope.continueConstantRefresh = true;
+		$scope.tempCounterDataUpdateReport = 0;
 
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
@@ -79,7 +81,9 @@
 		this.syncWithRemoteApi = function(mainSipAccount){
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
+		
 		this.globalUpdate = function(){
+			$scope.tempCounterDataUpdateReport = 0;
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
@@ -93,7 +97,10 @@
 				}
 				curPromise.then(function(){
  					defer.resolve();
-				}, function(){});
+				}, function(){},function(){
+					$scope.tempCounterDataUpdateReport += 1;
+					$scope.updateDataReport = "("+$scope.tempCounterDataUpdateReport+"/"+$scope.sipAccounts.length+")"
+				});
 				updateStack.push(curPromise);
 			});
 
