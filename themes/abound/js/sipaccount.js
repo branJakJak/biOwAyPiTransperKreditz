@@ -66,7 +66,6 @@
 								}
 							});
 						});
-						$scope.globalUpdateText = "Global Update";
 
 					}
 
