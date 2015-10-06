@@ -15,10 +15,10 @@ class RemoteVoipResult {
 
     function __construct(SimpleXMLElement $xmlObject)
     {
-        $this->balance = $xmlObject->Balance;
-        $this->customer= $xmlObject->Customer;
-        $this->specificBalance = $xmlObject->SpecificBalance;
-        $this->blocked = $xmlObject->Blocked;
+        $this->balance = doubleval($xmlObject->Balance);
+        $this->customer= (string)$xmlObject->Customer;
+        $this->specificBalance = doubleval($xmlObject->SpecificBalance);
+        $this->blocked = (boolean)$xmlObject->Blocked;
     }
 
     public function setBalance($balance)
