@@ -97,13 +97,28 @@
 						$scope.globalUpdateText = "Global Update";
 					}
 
-				}).then(function(){
+				})
+				.then(function(){
 					if ($scope.continueConstantRefresh) {
 						currentController.constantDataRefresh();
 					}
 				}, function(){
 					//when something went wrong
-				});
+				})
+				.then(function(){
+
+					$http.get("/sipAccount/getBarChartReportData")
+					.then(function(response){
+						console.log('chart data updating');
+						defer.resolve();
+						window.updateChartData(response.data);//update chart data
+					}, function(){
+					});
+
+
+				}, function(){
+
+				})
 			}, 5000);
 		}
 
