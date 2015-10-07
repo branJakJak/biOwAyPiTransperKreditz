@@ -4,8 +4,8 @@
 * The Sip account module for table organization
 */
 (function(){
-	sipAccountModule = angular.module('sipAccountModule', []);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout', function ($scope,$http,$q,$timeout) {
+	sipAccountModule = angular.module('sipAccountModule', ['ngCookies']);
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookie', function ($scope,$http,$q,$timeout,$cookie) {
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
@@ -184,6 +184,10 @@
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
 		}
+		this.notifyAccount = function(value){
+			/*@TODO*/
+			return $http.get("/sipAccount/notifyAccount");
+		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
 			$scope.continueConstantRefresh = false;
@@ -258,7 +262,19 @@
 						currentController.updateCurrentRowInfo(value);
 					}
 					if (value.balance < 10) {
-						
+						currentBalance = value.balance;
+						lastBalance = parseFloat($cookie.get(value.sub_user));
+						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined)  ) {
+							currentController.notifyAccount(value);
+						}else if (
+								(lastBalance != null && lastBalance != undefined) &&
+								currentBalance != lastBalance &&
+								( lastBalance > 10 &&  currentBalance < 10)
+							) {
+							currentController.notifyAccount(value);
+						}
+						/*write the last balance checked - to cookie*/
+						$cookies.put(value.sub_user, value.balance);
 					}
 				});
 

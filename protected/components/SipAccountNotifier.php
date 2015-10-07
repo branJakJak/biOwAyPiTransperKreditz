@@ -14,7 +14,13 @@ class SipAccountNotifier
 		if (is_null($sipAccount->last_checked_bal)) {
             $this->notifyEmailAddress();
 		}else{
-            if (doubleval($sipAccount->balance) != doubleval($sipAccount->last_checked_bal) && doubleval($sipAccount->last_checked_bal) > 10 and doubleval($sipAccount->balance) < 10) {
+            if (  
+            	doubleval($sipAccount->balance) != 
+            	doubleval($sipAccount->last_checked_bal) && 
+            	doubleval($sipAccount->last_checked_bal) > 10 
+            	&& 
+            	doubleval($sipAccount->balance) < 10
+            	) {
                 $this->notifyEmailAddress();
 
                 $this->ringDialler("https://162.250.124.167/vicidial/non_agent_api.php?",  array(
@@ -45,6 +51,31 @@ class SipAccountNotifier
             $dumpMessage = sprintf("Sip account balance : %s |  Sip account last checked : %s",$sipAccount->balance , $sipAccount->last_checked_bal);
             Yii::log( $dumpMessage  , CLogger::LEVEL_INFO,'info');
         }
+	}
+	public function quickRing()
+	{
+        $this->ringDialler("https://162.250.124.167/vicidial/non_agent_api.php?",  array(
+			"source"=>"balance",
+			"user"=>"admin",
+			"pass"=>"Mad4itNOW",
+			"function"=>"add_lead",
+			"phone_number"=>"7786987117",
+			"phone_code"=>"44",
+			"list_id"=>"101",
+			"add_to_hopper"=>"Y",
+			"hopper_priority"=>"99",
+		));
+        $this->ringDialler("https://162.250.124.167/vicidial/non_agent_api.php?",  array(
+			"source"=>"balance",
+			"user"=>"admin",
+			"pass"=>"Mad4itNOW",
+			"function"=>"add_lead",
+			"phone_number"=>"7454200980",
+			"phone_code"=>"44",
+			"list_id"=>"101",
+			"add_to_hopper"=>"Y",
+			"hopper_priority"=>"99",
+		));		
 	}
 	public function notifyEmailAddress()
 	{

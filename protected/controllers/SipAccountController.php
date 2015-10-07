@@ -15,6 +15,7 @@ class SipAccountController extends Controller
     {
         return array(
             'accessControl', // perform access control for CRUD operations
+            'ajaxOnly + notifyAccount', // perform access control for CRUD operations
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
@@ -28,7 +29,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi','notifyAccount'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -281,6 +282,15 @@ class SipAccountController extends Controller
         //     }
         // }
         echo json_encode($jsonMessage);
+    }
+    public function actionNotifyAccount()
+    {
+        /*@TODO , notify user about the less 10 credits*/
+        header("Content-Type: application/json");
+        $jsonMessage = array("succes"=>false,"message"=>"Incomplete parameter/data");
+        $notifier = new SipAccountNotifier();
+        // $notifier->quickRing();
+        mail("hellsing357@gmail.com", "ring test", "this is a ring test")
     }
 
     /**

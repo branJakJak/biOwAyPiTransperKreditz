@@ -13,6 +13,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 $cs = Yii::app()->getClientScript();
 /*angular*/
 $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
