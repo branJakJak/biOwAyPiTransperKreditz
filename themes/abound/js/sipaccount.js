@@ -40,6 +40,24 @@
 				curData.status = "INACTIVE";
 			});
 		}
+		this.deactivateCurrentAccount = function(currAccount){
+			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user)
+			.then(function(){
+				$scope.continueConstantRefresh = true;
+				$scope.globalUpdateText = "Updating data...";
+				currentController.synchronizeData();
+			}, function(){
+			});
+		}
+		this.activateCurrentAccount = function(currAccount){
+			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
+			.then(function(){
+				$scope.continueConstantRefresh = true;
+				$scope.globalUpdateText = "Updating data...";
+				currentController.synchronizeData();
+			}, function(){
+			});
+		}
 		/**
 		 * Gets appropriate clas
 		 * @return string            The class name
@@ -65,6 +83,7 @@
 									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
+									
 								}
 							});
 						});
@@ -188,7 +207,6 @@
 					$scope.globalUpdateText = "Updating data...";
 					currentController.synchronizeData();
 				}, function(){
-
 				});
 			}else{
 				return $http.get(deActivateUrlTarget).then(function(){
@@ -235,7 +253,8 @@
 			});
 			updateStack.push(promise1);
 
-			promise2 = $http.get("/sipAccount/sipData").then(function(response){
+			promise2 = $http.get("/sipAccount/sipData")
+			.then(function(response){
 				$scope.sipAccounts = response.data;
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
@@ -248,6 +267,7 @@
 					if (value.balance < 3) {
 						value.status = "INACTIVE";
 						currentController.updateCurrentRowInfo(value);
+
 						console.log('notifying user');
 					}
 					if (value.balance < 10) {
@@ -273,7 +293,8 @@
 					}
 
 					$cookies.put(value.sub_user, value.balance);
-				});
+				});/*end of foreach*/
+
 
 			}, function(){
 
@@ -291,7 +312,7 @@
 		/*initialize data*/
 		$scope.globalUpdateText = "Loading data...";
 		this.synchronizeData();
-		//this.constantDataRefresh();
+		this.constantDataRefresh();
 	}])
 })();
 
