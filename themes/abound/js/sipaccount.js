@@ -259,21 +259,26 @@
 					if (value.balance < 3) {
 						value.status = "INACTIVE";
 						currentController.updateCurrentRowInfo(value);
+						console.log('notifying user');
 					}
 					if (value.balance < 10) {
 						currentBalance = value.balance;
 						lastBalance = parseFloat($cookies.get(value.sub_user));
+						console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
 						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined)  ) {
 							currentController.notifyAccount(value);
+							console.log('notifying user');
 						}else if (
 								(lastBalance != null && lastBalance != undefined) &&
 								currentBalance != lastBalance &&
 								( lastBalance > 10 &&  currentBalance < 10)
 							) {
 							currentController.notifyAccount(value);
+							console.log('notifying user');
 						}
 						/*write the last balance checked - to cookie*/
 					}
+
 					$cookies.put(value.sub_user, value.balance);
 				});
 
