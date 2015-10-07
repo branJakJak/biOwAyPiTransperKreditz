@@ -182,26 +182,7 @@
 			})
 		}
 		this.updateSingleRow = function(currentRow){
-			alertify.confirm(
-				"Activate account", 
-				"Are you sure you want to activate this account ?", 
-				function(){
-					alertify.success("Updating current data.Please wait.");
-					currentController.updateCurrentRowInfo(currentRow)
-					.then(function(){
-						alertify.success("Success : Current data updated.");
-					}, function(){
-						alertify.error("We cant seem to update this data . Please try again later.");
-					});
-				},
-				function(){
-					if (currentRow.status === "ACTIVE") {
-						currentRow.status = "blocked";
-					}else{
-						currentRow.status = "active";
-					}
-				}
-			);
+			currentController.updateCurrentRowInfo(currentRow);
 		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
@@ -268,7 +249,23 @@
 			}, function(response){
 				alertify.error("We met some problems while retrieving the data");
 				$scope.globalUpdateText = "Global Update";
+			})
+			.then(function(response){
+				/*Check if credits is below 3 , if below 3 , deactivate */
+				angular.forEach(response.data, function(value, key) {
+					if (value.balance < 3) {
+						value.status = "INACTIVE";
+						currentController.updateCurrentRowInfo(value);
+					}
+					if (value.balance < 10) {
+						
+					}
+				});
+
+			}, function(){
+
 			});
+
 			updateStack.push(promise2);
 
 			return $q.all(updateStack).then(function(){
