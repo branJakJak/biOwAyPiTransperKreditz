@@ -199,25 +199,52 @@ class SipAccountController extends Controller
     public function actionGetBarChartReportData()
     {
         header("Content-Type: application/json");
-        // $chartDataRetriever = new SipAccountChartData();
-        // $chartData = $chartDataRetriever->retrieve();
-        $seriesData = SipAccount::getSeriesDataAsArr();
-        foreach ($seriesData as $key => $value) {
-            $curDataContainer = array();
-            //$value += rand(0,20);
-            if ($value >= 10) {
-                $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
+        $asteriskData = AsteriskCarriers::getData();
+        $voipInfoRetriever = new BestVOIPInformationRetriever();
+        $seriesData = array();
+        foreach ($asteriskData as $key => $currentAsteriskData) {
+
+            /**
+             * @var $remoteVoipresult RemoteVoipResult
+             */
+            $remoteVoipresult = $voipInfoRetriever->getInfo(
+                $currentAsteriskData['main_user'],
+                $currentAsteriskData['main_pass'],
+                $currentAsteriskData['sub_user'],
+                $currentAsteriskData['sub_pass']
+            );
+            $currentAsteriskData['id'] = $key;
+            $currentAsteriskData['balance'] = doubleval($remoteVoipresult->getBalance());
+            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipresult->getSpecificBalance());
+            
+            if ($currentAsteriskData['balance'] >= 10) {
+                $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"#7CB5EC");
             }else{
                 if ($value >= 3) {
-                    $curDataContainer = array("y"=>$value,"color"=>"orange");
+                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$value,"color"=>"red");
+                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"red");
                 }
-            }
-            
-            $seriesData[$key] = $curDataContainer;
-
+            }            
+            $seriesData[] = $currentAsteriskData;
         }
+        // $seriesData = SipAccount::getSeriesDataAsArr();
+        // foreach ($seriesData as $key => $value) {
+        //     $curDataContainer = array();
+        //     //$value += rand(0,20);
+        //     if ($value >= 10) {
+        //         $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
+        //     }else{
+        //         if ($value >= 3) {
+        //             $curDataContainer = array("y"=>$value,"color"=>"orange");
+        //         }else{
+        //             $curDataContainer = array("y"=>$value,"color"=>"red");
+        //         }
+        //     }
+            
+        //     $seriesData[$key] = $curDataContainer;
+
+        // }
         echo CJSON::encode($seriesData);
     }
 
