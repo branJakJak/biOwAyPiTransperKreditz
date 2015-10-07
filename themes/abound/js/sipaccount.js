@@ -291,7 +291,7 @@
 		/*initialize data*/
 		$scope.globalUpdateText = "Loading data...";
 		this.synchronizeData();
-		this.constantDataRefresh();
+		//this.constantDataRefresh();
 	}])
 })();
 
