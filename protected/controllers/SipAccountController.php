@@ -228,23 +228,7 @@ class SipAccountController extends Controller
             }            
             $seriesData[] = $currentAsteriskData;
         }
-        // $seriesData = SipAccount::getSeriesDataAsArr();
-        // foreach ($seriesData as $key => $value) {
-        //     $curDataContainer = array();
-        //     //$value += rand(0,20);
-        //     if ($value >= 10) {
-        //         $curDataContainer = array("y"=>$value,"color"=>"#7CB5EC");
-        //     }else{
-        //         if ($value >= 3) {
-        //             $curDataContainer = array("y"=>$value,"color"=>"orange");
-        //         }else{
-        //             $curDataContainer = array("y"=>$value,"color"=>"red");
-        //         }
-        //     }
-            
-        //     $seriesData[$key] = $curDataContainer;
-
-        // }
+ 
         echo CJSON::encode($seriesData);
     }
 
