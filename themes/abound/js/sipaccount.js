@@ -309,8 +309,8 @@
 
 					$cookies.put(value.sub_user, value.balance);
 				});/*end of foreach*/
-
-
+			
+		
 			}, function(){
 
 			});
@@ -318,7 +318,7 @@
 			updateStack.push(promise2);
 
 			return $q.all(updateStack).then(function(){
-				
+				window.updateChartData();//update chart data
 			}, function(){
 				alertify.error('We met some problems while setting the value of SIP Data');
 				$scope.globalUpdateText = "Global Update";

@@ -1,4 +1,4 @@
-function updateChartData () {
+window.updateChartData = function() {
 	jQuery.ajax({
 	  url: '/sipAccount/getBarChartReportData',
 	  type: 'GET',
