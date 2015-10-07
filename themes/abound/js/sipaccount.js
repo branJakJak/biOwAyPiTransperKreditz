@@ -70,6 +70,9 @@
 			return classNameContainer;
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
+			console.log(freeVoipUser);
+			console.log(creditsToTopUp);
+			return false;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				currentController
 					.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
