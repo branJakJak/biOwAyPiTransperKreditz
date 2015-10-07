@@ -41,22 +41,22 @@
 			});
 		}
 		this.deactivateCurrentAccount = function(currAccount){
-			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user)
-			.then(function(){
-				$scope.continueConstantRefresh = true;
-				$scope.globalUpdateText = "Updating data...";
-				currentController.synchronizeData();
-			}, function(){
-			});
+			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
+			// .then(function(){
+			// 	$scope.continueConstantRefresh = true;
+			// 	$scope.globalUpdateText = "Updating data...";
+			// 	currentController.synchronizeData();
+			// }, function(){
+			// });
 		}
 		this.activateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
-			.then(function(){
-				$scope.continueConstantRefresh = true;
-				$scope.globalUpdateText = "Updating data...";
-				currentController.synchronizeData();
-			}, function(){
-			});
+			// .then(function(){
+			// 	$scope.continueConstantRefresh = true;
+			// 	$scope.globalUpdateText = "Updating data...";
+			// 	currentController.synchronizeData();
+			// }, function(){
+			// });
 		}
 		/**
 		 * Gets appropriate clas
@@ -83,7 +83,7 @@
 									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
-									
+
 								}
 							});
 						});
@@ -281,8 +281,8 @@
 				angular.forEach($scope.sipAccounts, function(value, key) {
 					if (value.balance < 3) {
 						value.status = "INACTIVE";
-						currentController.updateCurrentRowInfo(value);
-
+						// currentController.updateCurrentRowInfo(value);
+						currentController.deactivateCurrentAccount(value);
 						console.log('notifying user');
 					}
 					if (value.balance < 10) {
