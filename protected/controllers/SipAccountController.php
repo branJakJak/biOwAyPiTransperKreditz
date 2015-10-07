@@ -203,7 +203,7 @@ class SipAccountController extends Controller
         $voipInfoRetriever = new BestVOIPInformationRetriever();
         $seriesData = array();
         foreach ($asteriskData as $key => $currentAsteriskData) {
-
+            $curDataContainer = array();
             /**
              * @var $remoteVoipresult RemoteVoipResult
              */
@@ -226,7 +226,7 @@ class SipAccountController extends Controller
                     $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"red");
                 }
             }            
-            $seriesData[] = $currentAsteriskData;
+            $seriesData[] = $curDataContainer;
         }
  
         echo CJSON::encode($seriesData);
