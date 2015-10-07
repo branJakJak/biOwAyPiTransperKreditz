@@ -113,7 +113,7 @@
 				.then(function(){
 
 					currentController.checkCreditStatus();
-					
+
 				}, function(){
 
 				});
@@ -187,7 +187,7 @@
 			 	alertify.success("Success : Accounts updated");
 			 	alertify.success("Please wait while we refresh the data.");
 			 	$scope.updateDataReport = "Finalizing";
-			 	$scope.globalUpdateText = "Updating data...";
+			 	$scope.globalUpdateText = "Global Update";
 				currentController.synchronizeData().then(function(){
 
 					$scope.updateDataReport = "";
