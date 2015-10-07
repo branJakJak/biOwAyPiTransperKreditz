@@ -185,7 +185,7 @@
 			currentController.updateCurrentRowInfo(currentRow);
 		}
 		this.notifyAccount = function(value){
-			return $http.get("/sipAccount/notifyAccount");
+			return $http.post("/sipAccount/notifyAccount");
 		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/

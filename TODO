@@ -124,9 +124,11 @@ jawdroppingcalls
 Mad4itNOW!!
 @DONE
 
-you havnt got the auto deactivate if less than 3EU
+you havnt got the auto deactivate 
+if less than 3EU
 
 
 
 check for me please if on or not coz strange its showing 11 in the sub acocunt
 
+UPDATE user_carrier SET campaign='the value to update to '
