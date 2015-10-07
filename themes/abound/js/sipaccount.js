@@ -320,6 +320,7 @@
 
 			updateChartPromise = $http.get("/sipAccount/getBarChartReportData")
 			.then(function(response){
+				console.log('chart data updating');
 				defer.resolve();
 				window.updateChartData(response.data);//update chart data
 			}, function(){
