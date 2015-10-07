@@ -69,6 +69,26 @@
 			}
 			return classNameContainer;
 		}
+		this.topUpAll = function(freeVoipUser,creditsToTopUp){
+			angular.forEach($scope.sipAccounts, function(curData, index){
+				currentController
+					.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
+					.then(function(){
+						currentController
+							.topUpSubSip(curData.main_user,curData.main_user,curData.sub_user,curData.sub_pass,creditsToTopUp)
+							.then(function(){
+								console.log(curData.main_user + "Topped up .");
+							}, function(){
+								alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
+							})
+					}, function(){
+						alertify.error("We met some problems while retrieving the topping up the main SIP account");
+					})
+					.then(function(){
+						alertify.success("<strong>Success : </strong>Top-up complete.");
+					});
+			});
+		}
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
@@ -293,7 +313,7 @@
 			}
 
 		}
-		this.topUpMainSip = function topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits){
+		this.topUpMainSip = function(freeVoipUsername,mainUsername,mainPassword,credits){
 			return $http.post('/topUp/mainSip',  {
 				'freeVoipUsername' : freeVoipUsername,
 				'mainUsername' : mainUsername,

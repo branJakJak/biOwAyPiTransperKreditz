@@ -121,14 +121,29 @@ $this->widget('bootstrap.widgets.TbAlert', array(
     Sip Accounts <small>[bestvoipreselling]</small>
 </h1>
 <hr>
-<strong>
-	<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
-	<strong >Activate All</strong>
-</strong>
-<strong style="margin-left: 40px;">
-	<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
-	<strong >Deactivate All</strong>
-</strong>
+<div class="row">
+	<div class="span3">
+		<strong>
+			<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
+			<strong >Activate All</strong>
+		</strong>		
+	</div>
+	<div class="span3">
+		<strong style="margin-left: 40px;">
+			<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
+			<strong >Deactivate All</strong>
+		</strong>		
+	</div>
+	<div class="span4 offset1">
+		<label>Credits * </label>
+		<input type="number" ng-model="creditsToTopUp" name="creditsToTopUp" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
+		<label>Balance From</label>
+		<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
+			<option value="">-- Select Account --</option>
+		</select>
+		<button ng-click="indexCtrl.topUpAll(freeVoipUsername,creditsToTopUp)" type="button" class="btn btn-default"><i class="fa fa-plus"></i> Top-up All</button>
+	</div>
+</div>
 <hr>
 <table class="table">
 	<thead>
