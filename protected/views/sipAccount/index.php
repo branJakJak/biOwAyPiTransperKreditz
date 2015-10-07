@@ -157,8 +157,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		</tr>
 
 		<tr ng-repeat="(key, value) in sipAccounts" ng-class="indexCtrl.getRowClass(value)">
-			<div>
-			</div>
 			<td>{{value.main_user}}</td>
 			<td>{{value.sub_user}}</td>
 			<td>{{value.balance}}</td>

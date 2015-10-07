@@ -158,36 +158,48 @@
 		}
 		this.topUpCredits = function(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
 			value.topUpText = "Loading..";
-			
+			defer  = $q.defer();
 			alertify.success("Updating credits..Please wait..");
 			$scope.continueConstantRefresh = false;
+
+			updateStack  = [];
+
+			
 			/*top up account main SIP account using freeVoipUsername*/
-			currentController
-			.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
+			topUpMainAccountPromise = currentController.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
 			.then(function(response){
-				/*top up sub sip account using main sip account*/
-				currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
-				.then(function(response){
-					value.topUpText = "Syncing..";
-					alertify.success("Please wait while we synchronize the data from the API");
-					/*@TODO - sync using /sipData instead*/
-					$scope.globalUpdateText = "Updating data...";
-					currentController
-						.synchronizeData()
-						.then(function(){
-							$scope.continueConstantRefresh = true;
-							value.topUpText = "Done";
-							alertify.success("SUCCESS : The records are updated")
-						}, function(){
-							alertify.success("We met some error while synchronizing the data to the database");
-					});
-				}, function(){
-					alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
-				});
-				
+				defer.resolve();
+				console.log('main SIP Account updated');
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the main SIP account.Try again later.");
-			})
+			});
+			updateStack.push(topUpMainAccountPromise);
+
+			/*top up sub sip account using main sip account*/
+			topUpSubAccountPromise = currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
+			.then(function(response){
+				defer.resolve();
+				value.topUpText = "Syncing..";
+				alertify.success("Please wait while we synchronize the data from the API");
+				/*@TODO - sync using /sipData instead*/
+				$scope.globalUpdateText = "Updating data...";
+				currentController
+					.synchronizeData()
+					.then(function(){
+						$scope.continueConstantRefresh = true;
+						value.topUpText = "Done";
+						alertify.success("SUCCESS : The records are updated")
+					}, function(){
+						alertify.success("We met some error while synchronizing the data to the database");
+				});
+			}, function(){
+				alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
+			});
+
+			updateStack.push(topUpSubAccountPromise);
+
+			return $q.all(updateStack);
+
 		}
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
@@ -246,6 +258,7 @@
 			
 			promise1 =  $http.get("/freeVoipAccounts/getList")
 			.then(function(response){
+				defer.resolve();
 				$scope.freeVoipAccts = response.data;
 			}, function(){
 				alertify.error('We met some problems while retrieving the list of FreeVoip Accounts');
@@ -255,6 +268,7 @@
 
 			promise2 = $http.get("/sipAccount/sipData")
 			.then(function(response){
+				defer.resolve();
 				$scope.sipAccounts = response.data;
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
@@ -262,6 +276,7 @@
 				$scope.globalUpdateText = "Global Update";
 			})
 			.then(function(response){
+				defer.resolve();
 				/*Check if credits is below 3 , if below 3 , deactivate */
 				angular.forEach($scope.sipAccounts, function(value, key) {
 					if (value.balance < 3) {
