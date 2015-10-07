@@ -121,11 +121,11 @@
 		}
 
 		this.checkCreditStatus = function(){
+			willRing = false;
 			/*Check if credits is below 3 , if below 3 , deactivate */
 			angular.forEach($scope.sipAccounts, function(value, key) {
 				if (value.balance < 3) {
 					value.status = "INACTIVE";
-					// currentController.updateCurrentRowInfo(value);
 					currentController.deactivateCurrentAccount(value);
 					console.log('notifying user');
 				}
@@ -138,17 +138,26 @@
 					
 					console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
 					if (  currentBalance < 10 && (lastBalance == null)  ) {
-						currentController.notifyAccount(value);
+
+						// currentController.notifyAccount(value);
+						willRing = true;
 						console.log('notifying user');
+
 					}else if (
 							lastBalance != null &&
 							currentBalance != lastBalance &&
 							( lastBalance > 10 &&  currentBalance < 10)
 						) {
-						currentController.notifyAccount(value);
+						// currentController.notifyAccount(value);
+						willRing = true;
 						console.log('notifying user');
 					}
 					/*write the last balance checked - to cookie*/
+				}
+
+
+				if (willRing) {
+					currentController.notifyAccount(value);
 				}
 
 				$cookies.put(value.sub_user, value.balance);
