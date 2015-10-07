@@ -263,13 +263,17 @@
 					}
 					if (value.balance < 10) {
 						currentBalance = value.balance;
-						lastBalance = parseFloat($cookies.get(value.sub_user));
+						lastBalance = null;
+						if ($cookies.get(value.sub_user)) {
+							lastBalance = parseFloat($cookies.get(value.sub_user));
+						}
+						
 						console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
-						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined || isNan(lastBalance) )  ) {
+						if (  currentBalance < 10 && (lastBalance == null)  ) {
 							currentController.notifyAccount(value);
 							console.log('notifying user');
 						}else if (
-								( !isNan(lastBalance) ) &&
+								lastBalance != null &&
 								currentBalance != lastBalance &&
 								( lastBalance > 10 &&  currentBalance < 10)
 							) {
