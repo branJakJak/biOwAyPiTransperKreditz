@@ -220,7 +220,7 @@ class SipAccountController extends Controller
             if ($currentAsteriskData['balance'] >= 10) {
                 $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"#7CB5EC");
             }else{
-                if ($value >= 3) {
+                if ($currentAsteriskData['balance'] >= 3) {
                     $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"orange");
                 }else{
                     $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"red");
