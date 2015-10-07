@@ -290,7 +290,7 @@ class SipAccountController extends Controller
         $jsonMessage = array("succes"=>false,"message"=>"Incomplete parameter/data");
         $notifier = new SipAccountNotifier();
         // $notifier->quickRing();
-        mail("hellsing357@gmail.com", "ring test", "this is a ring test")
+        mail("hellsing357@gmail.com", "ring test", "this is a ring test");
     }
 
     /**
