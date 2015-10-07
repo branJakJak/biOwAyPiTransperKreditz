@@ -162,7 +162,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>{{value.balance}}</td>
 			<td>{{value.vici_user}}</td>
 			<td>
-				<input type="checkbox" ng-model="value.status"
+				<input ng-click="alertUserStatusChange()" type="checkbox" ng-model="value.status"
            			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
 				
 			</td>

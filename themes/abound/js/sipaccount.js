@@ -166,6 +166,10 @@
 			
 		}
 
+		this.alertUserStatusChange = function(){
+			alertify.alert("Update Status","<strong>Please click the \"Global Update\" for the changes to take effect.</strong>")
+		}
+
 		this.syncWithRemoteApi = function(mainSipAccount){
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
