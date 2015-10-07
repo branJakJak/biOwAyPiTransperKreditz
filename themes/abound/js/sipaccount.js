@@ -265,11 +265,11 @@
 						currentBalance = value.balance;
 						lastBalance = parseFloat($cookies.get(value.sub_user));
 						console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
-						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined)  ) {
+						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined || isNan(lastBalance) )  ) {
 							currentController.notifyAccount(value);
 							console.log('notifying user');
 						}else if (
-								(lastBalance != null && lastBalance != undefined) &&
+								( !isNan(lastBalance) ) &&
 								currentBalance != lastBalance &&
 								( lastBalance > 10 &&  currentBalance < 10)
 							) {
