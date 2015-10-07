@@ -73,9 +73,7 @@
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
 				$http.get("/sipAccount/sipData").then(function(response){
-
 					if ($scope.continueConstantRefresh) {
-						
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
 							angular.forEach($scope.sipAccounts, function(oldData, index){
@@ -83,14 +81,10 @@
 									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
-
 								}
 							});
 						});
-
 					}
-
-
 				}, function(response){
 					if ($scope.continueConstantRefresh) {
 						alertify.error("We met some problems while retrieving the data");
@@ -114,14 +108,54 @@
 						window.updateChartData(response.data);//update chart data
 					}, function(){
 					});
+				}, function(){
+				})
+				.then(function(){
 
-
+					currentController.checkCreditStatus();
+					
 				}, function(){
 
-				})
+				});
 			}, 5000);
 		}
 
+		this.checkCreditStatus = function(){
+			/*Check if credits is below 3 , if below 3 , deactivate */
+			angular.forEach($scope.sipAccounts, function(value, key) {
+				if (value.balance < 3) {
+					value.status = "INACTIVE";
+					// currentController.updateCurrentRowInfo(value);
+					currentController.deactivateCurrentAccount(value);
+					console.log('notifying user');
+				}
+				if (value.balance < 10) {
+					currentBalance = value.balance;
+					lastBalance = null;
+					if ($cookies.get(value.sub_user)) {
+						lastBalance = parseFloat($cookies.get(value.sub_user));
+					}
+					
+					console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
+					if (  currentBalance < 10 && (lastBalance == null)  ) {
+						currentController.notifyAccount(value);
+						console.log('notifying user');
+					}else if (
+							lastBalance != null &&
+							currentBalance != lastBalance &&
+							( lastBalance > 10 &&  currentBalance < 10)
+						) {
+						currentController.notifyAccount(value);
+						console.log('notifying user');
+					}
+					/*write the last balance checked - to cookie*/
+				}
+
+				$cookies.put(value.sub_user, value.balance);
+			});/*end of foreach*/
+
+			
+		}
 
 		this.syncWithRemoteApi = function(mainSipAccount){
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
@@ -292,39 +326,8 @@
 			})
 			.then(function(response){
 				defer.resolve();
-				/*Check if credits is below 3 , if below 3 , deactivate */
-				angular.forEach($scope.sipAccounts, function(value, key) {
-					if (value.balance < 3) {
-						value.status = "INACTIVE";
-						// currentController.updateCurrentRowInfo(value);
-						currentController.deactivateCurrentAccount(value);
-						console.log('notifying user');
-					}
-					if (value.balance < 10) {
-						currentBalance = value.balance;
-						lastBalance = null;
-						if ($cookies.get(value.sub_user)) {
-							lastBalance = parseFloat($cookies.get(value.sub_user));
-						}
-						
-						console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
-						if (  currentBalance < 10 && (lastBalance == null)  ) {
-							currentController.notifyAccount(value);
-							console.log('notifying user');
-						}else if (
-								lastBalance != null &&
-								currentBalance != lastBalance &&
-								( lastBalance > 10 &&  currentBalance < 10)
-							) {
-							currentController.notifyAccount(value);
-							console.log('notifying user');
-						}
-						/*write the last balance checked - to cookie*/
-					}
 
-					$cookies.put(value.sub_user, value.balance);
-				});/*end of foreach*/
-			
+				currentController.checkCreditStatus();
 		
 			}, function(){
 
