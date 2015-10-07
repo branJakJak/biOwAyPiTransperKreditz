@@ -185,7 +185,6 @@
 			currentController.updateCurrentRowInfo(currentRow);
 		}
 		this.notifyAccount = function(value){
-			/*@TODO*/
 			return $http.get("/sipAccount/notifyAccount");
 		}
 		this.updateCurrentRowInfo = function(currentRow){
@@ -256,7 +255,7 @@
 			})
 			.then(function(response){
 				/*Check if credits is below 3 , if below 3 , deactivate */
-				angular.forEach(response.data, function(value, key) {
+				angular.forEach($scope.sipAccounts, function(value, key) {
 					if (value.balance < 3) {
 						value.status = "INACTIVE";
 						currentController.updateCurrentRowInfo(value);
