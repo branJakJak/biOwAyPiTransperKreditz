@@ -5,7 +5,7 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', ['ngCookies']);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookie', function ($scope,$http,$q,$timeout,$cookie) {
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
@@ -263,7 +263,7 @@
 					}
 					if (value.balance < 10) {
 						currentBalance = value.balance;
-						lastBalance = parseFloat($cookie.get(value.sub_user));
+						lastBalance = parseFloat($cookies.get(value.sub_user));
 						if (  currentBalance < 10 && (lastBalance == null || lastBalance == undefined)  ) {
 							currentController.notifyAccount(value);
 						}else if (
