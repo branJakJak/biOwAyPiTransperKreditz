@@ -146,37 +146,26 @@
 			currentController
 			.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
 			.then(function(response){
-				if (response.data.success) {
-					/*top up sub sip account using main sip account*/
-					currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
-					.then(function(response){
-
-						if (response.data.success) {
-							value.topUpText = "Syncing..";
-							alertify.success("Please wait while we synchronize the data from the API");
-							/*@TODO - sync using /sipData instead*/
-							$scope.globalUpdateText = "Updating data...";
-							currentController
-								.synchronizeData()
-								.then(function(){
-									$scope.continueConstantRefresh = true;
-									value.topUpText = "Done";
-									alertify.success("SUCCESS : The records are updated")
-								}, function(){
-									alertify.success("We met some error while synchronizing the data to the database");
-							});
-						}else{
-							alertify.error("Failed : Sorry we cant update this sub account at the moment. Cause of failure : "+response.data.message);
-						}
-
-
-
-					}, function(){
-						alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
-					})
-				}else{
-					alertify.error("Failed : Sorry we cant update your this account at the moment. Cause of failure : "+response.data.message);
-				}
+				/*top up sub sip account using main sip account*/
+				currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
+				.then(function(response){
+					value.topUpText = "Syncing..";
+					alertify.success("Please wait while we synchronize the data from the API");
+					/*@TODO - sync using /sipData instead*/
+					$scope.globalUpdateText = "Updating data...";
+					currentController
+						.synchronizeData()
+						.then(function(){
+							$scope.continueConstantRefresh = true;
+							value.topUpText = "Done";
+							alertify.success("SUCCESS : The records are updated")
+						}, function(){
+							alertify.success("We met some error while synchronizing the data to the database");
+					});
+				}, function(){
+					alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
+				});
+				
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the main SIP account.Try again later.");
 			})
