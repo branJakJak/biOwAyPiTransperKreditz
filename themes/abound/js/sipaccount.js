@@ -273,8 +273,8 @@
 							currentController.notifyAccount(value);
 						}
 						/*write the last balance checked - to cookie*/
-						$cookies.put(value.sub_user, value.balance);
 					}
+					$cookies.put(value.sub_user, value.balance);
 				});
 
 			}, function(){
