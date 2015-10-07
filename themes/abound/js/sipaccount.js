@@ -317,8 +317,18 @@
 
 			updateStack.push(promise2);
 
+
+			updateChartPromise = $http.get("/sipAccount/getBarChartReportData")
+			.then(function(response){
+				defer.resolve();
+				window.updateChartData(response.data);//update chart data
+			}, function(){
+			});
+
+			updateStack.push(updateChartPromise);
+
 			return $q.all(updateStack).then(function(){
-				window.updateChartData();//update chart data
+				
 			}, function(){
 				alertify.error('We met some problems while setting the value of SIP Data');
 				$scope.globalUpdateText = "Global Update";
