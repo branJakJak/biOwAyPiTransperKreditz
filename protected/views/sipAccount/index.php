@@ -145,11 +145,11 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		</strong>		
 	</div>
 	<div class="span4 offset1 topUpAllContainer">
-		<input type="number" ng-model="creditsToTopUp" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
+		<input type="number" ng-model="creditsToTopUpAll" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
 		<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 			<option value="">Balance From</option>
 		</select>
-		<button ng-click="indexCtrl.topUpAll(freeVoipUsername,creditsToTopUp)" type="button" class="btn btn-default" style="margin-top: -10px;">
+		<button ng-click="indexCtrl.topUpAll(freeVoipUsername,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
 			<i class="fa fa-plus"></i> Top-up All
 		</button>
 	</div>
