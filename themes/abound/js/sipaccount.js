@@ -110,6 +110,7 @@
 									$scope.topUpCompletedCount = 0;
 									$scope.topUpMessageLabel = "Top-up All";
 									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+									currentController.synchronizeData();
 								}
 
 								defer.resolve();
@@ -126,7 +127,7 @@
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
-				this.synchronizeData();
+
 			}, function(){
 			});
 
