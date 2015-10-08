@@ -136,25 +136,27 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 </h1>
 <hr>
 <div class="span12">
-	<div class="span3">
+	<div class="span2">
 		<strong>
 			<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 			<strong >Activate All</strong>
 		</strong>		
 	</div>
-	<div class="span3">
+	<div class="span2">
 		<strong style="margin-left: 40px;">
 			<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 			<strong >Deactivate All</strong>
 		</strong>		
 	</div>
-	<div class="span4 offset1 topUpAllContainer">
+	<div class="span5 offset1 topUpAllContainer">
 		<input type="number" ng-model="creditsToTopUpAll" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
 		<select ng-model="freeVoipUsernameAll" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 			<option value="">Balance From</option>
 		</select>
 		<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
-			<i class="fa fa-plus"></i> Top-up All
+			<i class="fa fa-plus"></i> 
+			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / sipAccounts.length</span>
+			Top-up All
 		</button>
 	</div>
 </div>
