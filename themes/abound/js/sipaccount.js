@@ -78,7 +78,7 @@
 			)
 			.then(function(response){
 				if (response.data.success) {
-					alertify.success(response.data.message + "<strong>"+currentRow.sub_user+"</strong>"+);
+					alertify.success(response.data.message + "<strong>"+currentRow.sub_user+"</strong>");
 				}else{
 					alertify.error(response.data.message);
 				}
