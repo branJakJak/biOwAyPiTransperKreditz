@@ -18,6 +18,7 @@
 		$scope.topUpCompletedCount = 0;
 
 		$scope.updateDataReport = "";
+		$scope.topUpMessageLabel = "Top-up All";
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -92,7 +93,7 @@
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
 			defer  = $q.defer();
 			topUpAllStack  = [];
-
+			$scope.topUpMessageLabel = "";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				updateCreditPromise = currentController
@@ -119,6 +120,7 @@
 			.then(function(){
 				$scope.topUpCompletedCount = 0;
 				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+				$scope.topUpMessageLabel = "Top-up All";
 			}, function(){
 			});
 
@@ -192,7 +194,7 @@
 						lastBalance = parseFloat($cookies.get(value.sub_user));
 					}
 					
-					console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
+					//console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
 					if (  currentBalance < 10 && (lastBalance == null)  ) {
 
 						// currentController.notifyAccount(value);

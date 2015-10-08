@@ -132,7 +132,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <h1>
-    Sip Accounts <small>[bestvoipreselling]</small>
+    Sip Accounts ({{sipAccounts.length}}) <small>[bestvoipreselling]</small>
 </h1>
 <hr>
 <div class="span12">
@@ -154,9 +154,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<option value="">Balance From</option>
 		</select>
 		<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
-			<i class="fa fa-plus"></i> 
-			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / sipAccounts.length</span>
-			Top-up All
+			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{sipAccounts.length}}</span>
+			{{topUpMessageLabel}}
 		</button>
 	</div>
 </div>
