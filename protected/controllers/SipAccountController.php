@@ -67,8 +67,8 @@ class SipAccountController extends Controller
                     $postedData['vici_user'],
                     $postedData['main_user'],
                     $postedData['main_pass'],
-                    $postedData['campaign'],
-            );            
+                    $postedData['campaign']
+            );
             if ($affectedRows > 0) {
                 $jsonMessage = array(
                     "success"=>true,
