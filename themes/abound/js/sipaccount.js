@@ -185,7 +185,7 @@
 				if (value.balance < 3) {
 					value.status = "INACTIVE";
 					currentController.deactivateCurrentAccount(value);
-					console.log('notifying user');
+					console.log('deactivating user : '+value.sub_user);
 				}
 				if (value.balance < 10) {
 					currentBalance = value.balance;
@@ -199,7 +199,7 @@
 
 						// currentController.notifyAccount(value);
 						willRing = true;
-						console.log('notifying user');
+						console.log('notifying user : '+value.sub_user);
 
 					}else if (
 							lastBalance != null &&
