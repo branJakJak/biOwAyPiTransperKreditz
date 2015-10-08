@@ -106,7 +106,7 @@
 								console.log(curData.main_user + "Topped up .");
 								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-								if ($scope.topUpCompletedCount === sipAccounts.length) {
+								if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
 									$scope.topUpCompletedCount = 0;
 									$scope.topUpMessageLabel = "Top-up All";
 									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
@@ -126,6 +126,7 @@
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
+				this.synchronizeData();
 			}, function(){
 			});
 
