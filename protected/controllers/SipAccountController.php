@@ -56,7 +56,6 @@ class SipAccountController extends Controller
     public function actionUpdateCampaignName()
     {
         header("Content-Type: application/json");
-        die();
         $jsonMessage = array(
                 "success"=>false,
                 "message"=>"Incomplete data/parameter",
@@ -73,12 +72,12 @@ class SipAccountController extends Controller
             if ($affectedRows > 0) {
                 $jsonMessage = array(
                     "success"=>true,
-                    "message"=>"Success : Campaign updated.",
+                    "message"=>"Success : Campaign name updated.",
                 );
             }else{
                 $jsonMessage = array(
-                    "success"=>true,
-                    "message"=>"No data are updated.",
+                    "success"=>false,
+                    "message"=>"We met some problem while updating the record. Please try again later.",
                 );
             }
         }

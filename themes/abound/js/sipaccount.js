@@ -76,7 +76,12 @@
 				"/sipAccount/updateCampaignName",
 				currentRow
 			)
-			.then(function(){
+			.then(function(response){
+				if (response.data.success) {
+					alertify.success(response.data.message + "<strong>"+currentRow.sub_user+"</strong>"+);
+				}else{
+					alertify.error(response.data.message);
+				}
 				currentRow.showEditCampaignLoadingImg = false;
 			}, function(){
 				alertify.error("Something went wrong while updating campaign name of " + currentRow.sub_user);
