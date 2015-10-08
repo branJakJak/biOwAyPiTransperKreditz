@@ -94,23 +94,20 @@
 			defer  = $q.defer();
 			topUpAllStack  = [];
 			$scope.topUpMessageLabel = "Loading...";
-			// freeVoipUser = freeVoipUser.username;
+			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				updateCreditPromise = currentController
-					.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
+					.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
 					.then(function(){
 						currentController
-							.topUpSubSip(curData.main_user,curData.main_password,curData.sub_user,curData.sub_pass,creditsToTopUp)
+							.topUpSubSip(curData.main_user,curData.main_user,curData.sub_user,curData.sub_pass,creditsToTopUp)
 							.then(function(){
 								$scope.topUpCompletedCount += 1;
 								console.log(curData.main_user + "Topped up .");
 								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-								if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
-								$scope.topUpCompletedCount = 0;
-									$scope.topUpMessageLabel = "Top-up All";
-									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-									currentController.synchronizeData();
+								if ($scope.topUpCompletedCount === sipAccounts.length) {
+									
 								}
 
 								defer.resolve();
@@ -127,7 +124,9 @@
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
-
+				
+				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+				$scope.topUpMessageLabel = "Top-up All";
 			}, function(){
 			});
 
