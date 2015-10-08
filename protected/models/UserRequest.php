@@ -127,6 +127,7 @@ class UserRequest extends CActiveRecord
 	public static function getRecentLogins()
 	{
 		$criteria = new CDbCriteria;
+		$criteria->addCondition("date(date_created) = date(now())");
 		$criteria->limit = 20;
 		$criteria->order = "date_created DESC";
 		$dataProvider = new CActiveDataProvider('UserRequest',array(
