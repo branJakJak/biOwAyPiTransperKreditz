@@ -49,7 +49,7 @@ class TopUpController extends Controller
 		header("Content-Type: application/json");
 		$jsonMessage = array("success"=>false,"message"=>"incomplete data/parameter");
 		$postedData = json_decode(file_get_contents("php://input"),true);
-		Yii::log(json_encode($postedData), CLogger::LEVEL_INFO,'info');
+		Yii::log(print_r($postedData), CLogger::LEVEL_INFO,'info');
 		if (
 			isset($postedData['freeVoipUsername']) && 
 			isset($postedData['mainUsername']) && 
