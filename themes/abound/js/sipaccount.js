@@ -100,7 +100,7 @@
 					.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
 					.then(function(){
 						currentController
-							.topUpSubSip(curData.main_user,curData.main_user,curData.sub_user,curData.sub_pass,creditsToTopUp)
+							.topUpSubSip(curData.main_user,curData.main_pass,curData.sub_user,curData.sub_pass,creditsToTopUp)
 							.then(function(){
 								$scope.topUpCompletedCount += 1;
 								console.log(curData.main_user + "Topped up .");
