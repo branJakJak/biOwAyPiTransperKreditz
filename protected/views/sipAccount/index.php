@@ -132,13 +132,13 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 </h1>
 <hr>
 <div class="span12">
-	<div class="span3">
+	<div class="span1">
 		<strong>
 			<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 			<strong >Activate All</strong>
 		</strong>		
 	</div>
-	<div class="span3">
+	<div class="span1">
 		<strong style="margin-left: 40px;">
 			<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 			<strong >Deactivate All</strong>
@@ -191,7 +191,12 @@ $this->widget('bootstrap.widgets.TbAlert', array(
            			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
 				
 			</td>
-			<td>{{value.campaign}}</td>
+			<td ng-init="showEditCampaign = false">
+				<div ng-click="showEditCampaign = true" ng-show="!showEditCampaign">
+					{{value.campaign}}
+				</div>
+				<input ng-show="showEditCampaign" ng-blur="showEditCampaign = false" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
+			</td>
 			<td>
 				{{value.server_ip}}
 			</td>
