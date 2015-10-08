@@ -15,7 +15,7 @@ class SipAccountController extends Controller
     {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'postOnly + notifyAccount', // perform access control for CRUD operations
+            'postOnly + notifyAccount,updateCampaignName', // perform access control for CRUD operations
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
@@ -29,7 +29,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi','notifyAccount'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi','notifyAccount','updateCampaignName'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,6 +51,37 @@ class SipAccountController extends Controller
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
+    }
+
+    public function actionUpdateCampaignName()
+    {
+        header("Content-Type: application/json");
+        $jsonMessage = array(
+                "success"=>false,
+                "message"=>"Incomplete data/parameter",
+            );
+        $postedData = json_decode(file_get_contents("php://input"),true);
+        if ( isset($postedData['vici_user']) && isset($postedData['main_user']) && isset($postedData['main_pass']) && isset($postedData['campaign'])) {
+            $campaignUpdaterObj = new CampaignNameUpdater();
+            $affectedRows = $campaignUpdaterObj->update(
+                    $postedData['vici_user'],
+                    $postedData['main_user'],
+                    $postedData['main_pass'],
+                    $postedData['campaign'],
+            );            
+            if ($affectedRows > 0) {
+                $jsonMessage = array(
+                    "success"=>true,
+                    "message"=>"Success : Campaign updated.",
+                );
+            }else{
+                $jsonMessage = array(
+                    "success"=>true,
+                    "message"=>"No data are updated.",
+                );
+            }
+        }
+        echo json_encode($jsonMessage);
     }
 
     /**

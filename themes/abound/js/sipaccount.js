@@ -69,6 +69,19 @@
 			}
 			return classNameContainer;
 		}
+		this.updateCampaignName = function(currentRow){
+			currentRow.showEditCampaign = false;
+			currentRow.showEditCampaignLoadingImg = true;
+			return $http.post(
+				"/sipAccount/updateCampaignName",
+				currentRow
+			)
+			.then(function(){
+				currentRow.showEditCampaignLoadingImg = false;
+			}, function(){
+				alertify.error("Something went wrong while updating campaign name of " + currentRow.sub_user);
+			})
+		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
