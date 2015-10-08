@@ -93,7 +93,7 @@
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
 			defer  = $q.defer();
 			topUpAllStack  = [];
-			$scope.topUpMessageLabel = "";
+			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				updateCreditPromise = currentController
