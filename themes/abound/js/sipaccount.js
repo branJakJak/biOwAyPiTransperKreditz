@@ -107,7 +107,9 @@
 								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
 								if ($scope.topUpCompletedCount === sipAccounts.length) {
-									
+									$scope.topUpCompletedCount = 0;
+									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+									$scope.topUpMessageLabel = "Top-up All";
 								}
 
 								defer.resolve();
@@ -122,11 +124,9 @@
 					});
 				topUpAllStack.push(updateCreditPromise);
 			});
+
 			$q.all(topUpAllStack)
 			.then(function(){
-				$scope.topUpCompletedCount = 0;
-				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-				$scope.topUpMessageLabel = "Top-up All";
 			}, function(){
 			});
 
