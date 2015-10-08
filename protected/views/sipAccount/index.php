@@ -195,7 +195,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
 					{{value.campaign}}
 				</div>
-				<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName()" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
+				<input ng-show="value.showEditCampaign" ng-blur="value.showEditCampaignLoadingImg = true;indexCtrl.updateCampaignName(value);value.showEditCampaignLoadingImg = false;" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
 				<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i>
 			</td>
 			<td>
