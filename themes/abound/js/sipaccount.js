@@ -104,6 +104,14 @@
 							.then(function(){
 								$scope.topUpCompletedCount += 1;
 								console.log(curData.main_user + "Topped up .");
+								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
+
+								if ($scope.topUpCompletedCount === sipAccounts.length) {
+									$scope.topUpCompletedCount = 0;
+									$scope.topUpMessageLabel = "Top-up All";
+									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+								}
+
 								defer.resolve();
 							}, function(){
 								alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
@@ -112,15 +120,12 @@
 						alertify.error("We met some problems while retrieving the topping up the main SIP account");
 					})
 					.then(function(){
-						alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
+						
 					});
 				topUpAllStack.push(updateCreditPromise);
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
-				$scope.topUpCompletedCount = 0;
-				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-				$scope.topUpMessageLabel = "Top-up All";
 			}, function(){
 			});
 
