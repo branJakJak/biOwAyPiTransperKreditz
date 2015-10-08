@@ -70,10 +70,9 @@
 			return classNameContainer;
 		}
 		this.updateCampaignName = function(currentRow){
-			console.log(currentRow);
-			return false;
 			currentRow.showEditCampaign = false;
 			currentRow.showEditCampaignLoadingImg = true;
+			return false;
 			return $http.post(
 				"/sipAccount/updateCampaignName",
 				currentRow
