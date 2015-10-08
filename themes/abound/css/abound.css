@@ -525,7 +525,8 @@ footer {
 .main-body {
   min-height: 600px;
 }
-.blockedAccount{
+.blockedAccount , .blockedAccount a{
   background-color: #ff284c !important;
   color: white;
 }
+
