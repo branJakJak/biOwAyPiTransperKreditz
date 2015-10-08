@@ -525,7 +525,7 @@ footer {
 .main-body {
   min-height: 600px;
 }
-.blockedAccount , .blockedAccount a{
+.blockedAccount , .blockedAccount a.editCampaignLink {
   background-color: #ff284c !important;
   color: white;
 }

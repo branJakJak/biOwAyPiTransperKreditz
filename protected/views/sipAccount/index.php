@@ -87,7 +87,7 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 	.topUpAllContainer > input{
 	    width: 138px;
 	}
-	.blockedAccount a{
+	.blockedAccount a.editCampaignLink {
 	  background-color: #ff284c !important;
 	  color: white;		
 	}
@@ -197,7 +197,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 			<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
 				<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
-					<a href="">
+					<a href="" class='editCampaignLink'>
 						<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i> {{value.campaign}}
 					</a>
 				</div>
