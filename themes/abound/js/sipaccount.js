@@ -100,14 +100,14 @@
 					.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
 					.then(function(){
 						currentController
-							.topUpSubSip(curData.main_user,curData.main_user,curData.sub_user,curData.sub_pass,creditsToTopUp)
+							.topUpSubSip(curData.main_user,curData.main_password,curData.sub_user,curData.sub_pass,creditsToTopUp)
 							.then(function(){
 								$scope.topUpCompletedCount += 1;
 								console.log(curData.main_user + "Topped up .");
 								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
 								if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
-									$scope.topUpCompletedCount = 0;
+								$scope.topUpCompletedCount = 0;
 									$scope.topUpMessageLabel = "Top-up All";
 									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
 									currentController.synchronizeData();
