@@ -72,7 +72,6 @@
 		this.updateCampaignName = function(currentRow){
 			currentRow.showEditCampaign = false;
 			currentRow.showEditCampaignLoadingImg = true;
-			return false;
 			return $http.post(
 				"/sipAccount/updateCampaignName",
 				currentRow
@@ -81,6 +80,7 @@
 				currentRow.showEditCampaignLoadingImg = false;
 			}, function(){
 				alertify.error("Something went wrong while updating campaign name of " + currentRow.sub_user);
+				currentRow.showEditCampaignLoadingImg = false;
 			})
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){

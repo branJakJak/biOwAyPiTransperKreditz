@@ -56,6 +56,7 @@ class SipAccountController extends Controller
     public function actionUpdateCampaignName()
     {
         header("Content-Type: application/json");
+        die();
         $jsonMessage = array(
                 "success"=>false,
                 "message"=>"Incomplete data/parameter",
