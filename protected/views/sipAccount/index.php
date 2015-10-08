@@ -85,7 +85,11 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 		margin: 0px 5px;
 	}
 	.topUpAllContainer > input{
-		    width: 138px;
+	    width: 138px;
+	}
+	.blockedAccount a{
+	  background-color: #ff284c !important;
+	  color: white;		
 	}
 </style>
 
