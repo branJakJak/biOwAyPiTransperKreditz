@@ -91,39 +91,71 @@
 			})
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
+
+			//this.topUpCredits()
+			//(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits);
 			defer  = $q.defer();
 			topUpAllStack  = [];
 			$scope.topUpMessageLabel = "Loading...";
-			// freeVoipUser = freeVoipUser.username;
+
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				updateCreditPromise = currentController
-					.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
-					.then(function(){
-						currentController
-							.topUpSubSip(curData.main_user,curData.main_password,curData.sub_user,curData.sub_pass,creditsToTopUp)
-							.then(function(){
-								$scope.topUpCompletedCount += 1;
-								console.log(curData.main_user + "Topped up .");
-								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
+				currentController.topUpCredits(
+						curData,
+						freeVoipUser,
+						curData.main_user, 
+						curData.main_pass, 
+						curData.sub_user , 
+						curData.sub_pass, 
+						creditsToTopUp
+					)
+				.then(function(){
+					$scope.topUpCompletedCount += 1;
+					alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
+					if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
+						$scope.topUpMessageLabel = "Finalizing";
+						alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+						currentController.synchronizeData()
+						.then(function(){
+							$scope.topUpCompletedCount = 0;
+							$scope.topUpMessageLabel = "Top-up All";
+						}, failCallbacks)
+					}
+				}, function(){
+				});
 
-								if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
-								$scope.topUpCompletedCount = 0;
-									$scope.topUpMessageLabel = "Top-up All";
-									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-									currentController.synchronizeData();
-								}
+			});
+			// freeVoipUser = freeVoipUser.username;
+			// angular.forEach($scope.sipAccounts, function(curData, index){
+			// 	updateCreditPromise = currentController
+			// 		.topUpMainSip(freeVoipUser,curData.main_pass,curData.main_user,creditsToTopUp)
+			// 		.then(function(){
+			// 			currentController
+			// 				.topUpSubSip(curData.main_user,curData.main_password,curData.sub_user,curData.sub_pass,creditsToTopUp)
+			// 				.then(function(){
+			// 					$scope.topUpCompletedCount += 1;
+			// 					console.log(curData.main_user + "Topped up .");
+			// 					alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-								defer.resolve();
-							}, function(){
-								alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
-							})
-					}, function(){
-						alertify.error("We met some problems while retrieving the topping up the main SIP account");
-					})
-					.then(function(){
+			// 					if ($scope.topUpCompletedCount === $scope.sipAccounts.length) {
+			// 					$scope.topUpCompletedCount = 0;
+			// 						$scope.topUpMessageLabel = "Top-up All";
+			// 						alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+			// 						currentController.synchronizeData();
+			// 					}
+
+			// 					defer.resolve();
+			// 				}, function(){
+			// 					alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
+			// 				})
+			// 		}, function(){
+			// 			alertify.error("We met some problems while retrieving the topping up the main SIP account");
+			// 		})
+			// 		.then(function(){
 						
-					});
-				topUpAllStack.push(updateCreditPromise);
+			// 		});
+			// 	topUpAllStack.push(updateCreditPromise);
+
+
 			});
 			$q.all(topUpAllStack)
 			.then(function(){

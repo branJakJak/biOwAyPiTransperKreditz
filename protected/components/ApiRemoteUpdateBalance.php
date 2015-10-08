@@ -94,6 +94,7 @@ class ApiRemoteUpdateBalance
             $status = true;
         }
         $this->logData($curlResRaw.PHP_EOL);
+        
         return $status;
     }
     private function logData($message)
