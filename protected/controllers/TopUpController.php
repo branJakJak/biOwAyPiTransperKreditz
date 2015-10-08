@@ -62,6 +62,8 @@ class TopUpController extends Controller
 	        $criteria = new CDbCriteria;
 	        $criteria->compare("username",$postedData['freeVoipUsername']);
 	        $freeVoipAccount = FreeVoipAccounts::model()->find($criteria);
+	        Yii::log($freeVoipAccount->username, CLogger::LEVEL_INFO,'info');
+	        Yii::log($freeVoipAccount->password, CLogger::LEVEL_INFO,'info');
 	        if (is_null($freeVoipAccount) ) {
 				$jsonMessage = array("success"=>false,"message"=>"Cant find FreeVOIP Account");
 	        }else{
