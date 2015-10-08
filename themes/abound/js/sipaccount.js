@@ -124,7 +124,7 @@
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
-				
+				$scope.topUpCompletedCount = 0;
 				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
 				$scope.topUpMessageLabel = "Top-up All";
 			}, function(){
