@@ -70,6 +70,8 @@
 			return classNameContainer;
 		}
 		this.updateCampaignName = function(currentRow){
+			console.log(currentRow);
+			return false;
 			currentRow.showEditCampaign = false;
 			currentRow.showEditCampaignLoadingImg = true;
 			return $http.post(
