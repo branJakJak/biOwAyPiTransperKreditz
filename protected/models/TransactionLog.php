@@ -9,6 +9,8 @@
  * @property string $to_username
  * @property string $amount
  * @property string $pincode
+ * @property string $result_string
+ * @property string $result_description
  * @property string $date_created
  * @property string $date_updated
  *
@@ -17,6 +19,9 @@
  */
 class TransactionLog extends CActiveRecord
 {
+	public $result_string;
+	public $result_description;
+
 	public function init()
 	{
 		if ($this->isNewRecord) {
@@ -40,7 +45,7 @@ class TransactionLog extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('to_username, amount, pincode,freevoip_account', 'required'),
+			array('to_username, amount, pincode,freevoip_account,result_string , result_description', 'required'),
 			array('freevoip_account,amount', 'numerical', 'integerOnly'=>true),
 			array('to_username, amount, pincode', 'length', 'max'=>255),
 			array('date_created, date_updated', 'safe'),
@@ -73,6 +78,9 @@ class TransactionLog extends CActiveRecord
 			'to_username' => 'Recipient',
 			'amount' => 'Amount',
 			'pincode' => 'Pincode',
+			'result_string' => 'Result status',
+			'result_description' => 'Result description',
+			'pincode' => 'Pincode',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -101,6 +109,8 @@ class TransactionLog extends CActiveRecord
 		$criteria->compare('to_username',$this->to_username,true);
 		$criteria->compare('amount',$this->amount,true);
 		$criteria->compare('pincode',$this->pincode,true);
+		$criteria->compare('result_string',$this->result_string,true);
+		$criteria->compare('result_description',$this->result_description,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 

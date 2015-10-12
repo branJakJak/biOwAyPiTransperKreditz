@@ -44,21 +44,9 @@
 		}
 		this.deactivateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		this.activateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		/**
 		 * Gets appropriate clas
@@ -125,14 +113,11 @@
 				topUpAllStack.push(updateCreditPromise);
 			});
 
-			$q.all(topUpAllStack)
-			.then(function(){
-			}, function(){
-			});
-
-
-
+			return $q.all(topUpAllStack);
 		}
+		/**
+		 * Constantly refresh balance , exact balance
+		 */
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
@@ -142,7 +127,6 @@
 						angular.forEach(response.data, function(freshData, index){
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
-									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
 								}
@@ -157,11 +141,9 @@
 
 				})
 				.then(function(){
-					if ($scope.continueConstantRefresh) {
-						currentController.constantDataRefresh();
-					}
+					currentController.constantDataRefresh();
 				}, function(){
-					//when something went wrong
+					//error 
 				})
 				.then(function(){
 
@@ -175,72 +157,14 @@
 				}, function(){
 				})
 				.then(function(){
-
-					currentController.checkCreditStatus();
-
 				}, function(){
 
 				});
 			}, 5000);
 		}
 
-		this.checkCreditStatus = function(){
-			willRing = false;
-			/*Check if credits is below 3 , if below 3 , deactivate */
-			angular.forEach($scope.sipAccounts, function(value, key) {
-				if (value.balance < 3) {
-					value.status = "INACTIVE";
-					currentController.deactivateCurrentAccount(value);
-					console.log('deactivating user : '+value.sub_user);
-				}
-				if (value.balance < 10) {
-					currentBalance = value.balance;
-					lastBalance = null;
-					if ($cookies.get(value.sub_user)) {
-						lastBalance = parseFloat($cookies.get(value.sub_user));
-					}
-					
-					//console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
-					if (  currentBalance < 10 && (lastBalance == null)  ) {
-
-						// currentController.notifyAccount(value);
-						willRing = true;
-						console.log('notifying user : '+value.sub_user);
-
-					}else if (
-							lastBalance != null &&
-							currentBalance != lastBalance &&
-							( lastBalance > 10 &&  currentBalance < 10)
-						) {
-						// currentController.notifyAccount(value);
-						willRing = true;
-						console.log('notifying user');
-					}
-					/*write the last balance checked - to cookie*/
-				}
-
-
-				if (willRing) {
-					currentController.notifyAccount(value);
-				}
-
-				$cookies.put(value.sub_user, value.balance);
-			});/*end of foreach*/
-
-			
-		}
-
-		this.alertUserStatusChange = function(){
-			alertify.alert("Update Status","<strong>Please click the \"Global Update\" for the changes to take effect.</strong>")
-		}
-
-		this.syncWithRemoteApi = function(mainSipAccount){
-			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
-		}
-		
 		this.globalUpdate = function(){
-			$timeout.cancel($scope.currentRefreshPromise);
-			
+			// $timeout.cancel($scope.currentRefreshPromise);
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
@@ -330,9 +254,6 @@
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
 		}
-		this.notifyAccount = function(value){
-			return $http.post("/sipAccount/notifyAccount");
-		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
 			$scope.continueConstantRefresh = false;
@@ -403,9 +324,7 @@
 			})
 			.then(function(response){
 				defer.resolve();
-
-				currentController.checkCreditStatus();
-		
+				
 			}, function(){
 
 			});

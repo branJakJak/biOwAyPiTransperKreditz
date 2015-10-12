@@ -146,77 +146,48 @@ class SipAccountController extends Controller
      */
     public function actionIndex()
     {
+        /**
+         * @var $currentRemoteData RemoteDataCache
+         */
         $this->layout = "column2";
-        $chartDataRetriever = new ChartInfoDataArr;
-        $rawData = $chartDataRetriever->getData();
-        $seriesData = array();
-        $sipAccounts = array();
-        $chartDataArr = array();
-        $remoteApiDataretriever = new BestVOIPInformationRetriever();
+        $initialSeriesData = array();
+        $sipAccountNames = array();
+        $chartInitialData = array();
+        $allRemoteModels = RemoteDataCache::model()->findAll();
 
-
-        foreach ($rawData as $key => $currentSeriesData) {
-            $curDataContainer = array();
+        foreach ($allRemoteModels as $key => $currentRemoteData) {
+            $tempColorContainer = "red";
             //collect sip accounts
-            $sipAccounts[$key] = $currentSeriesData['sub_user'];
-            //retrieve remote api information
-            $remoteVoipRes = $remoteApiDataretriever->getInfo(
-                $currentSeriesData['main_user'],
-                $currentSeriesData['main_pass'],
-                $currentSeriesData['sub_user'],
-                $currentSeriesData['sub_pass']
-            );
+            $sipAccountNames[$key] = $currentRemoteData->sub_user;
             //register chart data array
-            $chartDataArr = array(
-                "name"=>$currentSeriesData['sub_user'],
-                "data"=>$remoteVoipRes->getBalance(),
+            $chartInitialData = array(
+                "name"=>$currentRemoteData->sub_user,
+                "data"=>$currentRemoteData->exact_balance,
             );
-
-            if($remoteVoipRes->getBalance()  >= 10){
-                $curDataContainer = array("color"=>"#7CB5EC");
+            if(doubleval($currentRemoteData->exact_balance)  >= 10){
+                $tempColorContainer = "#7CB5EC";
             }else{
-                if ($remoteVoipRes->getBalance() > 3) {
-                    $curDataContainer = array("color"=>"orange");
-                }else{
-                    $curDataContainer = array("color"=>"red");
+                if ($currentRemoteData->exact_balance > 3) {
+                    $tempColorContainer = "orange";
                 }
             }
-            $curDataContainer['y'] = $remoteVoipRes->getBalance();
             //register series data
-            $seriesData[$key] = $curDataContainer;
+            $initialSeriesData[$key] = array(
+                "y"=>$currentRemoteData->exact_balance,
+                "color"=>$tempColorContainer,
+            );
         }
-        $seriesDataStr = json_encode($seriesData);
-        $sipAccountsStr = json_encode($sipAccounts);
-
-
         $this->render('index', array(
-            'chartData'=>$chartDataArr,
-            'seriesDataStr'=>$seriesDataStr,
-            'sipAccountsStr'=>$sipAccountsStr,
+            'chartData'=>$chartInitialData,
+            'seriesDataStr'=>json_encode($initialSeriesData),
+            'sipAccountsStr'=>json_encode($sipAccountNames),
         ));
     }
     public function actionSipData()
     {
-        $finalArr = array();
-        /*data asterisk data as primary data source*/
-        $asteriskData = AsteriskCarriers::getData();
-        $voipInfoRetriever = new BestVOIPInformationRetriever();
-        foreach ($asteriskData as $key => $currentAsteriskData) {
-            /**
-             * @var $remoteVoipresult RemoteVoipResult
-             */
-            $remoteVoipresult = $voipInfoRetriever->getInfo(
-                $currentAsteriskData['main_user'],
-                $currentAsteriskData['main_pass'],
-                $currentAsteriskData['sub_user'],
-                $currentAsteriskData['sub_pass']
-            );
-            $currentAsteriskData['id'] = $key;
-            $currentAsteriskData['balance'] = doubleval($remoteVoipresult->getBalance());
-            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipresult->getSpecificBalance());
-            $finalArr[] = $currentAsteriskData;
-        }
-        echo CJSON::encode($finalArr);
+        header("Content-Type: application/json");
+        $allremoteData = RemoteDataCache::model()->findAll();
+        echo CJSON::encode($allremoteData);
     }
     public function actionRemoteAsteriskInfo()
     {
@@ -230,36 +201,26 @@ class SipAccountController extends Controller
     public function actionGetBarChartReportData()
     {
         header("Content-Type: application/json");
-        $asteriskData = AsteriskCarriers::getData();
-        $voipInfoRetriever = new BestVOIPInformationRetriever();
+        $allremoteData = RemoteDataCache::model()->findAll();
         $seriesData = array();
-        foreach ($asteriskData as $key => $currentAsteriskData) {
-            $curDataContainer = array();
+
+        foreach ($allremoteData as $currentRemoteData) {
             /**
-             * @var $remoteVoipresult RemoteVoipResult
+             * @var $currentRemoteData RemoteDataCache
              */
-            $remoteVoipresult = $voipInfoRetriever->getInfo(
-                $currentAsteriskData['main_user'],
-                $currentAsteriskData['main_pass'],
-                $currentAsteriskData['sub_user'],
-                $currentAsteriskData['sub_pass']
-            );
-            $currentAsteriskData['id'] = $key;
-            $currentAsteriskData['balance'] = doubleval($remoteVoipresult->getBalance());
-            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipresult->getSpecificBalance());
-            
-            if ($currentAsteriskData['balance'] >= 10) {
-                $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"#7CB5EC");
+            $curDataContainer = array();
+
+            if ($currentRemoteData->balance >= 10 ) {
+                $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"#7CB5EC");
             }else{
-                if ($currentAsteriskData['balance'] >= 3) {
-                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"orange");
+                if ($currentRemoteData->balance >= 3) {
+                    $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"red");
+                    $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"red");
                 }
-            }            
+            }
             $seriesData[] = $curDataContainer;
         }
- 
         echo CJSON::encode($seriesData);
     }
 
