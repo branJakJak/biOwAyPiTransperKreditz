@@ -3,7 +3,7 @@ window.chartBlink = function(){
 	/*iterate data*/
 	jQuery.each(window.chartObj.series[0].data, function(index, val) {
 		/*if value is between 4 and 3*/
-		if (val.y <= 4 && val.y >= 3 ) {
+		if (val.y < 5 && val.y > 2 ) {
 			if (val.color == "orange") {
 				dataClone[index].color = "yellow";
 			}else if (val.color == "yellow") {
