@@ -193,7 +193,7 @@
 					currentController.deactivateCurrentAccount(value);
 					console.log('deactivating user : '+value.sub_user);
 				}
-				if (value.balance < 10) {
+				if (value.balance < 5) {
 					currentBalance = value.balance;
 					lastBalance = null;
 					if ($cookies.get(value.sub_user)) {
@@ -201,7 +201,7 @@
 					}
 					
 					//console.log('current balance is '+currentBalance+' last balance is '+lastBalance);
-					if (  currentBalance < 10 && (lastBalance == null)  ) {
+					if (  currentBalance < 5 && (lastBalance == null)  ) {
 
 						// currentController.notifyAccount(value);
 						willRing = true;
@@ -210,7 +210,7 @@
 					}else if (
 							lastBalance != null &&
 							currentBalance != lastBalance &&
-							( lastBalance > 10 &&  currentBalance < 10)
+							( lastBalance > 5 &&  currentBalance < 5)
 						) {
 						// currentController.notifyAccount(value);
 						willRing = true;
