@@ -78,7 +78,7 @@ Yii::app()->clientScript->registerScript('updateChartData', '
 	', CClientScript::POS_READY);
 
 
-jYii::app()->clientScript->registerScript('blinkingChart', '
+Yii::app()->clientScript->registerScript('blinkingChart', '
 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 	', CClientScript::POS_READY);
 
