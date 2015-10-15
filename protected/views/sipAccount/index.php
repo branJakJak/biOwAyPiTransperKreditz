@@ -163,7 +163,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		<br>
 		<div ng-show="topUpSelectContainerShow">
 			<label>Select account to EXCLUDE : </label>
-			<ul>
+			<ul style="list-style: none">
 				<li ng-repeat="(key, value) in sipAccounts">
 					<div class="checkbox">
 						<label>
@@ -178,6 +178,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{sipAccounts.length}}</span>
 			{{topUpMessageLabel}}
 			</button>
+			<hr>
 		</div>
 	</div>
 </div>

@@ -19,7 +19,7 @@
 		$scope.topUpSelectContainerShow = false;
 
 		$scope.updateDataReport = "";
-		$scope.topUpMessageLabel = "Top-up All";
+		$scope.topUpMessageLabel = "Update";
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -125,11 +125,13 @@
 						.then(function(){
 							
 						});
+					topUpAllStack.push(updateCreditPromise);
 				}
-				topUpAllStack.push(updateCreditPromise);
+				
 			});
 			$q.all(topUpAllStack)
 			.then(function(){
+				$scope.topUpSelectContainerShow = false;
 			}, function(){
 			});
 		}
