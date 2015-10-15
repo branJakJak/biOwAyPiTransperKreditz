@@ -135,6 +135,7 @@
 				$scope.topUpCompletedCount = 0;
 				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
 				$scope.topUpMessageLabel = "Update";
+                console.log("All ajax completed")
 			}, function(){
 			});
 		}
