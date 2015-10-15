@@ -19,6 +19,8 @@
 				last <?php echo date("F j, Y, g:i a",strtotime($data->date_created))?> using account
 				<?php echo CHtml::link($data->freevoipAccount->username, array('/freeVoipAccounts/view', 'id'=>$data->freevoipAccount->id), array('class'=>'')); ?>
 			</h5>
+			<p>Result : <?php echo $data->result_string ?></p>
+			<p>Description : <?php echo $data->result_description ?></p>
 	
 	</div>    
 

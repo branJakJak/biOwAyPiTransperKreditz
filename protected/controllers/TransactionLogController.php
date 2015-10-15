@@ -119,7 +119,9 @@ class TransactionLogController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('TransactionLog');
+		$criteria = new CDbCriteria;
+		$criteria->order = "date_created DESC";
+		$dataProvider=new CActiveDataProvider('TransactionLog',array('criteria'=>$criteria));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

@@ -170,3 +170,109 @@ UPDATE user_carrier SET campaign='the value to update to '
 @DONE
 
 
+
+@TODO - 
+
+create table for 
+RemoteDataCache
+
+id
+main_user
+main_pass
+sub_user
+sub_pass
+vici_user
+is_active
+balance
+exact_balance
+ip_address
+num_lines
+@DONE
+
+
+
+@TODO  - CRON
+fetch all data 
+check if exists in the database , if exists
+update data
+else if it doesnt crreate new record
+@DONE
+
+
+
+
+
+
+@TODO = transfer balance checking
+at cron
+@DONE
+
+
+
+
+@TODO  - change backend 
+for actionSipData to get data from 
+database table not remotely
+@done
+
+
+@TODO - change chart ajax remote datasource
+@DONE
+
+@TODO - change ajax sipData
+@DONE
+
+
+@TODO - sipController index , 
+@DONE
+
+
+
+
+@TODO - Change ChartReportdata 
+datasource to database table
+@done
+
+
+
+
+@update client sciprt code
+-topUpMainSip
+-topUpSubSip
+@DONE
+
+
+@TODO - remove check credit status
+@DONE
+
+@TODO this.alertUserStatusChange
+@DONE
+
+
+
+@TODO 
+this.syncWithRemoteApi
+@DONE
+
+@TODO
+$scope.continueConstantRefresh
+@DONE
+
+
+@TODO
+this.notifyAccount
+@DONE
+
+
+
+
+@TODO - bug when clicking topup all , 
+make sure it is one time click
+
+
+@TODO - create 
+cron that will run 
+every minute for 1 minute 
+To refresh the data
+
+

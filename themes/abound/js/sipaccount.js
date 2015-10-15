@@ -46,21 +46,9 @@
 		}
 		this.deactivateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		this.activateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		/**
 		 * Gets appropriate clas
@@ -128,6 +116,7 @@
 				}
 				topUpAllStack.push(updateCreditPromise);
 			});
+<<<<<<< HEAD
 			$q.all(topUpAllStack)
 			.then(function(){
 			}, function(){
@@ -135,7 +124,14 @@
 		}
 		this.currentshowExclusionPanel = function(){
 			$scope.topUpSelectContainerShow = true;
+=======
+
+			return $q.all(topUpAllStack);
+>>>>>>> c28d02c9ecef959f03e94ac2abdd70175d94f862
 		}
+		/**
+		 * Constantly refresh balance , exact balance
+		 */
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
@@ -145,7 +141,6 @@
 						angular.forEach(response.data, function(freshData, index){
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
-									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
 								}
@@ -160,11 +155,9 @@
 
 				})
 				.then(function(){
-					if ($scope.continueConstantRefresh) {
-						currentController.constantDataRefresh();
-					}
+					currentController.constantDataRefresh();
 				}, function(){
-					//when something went wrong
+					//error 
 				})
 				.then(function(){
 
@@ -178,15 +171,13 @@
 				}, function(){
 				})
 				.then(function(){
-
-					currentController.checkCreditStatus();
-
 				}, function(){
 
 				});
 			}, 5000);
 		}
 
+<<<<<<< HEAD
 		this.checkCreditStatus = function(){
 			willRing = false;
 			/*Check if credits is below 3 , if below 3 , deactivate */
@@ -241,9 +232,10 @@
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		
+=======
+>>>>>>> c28d02c9ecef959f03e94ac2abdd70175d94f862
 		this.globalUpdate = function(){
-			$timeout.cancel($scope.currentRefreshPromise);
-			
+			// $timeout.cancel($scope.currentRefreshPromise);
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
@@ -333,9 +325,6 @@
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
 		}
-		this.notifyAccount = function(value){
-			return $http.post("/sipAccount/notifyAccount");
-		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
 			$scope.continueConstantRefresh = false;
@@ -406,9 +395,7 @@
 			})
 			.then(function(response){
 				defer.resolve();
-
-				currentController.checkCreditStatus();
-		
+				
 			}, function(){
 
 			});
