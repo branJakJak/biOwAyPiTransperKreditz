@@ -98,9 +98,7 @@
 			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				if (curData.isExcluded) {
-					return true;
-				}else{
+				if (!curData.isExcluded) {
 					updateCreditPromise = currentController
 						.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
 						.then(function(){
@@ -127,7 +125,7 @@
 						.then(function(){
 							
 						});
-					}
+				}
 				topUpAllStack.push(updateCreditPromise);
 			});
 			$q.all(topUpAllStack)
