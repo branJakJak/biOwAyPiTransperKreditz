@@ -133,6 +133,9 @@
 			}, function(){
 			});
 		}
+		this.currentshowExclusionPanel = function(){
+			$scope.topUpSelectContainerShow = true;
+		}
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
