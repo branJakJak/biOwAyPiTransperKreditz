@@ -146,42 +146,55 @@ class SipAccountController extends Controller
      */
     public function actionIndex()
     {
-        /**
-         * @var $currentRemoteData RemoteDataCache
-         */
         $this->layout = "column2";
-        $initialSeriesData = array();
-        $sipAccountNames = array();
-        $chartInitialData = array();
-        $allRemoteModels = RemoteDataCache::model()->findAll();
+        $chartDataRetriever = new ChartInfoDataArr;
+        $rawData = $chartDataRetriever->getData();
+        $seriesData = array();
+        $sipAccounts = array();
+        $chartDataArr = array();
+        $remoteApiDataretriever = new BestVOIPInformationRetriever();
 
-        foreach ($allRemoteModels as $key => $currentRemoteData) {
-            $tempColorContainer = "red";
+
+        foreach ($rawData as $key => $currentSeriesData) {
+            $curDataContainer = array();
             //collect sip accounts
-            $sipAccountNames[$key] = $currentRemoteData->sub_user;
-            //register chart data array
-            $chartInitialData = array(
-                "name"=>$currentRemoteData->sub_user,
-                "data"=>$currentRemoteData->exact_balance,
+            $sipAccounts[$key] = $currentSeriesData['sub_user'];
+            //retrieve remote api information
+            $remoteVoipRes = $remoteApiDataretriever->getInfo(
+                $currentSeriesData['main_user'],
+                $currentSeriesData['main_pass'],
+                $currentSeriesData['sub_user'],
+                $currentSeriesData['sub_pass']
             );
-            if(doubleval($currentRemoteData->exact_balance)  >= 10){
-                $tempColorContainer = "#7CB5EC";
+            //register chart data array
+            $chartDataArr = array(
+                "name"=>$currentSeriesData['sub_user'],
+                "data"=>$remoteVoipRes->getBalance(),
+            );
+
+            if($remoteVoipRes->getBalance()  >= 10){
+                $curDataContainer = array("color"=>"#7CB5EC");
             }else{
-                if ($currentRemoteData->exact_balance > 3) {
-                    $tempColorContainer = "orange";
+                if ($remoteVoipRes->getBalance() > 3) {
+                    $curDataContainer = array("color"=>"orange");
+                }else{
+                    $curDataContainer = array("color"=>"red");
                 }
             }
+            $curDataContainer['y'] = $remoteVoipRes->getBalance();
             //register series data
-            $initialSeriesData[$key] = array(
-                "y"=>$currentRemoteData->exact_balance,
-                "color"=>$tempColorContainer,
-            );
+            $seriesData[$key] = $curDataContainer;
         }
+        $seriesDataStr = json_encode($seriesData);
+        $sipAccountsStr = json_encode($sipAccounts);
+
+
         $this->render('index', array(
-            'chartData'=>$chartInitialData,
-            'seriesDataStr'=>json_encode($initialSeriesData),
-            'sipAccountsStr'=>json_encode($sipAccountNames),
+            'chartData'=>$chartDataArr,
+            'seriesDataStr'=>$seriesDataStr,
+            'sipAccountsStr'=>$sipAccountsStr,
         ));
+
     }
     public function actionSipData()
     {
