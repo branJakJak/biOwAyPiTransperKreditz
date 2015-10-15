@@ -33,13 +33,6 @@
     <?php
       $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js'  , CClientScript::POS_END);
       $cs->registerScriptFile($baseUrl.'/js/jquery-migrate-1.2.1.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.sparkline.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.min.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.flot.pie.min.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/charts.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.knob.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/plugins/jquery.masonry.min.js' , CClientScript::POS_END);
-      // $cs->registerScriptFile($baseUrl.'/js/styleswitcher.js' , CClientScript::POS_END);
     ?>    
       <!-- styles for style switcher -->
       	<link rel="stylesheet" type="text/css" href="<?php echo $baseUrl;?>/css/style-blue.css" />

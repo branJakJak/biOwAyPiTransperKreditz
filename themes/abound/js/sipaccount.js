@@ -16,6 +16,7 @@
 		$scope.tempCounterDataUpdateReport = 1;
 		$scope.currentRefreshPromise = null;
 		$scope.topUpCompletedCount = 0;
+		$scope.topUpSelectContainerShow = false;
 
 		$scope.updateDataReport = "";
 		$scope.topUpMessageLabel = "Top-up All";
@@ -31,6 +32,7 @@
 		  		currentController.deactivateAllAccountsFunc();
 		  	}
 		});
+
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curData.status = "ACTIVE";
@@ -96,42 +98,42 @@
 			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				updateCreditPromise = currentController
-					.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
-					.then(function(){
-						currentController
-							.topUpSubSip(curData.main_user,curData.main_pass,curData.sub_user,curData.sub_pass,creditsToTopUp)
-							.then(function(){
-								$scope.topUpCompletedCount += 1;
-								console.log(curData.main_user + "Topped up .");
-								alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
+				if (curData.isExcluded) {
+					return true;
+				}else{
+					updateCreditPromise = currentController
+						.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
+						.then(function(){
+							currentController
+								.topUpSubSip(curData.main_user,curData.main_pass,curData.sub_user,curData.sub_pass,creditsToTopUp)
+								.then(function(){
+									$scope.topUpCompletedCount += 1;
+									console.log(curData.main_user + "Topped up .");
+									alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-								if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
-									$scope.topUpCompletedCount = 0;
-									alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-									$scope.topUpMessageLabel = "Top-up All";
-								}
+									if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
+										$scope.topUpCompletedCount = 0;
+										alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+										$scope.topUpMessageLabel = "Top-up All";
+									}
 
-								defer.resolve();
-							}, function(){
-								alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
-							})
-					}, function(){
-						alertify.error("We met some problems while retrieving the topping up the main SIP account");
-					})
-					.then(function(){
-						
-					});
+									defer.resolve();
+								}, function(){
+									alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
+								})
+						}, function(){
+							alertify.error("We met some problems while retrieving the topping up the main SIP account");
+						})
+						.then(function(){
+							
+						});
+					}
 				topUpAllStack.push(updateCreditPromise);
 			});
-
 			$q.all(topUpAllStack)
 			.then(function(){
 			}, function(){
 			});
-
-
-
 		}
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){

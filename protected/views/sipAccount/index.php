@@ -159,10 +159,27 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		<select ng-model="freeVoipUsernameAll" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 			<option value="">Balance From</option>
 		</select>
-		<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
+		
+		<br>
+		<div ng-show="topUpSelectContainerShow">
+			<label>Select account to EXCLUDE : </label>
+			<ul>
+				<li ng-repeat="(key, value) in sipAccounts">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="value.isExcluded">
+							{{value.sub_user}}
+						</label>
+					</div>
+				</li>
+			</ul>
+			<br>
+			
+			<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
 			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{sipAccounts.length}}</span>
 			{{topUpMessageLabel}}
-		</button>
+			</button>
+		</div>
 	</div>
 </div>
 <hr>
