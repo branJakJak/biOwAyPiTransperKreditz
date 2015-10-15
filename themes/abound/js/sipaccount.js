@@ -110,11 +110,11 @@
 									console.log(curData.main_user + "Topped up .");
 									alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-									// if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
-									// 	$scope.topUpCompletedCount = 0;
-									// 	alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-									// 	$scope.topUpMessageLabel = "Top-up All";
-									// }
+									if ($scope.topUpCompletedCount == $scope.topUpAllStack.length) {
+										$scope.topUpCompletedCount = 0;
+										alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+										$scope.topUpMessageLabel = "Top-up All";
+									}
 
 									//defer.resolve();
 								}, function(){
