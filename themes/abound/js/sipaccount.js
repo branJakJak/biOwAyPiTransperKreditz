@@ -8,6 +8,7 @@
 	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 		var currentController = this;
 		$scope.sipAccounts = [];
+        $scope.topUpAllStack = [];
 		$scope.freeVoipAccts = [];
 		
 		$scope.activateAllAccounts = false;
@@ -93,8 +94,8 @@
 			})
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
-			defer  = $q.defer();
-			topUpAllStack  = [];
+			//defer  = $q.defer();
+			$scope.topUpAllStack  = [];
 			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
@@ -109,13 +110,13 @@
 									console.log(curData.main_user + "Topped up .");
 									alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
 
-									if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
-										$scope.topUpCompletedCount = 0;
-										alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-										$scope.topUpMessageLabel = "Top-up All";
-									}
+									// if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
+									// 	$scope.topUpCompletedCount = 0;
+									// 	alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+									// 	$scope.topUpMessageLabel = "Top-up All";
+									// }
 
-									defer.resolve();
+									//defer.resolve();
 								}, function(){
 									alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
 								})
@@ -123,15 +124,17 @@
 							alertify.error("We met some problems while retrieving the topping up the main SIP account");
 						})
 						.then(function(){
-							
 						});
-					topUpAllStack.push(updateCreditPromise);
+                    $scope.topUpAllStack.push(updateCreditPromise);
 				}
 				
 			});
-			$q.all(topUpAllStack)
+			$q.all($scope.topUpAllStack)
 			.then(function(){
 				$scope.topUpSelectContainerShow = false;
+				$scope.topUpCompletedCount = 0;
+				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+				$scope.topUpMessageLabel = "Update";
 			}, function(){
 			});
 		}
