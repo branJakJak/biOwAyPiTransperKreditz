@@ -179,7 +179,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 			<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
 
-			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{topUpAllStack.length}}</span>
+			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{  (topUpAllStack.length / 2) | number:0   }}</span>
 			{{topUpMessageLabel}}
 
 			</button>
