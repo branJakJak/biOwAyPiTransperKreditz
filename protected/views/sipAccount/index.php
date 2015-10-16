@@ -164,12 +164,12 @@ $this->widget('bootstrap.widgets.TbAlert', array(
         </button>
 		<br>
 		<div ng-show="topUpSelectContainerShow">
-			<label>Select account to EXCLUDE : </label>
+			<label>Select an account  : </label>
 			<ul style="list-style: none">
 				<li ng-repeat="(key, value) in sipAccounts">
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" ng-model="value.isExcluded">
+							<input type="checkbox" ng-model="value.isIncluded">
 							{{value.sub_user}}
 						</label>
 					</div>
