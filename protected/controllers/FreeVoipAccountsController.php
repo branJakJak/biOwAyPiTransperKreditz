@@ -52,7 +52,7 @@ class FreeVoipAccountsController extends Controller
 				"success"=>false,
 				"message"=>"Cant update VOIP model",
 			);
-		$model = FreeVoipAccounts::model()->findAllByAttributes(array('username'=>$mainVoipUsername));
+		$model = FreeVoipAccounts::model()->findByAttributes(array('username'=>$mainVoipUsername));
 		if ($model) {
 			$model->credits = $credits;
 			if ($model->save()) {
