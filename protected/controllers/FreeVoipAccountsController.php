@@ -46,7 +46,7 @@ class FreeVoipAccountsController extends Controller
 	}
 	public function actionCreditsUpdate($mainVoipUsername , $credits)
 	{
-		header("Access-Control-Allow-Origin: *");	
+		header("Access-Control-Allow-Origin: https://www.freevoipdeal.com/");
 		header("Content-Type: application/json");
 		$jsonResponse = array(
 				"success"=>false,
