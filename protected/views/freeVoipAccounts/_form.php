@@ -32,9 +32,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'credit'); ?>
-		<?php echo $form->textField($model,'credit',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'credit'); ?>
+		<?php echo $form->labelEx($model,'credits'); ?>
+		<?php echo $form->textField($model,'credits',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'credits'); ?>
 	</div>
 
 	<div class="row buttons">
