@@ -31,6 +31,12 @@
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'credit'); ?>
+		<?php echo $form->textField($model,'credit',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'credit'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'btn btn-primary')); ?>
 	</div>

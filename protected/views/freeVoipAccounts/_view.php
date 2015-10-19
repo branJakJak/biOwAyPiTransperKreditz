@@ -22,6 +22,10 @@
 					<td><?php echo CHtml::encode($data->password); ?></td>
 				</tr>
 				<tr>
+					<td><b><?php echo CHtml::encode($data->getAttributeLabel('credit')); ?>:</b></td>
+					<td><?php echo CHtml::encode($data->credit); ?></td>
+				</tr>
+				<tr>
 					<td><b><?php echo CHtml::encode($data->getAttributeLabel('date_created')); ?>:</b></td>
 					<td><?php echo CHtml::encode($data->date_created); ?></td>
 				</tr>
