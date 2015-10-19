@@ -170,3 +170,16 @@ UPDATE user_carrier SET campaign='the value to update to '
 @DONE
 
 
+
+@TODO = create migration  , 
+add the credit attribute 
+
+
+
+@TODO = update model 
+to include the credit attribute
+
+
+@TODO - implement actionCreditsUpdate
+ - find using username
+  - update credit

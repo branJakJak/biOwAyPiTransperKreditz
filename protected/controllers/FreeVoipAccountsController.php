@@ -27,20 +27,44 @@ class FreeVoipAccountsController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			array('allow',
+				'actions'=>array('creditsUpdate'),
+				'users'=>array('*'),
+			),
+			array('allow', 
 				'actions'=>array('create','update','index','view','getList'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', 
 				'actions'=>array('admin','delete'),
 				'roles'=>array('administrator'),
 			),
-			array('deny',  // deny all users
+			array('deny', 
 				'users'=>array('*'),
 			),
 		);
 	}
-
+	public function actionCreditsUpdate($mainVoipUsername , $credits)
+	{
+		header("Content-Type: application/json");
+		$jsonResponse = array(
+				"success"=>false,
+				"message"=>"Cant update VOIP model",
+			);
+		$model = FreeVoipAccounts::model()->findAllByAttributes(array('username'=>$mainVoipUsername));
+		if ($model) {
+			$model->credits = $credits;
+			if ($model->save()) {
+				$jsonResponse = array(
+						"success"=>true,
+						"message"=>"Freevoip credit updated"
+				);
+			}
+		}else{
+			throw new CHttpException(404,"Cant find FreeVoip Account");
+		}
+		echo json_encode($jsonResponse);
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
