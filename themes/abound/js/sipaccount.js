@@ -255,7 +255,6 @@
 		}
 		this.topUpCredits = function(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
 			value.topUpText = "Loading..";
-			defer  = $q.defer();
 			alertify.success("Updating credits..Please wait..");
 			$scope.continueConstantRefresh = false;
 
@@ -264,7 +263,6 @@
 			/*top up account main SIP account using freeVoipUsername*/
 			topUpMainAccountPromise = currentController.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
 			.then(function(response){
-				defer.resolve();
 				console.log('main SIP Account updated');
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the main SIP account.Try again later.");
@@ -274,27 +272,24 @@
 			/*top up sub sip account using main sip account*/
 			topUpSubAccountPromise = currentController.topUpSubSip(mainUsername,mainPassword,subUsername,subPassword,credits)
 			.then(function(response){
-				defer.resolve();
 				value.topUpText = "Syncing..";
 				alertify.success("Please wait while we synchronize the data from the API");
-				/*@TODO - sync using /sipData instead*/
 				$scope.globalUpdateText = "Updating data...";
-				currentController
-					.synchronizeData()
-					.then(function(){
-						$scope.continueConstantRefresh = true;
-						value.topUpText = "Done";
-						alertify.success("SUCCESS : The records are updated")
-					}, function(){
-						alertify.success("We met some error while synchronizing the data to the database");
-				});
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
 			});
 
 			updateStack.push(topUpSubAccountPromise);
 
-			return $q.all(updateStack);
+			return $q.all(updateStack)
+				.then(function(){
+					$scope.continueConstantRefresh = true;
+					value.topUpText = "Done";
+					alertify.success("SUCCESS : The records are updated")
+				}, function(){
+					alertify.success("We met some error while synchronizing the data to the database");
+				});
+
 
 		}
 		this.updateSingleRow = function(currentRow){
