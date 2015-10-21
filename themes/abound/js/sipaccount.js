@@ -126,6 +126,7 @@
 		 * Constantly refresh balance , exact balance
 		 */
 		this.constantDataRefresh = function(){
+			
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
 				$http.get("/sipAccount/sipData").then(function(response){
@@ -355,12 +356,10 @@
 		 */
 		this.synchronizeData = function(){
 			
-			defer  = $q.defer();
 			updateStack  = [];
 			
 			promise1 =  $http.get("/freeVoipAccounts/getList")
 			.then(function(response){
-				defer.resolve();
 				$scope.freeVoipAccts = response.data;
 			}, function(){
 				alertify.error('We met some problems while retrieving the list of FreeVoip Accounts');
@@ -370,23 +369,17 @@
 
 			promise2 = $http.get("/sipAccount/sipData")
 			.then(function(response){
-				defer.resolve();
 				$scope.sipAccounts = response.data;
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
 				alertify.error("We met some problems while retrieving the data");
 				$scope.globalUpdateText = "Global Update";
-			})
-			.then(function(response){
-				defer.resolve();
-			}, function(){
 			});
 
 			updateStack.push(promise2);
 
 
 			return $q.all(updateStack).then(function(){
-				
 			}, function(){
 				alertify.error('We met some problems while setting the value of SIP Data');
 				$scope.globalUpdateText = "Global Update";
