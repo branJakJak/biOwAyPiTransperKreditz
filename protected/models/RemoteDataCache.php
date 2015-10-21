@@ -16,9 +16,13 @@
  * @property double $exact_balance
  * @property string $ip_address
  * @property integer $num_lines
+ * @property string $campaign
+ * @property datetime $date_created
+ * @property datetime $date_updated
  */
 class RemoteDataCache extends CActiveRecord
 {
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,6 +42,7 @@ class RemoteDataCache extends CActiveRecord
 			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
 			array('balance, exact_balance,last_balance', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
+			array('campaign, date_created,date_updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines', 'safe', 'on'=>'search'),
@@ -73,6 +78,9 @@ class RemoteDataCache extends CActiveRecord
 			'exact_balance' => 'Exact Balance',
 			'ip_address' => 'Ip Address',
 			'num_lines' => 'Num Lines',
+			'campaign' => 'Campaign',
+			'date_created' => 'Date created',
+			'date_updated' => 'Date updated',
 		);
 	}
 
@@ -106,6 +114,9 @@ class RemoteDataCache extends CActiveRecord
 		$criteria->compare('exact_balance',$this->exact_balance);
 		$criteria->compare('ip_address',$this->ip_address,true);
 		$criteria->compare('num_lines',$this->num_lines);
+		$criteria->compare('campaign',$this->campaign);
+		$criteria->compare('date_created',$this->date_created);
+		$criteria->compare('date_updated',$this->date_updated);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
