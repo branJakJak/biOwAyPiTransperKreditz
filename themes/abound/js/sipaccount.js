@@ -116,7 +116,6 @@
 				}
 				topUpAllStack.push(updateCreditPromise);
 			});
-<<<<<<< HEAD
 			$q.all(topUpAllStack)
 			.then(function(){
 			}, function(){
@@ -124,10 +123,6 @@
 		}
 		this.currentshowExclusionPanel = function(){
 			$scope.topUpSelectContainerShow = true;
-=======
-
-			return $q.all(topUpAllStack);
->>>>>>> c28d02c9ecef959f03e94ac2abdd70175d94f862
 		}
 		/**
 		 * Constantly refresh balance , exact balance
@@ -177,7 +172,6 @@
 			}, 5000);
 		}
 
-<<<<<<< HEAD
 		this.checkCreditStatus = function(){
 			willRing = false;
 			/*Check if credits is below 3 , if below 3 , deactivate */
@@ -220,8 +214,6 @@
 
 				$cookies.put(value.sub_user, value.balance);
 			});/*end of foreach*/
-
-			
 		}
 
 		this.alertUserStatusChange = function(){
@@ -232,8 +224,6 @@
 			return $http.post("/sipAccount/syncApi",{'mainSipAccount':mainSipAccount});
 		}
 		
-=======
->>>>>>> c28d02c9ecef959f03e94ac2abdd70175d94f862
 		this.globalUpdate = function(){
 			// $timeout.cancel($scope.currentRefreshPromise);
 			$scope.globalUpdateText = "Updating data...";
@@ -275,7 +265,6 @@
 			 }, function(){
 			 	alertify.success("Something went wrong while refreshing the data");
 			 });
-			
 		}
 		this.topUpCredits = function(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
 			value.topUpText = "Loading..";
@@ -284,7 +273,6 @@
 			$scope.continueConstantRefresh = false;
 
 			updateStack  = [];
-
 			
 			/*top up account main SIP account using freeVoipUsername*/
 			topUpMainAccountPromise = currentController.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
@@ -395,9 +383,7 @@
 			})
 			.then(function(response){
 				defer.resolve();
-				
 			}, function(){
-
 			});
 
 			updateStack.push(promise2);
