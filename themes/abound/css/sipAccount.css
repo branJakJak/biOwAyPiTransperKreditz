@@ -19,6 +19,10 @@ select{
 .headerBtnToggle button{
 	margin-left: 20px;
 }
+#chartContainer{
+	height : 500px;
+}
+
 /*
 .activateAccount{
 	
