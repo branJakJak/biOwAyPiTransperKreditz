@@ -35,6 +35,11 @@ class SyncController extends Controller
 	{
 		header("Content-Type: application/json");
 		$postedData = json_decode(file_get_contents("php://input"),true);
+		$criteria = new CDbCriteria;
+		$criteria->compare("main_user",$postedData['mainUsername']);
+		$criteria->compare("main_pass",$postedData['mainPassword']);
+		$criteria->compare("sub_user",$postedData['subUsername']);
+		$criteria->compare("sub_pass",$postedData['subPassword']);
 		$model = RemoteDataCache::model()->find($criteria);
 		if ($model) {
 			SyncSingleSubSip::sync($model);
