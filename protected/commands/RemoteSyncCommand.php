@@ -9,12 +9,14 @@ class RemoteSyncCommand extends CConsoleCommand
 
     public function actionIndex()
     {   
+        echo "Running remote sync . ".date("Y-m-d H:i:s").PHP_EOL;
         $curTime = time();
         $endTime = strtotime("+50 seconds");
         while ($endTime >= $curTime) {
             $this->synData();
             $curTime = time();
         }
+        echo "Remote sync end . ".date("Y-m-d H:i:s").PHP_EOL;
     }
 
 
