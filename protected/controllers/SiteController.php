@@ -54,6 +54,9 @@ class SiteController extends Controller
             		$transactionLogMdl->pincode
         		);
         		$newTransactionlink = CHtml::link('Transaction Log', array('transactionLog/view','id'=>$transactionLogMdl->id)); 
+        		$transactionLogMdl->result_string = $remoteResult->resultstring;
+        		$transactionLogMdl->result_description = $remoteResult->description;
+        		$transactionLogMdl->save();
         		if ($remoteResult->resultstring == 'success') {
         			Yii::app()->user->setFlash('success', '<strong>Success!</strong> Credit transfered . '.$newTransactionlink);
         		}else if ($remoteResult->resultstring == 'failure') {
@@ -63,7 +66,7 @@ class SiteController extends Controller
         			}
         			Yii::app()->user->setFlash('error', '<strong>Transaction Failed!</strong> We met some error while transferring the amount . <br>But here is your transaction log '.$newTransactionlink . ' , you can resend it later. <br>Reason of failure : '.$reasonOfFailure);
         		}
-            	$this->redirect("/");
+            	$this->redirect("/site/index");
             }
         }
 		$voipAccountsCount = FreeVoipAccounts::model()->count();

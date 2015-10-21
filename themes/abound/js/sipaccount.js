@@ -8,7 +8,6 @@
 	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 		var currentController = this;
 		$scope.sipAccounts = [];
-        $scope.topUpAllStack = [];
 		$scope.freeVoipAccts = [];
 		
 		$scope.activateAllAccounts = false;
@@ -20,7 +19,7 @@
 		$scope.topUpSelectContainerShow = false;
 
 		$scope.updateDataReport = "";
-		$scope.topUpMessageLabel = "Update";
+		$scope.topUpMessageLabel = "Top-up All";
 		
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -36,32 +35,20 @@
 
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.status = "ACTIVE";
+				curData.is_active = "ACTIVE";
 			});
 		}
 
 		this.deactivateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.status = "INACTIVE";
+				curData.is_active = "INACTIVE";
 			});
 		}
 		this.deactivateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		this.activateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
-			// .then(function(){
-			// 	$scope.continueConstantRefresh = true;
-			// 	$scope.globalUpdateText = "Updating data...";
-			// 	currentController.synchronizeData();
-			// }, function(){
-			// });
 		}
 		/**
 		 * Gets appropriate clas
@@ -69,7 +56,7 @@
 		 */
 		this.getRowClass = function(currentRow){
 			classNameContainer = "activateAccount";
-			if (currentRow.status === "INACTIVE") {
+			if (currentRow.is_active === "INACTIVE") {
 				classNameContainer = "blockedAccount";
 			}
 			return classNameContainer;
@@ -94,7 +81,6 @@
 			})
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
-			//defer  = $q.defer();
 			$scope.topUpAllStack  = [];
 			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
@@ -105,7 +91,7 @@
 					topUpMainPromise.then(function(){}, function(){
 						alertify.error("We met some problems while retrieving the topping up the main SIP account");
 					});
-					
+
 					$scope.topUpAllStack.push(topUpMainPromise);
 
 					/*topup sub acct promise*/
@@ -119,54 +105,26 @@
 						$scope.topUpCompletedCount += 1;
 					});
 					$scope.topUpAllStack.push(topUpSubPromise);
-
-
-
-					// updateCreditPromise = currentController
-					// 	.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
-					// 	.then(function(){
-     //                        currentController
-     //                            .topUpSubSip(curData.main_user, curData.main_pass, curData.sub_user, curData.sub_pass, creditsToTopUp)
-     //                            .then(function () {
-     //                                $scope.topUpCompletedCount += 1;
-     //                                console.log(curData.main_user + "Topped up .");
-     //                                alertify.success("<strong>Success : </strong>Top-up complete. " + curData.sub_user);
-
-     //                                if ($scope.topUpCompletedCount == $scope.topUpAllStack.length) {
-     //                                    $scope.topUpCompletedCount = 0;
-     //                                    alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-     //                                    $scope.topUpMessageLabel = "Top-up All";
-     //                                }
-
-     //                                //defer.resolve();
-     //                            }, function () {
-     //                                $scope.topUpCompletedCount += 1;
-     //                                alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
-     //                            });
-					// 	}, function(){
-					// 		alertify.error("We met some problems while retrieving the topping up the main SIP account");
-					// 	})
-					// 	.then(function(){
-					// 	});
-					// 	
-                    // $scope.topUpAllStack.push(updateCreditPromise);
-				
 				}
-				
 			});
-			$q.all($scope.topUpAllStack)
+
+			return $q.all($scope.topUpAllStack)
 			.then(function(){
-                $scope.topUpSelectContainerShow = false;
-                $scope.topUpCompletedCount = 0;
-                alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-                $scope.topUpMessageLabel = "Update";
-                console.log("All ajax completed");
+			    $scope.topUpSelectContainerShow = false;
+			    $scope.topUpCompletedCount = 0;
+			    alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+			    $scope.topUpMessageLabel = "Update";
+			    console.log("All ajax completed");
 			}, function(){
 			});
+
 		}
 		this.currentshowExclusionPanel = function(){
 			$scope.topUpSelectContainerShow = true;
 		}
+		/**
+		 * Constantly refresh balance , exact balance
+		 */
 		this.constantDataRefresh = function(){
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
@@ -176,7 +134,6 @@
 						angular.forEach(response.data, function(freshData, index){
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
-									//oldData.status = freshData.status;
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
 								}
@@ -191,27 +148,11 @@
 
 				})
 				.then(function(){
-					if ($scope.continueConstantRefresh) {
-						currentController.constantDataRefresh();
-					}
+					currentController.constantDataRefresh();
 				}, function(){
-					//when something went wrong
+					//error 
 				})
 				.then(function(){
-
-					$http.get("/sipAccount/getBarChartReportData")
-					.then(function(response){
-						console.log('chart data updating');
-						defer.resolve();
-						window.updateChartData(response.data);//update chart data
-					}, function(){
-					});
-				}, function(){
-				})
-				.then(function(){
-
-					currentController.checkCreditStatus();
-
 				}, function(){
 
 				});
@@ -223,7 +164,7 @@
 			/*Check if credits is below 3 , if below 3 , deactivate */
 			angular.forEach($scope.sipAccounts, function(value, key) {
 				if (value.balance < 3) {
-					value.status = "INACTIVE";
+					value.is_active = "INACTIVE";
 					currentController.deactivateCurrentAccount(value);
 					console.log('deactivating user : '+value.sub_user);
 				}
@@ -260,8 +201,6 @@
 
 				$cookies.put(value.sub_user, value.balance);
 			});/*end of foreach*/
-
-			
 		}
 
 		this.alertUserStatusChange = function(){
@@ -273,15 +212,14 @@
 		}
 		
 		this.globalUpdate = function(){
-			$timeout.cancel($scope.currentRefreshPromise);
-			
+			// $timeout.cancel($scope.currentRefreshPromise);
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
 			defer  = $q.defer();
 			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
-				if (curData.status === "ACTIVE") {
+				if (curData.is_active === "ACTIVE") {
 					curPromise = $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+curData.vici_user);
 				}else{
 					curPromise = $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+curData.vici_user);
@@ -314,7 +252,6 @@
 			 }, function(){
 			 	alertify.success("Something went wrong while refreshing the data");
 			 });
-			
 		}
 		this.topUpCredits = function(value,freeVoipUsername,mainUsername , mainPassword , subUsername , subPassword, credits){
 			value.topUpText = "Loading..";
@@ -323,7 +260,6 @@
 			$scope.continueConstantRefresh = false;
 
 			updateStack  = [];
-
 			
 			/*top up account main SIP account using freeVoipUsername*/
 			topUpMainAccountPromise = currentController.topUpMainSip(freeVoipUsername,mainUsername,mainPassword,credits)
@@ -364,16 +300,13 @@
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
 		}
-		this.notifyAccount = function(value){
-			return $http.post("/sipAccount/notifyAccount");
-		}
 		this.updateCurrentRowInfo = function(currentRow){
 			/*check subsip account id*/
 			$scope.continueConstantRefresh = false;
 			activateUrlTarget = "/subSipAccount/ajaxActivate?vicidial_identification="+currentRow.vici_user;
 			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?vicidial_identification="+currentRow.vici_user;
 			/*check status*/
-			if (currentRow.status === "ACTIVE") {
+			if (currentRow.is_active === "ACTIVE") {
 				return $http.get(activateUrlTarget).then(function(){
 					$scope.continueConstantRefresh = true;
 					$scope.globalUpdateText = "Updating data...";
@@ -400,13 +333,27 @@
 			});
 		}
 		this.topUpSubSip = function(mainUsername,mainPassword,subUsername,subPassword,credits){
-			return $http.post('/topUp/subSip',  {
+
+			topupSubSipPromise = $http.post('/topUp/subSip',  {
 				'mainUsername' : mainUsername,
 				'mainPassword' : mainPassword,
 			 	'subUsername' : subUsername,
 			 	'subPassword' : subPassword,
 			 	'credits' : credits,
 			})
+			.then(function(){
+				$http.post("/sync/single",{
+					'mainUsername' : mainUsername,
+					'mainPassword' : mainPassword,
+			 		'subUsername' : subUsername,
+			 		'subPassword' : subPassword
+				});
+
+			}, function(){
+				alertify.error("We cant sync "+subUsername);
+			})
+
+			 return topupSubSipPromise;
 		}
 		/**
 		 * Updates the data value
@@ -437,25 +384,11 @@
 			})
 			.then(function(response){
 				defer.resolve();
-
-				currentController.checkCreditStatus();
-		
 			}, function(){
-
 			});
 
 			updateStack.push(promise2);
 
-
-			updateChartPromise = $http.get("/sipAccount/getBarChartReportData")
-			.then(function(response){
-				console.log('chart data updating');
-				defer.resolve();
-				window.updateChartData(response.data);//update chart data
-			}, function(){
-			});
-
-			updateStack.push(updateChartPromise);
 
 			return $q.all(updateStack).then(function(){
 				
@@ -470,4 +403,5 @@
 		this.constantDataRefresh();
 	}])
 })();
+
 

@@ -20,67 +20,14 @@ $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_
 
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
 $cs->registerCssFile($baseUrl.'/css/alertify.css');
+
+
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
-$cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 
-$javascriptCode = <<<EOL
 
-	window.originalColorMap = new Object();
-
-	window.options = {
-            chart: {
-            	renderTo:"chartContainer",
-                type: 'bar'
-            },
-	 		title: {
-	            text: 'Credit Balance'
-	        },
-			credits: {
-			   enabled: false
-			},
-            legend: { enabled: false},
-            xAxis: {
-                categories: $sipAccountsStr,
-	  			title: {
-	                text: null
-	            },
-            },
-	 		yAxis: {
-	            title: {
-	                text: null,
-	            },
-	        },
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000',
-                        style: {fontWeight: 'bolder'},
-                        inside: true,
-                    },
-                    pointPadding: 0.1,
-                    groupPadding: 0
-                }
-            },
-
-            series: [{
-                data: $seriesDataStr
-            }]
-        };
-	
-	
-	window.chartObj = new Highcharts.Chart(window.options);
-EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
-Yii::app()->clientScript->registerScript('updateChartData', '
-	//setTimeout(updateChartData, 3 * 1000);
-	', CClientScript::POS_READY);
 
-
-Yii::app()->clientScript->registerScript('blinkingChart', '
-		window.blinkerInterval = setInterval(window.chartBlink, 600);
-	', CClientScript::POS_READY);
 
 
 ?>
@@ -121,22 +68,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 <hr>
 
-
-
-<?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>'SIP Account Balance',
-	));
-?>
-
-<div id="chartContainer"></div>
-
-<?php
-	$this->endWidget();
-?>
-<hr>
-
-
 <h1>
     Sip Accounts ({{sipAccounts.length}}) <small>[bestvoipreselling]</small>
 </h1>
@@ -166,6 +97,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
             Top-Up
         </button>
 		<br>
+
 		<div ng-show="topUpSelectContainerShow">
 			<label>Select an account  : </label>
 			<ul style="list-style: none">
@@ -188,6 +120,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</button>
 			<hr>
 		</div>
+
+
 	</div>
 </div>
 <hr>
@@ -207,6 +141,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Add Balance</th>
 			<th>Balance From</th>
 			<th></th>
+			<th>Last update</th>
 
 		</tr>
 	</thead>
@@ -223,7 +158,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>{{value.balance}}</td>
 			<td>{{value.vici_user}}</td>
 			<td>
-				<input ng-change="indexCtrl.alertUserStatusChange()" type="checkbox" ng-model="value.status"
+				<input ng-change="indexCtrl.alertUserStatusChange()" type="checkbox" ng-model="value.is_active"
            			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
 				
 			</td>
@@ -236,12 +171,12 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
 			</td>
 			<td>
-				{{value.server_ip}}
+				{{value.ip_address}}
 			</td>
 			<td>
-				{{value.number_of_lines}}
+				{{value.num_lines}}
 			</td>
-			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" title=""></td>
+			<td><input ng-model="topUpCreditsVal" type="number" ></td>
 			<td>
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
@@ -252,6 +187,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
 					{{value.topUpText}} 
 				</a>
+			</td>
+			<td>
+				{{value.date_updated}}
 			</td>
 
 		</tr>

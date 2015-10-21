@@ -198,26 +198,15 @@ class SipAccountController extends Controller
     }
     public function actionSipData()
     {
-        $finalArr = array();
-        /*data asterisk data as primary data source*/
-        $asteriskData = AsteriskCarriers::getData();
-        $voipInfoRetriever = new BestVOIPInformationRetriever();
-        foreach ($asteriskData as $key => $currentAsteriskData) {
-            /**
-             * @var $remoteVoipresult RemoteVoipResult
-             */
-            $remoteVoipresult = $voipInfoRetriever->getInfo(
-                $currentAsteriskData['main_user'],
-                $currentAsteriskData['main_pass'],
-                $currentAsteriskData['sub_user'],
-                $currentAsteriskData['sub_pass']
-            );
-            $currentAsteriskData['id'] = $key;
-            $currentAsteriskData['balance'] = doubleval($remoteVoipresult->getBalance());
-            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipresult->getSpecificBalance());
-            $finalArr[] = $currentAsteriskData;
+    header("Content-Type: application/json");
+        $allremoteData = RemoteDataCache::model()->findAll();
+        $updatedData = array();
+        /*format some data*/
+        foreach ($allremoteData as $curObj) {
+            $curObj->date_updated = date("g:i a",strtotime($curObj->date_updated));
+            $updatedData[] = $curObj;
         }
-        echo CJSON::encode($finalArr);
+        echo CJSON::encode($updatedData);
     }
     public function actionRemoteAsteriskInfo()
     {
@@ -231,36 +220,26 @@ class SipAccountController extends Controller
     public function actionGetBarChartReportData()
     {
         header("Content-Type: application/json");
-        $asteriskData = AsteriskCarriers::getData();
-        $voipInfoRetriever = new BestVOIPInformationRetriever();
+        $allremoteData = RemoteDataCache::model()->findAll();
         $seriesData = array();
-        foreach ($asteriskData as $key => $currentAsteriskData) {
-            $curDataContainer = array();
+
+        foreach ($allremoteData as $currentRemoteData) {
             /**
-             * @var $remoteVoipresult RemoteVoipResult
+             * @var $currentRemoteData RemoteDataCache
              */
-            $remoteVoipresult = $voipInfoRetriever->getInfo(
-                $currentAsteriskData['main_user'],
-                $currentAsteriskData['main_pass'],
-                $currentAsteriskData['sub_user'],
-                $currentAsteriskData['sub_pass']
-            );
-            $currentAsteriskData['id'] = $key;
-            $currentAsteriskData['balance'] = doubleval($remoteVoipresult->getBalance());
-            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipresult->getSpecificBalance());
-            
-            if ($currentAsteriskData['balance'] >= 10) {
-                $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"#7CB5EC");
+            $curDataContainer = array();
+
+            if ($currentRemoteData->balance >= 10 ) {
+                $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"#7CB5EC");
             }else{
-                if ($currentAsteriskData['balance'] >= 3) {
-                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"orange");
+                if ($currentRemoteData->balance >= 3) {
+                    $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$currentAsteriskData['balance'],"color"=>"red");
+                    $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"red");
                 }
-            }            
+            }
             $seriesData[] = $curDataContainer;
         }
- 
         echo CJSON::encode($seriesData);
     }
 

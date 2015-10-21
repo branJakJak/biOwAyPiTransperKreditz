@@ -1,0 +1,12 @@
+{
+    "name": "kevin/extract-opt",
+    "authors": [
+        {
+            "name": "kebyang",
+            "email": "kelvo_link@yahoo.com"
+        }
+    ],
+    "require": {
+    	 "sunra/php-simple-html-dom-parser": "v1.5.0"
+    }
+}
