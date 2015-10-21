@@ -62,6 +62,24 @@ EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
 
+Yii::app()->clientScript->registerScript('updateChartDataInterval', '
+function updateChartDataInterval(){
+	jQuery.ajax({
+	  url: "/sipAccount/BarChartReportData",
+	  type: "POST",
+	  dataType: "json",
+	  complete: function(xhr, textStatus) {
+	    setTimeout(updateChartDataInterval, 1000);
+	  },
+	  success: function(data, textStatus, xhr) {
+	  	window.updateChartData(data);
+	  },
+	});
+}
+setTimeout(updateChartDataInterval, 1000);
+', CClientScript::POS_READY);
+
+
 Yii::app()->clientScript->registerScript('blinkingChart', '
 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 	', CClientScript::POS_READY);
