@@ -27,6 +27,7 @@ class RemoteSyncCommand extends CConsoleCommand
             $criteria->compare("sub_pass", $currentFetchedData['sub_pass']);
             $foundModel = RemoteDataCache::model()->find($criteria);
             if ($foundModel) {
+                $last_balance = $foundModel->last_balance;
                 Yii::log("Current Data . ".json_encode($currentFetchedData), CLogger::LEVEL_INFO,'sync_log');
 
                 Yii::log("Model found . ", CLogger::LEVEL_INFO,'sync_log');
@@ -41,6 +42,9 @@ class RemoteSyncCommand extends CConsoleCommand
 
                 // $this->checkStatus($foundModel);
                 // 
+                //@TODO - save the last balance
+                //
+                
                 /*proceed with update*/
                 Yii::log("Updating balance . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->balance = doubleval($currentFetchedData['balance']);
@@ -49,6 +53,8 @@ class RemoteSyncCommand extends CConsoleCommand
 
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
+                    $foundModel->last_balance = $last_balance;
+                    $foundModel->save();
                 }else{
                     Yii::log("Cant update model because :  ".CHtml::errorSummary($foundModel), CLogger::LEVEL_INFO,'sync_log');
                 }
@@ -66,7 +72,7 @@ class RemoteSyncCommand extends CConsoleCommand
                 $newModel->balance = doubleval($currentFetchedData['balance']);
                 $newModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
                 $newModel->vici_user = doubleval($currentFetchedData['vici_user']);
-                $newModel->num_lines = doubleval($currentFetchedData['num_lines']);
+                $newModel->num_lines = doubleval(@$currentFetchedData['num_lines']);
                 $newModel->ip_address = $currentFetchedData['ip_address'];
                 if ($newModel->save()) {
                     Yii::log("New Model Saved . ", CLogger::LEVEL_INFO,'sync_log');
