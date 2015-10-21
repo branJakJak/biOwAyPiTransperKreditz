@@ -42,7 +42,7 @@ class RemoteDataCache extends CActiveRecord
 			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
 			array('balance, exact_balance,last_balance', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
-			array('campaign, date_created,date_updated,status', 'safe'),
+			array('campaign, date_created,date_updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines', 'safe', 'on'=>'search'),
@@ -79,7 +79,6 @@ class RemoteDataCache extends CActiveRecord
 			'ip_address' => 'Ip Address',
 			'num_lines' => 'Num Lines',
 			'campaign' => 'Campaign',
-			'status' => 'Status',
 			'date_created' => 'Date created',
 			'date_updated' => 'Date updated',
 		);
@@ -146,5 +145,11 @@ class RemoteDataCache extends CActiveRecord
 		   )
 		);
 	}
+	public function afterFind()
+	{
+		$this->status = $this->is_active;
+  		return parent::afterFind();
+	}
+
 	
 }
