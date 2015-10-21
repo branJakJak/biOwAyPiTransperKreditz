@@ -129,6 +129,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Add Balance</th>
 			<th>Balance From</th>
 			<th></th>
+			<th>Last update</th>
 
 		</tr>
 	</thead>
@@ -158,10 +159,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
 			</td>
 			<td>
-				{{value.server_ip}}
+				{{value.ip_address}}
 			</td>
 			<td>
-				{{value.number_of_lines}}
+				{{value.num_lines}}
 			</td>
 			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" title=""></td>
 			<td>
@@ -174,6 +175,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
 					{{value.topUpText}} 
 				</a>
+			</td>
+			<td>
+				{{value.last_update}}
 			</td>
 
 		</tr>

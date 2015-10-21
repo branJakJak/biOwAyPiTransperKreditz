@@ -185,9 +185,15 @@ class SipAccountController extends Controller
     }
     public function actionSipData()
     {
-        header("Content-Type: application/json");
+    header("Content-Type: application/json");
         $allremoteData = RemoteDataCache::model()->findAll();
-        echo CJSON::encode($allremoteData);
+        $updatedData = array();
+        /*format some data*/
+        foreach ($allremoteData as $curObj) {
+            $curObj->date_updated = date("F j, Y, g:i a",strtotime($curObj->date_updated));
+            $updatedData[] = $curObj;
+        }
+        echo CJSON::encode($updatedData);
     }
     public function actionRemoteAsteriskInfo()
     {
