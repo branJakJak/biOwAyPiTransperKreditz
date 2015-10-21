@@ -13,8 +13,13 @@ class RemoteSyncCommand extends CConsoleCommand
          * @var RemoteDataCache $foundModel
          */
         $fetchData = new ChartInfoDataArr();
+        Yii::log("Fetching data from remote source.", CLogger::LEVEL_INFO,'sync_log');
         $fetchedData = $fetchData->getData();
+        Yii::log("Data Fetched from remote source", CLogger::LEVEL_INFO,'sync_log');
         foreach ($fetchedData as $currentFetchedData) {
+            Yii::log(
+                    sprintf("Iterating data - %s - %s - %s - %s",$currentFetchedData['main_user'] ,$currentFetchedData['main_pass'],$currentFetchedData['sub_user'] ,$currentFetchedData['sub_pass'])
+                , CLogger::LEVEL_INFO,'sync_log');
             $criteria = new CDbCriteria();
             $criteria->compare("main_user", $currentFetchedData['main_user']);
             $criteria->compare("main_pass", $currentFetchedData['main_pass']);
@@ -22,16 +27,24 @@ class RemoteSyncCommand extends CConsoleCommand
             $criteria->compare("sub_pass", $currentFetchedData['sub_pass']);
             $foundModel = RemoteDataCache::model()->find($criteria);
             if ($foundModel) {
+                Yii::log("Model found . ", CLogger::LEVEL_INFO,'sync_log');
                 /*check current data before saving*/
                 /*notification check */
+                Yii::log("Checking data for notification . ", CLogger::LEVEL_INFO,'sync_log');
                 $this->checkNotification($foundModel);
                 /*deactivation check*/
+                Yii::log("Checking status code . ", CLogger::LEVEL_INFO,'sync_log');
                 $this->checkStatus($foundModel);
                 /*proceed with update*/
+                Yii::log("Updating balance . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->balance = doubleval($currentFetchedData['balance']);
+                Yii::log("Balance updated . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
                 $foundModel->save();
             } else {
+                Yii::log(
+                    sprintf("Model not found  , saving as new model instead - %s - %s - %s - %s",$currentFetchedData['main_user'] ,$currentFetchedData['main_pass'],$currentFetchedData['sub_user'] ,$currentFetchedData['sub_pass'])
+                , CLogger::LEVEL_INFO,'sync_log');
                 $newModel = new RemoteDataCache();
                 $newModel->main_user = $currentFetchedData['main_user'];
                 $newModel->main_pass = $currentFetchedData['main_pass'];
