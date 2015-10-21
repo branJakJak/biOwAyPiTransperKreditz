@@ -213,6 +213,14 @@ class SubSipAccountController extends Controller
         $sipAccount->vicidial_identification = $vicidial_identification;
         $activatorObj = new ActivateVicidialUser($sipAccount);
         $reqREs = $activatorObj->run();
+
+        /*find the RemoteDataCache and update it too*/
+        $criteria = new CDbCriteria;
+        $criteria->compare("vici_user",$vicidial_identification)
+        $model = RemoteDataCache::model()->find($criteria);
+        $model->is_active = "ACTIVE";
+        $model->save();
+
         echo json_encode(array("success"=>true,"message"=>"Account activated","result"=>$reqREs));
 	}
 	public function actionDeactivate($subAccount)
@@ -220,6 +228,8 @@ class SubSipAccountController extends Controller
         $childCur = SubSipAccount::model()->findByPk($subAccount);
         $activatorObj = new DeactivateVicidialUser($childCur->parentSip);
         $activatorObj->run();
+
+
 		Yii::app()->user->setFlash("info","Account <strong>{$childCur->username}</strong> deactivated");
 		$this->redirect(Yii::app()->request->urlReferrer);
 	}
@@ -230,6 +240,14 @@ class SubSipAccountController extends Controller
         $sipAccount->vicidial_identification = $vicidial_identification;
         $activatorObj = new DeactivateVicidialUser($sipAccount);
         $reqRes = $activatorObj->run();
+
+        /*find the RemoteDataCache and update it too*/
+        $criteria->compare("vici_user",$vicidial_identification)
+        $model = RemoteDataCache::model()->find($criteria);
+        $model->is_active = "INACTIVE";
+        $model->save();
+
+
         echo json_encode(array("success"=>false,"message"=>"Account deactivated","result"=>$reqRes));
 	}
 }
