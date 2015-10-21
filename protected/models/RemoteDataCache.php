@@ -22,7 +22,7 @@
  */
 class RemoteDataCache extends CActiveRecord
 {
-
+	public $status;
 	/**
 	 * @return string the associated database table name
 	 */
