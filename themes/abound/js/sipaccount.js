@@ -81,12 +81,19 @@
 			})
 		}
 		this.topUpAll = function(freeVoipUser,creditsToTopUp){
-			defer  = $q.defer();
-			topUpAllStack  = [];
+			$scope.topUpAllStack  = [];
 			$scope.topUpMessageLabel = "Loading...";
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				if (curData.isIncluded) {
+					/*topup main acct promise*/
+					topUpMainPromise = currentController.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp);
+					topUpMainPromise.then(function(){}, function(){
+						alertify.error("We met some problems while retrieving the topping up the main SIP account");
+					});
+
+					$scope.topUpAllStack.push(topUpMainPromise);
+
 					/*topup sub acct promise*/
 					topUpSubPromise = currentController.topUpSubSip(curData.main_user, curData.main_pass, curData.sub_user, curData.sub_pass, creditsToTopUp)
 					topUpSubPromise.then(function(){
@@ -101,18 +108,15 @@
 				}
 			});
 
-
-			$q.all($scope.topUpAllStack)
+			return $q.all($scope.topUpAllStack)
 			.then(function(){
-				$scope.topUpSelectContainerShow = false;
-				$scope.topUpCompletedCount = 0;
-				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-				$scope.topUpMessageLabel = "Update";
-				console.log("All ajax completed");
+			    $scope.topUpSelectContainerShow = false;
+			    $scope.topUpCompletedCount = 0;
+			    alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+			    $scope.topUpMessageLabel = "Update";
+			    console.log("All ajax completed");
 			}, function(){
 			});
-
-
 
 		}
 		this.currentshowExclusionPanel = function(){
