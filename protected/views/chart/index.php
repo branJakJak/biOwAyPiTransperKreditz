@@ -98,7 +98,7 @@ Yii::app()->clientScript->registerScript('blinkingChart', '
 	));
 ?>
 
-<div id="chartContainer"></div>
+<div id="chartContainer" style="height: 500px"></div>
 
 <?php
 	$this->endWidget();
