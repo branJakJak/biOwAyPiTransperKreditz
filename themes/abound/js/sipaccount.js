@@ -155,17 +155,6 @@
 					//error 
 				})
 				.then(function(){
-
-					$http.get("/sipAccount/getBarChartReportData")
-					.then(function(response){
-						console.log('chart data updating');
-						defer.resolve();
-						window.updateChartData(response.data);//update chart data
-					}, function(){
-					});
-				}, function(){
-				})
-				.then(function(){
 				}, function(){
 
 				});
