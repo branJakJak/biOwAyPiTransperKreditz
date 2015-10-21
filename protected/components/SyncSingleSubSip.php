@@ -38,7 +38,7 @@ class SyncSingleSubSip
         if ($rmtModel->last_balance === null || ($rmtModel->last_balance > 10 && $rmtModel->balance <= 10)  ) {
             $notifier = new SipAccountNotifier();
             $notifier->quickRing();
-            mail("hellsing357@gmail.com", "Credits Low < 3", file_get_contents("php://input"));
+            mail("hellsing357@gmail.com", "Credits Low < 3", json_encode($rmtModel->attributes));
             $notify = true;
         }
         return $notify;

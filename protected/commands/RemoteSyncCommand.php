@@ -9,8 +9,12 @@ class RemoteSyncCommand extends CConsoleCommand
 
     public function actionIndex()
     {   
-        /*@TODO - run this script for 1 minute*/
-        $this->synData();
+        $curTime = time();
+        $endTime = strtotime("+50 seconds");
+        while ($endTime >= $curTime) {
+            $this->synData();
+            $curTime = time();
+        }
     }
 
 
