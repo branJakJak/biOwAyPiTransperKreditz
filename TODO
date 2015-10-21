@@ -291,3 +291,119 @@ To refresh the data
 
 
 >>>>>>> 84bf9d6335488c016c5a94b1312595b3ef5acd9f
+
+
+
+
+
+
+
+
+
+
+
+php -f yiic.php  remotesync
+
+
+'application.models.*',
+'application.components.*',
+'application.components.bestvoipAPI.*',
+'application.components.dataprovider.*',
+'application.modules.user.models.*',
+'application.modules.user.components.*',
+'application.modules.rights.*',
+'application.modules.rights.components.*',
+'bootstrap.behaviors.TbWidget',
+'ext.YiiMailer.YiiMailer',
+
+
+array(
+    'class' => 'CFileLogRoute',
+    'levels' => 'info',
+    'categories' => 'sync_log',
+),
+
+
+		'log' => array(
+		    'class' => 'CLogRouter',
+		    'routes' => array(
+				array(
+				    'class' => 'CFileLogRoute',
+				    'levels' => 'info',
+				    'categories' => 'sync_log',
+				),
+		    ),
+		),
+
+
+@TODO - save last balance checkded
+
+
+Neo gallery , less 10 
+
+
+
+@TODO
+Apivoip tweaks . 
+
+- patabain yung bar chart or kung ano yung maganda
+@DONE
+- iseparate yung bar chart sa sip accounts
+@DONE
+
+
+@TODO - fix and and record show campaign
+
+$newModel->vici_user = doubleval($currentFetchedData['vici_user']);
+$newModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
+$newModel->ip_address = $currentFetchedData['server_ip'];
+$newModel->campaign = $currentFetchedData["campaign"];
+
+
+@TODO - fix, show and record
+@DIBE
+@TODO - pati narin pala yung pang minus ng balance kevs (y)
+@DIBE
+@TODO - add column date created
+@DIBE
+@TODO - add column date updated
+@DIBE
+@TODo - allow user to subtract data
+@DIBE
+
+@TODO - single update
+
+@TODO - after toping up one , 
+update individual - update only single account
+
+
+@TODO  -sync our remote to our database
+
+
+@TODO - test deactivate 
+
+@TODO -  test notification
+
+
+@TODO - bulk update
+@DONE
+
+@TODO - bulk topup
+@DONE
+
+@TODO - run cron for 1 minute
+then die 
+
+
+
+
+
+@TODO - move the checking of 
+credit balanace and notification to 
+start from user  - aside from CROn
+
+
+@TODO - sync also the , ip  , num of lines and campaign
+this.synchronizeData
+
+
