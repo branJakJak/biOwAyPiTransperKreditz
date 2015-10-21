@@ -42,7 +42,8 @@ class SyncController extends Controller
 		$criteria->compare("sub_pass",$postedData['subPassword']);
 		$model = RemoteDataCache::model()->find($criteria);
 		if ($model) {
-			SyncSingleSubSip::sync($model);
+			$sync = new SyncSingleSubSip;
+			$sync->sync($model);
 		}else{
 			throw new Exception("Cant find subsip account");
 		}

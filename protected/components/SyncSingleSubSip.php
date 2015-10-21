@@ -5,7 +5,7 @@
 */
 class SyncSingleSubSip
 {
-	public static function sync(RemoteDataCache $model)
+	public function sync(RemoteDataCache $model)
 	{
 		if (!$model) {
 			throw new Exception("RemoteDataCache cannot be null");
