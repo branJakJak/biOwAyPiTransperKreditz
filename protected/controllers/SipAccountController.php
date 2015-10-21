@@ -147,58 +147,13 @@ class SipAccountController extends Controller
     public function actionIndex()
     {
         $this->layout = "column2";
-        $chartDataRetriever = new ChartInfoDataArr;
-        $rawData = $chartDataRetriever->getData();
-        $seriesData = array();
-        $sipAccounts = array();
-        $chartDataArr = array();
-        $remoteApiDataretriever = new BestVOIPInformationRetriever();
 
-
-        foreach ($rawData as $key => $currentSeriesData) {
-            $curDataContainer = array();
-            //collect sip accounts
-            $sipAccounts[$key] = $currentSeriesData['sub_user'];
-            //retrieve remote api information
-            $remoteVoipRes = $remoteApiDataretriever->getInfo(
-                $currentSeriesData['main_user'],
-                $currentSeriesData['main_pass'],
-                $currentSeriesData['sub_user'],
-                $currentSeriesData['sub_pass']
-            );
-            //register chart data array
-            $chartDataArr = array(
-                "name"=>$currentSeriesData['sub_user'],
-                "data"=>$remoteVoipRes->getBalance(),
-            );
-
-            if($remoteVoipRes->getBalance()  >= 10){
-                $curDataContainer = array("color"=>"#7CB5EC");
-            }else{
-                if ($remoteVoipRes->getBalance() > 3) {
-                    $curDataContainer = array("color"=>"orange");
-                }else{
-                    $curDataContainer = array("color"=>"red");
-                }
-            }
-            $curDataContainer['y'] = $remoteVoipRes->getBalance();
-            //register series data
-            $seriesData[$key] = $curDataContainer;
-        }
-        $seriesDataStr = json_encode($seriesData);
-        $sipAccountsStr = json_encode($sipAccounts);
-
-
-        $this->render('index', array(
-            'chartData'=>$chartDataArr,
-            'seriesDataStr'=>$seriesDataStr,
-            'sipAccountsStr'=>$sipAccountsStr,
-        ));
+        $this->render('index');
 
     }
     public function actionSipData()
     {
-    header("Content-Type: application/json");
+        header("Content-Type: application/json");
         $allremoteData = RemoteDataCache::model()->findAll();
         $updatedData = array();
         /*format some data*/
