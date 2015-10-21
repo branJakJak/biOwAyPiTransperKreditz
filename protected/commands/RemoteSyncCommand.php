@@ -45,6 +45,14 @@ class RemoteSyncCommand extends CConsoleCommand
                 Yii::log("Balance updated . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
                 $foundModel->save();
+
+                if ($foundModel->save()) {
+                    Yii::log("New Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
+                }else{
+                    Yii::log("Cant update model because :  ".CHtml::errorSummary($foundModel), CLogger::LEVEL_INFO,'sync_log');
+                }
+
+
             } else {
                 Yii::log(
                     sprintf("Model not found  , saving as new model instead - %s - %s - %s - %s",$currentFetchedData['main_user'] ,$currentFetchedData['main_pass'],$currentFetchedData['sub_user'] ,$currentFetchedData['sub_pass'])
@@ -59,7 +67,11 @@ class RemoteSyncCommand extends CConsoleCommand
                 $newModel->vici_user = doubleval($currentFetchedData['vici_user']);
                 $newModel->num_lines = doubleval($currentFetchedData['num_lines']);
                 $newModel->ip_address = $currentFetchedData['ip_address'];
-                $newModel->save();
+                if ($newModel->save()) {
+                    Yii::log("New Model Saved . ", CLogger::LEVEL_INFO,'sync_log');
+                }else{
+                    Yii::log("Cant save new model because :  ".CHtml::errorSummary($newModel), CLogger::LEVEL_INFO,'sync_log');
+                }
             }
         }
     }
