@@ -22,7 +22,6 @@
  */
 class RemoteDataCache extends CActiveRecord
 {
-	public $status;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -145,11 +144,4 @@ class RemoteDataCache extends CActiveRecord
 		   )
 		);
 	}
-	public function afterFind()
-	{
-		$this->status = $this->is_active;
-  		return parent::afterFind();
-	}
-
-	
 }

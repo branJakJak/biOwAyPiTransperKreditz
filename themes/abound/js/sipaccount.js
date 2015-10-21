@@ -35,13 +35,13 @@
 
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.status = "ACTIVE";
+				curData.is_active = "ACTIVE";
 			});
 		}
 
 		this.deactivateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.status = "INACTIVE";
+				curData.is_active = "INACTIVE";
 			});
 		}
 		this.deactivateCurrentAccount = function(currAccount){
@@ -56,7 +56,7 @@
 		 */
 		this.getRowClass = function(currentRow){
 			classNameContainer = "activateAccount";
-			if (currentRow.status === "INACTIVE") {
+			if (currentRow.is_active === "INACTIVE") {
 				classNameContainer = "blockedAccount";
 			}
 			return classNameContainer;
@@ -166,7 +166,7 @@
 			/*Check if credits is below 3 , if below 3 , deactivate */
 			angular.forEach($scope.sipAccounts, function(value, key) {
 				if (value.balance < 3) {
-					value.status = "INACTIVE";
+					value.is_active = "INACTIVE";
 					currentController.deactivateCurrentAccount(value);
 					console.log('deactivating user : '+value.sub_user);
 				}
@@ -221,7 +221,7 @@
 			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
-				if (curData.status === "ACTIVE") {
+				if (curData.is_active === "ACTIVE") {
 					curPromise = $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+curData.vici_user);
 				}else{
 					curPromise = $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+curData.vici_user);
@@ -308,7 +308,7 @@
 			activateUrlTarget = "/subSipAccount/ajaxActivate?vicidial_identification="+currentRow.vici_user;
 			deActivateUrlTarget = "/subSipAccount/ajaxDeactivate?vicidial_identification="+currentRow.vici_user;
 			/*check status*/
-			if (currentRow.status === "ACTIVE") {
+			if (currentRow.is_active === "ACTIVE") {
 				return $http.get(activateUrlTarget).then(function(){
 					$scope.continueConstantRefresh = true;
 					$scope.globalUpdateText = "Updating data...";

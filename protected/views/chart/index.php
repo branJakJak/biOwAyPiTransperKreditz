@@ -65,7 +65,7 @@ Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CC
 Yii::app()->clientScript->registerScript('updateChartDataInterval', '
 function updateChartDataInterval(){
 	jQuery.ajax({
-	  url: "/sipAccount/barChartReportData",
+	  url: "/sipAccount/getBarChartReportData",
 	  type: "POST",
 	  dataType: "json",
 	  complete: function(xhr, textStatus) {
