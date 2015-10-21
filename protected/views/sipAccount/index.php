@@ -164,7 +164,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.num_lines}}
 			</td>
-			<td><input ng-model="topUpCreditsVal" type="number" name="" class="" value="" min="0" title=""></td>
+			<td><input ng-model="topUpCreditsVal" type="number" ></td>
 			<td>
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
