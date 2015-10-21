@@ -61,7 +61,6 @@ class RemoteSyncCommand extends CConsoleCommand
                 $foundModel->ip_address = $currentFetchedData['server_ip'];
                 $foundModel->campaign = $currentFetchedData["campaign"];
 
-                //@TODO - campaign name
                 
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
