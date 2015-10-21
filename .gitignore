@@ -13,3 +13,4 @@ protected/config/console.php
 error_log
 TODO/
 dev/
+sms_data/
