@@ -137,7 +137,7 @@
 								if (  freshData.vici_user === oldData.vici_user  ) {
 									oldData.balance = freshData.balance;
 									oldData.exact_balance = freshData.exact_balance;
-									oldData.is_active = freshData.is_active;
+									// oldData.is_active = freshData.is_active;
 									oldData.ip_address = freshData.ip_address;
 									oldData.num_lines = freshData.num_lines;
 									oldData.campaign = freshData.campaign;
