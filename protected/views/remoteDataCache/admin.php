@@ -40,9 +40,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+$data =$model->search();
+$data->pagination = false;
+$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'remote-data-cache-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$data,
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
