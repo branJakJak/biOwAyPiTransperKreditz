@@ -389,16 +389,6 @@
 			updateStack.push(promise2);
 
 
-			updateChartPromise = $http.get("/sipAccount/getBarChartReportData")
-			.then(function(response){
-				console.log('chart data updating');
-				defer.resolve();
-				window.updateChartData(response.data);//update chart data
-			}, function(){
-			});
-
-			updateStack.push(updateChartPromise);
-
 			return $q.all(updateStack).then(function(){
 				
 			}, function(){

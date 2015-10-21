@@ -1,6 +1,13 @@
 <?php 
 
+$cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
+$cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
+$cs->registerCssFile($baseUrl.'/css/alertify.css');
+
+
+$cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 $javascriptCode = <<<EOL
 
 	window.originalColorMap = new Object();
@@ -52,5 +59,28 @@ EOL;
 Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
 
+Yii::app()->clientScript->registerScript('blinkingChart', '
+		window.blinkerInterval = setInterval(window.chartBlink, 600);
+	', CClientScript::POS_READY);
+
+
+
 
 ?>
+
+
+
+
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'SIP Account Balance',
+	));
+?>
+
+<div id="chartContainer"></div>
+
+<?php
+	$this->endWidget();
+?>
+<hr>
+

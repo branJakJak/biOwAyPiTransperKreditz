@@ -82,6 +82,11 @@ class RemoteSyncCommand extends CConsoleCommand
         }
     }
 
+
+    public function run()
+    {
+        
+    }
     /**
      * Check if model to be checked should issue a notification
      * @param RemoteDataCache $rmtModel Checks
