@@ -18,7 +18,7 @@ class ChartInfoDataArr {
             );
             $currentAsteriskData['id'] = $key;
             $currentAsteriskData['balance'] = doubleval($remoteVoipResult->getBalance());
-            $currentAsteriskData['exact_balance'] = doubleval($xmlObject->getSpecificBalance());
+            $currentAsteriskData['exact_balance'] = doubleval($remoteVoipResult->getSpecificBalance());
             $finalArr[] = $currentAsteriskData;
         }
         return $finalArr;
