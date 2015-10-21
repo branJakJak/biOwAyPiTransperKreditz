@@ -242,6 +242,7 @@ class SubSipAccountController extends Controller
         $reqRes = $activatorObj->run();
 
         /*find the RemoteDataCache and update it too*/
+        $criteria = new CDbCriteria;
         $criteria->compare("vici_user",$vicidial_identification);
         $model = RemoteDataCache::model()->find($criteria);
         $model->is_active = "INACTIVE";
