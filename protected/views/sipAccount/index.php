@@ -177,7 +177,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</a>
 			</td>
 			<td>
-				{{value.last_update}}
+				{{value.date_updated}}
 			</td>
 
 		</tr>
