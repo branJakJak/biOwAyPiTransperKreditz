@@ -65,7 +65,6 @@ class RemoteSyncCommand extends CConsoleCommand
                 
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
-                    
                     $foundModel->save();
                 }else{
                     Yii::log("Cant update model because :  ".CHtml::errorSummary($foundModel), CLogger::LEVEL_INFO,'sync_log');
