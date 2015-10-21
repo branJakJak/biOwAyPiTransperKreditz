@@ -60,6 +60,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'exact_balance',
 		'ip_address',
 		'num_lines',
+		'campaign',
+		'date_created',
+		'date_updated',
 		/*
 		*/
 		array(
