@@ -27,7 +27,7 @@ class RemoteSyncCommand extends CConsoleCommand
             $criteria->compare("sub_pass", $currentFetchedData['sub_pass']);
             $foundModel = RemoteDataCache::model()->find($criteria);
             if ($foundModel) {
-                $last_balance = $foundModel->last_balance;
+                $last_balance = $foundModel->balance;
                 Yii::log("Current Data . ".json_encode($currentFetchedData), CLogger::LEVEL_INFO,'sync_log');
 
                 Yii::log("Model found . ", CLogger::LEVEL_INFO,'sync_log');
@@ -50,10 +50,11 @@ class RemoteSyncCommand extends CConsoleCommand
                 $foundModel->balance = doubleval($currentFetchedData['balance']);
                 Yii::log("Balance updated . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
-
+                $foundModel->last_balance = $last_balance;
+                
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
-                    $foundModel->last_balance = $last_balance;
+                    
                     $foundModel->save();
                 }else{
                     Yii::log("Cant update model because :  ".CHtml::errorSummary($foundModel), CLogger::LEVEL_INFO,'sync_log');
