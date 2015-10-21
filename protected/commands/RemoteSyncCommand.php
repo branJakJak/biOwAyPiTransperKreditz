@@ -18,7 +18,7 @@ class RemoteSyncCommand extends CConsoleCommand
         Yii::log("Data Fetched from remote source", CLogger::LEVEL_INFO,'sync_log');
         foreach ($fetchedData as $currentFetchedData) {
             Yii::log(
-                    sprintf("Iterating data - %s - %s - %s - %s",$currentFetchedData['main_user'] ,$currentFetchedData['main_pass'],$currentFetchedData['sub_user'] ,$currentFetchedData['sub_pass'])
+                    sprintf("Processing data - %s - %s - %s - %s",$currentFetchedData['main_user'] ,$currentFetchedData['main_pass'],$currentFetchedData['sub_user'] ,$currentFetchedData['sub_pass'])
                 , CLogger::LEVEL_INFO,'sync_log');
             $criteria = new CDbCriteria();
             $criteria->compare("main_user", $currentFetchedData['main_user']);
@@ -27,6 +27,8 @@ class RemoteSyncCommand extends CConsoleCommand
             $criteria->compare("sub_pass", $currentFetchedData['sub_pass']);
             $foundModel = RemoteDataCache::model()->find($criteria);
             if ($foundModel) {
+                Yii::log("Current Data . ".json_encode($currentFetchedData), CLogger::LEVEL_INFO,'sync_log');
+
                 Yii::log("Model found . ", CLogger::LEVEL_INFO,'sync_log');
                 /*check current data before saving*/
                 /*notification check */
@@ -44,7 +46,6 @@ class RemoteSyncCommand extends CConsoleCommand
                 $foundModel->balance = doubleval($currentFetchedData['balance']);
                 Yii::log("Balance updated . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
-                $foundModel->save();
 
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
