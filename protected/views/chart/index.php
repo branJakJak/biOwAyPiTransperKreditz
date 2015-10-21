@@ -4,7 +4,6 @@
 $baseUrl = Yii::app()->theme->baseUrl; 
 $cs = Yii::app()->getClientScript();
 
-$cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
