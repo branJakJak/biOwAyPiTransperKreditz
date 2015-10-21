@@ -54,13 +54,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'sub_user',
 		'sub_pass',
 		'vici_user',
-		/*
 		'is_active',
 		'last_balance',
 		'balance',
 		'exact_balance',
 		'ip_address',
 		'num_lines',
+		/*
 		*/
 		array(
 			'class'=>'CButtonColumn',
