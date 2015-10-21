@@ -154,6 +154,7 @@
 					//error 
 				})
 				.then(function(){
+					//currentController.checkCreditStatus();
 				}, function(){
 
 				});
