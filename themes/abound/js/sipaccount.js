@@ -87,39 +87,33 @@
 			freeVoipUser = freeVoipUser.username;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				if (curData.isIncluded) {
-					updateCreditPromise = currentController
-						.topUpMainSip(freeVoipUser,curData.main_user,curData.main_pass,creditsToTopUp)
-						.then(function(){
-							currentController
-								.topUpSubSip(curData.main_user,curData.main_pass,curData.sub_user,curData.sub_pass,creditsToTopUp)
-								.then(function(){
-									$scope.topUpCompletedCount += 1;
-									console.log(curData.main_user + "Topped up .");
-									alertify.success("<strong>Success : </strong>Top-up complete. "+curData.sub_user);
-
-									if ($scope.topUpCompletedCount == $scope.sipAccounts.length) {
-										$scope.topUpCompletedCount = 0;
-										alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
-										$scope.topUpMessageLabel = "Top-up All";
-									}
-
-									defer.resolve();
-								}, function(){
-									alertify.error("We met some problems while retrieving the topping up the sub-SIP account");
-								})
-						}, function(){
-							alertify.error("We met some problems while retrieving the topping up the main SIP account");
-						})
-						.then(function(){
-							
-						});
+					/*topup sub acct promise*/
+					topUpSubPromise = currentController.topUpSubSip(curData.main_user, curData.main_pass, curData.sub_user, curData.sub_pass, creditsToTopUp)
+					topUpSubPromise.then(function(){
+						$scope.topUpCompletedCount += 1;
+						console.log(curData.main_user + "Topped up .");
+						alertify.success("<strong>Success : </strong>Top-up complete. " + curData.sub_user);
+					}, function(){
+						alertify.error("We met some problems while retrieving the topping up the sub-SIP account : "+curData.sub_user);
+						$scope.topUpCompletedCount += 1;
+					});
+					$scope.topUpAllStack.push(topUpSubPromise);
 				}
-				topUpAllStack.push(updateCreditPromise);
 			});
-			$q.all(topUpAllStack)
+
+
+			$q.all($scope.topUpAllStack)
 			.then(function(){
+				$scope.topUpSelectContainerShow = false;
+				$scope.topUpCompletedCount = 0;
+				alertify.success("<strong>Success : </strong>All Accounts are credited.Please wait while we refresh the data.");
+				$scope.topUpMessageLabel = "Update";
+				console.log("All ajax completed");
 			}, function(){
 			});
+
+
+
 		}
 		this.currentshowExclusionPanel = function(){
 			$scope.topUpSelectContainerShow = true;
