@@ -95,6 +95,9 @@ Yii::app()->clientScript->registerScript('blinkingChart', '
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(
 		'title'=>'SIP Account Balance',
+		'htmlOptions'=>array(
+			'class'=>'height: 500px'
+		)
 	));
 ?>
 
