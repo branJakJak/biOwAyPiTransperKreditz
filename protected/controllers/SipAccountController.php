@@ -217,12 +217,12 @@ class SipAccountController extends Controller
             $curDataContainer = array();
 
             if ($currentRemoteData->balance >= 10 ) {
-                $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"#7CB5EC");
+                $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"#7CB5EC");
             }else{
                 if ($currentRemoteData->balance >= 3) {
-                    $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"orange");
+                    $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"orange");
                 }else{
-                    $curDataContainer = array("y"=>$currentRemoteData->balance,"color"=>"red");
+                    $curDataContainer = array("y"=>doubleval($currentRemoteData->balance),"color"=>"red");
                 }
             }
             $seriesData[] = $curDataContainer;
