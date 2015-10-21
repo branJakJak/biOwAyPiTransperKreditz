@@ -31,10 +31,14 @@ class RemoteSyncCommand extends CConsoleCommand
                 /*check current data before saving*/
                 /*notification check */
                 Yii::log("Checking data for notification . ", CLogger::LEVEL_INFO,'sync_log');
-                $this->checkNotification($foundModel);
+
+                // $this->checkNotification($foundModel);
+                
                 /*deactivation check*/
                 Yii::log("Checking status code . ", CLogger::LEVEL_INFO,'sync_log');
-                $this->checkStatus($foundModel);
+
+                // $this->checkStatus($foundModel);
+                // 
                 /*proceed with update*/
                 Yii::log("Updating balance . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->balance = doubleval($currentFetchedData['balance']);
