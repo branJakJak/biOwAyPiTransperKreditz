@@ -9,6 +9,7 @@ class RemoteSyncCommand extends CConsoleCommand
 
     public function actionIndex()
     {   
+        /*@TODO - run this script for 1 minute*/
         $this->synData();
     }
 
@@ -100,7 +101,7 @@ class RemoteSyncCommand extends CConsoleCommand
      * @param RemoteDataCache $rmtModel Checks
      * @return bool
      */
-    private function checkNotification(RemoteDataCache $rmtModel){
+    public function checkNotification(RemoteDataCache $rmtModel){
         $notify = false;
         if ($rmtModel->last_balance === null || ($rmtModel->last_balance > 10 && $rmtModel->balance <= 10)  ) {
             $notifier = new SipAccountNotifier();
@@ -117,7 +118,7 @@ class RemoteSyncCommand extends CConsoleCommand
      * @param RemoteDataCache $rmtModel
      * @return bool
      */
-    private function checkStatus(RemoteDataCache $rmtModel){
+    public function checkStatus(RemoteDataCache $rmtModel){
         $deactivated = false;
         if ($rmtModel->balance < 3) {
             $sipAccount = new SipAccount();

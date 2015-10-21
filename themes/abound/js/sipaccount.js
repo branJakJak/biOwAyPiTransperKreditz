@@ -333,13 +333,27 @@
 			});
 		}
 		this.topUpSubSip = function(mainUsername,mainPassword,subUsername,subPassword,credits){
-			return $http.post('/topUp/subSip',  {
+
+			topupSubSipPromise = $http.post('/topUp/subSip',  {
 				'mainUsername' : mainUsername,
 				'mainPassword' : mainPassword,
 			 	'subUsername' : subUsername,
 			 	'subPassword' : subPassword,
 			 	'credits' : credits,
 			})
+			.then(function(){
+				$http.post("/sync/single",{
+					'mainUsername' : mainUsername,
+					'mainPassword' : mainPassword,
+			 		'subUsername' : subUsername,
+			 		'subPassword' : subPassword
+				});
+
+			}, function(){
+				alertify.error("We cant sync "+subUsername);
+			})
+
+			 return topupSubSipPromise;
 		}
 		/**
 		 * Updates the data value
