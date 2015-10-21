@@ -122,4 +122,17 @@ class RemoteDataCache extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+	public function behaviors()
+	{
+		return array(
+		   'CTimestampBehavior' => array(
+		       'class' => 'zii.behaviors.CTimestampBehavior',
+		       'createAttribute' => 'date_created',
+		       'updateAttribute' => 'date_updated',
+		   )
+		);
+	}
+	
 }

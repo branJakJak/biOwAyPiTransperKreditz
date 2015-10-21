@@ -55,6 +55,13 @@ class RemoteSyncCommand extends CConsoleCommand
                 Yii::log("Balance updated . ", CLogger::LEVEL_INFO,'sync_log');
                 $foundModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
                 $foundModel->last_balance = $last_balance;
+
+                $foundModel->vici_user = doubleval($currentFetchedData['vici_user']);
+                $foundModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
+                $foundModel->ip_address = $currentFetchedData['server_ip'];
+                $foundModel->campaign = $currentFetchedData["campaign"];
+
+                //@TODO - campaign name
                 
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO,'sync_log');
@@ -77,8 +84,10 @@ class RemoteSyncCommand extends CConsoleCommand
                 $newModel->balance = doubleval($currentFetchedData['balance']);
                 $newModel->exact_balance = doubleval($currentFetchedData['exact_balance']);
                 $newModel->vici_user = doubleval($currentFetchedData['vici_user']);
-                $newModel->num_lines = doubleval(@$currentFetchedData['num_lines']);
-                $newModel->ip_address = $currentFetchedData['ip_address'];
+                $newModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
+                $newModel->ip_address = $currentFetchedData['server_ip'];
+                $newModel->campaign = $currentFetchedData["campaign"];
+
                 if ($newModel->save()) {
                     Yii::log("New Model Saved . ", CLogger::LEVEL_INFO,'sync_log');
                 }else{
