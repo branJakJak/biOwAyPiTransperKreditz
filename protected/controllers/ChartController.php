@@ -59,7 +59,7 @@ class ChartController extends Controller
             }
             //register series data
             $initialSeriesData[$key] = array(
-                "y"=>$currentRemoteData->exact_balance,
+                "y"=>doubleval($currentRemoteData->exact_balance),
                 "color"=>$tempColorContainer,
             );
         }
