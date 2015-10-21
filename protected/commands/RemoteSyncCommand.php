@@ -8,6 +8,12 @@ class RemoteSyncCommand extends CConsoleCommand
 {
 
     public function actionIndex()
+    {   
+        $this->synData();
+    }
+
+
+    public function synData()
     {
         /**
          * @var RemoteDataCache $foundModel
@@ -79,13 +85,7 @@ class RemoteSyncCommand extends CConsoleCommand
                     Yii::log("Cant save new model because :  ".CHtml::errorSummary($newModel), CLogger::LEVEL_INFO,'sync_log');
                 }
             }
-        }
-    }
-
-
-    public function run()
-    {
-        
+        }        
     }
     /**
      * Check if model to be checked should issue a notification
