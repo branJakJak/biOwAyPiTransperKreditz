@@ -370,7 +370,20 @@
 
 			promise2 = $http.get("/sipAccount/sipData")
 			.then(function(response){
-				$scope.sipAccounts = response.data;
+				/*sync balance only*/
+
+
+				angular.forEach(response.data, function(freshData, index){
+					angular.forEach($scope.sipAccounts, function(oldData, index){
+						if (  freshData.vici_user === oldData.vici_user  ) {
+							oldData.balance = freshData.balance;
+							oldData.exact_balance = freshData.exact_balance;
+						}
+					});
+				});
+
+				// $scope.sipAccounts = response.data;
+
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
 				alertify.error("We met some problems while retrieving the data");
