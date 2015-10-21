@@ -60,6 +60,7 @@ class RemoteSyncCommand extends CConsoleCommand
                 $foundModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
                 $foundModel->ip_address = $currentFetchedData['server_ip'];
                 $foundModel->campaign = $currentFetchedData["campaign"];
+                $foundModel->is_active = $currentFetchedData["INACTIVE"];
 
                 
                 if ($foundModel->save()) {
@@ -85,7 +86,7 @@ class RemoteSyncCommand extends CConsoleCommand
                 $newModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
                 $newModel->ip_address = $currentFetchedData['server_ip'];
                 $newModel->campaign = $currentFetchedData["campaign"];
-
+                $newModel->is_active = $currentFetchedData["INACTIVE"];
                 if ($newModel->save()) {
                     Yii::log("New Model Saved . ", CLogger::LEVEL_INFO,'sync_log');
                 }else{
