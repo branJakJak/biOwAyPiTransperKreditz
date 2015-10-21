@@ -42,8 +42,6 @@ class RemoteSyncCommand extends CConsoleCommand
 
                 // $this->checkStatus($foundModel);
                 // 
-                //@TODO - save the last balance
-                //
                 
                 /*proceed with update*/
                 Yii::log("Updating balance . ", CLogger::LEVEL_INFO,'sync_log');
