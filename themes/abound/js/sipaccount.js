@@ -286,7 +286,6 @@
 			return $q.all(updateStack)
 				.then(function(){
 					$scope.continueConstantRefresh = true;
-					value.topUpText = "Done";
 					alertify.success("SUCCESS : The records are updated")
 				}, function(){
 					alertify.success("We met some error while synchronizing the data to the database");
