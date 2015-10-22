@@ -219,9 +219,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</a>
 			</td>
 			<td>
-				<span am-time-ago="indexCtrl.quickParseDate(value.date_updated)"></span>
+				{{ indexCtrl.awayFromNow(value.date_updated) }}
 			</td>
-
 		</tr>
 	</tbody>
 </table>

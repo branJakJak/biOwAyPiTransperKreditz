@@ -5,7 +5,7 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment']);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies','$locale', function ($scope,$http,$q,$timeout,$cookies,$locale) {
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 
 		var currentController = this;
 		$scope.sipAccounts = [];
@@ -378,8 +378,8 @@
 			return $http.post("/sipAccount/notifyAccount");
 		}
 		
-		this.quickParseDate = function(dateStr){
-			return moment(dateStr)._d;
+		this.awayFromNow = function(dateStr){
+			return moment(dateStr).fromNow();
 		}
 
 
