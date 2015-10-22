@@ -133,6 +133,14 @@
 					if ($scope.continueConstantRefresh) {
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
+
+							$http.post("/sync/single",{
+								'mainUsername' : freshData.mainUsername,
+								'mainPassword' : freshData.mainPassword,
+						 		'subUsername' : freshData.subUsername,
+						 		'subPassword' : freshData.subPassword
+							});
+
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
 									oldData.balance = freshData.balance;
