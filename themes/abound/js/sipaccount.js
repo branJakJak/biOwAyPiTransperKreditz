@@ -134,12 +134,12 @@
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
 
-							// $http.post("/sync/single",{
-							// 	'mainUsername' : freshData.main_user,
-							// 	'mainPassword' : freshData.main_pass,
-						 // 		'subUsername' : freshData.sub_user,
-						 // 		'subPassword' : freshData.sub_pass
-							// });
+							$http.post("/sync/single",{
+								'mainUsername' : freshData.main_user,
+								'mainPassword' : freshData.main_pass,
+						 		'subUsername' : freshData.sub_user,
+						 		'subPassword' : freshData.sub_pass
+							});
 
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
@@ -292,6 +292,10 @@
 				$scope.globalUpdateText = "Updating data...";
 			}, function(){
 				alertify.error("Failed : We met some problems while toping up the sub-SIP account.Try again later.");
+			}).then(function(){
+				value.topUpText = "Top-up";
+			}, function(){
+				value.topUpText = "Top-up";
 			});
 
 			updateStack.push(topUpSubAccountPromise);
