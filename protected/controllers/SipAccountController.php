@@ -158,10 +158,28 @@ class SipAccountController extends Controller
         $updatedData = array();
         /*format some data*/
         foreach ($allremoteData as $curObj) {
-            $curObj->date_updated = date("Y/m/d H:i:s",strtotime($curObj->date_updated));
+            $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
             $updatedData[] = $curObj;
         }
         echo CJSON::encode($updatedData);
+    }
+    private function simpleAgoHelper($time){
+       $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+       $lengths = array("60","60","24","7","4.35","12","10");
+       $now = time();
+       $difference     = $now - $time;
+       $tense         = "ago";
+
+       for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+           $difference /= $lengths[$j];
+       }
+
+       $difference = round($difference);
+
+       if($difference != 1) {
+           $periods[$j].= "s";
+       }
+       return "$difference $periods[$j] 'ago' ";
     }
     public function actionRemoteAsteriskInfo()
     {

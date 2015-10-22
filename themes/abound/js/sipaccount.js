@@ -138,12 +138,12 @@
 
 							/*TODO - uncomment if prod*/
 
-							$http.post("/sync/single",{
-								'mainUsername' : freshData.main_user,
-								'mainPassword' : freshData.main_pass,
-						 		'subUsername' : freshData.sub_user,
-						 		'subPassword' : freshData.sub_pass
-							});
+							// $http.post("/sync/single",{
+							// 	'mainUsername' : freshData.main_user,
+							// 	'mainPassword' : freshData.main_pass,
+						 // 		'subUsername' : freshData.sub_user,
+						 // 		'subPassword' : freshData.sub_pass
+							// });
 
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {

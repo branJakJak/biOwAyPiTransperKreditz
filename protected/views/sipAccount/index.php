@@ -219,7 +219,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</a>
 			</td>
 			<td>
-				{{ indexCtrl.awayFromNow(value.date_updated) }}
+				{{ value.date_updated }}
 			</td>
 		</tr>
 	</tbody>
