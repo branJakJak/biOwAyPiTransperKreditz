@@ -135,10 +135,10 @@
 						angular.forEach(response.data, function(freshData, index){
 
 							$http.post("/sync/single",{
-								'mainUsername' : freshData.mainUsername,
-								'mainPassword' : freshData.mainPassword,
-						 		'subUsername' : freshData.subUsername,
-						 		'subPassword' : freshData.subPassword
+								'mainUsername' : freshData.main_user,
+								'mainPassword' : freshData.main_pass,
+						 		'subUsername' : freshData.sub_user,
+						 		'subPassword' : freshData.sub_pass
 							});
 
 							angular.forEach($scope.sipAccounts, function(oldData, index){
