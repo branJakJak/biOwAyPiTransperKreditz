@@ -379,7 +379,7 @@
 		}
 		
 		this.quickParseDate = function(dateStr){
-			return moment(value.date_updated)._d;
+			return moment(dateStr)._d;
 		}
 
 

@@ -219,7 +219,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</a>
 			</td>
 			<td>
-				{{value.date_updated}}
 				<span am-time-ago="indexCtrl.quickParseDate(value.date_updated)"></span>
 			</td>
 
