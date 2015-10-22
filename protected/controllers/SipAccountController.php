@@ -158,7 +158,7 @@ class SipAccountController extends Controller
         $updatedData = array();
         /*format some data*/
         foreach ($allremoteData as $curObj) {
-            $curObj->date_updated = date("g:i a",strtotime($curObj->date_updated));
+            $curObj->date_updated = date("Y/m/d H:i:s",strtotime($curObj->date_updated));
             $updatedData[] = $curObj;
         }
         echo CJSON::encode($updatedData);

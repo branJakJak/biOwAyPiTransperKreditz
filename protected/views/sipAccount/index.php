@@ -1,6 +1,15 @@
 <?php
 /* @var $this SipAccountController */
 /* @var $dataProvider CActiveDataProvider */
+$baseUrl = Yii::app()->theme->baseUrl; 
+$cs = Yii::app()->getClientScript();
+
+
+// ==================================================================
+//
+// Declare some supplementary data to widgets
+//
+// ------------------------------------------------------------------
 
 $this->breadcrumbs=array(
 	'Sip Accounts',
@@ -9,11 +18,28 @@ $this->menu=array(
 	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
 );
 
-$baseUrl = Yii::app()->theme->baseUrl; 
-$cs = Yii::app()->getClientScript();
+
+// ==================================================================
+//
+// Include scripts
+//
+// ------------------------------------------------------------------
+
 /*angular*/
 $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
+/*moment js library */
+$cs->registerScriptFile($baseUrl.'/bower_components/moment/min/moment-with-locales.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/moment-timezone/moment-timezone.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/moment/min/moment-timezone-data.js'  , CClientScript::POS_END);
+
+// jstz
+$cs->registerScriptFile($baseUrl.'/js/jstz.min.js'  , CClientScript::POS_END);
+
+/* angular external modules*/
 $cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-moment/angular-moment.min.js'  , CClientScript::POS_END);
+
+/*dumb logic codes*/
 $cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
@@ -25,7 +51,10 @@ $cs->registerCssFile($baseUrl.'/css/alertify.css');
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 
 
-Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
+
+
+
+
 
 
 
@@ -71,8 +100,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <h1>
     Sip Accounts ({{sipAccounts.length}}) <small>[bestvoipreselling]</small>
 </h1>
+
 <hr>
-<div class="span12">
+<div class="well">
 	<div class="span2">
 		<strong>
 			<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
@@ -85,7 +115,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<strong >Deactivate All</strong>
 		</strong>		
 	</div>
-	<div class="span5 offset1 topUpAllContainer">
+	<div class="span5 offset2 topUpAllContainer">
 		<input type="number" ng-model="creditsToTopUpAll" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
 		<div ng-show="freeVoipAccts.length == 0">
 			<i  class="fa fa-spinner fa-spin"></i>
@@ -190,6 +220,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 			<td>
 				{{value.date_updated}}
+				<span am-time-ago="value.date_updated"></span>
 			</td>
 
 		</tr>

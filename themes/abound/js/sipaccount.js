@@ -4,8 +4,9 @@
 * The Sip account module for table organization
 */
 (function(){
-	sipAccountModule = angular.module('sipAccountModule', ['ngCookies']);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
+	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment']);
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies','$locale', function ($scope,$http,$q,$timeout,$cookies,$locale) {
+
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
@@ -134,6 +135,9 @@
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
 
+
+							/*TODO - uncomment if prod*/
+							
 							$http.post("/sync/single",{
 								'mainUsername' : freshData.main_user,
 								'mainPassword' : freshData.main_pass,
@@ -425,7 +429,12 @@
 		$scope.globalUpdateText = "Loading data...";
 		this.synchronizeData();
 		this.constantDataRefresh();
-	}])
+		// 
+		
+
+	}]);//end of IndexController
+
+
 })();
 
 

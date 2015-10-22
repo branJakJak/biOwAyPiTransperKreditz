@@ -378,6 +378,7 @@ update individual - update only single account
 
 
 @TODO  -sync our remote to our database
+@DONE
 
 
 @TODO - test deactivate 
@@ -393,7 +394,7 @@ update individual - update only single account
 
 @TODO - run cron for 1 minute
 then die 
-
+@DONE
 
 
 
@@ -401,6 +402,14 @@ then die
 @TODO - move the checking of 
 credit balanace and notification to 
 start from user  - aside from CROn
+@DONE
+
+
+
+
+
+@TODO - fix the date of last update
+relative to viewers locale
 
 
 @TODO - sync also the , ip  , num of lines and campaign
@@ -410,3 +419,8 @@ this.synchronizeData
 
 @TODO - fix the bug , 
 when updating the status , the 
+
+
+
+@TODO export data from apivoip 
+so we can test it here in local machine 
