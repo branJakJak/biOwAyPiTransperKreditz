@@ -220,7 +220,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 			<td>
 				{{value.date_updated}}
-				<span am-time-ago="value.date_updated"></span>
+				<span am-time-ago="{{moment(value.date_updated)}}"></span>
 			</td>
 
 		</tr>
