@@ -356,6 +356,12 @@
 
 			 return topupSubSipPromise;
 		}
+
+
+		this.notifyAccount = function(value){
+			return $http.post("/sipAccount/notifyAccount");
+		}
+		
 		/**
 		 * Updates the data value
 		 */
