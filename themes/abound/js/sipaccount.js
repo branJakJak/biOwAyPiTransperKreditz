@@ -137,7 +137,7 @@
 
 
 							/*TODO - uncomment if prod*/
-							
+
 							$http.post("/sync/single",{
 								'mainUsername' : freshData.main_user,
 								'mainPassword' : freshData.main_pass,
@@ -378,6 +378,11 @@
 			return $http.post("/sipAccount/notifyAccount");
 		}
 		
+		this.quickParseDate = function(dateStr){
+			return moment(value.date_updated)._d;
+		}
+
+
 		/**
 		 * Updates the data value
 		 */
