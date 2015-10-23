@@ -44,8 +44,10 @@ class FreeVoipAccountsController extends Controller
 			),
 		);
 	}
-	public function actionCreditsUpdate($mainVoipUsername , $credits)
+	public function actionCreditsUpdate()
 	{
+		$mainVoipUsername = @$_GET['mainVoipUsername'];
+		$credits = @$_GET['credits'];
 		header("Access-Control-Allow-Origin: *");	
 		header("Content-Type: application/json");
 		$jsonResponse = array(
