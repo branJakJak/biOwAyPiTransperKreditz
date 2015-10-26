@@ -424,3 +424,9 @@ when updating the status , the
 
 @TODO export data from apivoip 
 so we can test it here in local machine 
+
+
+@TODo
+when remote data deleted something 
+we need a way to recognize the deleted data from remote 
+-so we can fully reflect it from our table records
