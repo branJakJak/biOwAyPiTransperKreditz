@@ -172,7 +172,7 @@
 				}, function(){
 
 				});
-			}, 5000);
+			}, 20 * 1000);
 		}
 
 		this.checkCreditStatus = function(){

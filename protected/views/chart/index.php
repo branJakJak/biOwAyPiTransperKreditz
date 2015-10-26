@@ -76,7 +76,7 @@ function updateChartDataInterval(){
 	  },
 	});
 }
-setTimeout(updateChartDataInterval, 1000);
+setTimeout(updateChartDataInterval, 30 * 1000);
 ', CClientScript::POS_READY);
 
 
