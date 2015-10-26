@@ -156,7 +156,7 @@ class SipAccountController extends Controller
         header("Content-Type: application/json");
         $criteria = new CDbCriteria;
         $criteria->order = "vici_user ASC";
-        $allremoteData = RemoteDataCache::model()->findAll();
+        $allremoteData = RemoteDataCache::model()->findAll($criteria);
         $updatedData = array();
         /*format some data*/
         foreach ($allremoteData as $curObj) {
@@ -195,7 +195,9 @@ class SipAccountController extends Controller
     public function actionGetBarChartReportData()
     {
         header("Content-Type: application/json");
-        $allremoteData = RemoteDataCache::model()->findAll();
+        $criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
+        $allremoteData = RemoteDataCache::model()->findAll($criteria);
         $seriesData = array();
 
         foreach ($allremoteData as $currentRemoteData) {
