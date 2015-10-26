@@ -48,12 +48,12 @@ class RemoteSyncCommand extends CConsoleCommand
                 /*notification check */
                 Yii::log("Checking data for notification . ", CLogger::LEVEL_INFO,'sync_log');
 
-                // $this->checkNotification($foundModel);
+                $this->checkNotification($foundModel);
                 
                 /*deactivation check*/
                 Yii::log("Checking status code . ", CLogger::LEVEL_INFO,'sync_log');
 
-                // $this->checkStatus($foundModel);
+                $this->checkStatus($foundModel);
                 // 
                 
                 /*proceed with update*/
@@ -111,7 +111,8 @@ class RemoteSyncCommand extends CConsoleCommand
         if ($rmtModel->last_balance === null || ($rmtModel->last_balance > 10 && $rmtModel->balance <= 10)  ) {
             $notifier = new SipAccountNotifier();
             $notifier->quickRing();
-            mail("hellsing357@gmail.com", "Credits Low < 3", file_get_contents("php://input"));
+            $logMessage = sprintf("%s - %s - %s - %s  | this account has an account below 10 ", $rmtModel->main_user ,  $rmtModel->main_pass , $rmtModel->sub_user , $rmtModel->sub_pass );
+            mail("hellsing357@gmail.com", "Credits Low < 10", $logMessage );
             $notify = true;
         }
         return $notify;
@@ -130,6 +131,10 @@ class RemoteSyncCommand extends CConsoleCommand
             $sipAccount->vicidial_identification = $rmtModel->vici_user;
             $activatorObj = new DeactivateVicidialUser($sipAccount);
             $retData = $activatorObj->run();
+
+            $logMessage = sprintf("%s - %s - %s - %s  | this account has an account below 3 is now deactivated ", $rmtModel->main_user ,  $rmtModel->main_pass , $rmtModel->sub_user , $rmtModel->sub_pass );
+            mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage );
+
             $deactivated = $retData['success'];
         }
         return $deactivated;
