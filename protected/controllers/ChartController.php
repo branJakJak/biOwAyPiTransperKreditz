@@ -39,7 +39,9 @@ class ChartController extends Controller
 		$initialSeriesData = array();
         $sipAccountNames = array();
         $chartInitialData = array();
-        $allRemoteModels = RemoteDataCache::model()->findAll();
+		$criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
+        $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
 
         foreach ($allRemoteModels as $key => $currentRemoteData) {
             $tempColorContainer = "red";
