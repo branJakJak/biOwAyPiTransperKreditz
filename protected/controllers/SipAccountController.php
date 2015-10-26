@@ -154,6 +154,8 @@ class SipAccountController extends Controller
     public function actionSipData()
     {
         header("Content-Type: application/json");
+        $criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
         $allremoteData = RemoteDataCache::model()->findAll();
         $updatedData = array();
         /*format some data*/
