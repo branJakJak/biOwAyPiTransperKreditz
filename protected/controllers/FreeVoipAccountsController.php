@@ -82,7 +82,6 @@ class FreeVoipAccountsController extends Controller
 	{
 		header("Content-Type: application/json");
 		$criteria = new CDbCriteria;
-		$criteria->select = "username";
 		$allAccts = FreeVoipAccounts::model()->findAll($criteria);
 		echo CJSON::encode($allAccts);
 	}

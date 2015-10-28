@@ -96,11 +96,24 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 
 <hr>
+<div class="well">
+	<div class="span5">
+		<h1>
+			Sip Accounts ({{sipAccounts.length}}) 
+			<small>
+				[bestvoipreselling]
+			</small>
+		</h1>
+	</div>
 
-<h1>
-    Sip Accounts ({{sipAccounts.length}}) <small>[bestvoipreselling]</small>
-</h1>
-
+	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
+		<h4>
+			{{value.username}} <br>
+			<small>{{value.credits}}</small>
+		</h4>
+	</div>
+	<div class="clearfix"></div>
+</div>
 <hr>
 <div class="well">
 	<div class="span2">

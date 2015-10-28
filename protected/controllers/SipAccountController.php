@@ -181,7 +181,7 @@ class SipAccountController extends Controller
        if($difference != 1) {
            $periods[$j].= "s";
        }
-       return "$difference $periods[$j] 'ago' ";
+       return "$difference $periods[$j] ago";
     }
     public function actionRemoteAsteriskInfo()
     {

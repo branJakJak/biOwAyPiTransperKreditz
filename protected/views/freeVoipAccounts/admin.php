@@ -49,8 +49,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'username',
 		'password',
 		'credits',
-		'date_created',
-		'date_updated',
+		// 'date_created',
+		// 'date_updated',
+		array(
+			'type'=>'raw',
+			'header'=>'Last update',
+			'value'=>'VoipTransDateHelper::timeAgo(strtotime($data->date_updated))'
+		)
 		array(
 			'class'=>'CButtonColumn',
 		),

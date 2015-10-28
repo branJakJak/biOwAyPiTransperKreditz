@@ -419,14 +419,22 @@ this.synchronizeData
 
 @TODO - fix the bug , 
 when updating the status , the 
-
+@DNE
 
 
 @TODO export data from apivoip 
 so we can test it here in local machine 
+@DNE
 
 
 @TODo
 when remote data deleted something 
 we need a way to recognize the deleted data from remote 
 -so we can fully reflect it from our table records
+
+
+
+@TODO
+isabay ko na lang sa upload maya
+
+

@@ -5,6 +5,7 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment']);
+	
 	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 
 		var currentController = this;
@@ -135,6 +136,8 @@
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
 
+
+							//@TODO
 							$http.post("/sync/single",{
 								'mainUsername' : freshData.main_user,
 								'mainPassword' : freshData.main_pass,
@@ -181,7 +184,11 @@
 			angular.forEach($scope.sipAccounts, function(value, key) {
 				if (value.balance < 3) {
 					value.is_active = "INACTIVE";
+
+					//@TODO
 					currentController.deactivateCurrentAccount(value);
+
+
 					console.log('deactivating user : '+value.sub_user);
 				}
 				if (value.balance < 5) {
