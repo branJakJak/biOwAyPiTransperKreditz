@@ -100,7 +100,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	<div class="span5">
 		<h1>
 			Sip Accounts ({{sipAccounts.length}}) 
-			<small>
+			<small style="font-size: 19px;">
 				[bestvoipreselling]
 			</small>
 		</h1>
