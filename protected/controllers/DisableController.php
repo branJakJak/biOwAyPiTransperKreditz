@@ -30,6 +30,10 @@ class DisableController extends Controller
 		$criteria->compare("main_pass",$mainpassword);
 		$model = RemoteDataCache::model()->find($criteria);
 		if ($model) {
+			/*manually disable it - from record*/
+			$model->is_active = "INACTIVE";
+			$model->save();
+			
             $sipAccount = new SipAccount();
             $sipAccount->vicidial_identification = $model->vici_user;
 			$activatorObj = new DeactivateVicidialUser($sipAccount);
