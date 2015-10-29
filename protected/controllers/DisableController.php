@@ -35,13 +35,16 @@ class DisableController extends Controller
 			$activatorObj = new DeactivateVicidialUser($sipAccount);
 			$retData = $activatorObj->run();
             $logMessage = sprintf(
-	            	"%s - %s - %s - %s  | this account has an account below 3 is now deactivated ", 
+	            	"%s - %s - %s - %s  | this account has an account below 3 is now deactivated  | remote log : %s ", 
 	            	$model->main_user,
 	            	$model->main_pass,
 	            	$model->sub_user,
-	            	$model->sub_pass
+	            	$model->sub_pass,
+	            	$retData,
             	);
-            // mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage );
+            mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage );
+            header("Content-Type: application/json");
+            echo json_encode(array("success"=>true,"message"=>"account deactivated"));
 		}else{
 			$errorSummary = sprintf("Sorry we cant find this account in our database. %s | %s",$mainusername,$mainpassword);
 			throw new CHttpException(404,$errorSummary);
