@@ -427,14 +427,18 @@ so we can test it here in local machine
 @DNE
 
 
-@TODo
+@TODO
+isabay ko na lang sa upload maya
+@DONE
+
+
+@TODO
 when remote data deleted something 
 we need a way to recognize the deleted data from remote 
 -so we can fully reflect it from our table records
 
 
-
-@TODO
-isabay ko na lang sa upload maya
+@TODO - 
+disable/account?mainusername=replaceMainUsernameHere&mainpassword=replaceMainPasswordHere
 
 
