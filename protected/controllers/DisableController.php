@@ -40,7 +40,7 @@ class DisableController extends Controller
 	            	$model->main_pass,
 	            	$model->sub_user,
 	            	$model->sub_pass,
-	            	$retData,
+	            	$retData
             	);
             mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage );
             header("Content-Type: application/json");
