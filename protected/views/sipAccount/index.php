@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 	'Sip Accounts',
 );
 $this->menu=array(
-	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
+	array('label'=>'Manage SIP Account', 'url'=>array('create')),
 );
 
 

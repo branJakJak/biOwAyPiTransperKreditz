@@ -439,9 +439,14 @@ we need a way to recognize the deleted data from remote
 
 
 @TODO - 
-disable/account?mainusername=replaceMainUsernameHere&mainpassword=replaceMainPasswordHere
+https://apivoip.ml/disable/account?mainusername=replaceMainUsernameHere&mainpassword=replaceMainPasswordHere
 
 
 https://apivoip.ml/disable/account?mainusername=scottsdalecorp&mainpassword=EiRe5Elohkee
 
 
+
+
+Disabling Account 
+
+Url : https://apivoip.ml/disable/account?

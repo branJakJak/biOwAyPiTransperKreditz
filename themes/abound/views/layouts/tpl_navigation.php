@@ -30,6 +30,7 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                         array('label'=>'Charts', 'url'=>array('/chart'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Campaigns', 'url'=>array('/campaigns/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Manage SIP Accounts', 'url'=>array('remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
                         array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     ),
