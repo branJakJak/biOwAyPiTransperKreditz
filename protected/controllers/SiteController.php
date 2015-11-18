@@ -128,7 +128,7 @@ class SiteController extends Controller
 	{
 		$allModels = RemoteDataCache::model()->findAll();
 		foreach ($allmodel as $key => $currentModel) {
-			$urlStr = sprintf("https://apivoip.ml/disable/account?mainusername=%s&mainpassword=%s", $currentModel->main_user,$currentModel->main_pass)
+			$urlStr = sprintf("https://apivoip.ml/disable/account?mainusername=%s&mainpassword=%s", $currentModel->main_user,$currentModel->main_pass);
 			echo $urlStr."<br>";
 		}
 		die();
