@@ -127,7 +127,7 @@ class SiteController extends Controller
 	public function actionGenerate()
 	{
 		$allModels = RemoteDataCache::model()->findAll();
-		foreach ($allmodel as $key => $currentModel) {
+		foreach ($allModels as $key => $currentModel) {
 			$urlStr = sprintf("https://apivoip.ml/disable/account?mainusername=%s&mainpassword=%s", $currentModel->main_user,$currentModel->main_pass);
 			echo $urlStr."<br>";
 		}
