@@ -47,6 +47,7 @@ class DisableController extends Controller
 	            	$retData
             	);
             mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage );
+            Yii::log($logMessage, CLogger::LEVEL_INFO,'info');
             header("Content-Type: application/json");
             echo json_encode(array("success"=>true,"message"=>"account deactivated"));
 		}else{

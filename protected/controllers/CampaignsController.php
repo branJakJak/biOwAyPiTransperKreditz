@@ -29,7 +29,7 @@ class CampaignsController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index','activate','deactivate'),
+                'actions' => array('activate','deactivate'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users

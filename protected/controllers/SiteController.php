@@ -26,7 +26,7 @@ class SiteController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index'),
+				'actions'=>array('index','generate'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -124,39 +124,13 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-	public function actionTest()
+	public function actionGenerate()
 	{
-		Yii::import('ext.EGeoIP.*');
-		$geoIp = new EGeoIP();
-		$geoIp->locate('122.53.31.203'); // use your IP
-
-
-echo 'Information regarding IP: <b>'.$geoIp->ip.'</b><br/>';
-echo 'City: '.$geoIp->city.'<br>';
-echo 'Region: '.$geoIp->region.'<br>';
-echo 'Area Code: '.$geoIp->areaCode.'<br>';
-echo 'DMA: '.$geoIp->dma.'<br>';
-echo 'Country Code: '.$geoIp->countryCode.'<br>';
-echo 'Country Name: '.$geoIp->countryName.'<br>';
-echo 'Continent Code: '.$geoIp->continentCode.'<br>';
-echo 'Latitude: '.$geoIp->latitude.'<br>';
-echo 'Longitude: '.$geoIp->longitude.'<br>';
-echo 'Currency Symbol: '.$geoIp->currencySymbol.'<br>';
-echo 'Currency Code: '.$geoIp->currencyCode.'<br>';
-echo 'Currency Converter: '.$geoIp->currencyConverter.'<br/>';
- 
-		
-		// print_r(AsteriskCarriers::getData());
-		// $command = Yii::app()->asterisk_db->createCommand("select * from user_carrier");
-		// $allResults = $command->queryAll();
-		// echo json_encode($allResults);
-		// mail($to, $subject, $message);
-		// $mail = new YiiMailer();
-		// $mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
-		// $mail->setTo($to);
-		// $mail->setSubject('APIVOIP - credit limit');
-		// $mail->setBody($message);
-		// $mail->setSmtp('smtp.gmail.com', 465, 'ssl', true, 'apivoipnotifier@gmail.com', 'notifyusplease');
-		// $mail->send();
+		$allModels = RemoteDataCache::model()->findAll();
+		foreach ($allmodel as $key => $currentModel) {
+			$urlStr = sprintf("https://apivoip.ml/disable/account?mainusername=%s&mainpassword=%s", $currentModel->main_user,$currentModel->main_pass)
+			echo $urlStr."<br>";
+		}
+		die();
 	}
 }
