@@ -4,7 +4,7 @@
 * The Sip account module for table organization
 */
 (function(){
-	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment']);
+	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment','720kb.tooltips']);
 	
 	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
 
@@ -47,10 +47,18 @@
 			});
 		}
 		this.deactivateCurrentAccount = function(currAccount){
+			//@TODo
 			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
 		}
 		this.activateCurrentAccount = function(currAccount){
 			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
+		}
+		this.getTotalBalance = function(){
+			var total = 0;
+			angular.forEach($scope.sipAccounts,function(currentElement,index){
+				total += parseFloat(currentElement.exact_balance);
+			});
+			return total;
 		}
 		/**
 		 * Gets appropriate clas
@@ -187,8 +195,6 @@
 
 					//@TODO
 					currentController.deactivateCurrentAccount(value);
-
-
 					console.log('deactivating user : '+value.sub_user);
 				}
 				if (value.balance < 5) {
