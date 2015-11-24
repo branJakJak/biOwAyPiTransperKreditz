@@ -39,9 +39,15 @@ $cs->registerScriptFile($baseUrl.'/js/jstz.min.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-moment/angular-moment.min.js'  , CClientScript::POS_END);
 
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.js'  , CClientScript::POS_END);
+
+
+
+
 /*dumb logic codes*/
 $cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
+
 
 
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
@@ -49,6 +55,8 @@ $cs->registerCssFile($baseUrl.'/css/alertify.css');
 
 
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
+
+$cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.css');
 
 
 
@@ -99,17 +107,27 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <div class="well">
 	<div class="span5">
 		<h1>
-			Sip Accounts ({{sipAccounts.length}}) 
+			Sip Accounts Balance
 			<small style="font-size: 19px;">
-				[bestvoipreselling]
+				[{{indexCtrl.getTotalBalance() | number}}]
 			</small>
 		</h1>
 	</div>
 
 	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
 		<h4>
+			<small>
+				<a tooltips title="Since last update">
+					{{value.last_updated}}
+				</a>
+					
+				</a>
+			</small>
+			<br>
 			{{value.username}} <br>
-			<small>{{value.credits}}</small>
+			<strong>
+				{{value.credits}}
+			</strong>
 		</h4>
 	</div>
 	<div class="clearfix"></div>

@@ -83,7 +83,20 @@ class FreeVoipAccountsController extends Controller
 		header("Content-Type: application/json");
 		$criteria = new CDbCriteria;
 		$allAccts = FreeVoipAccounts::model()->findAll($criteria);
-		echo CJSON::encode($allAccts);
+		$finalArr = array();
+
+		foreach ($allAccts as $key => $value) {
+			$finalArr[] = array(
+				"id"=>$value->id,
+				"username"=>$value->username,
+				"password"=>$value->password,
+				"credits"=>$value->credits,
+				"last_updated"=>VoipTransDateHelper::timeAgo(strtotime($value->date_updated)),
+				"date_created"=>$value->date_created,
+				"date_updated"=>$value->date_updated,
+			);
+		}
+		echo CJSON::encode($finalArr);
 	}
 	/**
 	 * Creates a new model.
