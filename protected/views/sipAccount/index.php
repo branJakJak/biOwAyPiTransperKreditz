@@ -107,9 +107,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <div class="well">
 	<div class="span5">
 		<h1>
-			Sip Accounts Balance
+			 {{sipAccounts.length}} Sip Accounts Balance
 			<small style="font-size: 19px;">
-				[{{indexCtrl.getTotalBalance() | number}}]
+				({{indexCtrl.getTotalBalance() | currency:"&#8364;"}})
 			</small>
 		</h1>
 	</div>
