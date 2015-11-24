@@ -117,7 +117,8 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
 		<h4>
 			<small>
-				<a tooltips title="Since last update">
+				<!-- will show this soon -->
+				<a tooltips title="Since last update" ng-show="false">
 					{{value.last_updated}}
 				</a>
 					
