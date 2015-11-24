@@ -106,12 +106,12 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <hr>
 <div class="well">
 	<div class="span5">
-		<h1>
+		<h2 style="margin-top: 25px;">
 			 {{sipAccounts.length}} Sip Accounts Balance
 			<small style="font-size: 19px;">
 				({{indexCtrl.getTotalBalance() | currency:"&#8364;"}})
 			</small>
-		</h1>
+		</h2>
 	</div>
 
 	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
