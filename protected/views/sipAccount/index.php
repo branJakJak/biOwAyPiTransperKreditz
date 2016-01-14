@@ -118,7 +118,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		<h4>
 			<small>
 				<!-- will show this soon -->
-				<a tooltips title="Since last update" ng-show="false">
+				<a tooltips title="Since last update" >
 					{{value.last_updated}}
 				</a>
 					
