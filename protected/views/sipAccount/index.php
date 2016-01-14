@@ -121,8 +121,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<a tooltips title="Since last update" >
 					{{value.last_updated}}
 				</a>
-					
-				</a>
 			</small>
 			<br>
 			{{value.username}} <br>
