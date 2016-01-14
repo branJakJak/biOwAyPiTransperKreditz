@@ -51,8 +51,9 @@ create table Rights
 EOL;
 		$this->execute($initSqlCommand);
 		$sqlCommand = <<<EOL
-INSERT INTO `authitem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES ('Admin', 0, 'Admin', NULL, 'N;');
-INSERT INTO `authassignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES ('Admin', '1', NULL, 'N');
+INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES ('Admin', 0, 'Admin', NULL, 'N;');
+INSERT INTO `AuthAssignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES ('Admin', '1', NULL, 'N');
+
 EOL;
 		$this->execute($sqlCommand);
 	}
