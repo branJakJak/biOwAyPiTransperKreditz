@@ -438,7 +438,6 @@
 			.then(function(response){
 
 				if ($scope.APPLICATION_FIRST_RUN) {
-					removing this for now to unscramble the data
 					$scope.sipAccounts = response.data;//
 					$scope.APPLICATION_FIRST_RUN = false;
 				}else{
