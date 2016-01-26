@@ -437,22 +437,23 @@
 			promise2 = $http.get(sipDataUrl)
 			.then(function(response){
 
-				angular.forEach(response.data, function(freshData, indexFreshData){
-					angular.forEach($scope.sipAccounts, function(oldData, indexOldData){
-						if (freshData.id === oldData.id) {
-							$scope.sipAccounts[indexOldData] = freshData;
-						}
-						// if (  freshData.vici_user === oldData.vici_user  ) {
-						// 	oldData.balance = freshData.balance;
-						// 	oldData.exact_balance = freshData.exact_balance;
-						// }
+				if ($scope.APPLICATION_FIRST_RUN) {
+					removing this for now to unscramble the data
+					$scope.sipAccounts = response.data;//
+					$scope.APPLICATION_FIRST_RUN = false;
+				}else{
+					angular.forEach(response.data, function(freshData, indexFreshData){
+						angular.forEach($scope.sipAccounts, function(oldData, indexOldData){
+							if (freshData.id === oldData.id) {
+								$scope.sipAccounts[indexOldData] = freshData;
+							}
+							// if (  freshData.vici_user === oldData.vici_user  ) {
+							// 	oldData.balance = freshData.balance;
+							// 	oldData.exact_balance = freshData.exact_balance;
+							// }
+						});
 					});
-				});
-
-
-				//removing this for now to unscramble the data
-				// $scope.sipAccounts = response.data;//
-
+				}
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
 				alertify.error("We met some problems while retrieving the data");
