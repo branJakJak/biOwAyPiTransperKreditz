@@ -213,7 +213,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	</thead>
 	<tbody ng-cloak>
 		<tr>
-			<td colspan="8" ng-hide="sipAccounts.length !== 0">
+			<td colspan="14" ng-hide="sipAccounts.length !== 0">
 				<i class="fa fa-spinner fa-spin"></i> Loading ...
 			</td>
 		</tr>
