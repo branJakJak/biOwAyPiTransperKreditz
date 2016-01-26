@@ -436,11 +436,11 @@
 			// }
 			promise2 = $http.get(sipDataUrl)
 			.then(function(response){
-				
-				angular.forEach(response.data, function(freshData, index){
-					angular.forEach($scope.sipAccounts, function(oldData, index){
+
+				angular.forEach(response.data, function(freshData, indexFreshData){
+					angular.forEach($scope.sipAccounts, function(oldData, indexOldData){
 						if (freshData.id === oldData.id) {
-							$scope.sipAccounts[index] = freshData;
+							$scope.sipAccounts[indexOldData] = freshData;
 						}
 						// if (  freshData.vici_user === oldData.vici_user  ) {
 						// 	oldData.balance = freshData.balance;
