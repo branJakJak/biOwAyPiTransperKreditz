@@ -1,10 +1,8 @@
 <?php
 
+class ActivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVicidialAccount {
 
-class ActivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVicidialAccount
-{
-    public function run()
-    {
+    public function run() {
         $curlURL = "https://162.250.124.167/vicidial/non_agent_api.php?";
         $httparams = array(
             "function" => "toggle_remote",
@@ -29,12 +27,13 @@ class ActivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVic
             "username" => isset($rawResult[2]) ? trim($rawResult[2]) : null,
         );
 
-        /*update the current model status*/
+        /* update the current model status */
         // $this->remote_user->account_status = "active";
         // if (!$this->remote_user->save()) {
         //     throw new Exception("Cant update Account having username {$this->remote_user->username}");
         // }
-        
+
         return $finalData;
     }
+
 }

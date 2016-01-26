@@ -1,4 +1,7 @@
 <?php
+
+
+
 /* @var $this SipAccountController */
 /* @var $dataProvider CActiveDataProvider */
 $baseUrl = Yii::app()->theme->baseUrl; 
@@ -26,7 +29,7 @@ $this->menu=array(
 // ------------------------------------------------------------------
 
 /*angular*/
-$cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.js'  , CClientScript::POS_END);
 /*moment js library */
 $cs->registerScriptFile($baseUrl.'/bower_components/moment/min/moment-with-locales.min.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/moment-timezone/moment-timezone.js'  , CClientScript::POS_END);
@@ -161,7 +164,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		<div ng-show="topUpSelectContainerShow">
 			<label>Select an account  : </label>
 			<ul style="list-style: none">
-				<li ng-repeat="(key, value) in sipAccounts">
+				<li ng-repeat="(key, value) in sipAccounts ">
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" ng-model="value.isIncluded">
@@ -188,6 +191,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <table class="table">
 	<thead>
 		<tr>
+			<th>#</th>
 			<th>Main Account</th>
 			<th>Sub User</th>
 			<th>Balance</th>
@@ -201,7 +205,9 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Add Balance</th>
 			<th>Balance From</th>
 			<th></th>
+			<th>Get latest balance</th>
 			<th>Last update</th>
+			<th>Delete</th>
 
 		</tr>
 	</thead>
@@ -213,6 +219,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 		</tr>
 
 		<tr ng-repeat="(key, value) in sipAccounts" ng-class="indexCtrl.getRowClass(value)">
+			<td>{{key+1}}</td>
 			<td>{{value.main_user}}</td>
 			<td>{{value.sub_user}}</td>
 			<td>{{value.balance}}</td>
@@ -249,7 +256,16 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				</a>
 			</td>
 			<td>
+				<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
+			</td>
+			
+			<td>
 				{{ value.date_updated }}
+			</td>
+			<td>
+				<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
+					delete
+				</a>
 			</td>
 		</tr>
 	</tbody>

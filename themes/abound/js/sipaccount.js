@@ -14,7 +14,7 @@
 		
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
-		$scope.continueConstantRefresh = true;
+		$scope.continueConstantRefresh = false;
 		$scope.tempCounterDataUpdateReport = 1;
 		$scope.currentRefreshPromise = null;
 		$scope.topUpCompletedCount = 0;
@@ -35,6 +35,17 @@
 		  	}
 		});
 
+		//Sync only the ACTIVE accounts
+		// @To be tested
+		this.syncActiveAccount = function(sipAccountsCollection){
+			angular.forEach(sipAccountsCollection, function(currentSipAccount, index){
+				if (currentSipAccount.is_active === 'ACTIVE') {
+					currentController.quickUpdateBalance(currentSipAccount);
+				}
+			});
+		}
+
+
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curData.is_active = "ACTIVE";
@@ -47,7 +58,6 @@
 			});
 		}
 		this.deactivateCurrentAccount = function(currAccount){
-			//@TODo
 			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
 		}
 		this.activateCurrentAccount = function(currAccount){
@@ -143,16 +153,6 @@
 					if ($scope.continueConstantRefresh) {
 						/* iterate through data and set teh fresh data to sipAccounts*/
 						angular.forEach(response.data, function(freshData, index){
-
-
-							//@TODO
-							$http.post("/sync/single",{
-								'mainUsername' : freshData.main_user,
-								'mainPassword' : freshData.main_pass,
-						 		'subUsername' : freshData.sub_user,
-						 		'subPassword' : freshData.sub_pass
-							});
-
 							angular.forEach($scope.sipAccounts, function(oldData, index){
 								if (  freshData.vici_user === oldData.vici_user  ) {
 									oldData.balance = freshData.balance;
@@ -174,7 +174,7 @@
 
 				})
 				.then(function(){
-					currentController.constantDataRefresh();
+					//currentController.constantDataRefresh();
 				}, function(){
 					//error 
 				})
@@ -244,20 +244,20 @@
 			// $timeout.cancel($scope.currentRefreshPromise);
 			$scope.globalUpdateText = "Updating data...";
 			alertify.success("<p>Updating data, </p>Please wait while we refresh the data.");
-			defer  = $q.defer();
 			updateStack  = [];
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				curPromise = null;
+				//console.log(curData.vici_user+" "+curData.is_active);
 				if (curData.is_active === "ACTIVE") {
-					curPromise = $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+curData.vici_user);
+					curPromise = $http.get("/subSipAccount/ajaxActivate?record_id="+curData.id);
 				}else{
-					curPromise = $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+curData.vici_user);
+					curPromise = $http.get("/subSipAccount/ajaxDeactivate?record_id="+curData.id);
 				}
 				curPromise.then(function(){
- 					defer.resolve();
  					$scope.updateDataReport = "( "+$scope.tempCounterDataUpdateReport+"/"+$scope.sipAccounts.length+" )"
  					$scope.tempCounterDataUpdateReport += 1;
 				}, function(){});
+				console.log("we are now at promise "+ index + " with data "+curData.vici_user)
 				updateStack.push(curPromise);
 			});
 
@@ -272,7 +272,7 @@
 					$scope.tempCounterDataUpdateReport = 1;
 					
 					$scope.continueConstantRefresh = true;
-					currentController.constantDataRefresh();
+					//currentController.constantDataRefresh();
 
 					alertify.success("Success : All the data are now refreshed.");
 				}, function(){
@@ -316,14 +316,35 @@
 
 			return $q.all(updateStack)
 				.then(function(){
-					$scope.continueConstantRefresh = true;
+					$scope.continueConstantRefresh = false;
 					alertify.success("SUCCESS : The records are updated")
+					currentController.synchronizeData();
 				}, function(){
 					alertify.success("We met some error while synchronizing the data to the database");
 				});
 
 
 		}
+		this.quickUpdateBalance = function(model){
+			var promiseCollection = [];
+			//syn to apI
+			syncPromise  = $http.post("/sync/single",{
+			        'mainUsername' : model.main_user,
+			        'mainPassword' : model.main_pass,
+			        'subUsername' : model.sub_user,
+			        'subPassword' : model.sub_pass
+			});
+			promiseCollection.push(syncPromise);
+			//sync to local db
+			retrievePromise =  $http.post("/sipAccount/retrieveSingleData",model)
+					.then(function(response){
+			            model.balance = response.data.balance;
+			            model.is_active = response.data.is_active;
+			        });
+			promiseCollection.push(retrievePromise);
+			$q.all(promiseCollection);
+		}
+
 		this.updateSingleRow = function(currentRow){
 			currentController.updateCurrentRowInfo(currentRow);
 		}
@@ -335,14 +356,14 @@
 			/*check status*/
 			if (currentRow.is_active === "ACTIVE") {
 				return $http.get(activateUrlTarget).then(function(){
-					$scope.continueConstantRefresh = true;
+					$scope.continueConstantRefresh = false;
 					$scope.globalUpdateText = "Updating data...";
 					currentController.synchronizeData();
 				}, function(){
 				});
 			}else{
 				return $http.get(deActivateUrlTarget).then(function(){
-					$scope.continueConstantRefresh = true;
+					$scope.continueConstantRefresh = false;
 					$scope.globalUpdateText = "Updating data...";
 					currentController.synchronizeData();
 				}, function(){
@@ -442,9 +463,15 @@
 		}
 		/*initialize data*/
 		$scope.globalUpdateText = "Loading data...";
-		this.synchronizeData();
-		this.constantDataRefresh();
-		// 
+
+		this.synchronizeData();//initialize sip data and freevoip accounts
+
+		//Synchonize only the active accounts
+		
+		// $interval(function(){
+		// 	//@TODO to be tested
+		// 	currentController.syncActiveAccount($scope.sipAccounts);
+		// }, ( 5 * ( 60 * 1000 ) ) );// 5 minutes
 		
 
 	}]);//end of IndexController

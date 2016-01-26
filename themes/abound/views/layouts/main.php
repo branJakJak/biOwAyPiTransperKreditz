@@ -46,10 +46,12 @@
           .errorMessage{
             color:red;
           }
+          body > section.main-body > div > div > div > div.ng-scope > div > table > tbody > tr:hover {
+              background-color: #b4d455 !important;
+              color: white;
+          }
         </style>
-
   </head>
-
 <body>
 
 <section id="navigation-main">   
@@ -65,7 +67,7 @@
 </section>
 
 <!-- Require the footer -->
-<?php require_once('tpl_footer.php') ?>
+<?php //require_once('tpl_footer.php') ?>
 
 
   

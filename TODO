@@ -446,7 +446,72 @@ https://apivoip.ml/disable/account?mainusername=scottsdalecorp&mainpassword=EiRe
 
 
 
-
+@TODO
 Disabling Account 
-
 Url : https://apivoip.ml/disable/account?
+@DONE
+
+
+
+
+
+
+
+
+
+
+@TODO - retain current row position on update of 
+balance
+@DONE
+
+
+
+
+
+@TODO - this.syncActiveAccount - @TEST
+
+@TODO 
+sync every 5 minutes
+for active accounts only
+foreach account  as acurrentAccount
+	acurrentAccount.sync()  to API and db 
+@TEST
+
+@TODO - put number at /sipAccount/index - @TEST
+
+@TODO - CRON that will delete 
+all non existing records from 
+vbdial to user_carrier
+@TEST
+
+@TODO - 
+after user clicked update balance 
+update the status also
+@TEST
+
+
+@TODO 
+hover hover background color 
+ 
+
+
+
+
+@TODO - 
+bug when updating using global update 
+the last account 
+57/58
+last account will not update 
+ = NEED to recreate scenario
+
+
+
+
+
+
+@TODO 
+After deactivation 
+- resend the deactivation code after 30 seconds
+
+use CRON tab
+

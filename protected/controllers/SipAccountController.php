@@ -29,7 +29,7 @@ class SipAccountController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi','notifyAccount','updateCampaignName'),
+                'actions' => array('create', 'update', 'index', 'view','getBarChartReportData','sipData','remoteAsteriskInfo','syncApi','notifyAccount','updateCampaignName','retrieveSingleData','quickDelete'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -41,7 +41,24 @@ class SipAccountController extends Controller
             ),
         );
     }
+    public function actionQuickDelete($cacheid){
+    $model = RemoteDataCache::model()->findByPk($cacheid);
+    if($model){
+        $model->delete();   
+    }
+    $this->redirect('/sipAccount/index');
+    }
 
+    public function actionRetrieveSingleData(){
+        header("Content-Type: application/json");
+        $_POST = json_decode(file_get_contents("php://input"),true);
+        $model = RemoteDataCache::model()->findByPk($_POST['id']);
+        if($model){
+            echo json_encode(array('balance'=>doubleval($model->balance , 'is_active' =>$model->is_active )  ));
+        }else{
+             echo json_encode(array("balance"=>"Cant retrieve data"));
+        }
+    }
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -155,7 +172,7 @@ class SipAccountController extends Controller
     {
         header("Content-Type: application/json");
         $criteria = new CDbCriteria;
-        $criteria->order = "vici_user ASC";
+        $criteria->order = "is_active ASC  , balance DESC";
         $allremoteData = RemoteDataCache::model()->findAll($criteria);
         $updatedData = array();
         /*format some data*/

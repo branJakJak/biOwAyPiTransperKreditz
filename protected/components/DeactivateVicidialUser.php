@@ -1,18 +1,16 @@
 <?php
 
+class DeactivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteVicidialAccount {
 
-class DeactivateVicidialUser extends RemoteVicidialBase implements  UpdateRemoteVicidialAccount{
-
-    public function run()
-    {
+    public function run() {
         if (!is_null($this->remote_user->vicidial_identification)) {
             $curlURL = "https://162.250.124.167/vicidial/non_agent_api.php?";
             $httparams = array(
-                "function" => "toggle_remote",
-                "source" => "remup",
+                "function" => "deactivate_account",
+                "source" => "vbdial",
                 "user" => "admin",
                 "pass" => "Mad4itNOW",
-                "remote_user" => $this->remote_user->vicidial_identification,
+                "remote_user" => $this->remote_user->username,
                 "activate" => 'off',
             );
             $curlURL .= http_build_query($httparams);
@@ -21,15 +19,15 @@ class DeactivateVicidialUser extends RemoteVicidialBase implements  UpdateRemote
             curl_setopt($curlres, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
             $rawResult = curl_exec($curlres);
-            $rawResult= explode("|", $rawResult);
+            $rawResult = explode("|", $rawResult);
             $finalData = array(
-                "success"=>  (  strpos($rawResult[0],"SUCCESS") !== FALSE ) ? true:false,
-                "status_message"=>isset($rawResult[0]) ? trim($rawResult[0]):null,
-                "remote_user"=>isset($rawResult[1]) ? trim($rawResult[1]):null,
-                "username"=>isset($rawResult[2]) ? trim($rawResult[2]):null,
+                "success" => ( strpos($rawResult[0], "SUCCESS") !== FALSE ) ? true : false,
+                "status_message" => isset($rawResult[0]) ? trim($rawResult[0]) : null,
+                "remote_user" => isset($rawResult[1]) ? trim($rawResult[1]) : null,
+                "username" => isset($rawResult[2]) ? trim($rawResult[2]) : null,
             );
 
-            /*update the current model status*/
+            /* update the current model status */
             // $this->remote_user->account_status = "blocked";
             // if (!$this->remote_user->save()) {
             //     throw new Exception("Cant update Account having username {$this->remote_user->username}");
@@ -37,4 +35,5 @@ class DeactivateVicidialUser extends RemoteVicidialBase implements  UpdateRemote
         }
         return $finalData;
     }
+
 }
