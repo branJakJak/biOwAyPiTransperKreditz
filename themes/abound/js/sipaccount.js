@@ -430,15 +430,13 @@
 			});
 			updateStack.push(promise1);
 			var sipDataUrl = "/sipAccount/sipData";
-			if ($scope.APPLICATION_FIRST_RUN) {
-				sipDataUrl = "/sipAccount/sipData?firstRun=true";
-				$scope.APPLICATION_FIRST_RUN = false;
-			}
+			// if ($scope.APPLICATION_FIRST_RUN) {
+			// 	sipDataUrl = "/sipAccount/sipData?firstRun=true";
+			// 	$scope.APPLICATION_FIRST_RUN = false;
+			// }
 			promise2 = $http.get(sipDataUrl)
 			.then(function(response){
-				/*sync balance only*/
-
-
+				
 				angular.forEach(response.data, function(freshData, index){
 					angular.forEach($scope.sipAccounts, function(oldData, index){
 						if (freshData.id === oldData.id) {
