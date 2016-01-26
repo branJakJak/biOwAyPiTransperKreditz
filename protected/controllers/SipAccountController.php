@@ -54,7 +54,7 @@ class SipAccountController extends Controller
         $_POST = json_decode(file_get_contents("php://input"),true);
         $model = RemoteDataCache::model()->findByPk($_POST['id']);
         if($model){
-            echo json_encode(array('balance'=>doubleval($model->balance , 'is_active' =>$model->is_active )  ));
+            echo json_encode(array('balance'=>doubleval($model->balance) , 'is_active'=> $model->is_active  )  );
         }else{
              echo json_encode(array("balance"=>"Cant retrieve data"));
         }

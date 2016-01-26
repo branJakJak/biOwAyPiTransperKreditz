@@ -58,7 +58,7 @@
 <!-- Require the navigation -->
 <?php require_once('tpl_navigation.php') ?>
 </section><!-- /#navigation-main -->
-    
+  
 <section class="main-body">
     <div class="container-fluid">
             <!-- Include content pages -->
