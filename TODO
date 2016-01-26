@@ -468,32 +468,49 @@ balance
 
 
 
-@TODO - this.syncActiveAccount - @TEST
+@TODO - this.syncActiveAccount - @TEST @POSTPONED
 
 @TODO 
 sync every 5 minutes
 for active accounts only
 foreach account  as acurrentAccount
 	acurrentAccount.sync()  to API and db 
-@TEST
+@TEST      @POSTPONE
 
-@TODO - put number at /sipAccount/index - @TEST
+@TODO - put number at /sipAccount/index - @DONE
+
+
+
 
 @TODO - CRON that will delete 
 all non existing records from 
 vbdial to user_carrier
-@TEST
+@DONE
+php -f /home/vbdial/public_html/protected/yiic.php removeunusedaccounts
+
 
 @TODO - 
-after user clicked update balance 
+after user clicked update balance
 update the status also
-@TEST
+@DONE
 
 
 @TODO 
-hover hover background color 
- 
+hover background color 
+body > section.main-body > div > div > div > div.ng-scope > div > table > tbody > tr:hover {
+	background-color: #b4d455 !important;
+    color: white;
+}
+@DONE
 
+
+
+
+@TODO - bug at 
+https://vbdial.tk/index.php/sipAccount/index
+
+after updating the account ... it went up 
+possibly the order of status
 
 
 

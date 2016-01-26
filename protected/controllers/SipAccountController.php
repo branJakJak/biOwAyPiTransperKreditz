@@ -172,6 +172,9 @@ class SipAccountController extends Controller
     {
         header("Content-Type: application/json");
         $criteria = new CDbCriteria;
+        if (isset($_GET['firstRun'])) {
+            # code...
+        }
         $criteria->order = "is_active ASC  , balance DESC";
         $allremoteData = RemoteDataCache::model()->findAll($criteria);
         $updatedData = array();

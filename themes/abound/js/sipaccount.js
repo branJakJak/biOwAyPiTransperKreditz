@@ -5,12 +5,12 @@
 */
 (function(){
 	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment','720kb.tooltips']);
-	
 	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
-
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
+
+		$scope.APPLICATION_FIRST_RUN = true;
 		
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
@@ -418,7 +418,7 @@
 		 * Updates the data value
 		 */
 		this.synchronizeData = function(){
-			
+
 			updateStack  = [];
 			
 			promise1 =  $http.get("/freeVoipAccounts/getList")
@@ -429,22 +429,31 @@
 				$scope.globalUpdateText = "Global Update";
 			});
 			updateStack.push(promise1);
-
-			promise2 = $http.get("/sipAccount/sipData")
+			var sipDataUrl = "/sipAccount/sipData";
+			if ($scope.APPLICATION_FIRST_RUN) {
+				sipDataUrl = "/sipAccount/sipData?firstRun=true";
+				$scope.APPLICATION_FIRST_RUN = false;
+			}
+			promise2 = $http.get(sipDataUrl)
 			.then(function(response){
 				/*sync balance only*/
 
 
-				// angular.forEach(response.data, function(freshData, index){
-				// 	angular.forEach($scope.sipAccounts, function(oldData, index){
-				// 		if (  freshData.vici_user === oldData.vici_user  ) {
-				// 			oldData.balance = freshData.balance;
-				// 			oldData.exact_balance = freshData.exact_balance;
-				// 		}
-				// 	});
-				// });
+				angular.forEach(response.data, function(freshData, index){
+					angular.forEach($scope.sipAccounts, function(oldData, index){
+						if (freshData.id === oldData.id) {
+							$scope.sipAccounts[index] = freshData;
+						}
+						// if (  freshData.vici_user === oldData.vici_user  ) {
+						// 	oldData.balance = freshData.balance;
+						// 	oldData.exact_balance = freshData.exact_balance;
+						// }
+					});
+				});
 
-				$scope.sipAccounts = response.data;
+
+				//removing this for now to unscramble the data
+				// $scope.sipAccounts = response.data;//
 
 				$scope.globalUpdateText = "Global Update";
 			}, function(response){
@@ -467,7 +476,7 @@
 		this.synchronizeData();//initialize sip data and freevoip accounts
 
 		//Synchonize only the active accounts
-		
+
 		// $interval(function(){
 		// 	//@TODO to be tested
 		// 	currentController.syncActiveAccount($scope.sipAccounts);
