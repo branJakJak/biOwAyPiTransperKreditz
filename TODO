@@ -416,20 +416,10 @@ relative to viewers locale
 this.synchronizeData
 
 
-
-@TODO - fix the bug , 
-when updating the status , the 
-@DNE
-
-
 @TODO export data from apivoip 
 so we can test it here in local machine 
 @DNE
 
-
-@TODO
-isabay ko na lang sa upload maya
-@DONE
 
 
 @TODO
@@ -440,8 +430,6 @@ we need a way to recognize the deleted data from remote
 
 @TODO - 
 https://apivoip.ml/disable/account?mainusername=replaceMainUsernameHere&mainpassword=replaceMainPasswordHere
-
-
 https://apivoip.ml/disable/account?mainusername=scottsdalecorp&mainpassword=EiRe5Elohkee
 
 
@@ -450,10 +438,6 @@ https://apivoip.ml/disable/account?mainusername=scottsdalecorp&mainpassword=EiRe
 Disabling Account 
 Url : https://apivoip.ml/disable/account?
 @DONE
-
-
-
-
 
 
 

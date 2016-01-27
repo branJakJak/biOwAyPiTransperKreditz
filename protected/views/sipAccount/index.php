@@ -115,6 +115,20 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				({{indexCtrl.getTotalBalance() | currency:"&#8364;"}})
 			</small>
 		</h2>
+		<h2>
+			<small>
+				<span class='icon-ok'></span>
+				Active
+				{{  (sipAccounts |filter:{is_active:'ACTIVE'} ).length   }}
+			</small>
+		</h2>
+		<h2>
+			<small>
+				<span class='icon-remove'></span>
+				Inactive
+				{{  (sipAccounts |filter:{is_active:'INACTIVE'} ).length   }}
+			</small>
+		</h2>
 	</div>
 
 	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
