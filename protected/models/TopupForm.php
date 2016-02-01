@@ -44,10 +44,10 @@ class TopupForm extends CFormModel
 				$this->topUpMainAccount($model);
 				//topup the sub accounts
 				$remoteAcctUpdated = new ApiRemoteUpdateBalance(
-					$currentAccountName->sub_pass,
-					$currentAccountName->sub_user,
-					$currentAccountName->main_pass,
-					$currentAccountName->main_user,
+					$model->sub_pass,
+					$model->sub_user,
+					$model->main_pass,
+					$model->main_user,
 					$this->topupvalue
 				);
 				if ($remoteAcctUpdated->update()) {
