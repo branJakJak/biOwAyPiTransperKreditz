@@ -4,6 +4,7 @@ class TopupForm extends CFormModel
 {
 	public $accounts;
 	public $topupvalue;
+	public $freeVoipAccountUsername;
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
@@ -13,7 +14,7 @@ class TopupForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('accounts, topupvalue', 'required'),
+			array('accounts, topupvalue,freeVoipAccountUsername', 'required'),
 			array('topupvalue', 'numerical'),
 		);
 	}
@@ -39,6 +40,9 @@ class TopupForm extends CFormModel
 		foreach ($accountsArr as $key => $currentAccountName) {
 			$model = RemoteDataCache::model()->findByAttributes(array('sub_user'=>$currentAccountName));
 			if ($model) {
+				//topup the main account
+				$this->topUpMainAccount($model);
+				//topup the sub accounts
 				$remoteAcctUpdated = new ApiRemoteUpdateBalance(
 					$currentAccountName->sub_pass,
 					$currentAccountName->sub_user,
@@ -52,5 +56,25 @@ class TopupForm extends CFormModel
 			}
 		}
 		return $accountsAffectedInt;
+	}
+	public function topUpMainAccount(RemoteDataCache $subAccount)
+	{
+        $criteria = new CDbCriteria;
+        $criteria->compare("username",$this->freeVoipAccountUsername);
+        $freeVoipAccount = FreeVoipAccounts::model()->find($criteria);
+        if ($freeVoipAccount) {
+        	//transfer fund from FreeVoipAccount to SipAccount
+	        $rmt = new RemoteTransferFund();
+	        $remoteResult = $rmt->commitTransaction(
+	        	$freeVoipAccount->username,
+	            $freeVoipAccount->password,
+	            $subAccount->main_user,//user or the resller
+	            doubleval($this->topupvalue),
+	            $freeVoipAccount->pincode
+	        );
+        }else{
+        	throw new CHttpException(404,"$this->freeVoipAccountUsername doesnt exists");
+        }
+
 	}
 }

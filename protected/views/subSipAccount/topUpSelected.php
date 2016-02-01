@@ -32,14 +32,22 @@
 				    'tokenSeparators' => array(',', ' ')
 				)));
 			?>
+			<?php echo CHtml::error($formModel, 'accounts'); ?>
+			<br>
+			<br>
+			<label>Via : </label>
+			<?php echo CHtml::activeDropDownList($formModel, 'freeVoipAccountUsername', CHtml::listData(FreeVoipAccounts::model()->findAll(), 'username', 'username')  ); ?>
+			<?php echo CHtml::error($formModel, 'accounts'); ?>
 			<br>
 			<br>
 			<label>Amount : </label>
 			<?php echo CHtml::activeTextField($formModel, 'topupvalue', array('class'=>'form-control')); ?>
+			<?php echo CHtml::error($formModel, 'topupvalue'); ?>
 			<div class="form-actions">
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
 			</div>
+
 		<?php echo CHtml::endForm(); ?>
 	<?php
 		$this->endWidget();
