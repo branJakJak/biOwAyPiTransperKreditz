@@ -27,7 +27,7 @@
 				'asDropDownList' => false,
 				'pluginOptions' => array(
 				    'tags' => $allSipAccounts,
-				    'placeholder' => 'type 2amigos',
+				    'placeholder' => 'type accounts',
 				    'width' => '40%',
 				    'tokenSeparators' => array(',', ' ')
 				)));
