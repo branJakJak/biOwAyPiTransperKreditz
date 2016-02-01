@@ -37,7 +37,7 @@ class FreeVoipAccountsController extends Controller
 			),
 			array('allow', 
 				'actions'=>array('admin','delete'),
-				'roles'=>array('administrator'),
+				'user'=>array('admin'),
 			),
 			array('deny', 
 				'users'=>array('*'),
