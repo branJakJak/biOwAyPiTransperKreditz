@@ -4,13 +4,17 @@
 * The Sip account module for table organization
 */
 (function(){
-	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment','720kb.tooltips']);
-	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies', function ($scope,$http,$q,$timeout,$cookies) {
+	sipAccountModule = angular.module('sipAccountModule', ['ngCookies','angularMoment','720kb.tooltips','timer']);
+	sipAccountModule.controller('IndexCtrl', ['$scope','$http','$q','$timeout','$cookies','$interval', function ($scope,$http,$q,$timeout,$cookies,$interval) {
 		var currentController = this;
 		$scope.sipAccounts = [];
 		$scope.freeVoipAccts = [];
-
+		/*application settings/variables*/
 		$scope.APPLICATION_FIRST_RUN = true;
+		
+		$scope.endTimeTillNextUpdate = new Date();
+		// $scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
+		$scope.endTimeTillNextUpdate.setSeconds($scope.endTimeTillNextUpdate.getSeconds()+10);
 		
 		$scope.activateAllAccounts = false;
 		$scope.globalUpdateText = 'Global Update';
@@ -22,7 +26,9 @@
 
 		$scope.updateDataReport = "";
 		$scope.topUpMessageLabel = "Top-up All";
-		
+
+
+
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
 		  		currentController.activateAllAccountsFunc();
@@ -35,12 +41,46 @@
 		  	}
 		});
 
+        $scope.$on('timer-stop', function () {
+        	//resume the timer
+			$scope.$broadcast('timer-resume');
+        });
+
+		currentController.refreshResyncActiveDisplay = function(){
+			$timeout(function(){
+				$scope.$broadcast('timer-resume');
+				if (  $scope.endTimeTillNextUpdate <= new Date() ) {
+					// @TODO Uncomment for production
+					$scope.endTimeTillNextUpdate = new Date();
+					// $scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
+					
+					//@TODO DELETE AT PROD
+					$scope.endTimeTillNextUpdate.setSeconds($scope.endTimeTillNextUpdate.getSeconds()+10);
+
+					//call the sycn account
+					console.log("syncing all accounts");
+					//@TODO uncomment in prod
+					// currentController.syncActiveAccount($scope.sipAccounts);
+				}
+				currentController.refreshResyncActiveDisplay();				
+			}, 1000);
+		}
+
+		currentController.updateTimerValues = function(){
+			$scope.startingTimeTillNextUpdate = new Date();
+			$scope.endTimeTillNextUpdate = new Date();
+			$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
+		}
+
 		//Sync only the ACTIVE accounts
-		// @To be tested
 		this.syncActiveAccount = function(sipAccountsCollection){
+			var timeOutMillis = 1000;
 			angular.forEach(sipAccountsCollection, function(currentSipAccount, index){
 				if (currentSipAccount.is_active === 'ACTIVE') {
-					currentController.quickUpdateBalance(currentSipAccount);
+					$timeout(function(){
+						currentController.quickUpdateBalance(currentSipAccount);
+					}, timeOutMillis);
+					timeOutMillis = timeOutMillis + 1000;//add 1 second gap
 				}
 			});
 		}
@@ -430,10 +470,7 @@
 			});
 			updateStack.push(promise1);
 			var sipDataUrl = "/sipAccount/sipData";
-			// if ($scope.APPLICATION_FIRST_RUN) {
-			// 	sipDataUrl = "/sipAccount/sipData?firstRun=true";
-			// 	$scope.APPLICATION_FIRST_RUN = false;
-			// }
+
 			promise2 = $http.get(sipDataUrl)
 			.then(function(response){
 
@@ -446,10 +483,6 @@
 							if (freshData.id === oldData.id) {
 								$scope.sipAccounts[indexOldData] = freshData;
 							}
-							// if (  freshData.vici_user === oldData.vici_user  ) {
-							// 	oldData.balance = freshData.balance;
-							// 	oldData.exact_balance = freshData.exact_balance;
-							// }
 						});
 					});
 				}
@@ -479,10 +512,10 @@
 		// 	//@TODO to be tested
 		// 	currentController.syncActiveAccount($scope.sipAccounts);
 		// }, ( 5 * ( 60 * 1000 ) ) );// 5 minutes
+		currentController.refreshResyncActiveDisplay();
 		
 
 	}]);//end of IndexController
-
 
 })();
 

@@ -1,5 +1,4 @@
 protected/runtime/*
-assets/*
 data/
 *.bat
 protected/components/UserIdentity.php

@@ -26,7 +26,7 @@ class SubSipAccountController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'view', 'updateBalance', 'activate', 'deactivate', 'ajaxActivate', 'ajaxDeactivate'),
+                'actions' => array('create', 'update', 'view', 'updateBalance', 'activate', 'deactivate', 'ajaxActivate', 'ajaxDeactivate','topUpSelected'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -38,7 +38,34 @@ class SubSipAccountController extends Controller {
             ),
         );
     }
-
+    public function actionTopUpSelected()
+    {
+        $formModel = new TopupForm;
+        /*retrieve all accounts to be topped up*/
+        $allSipAccounts = $this->getAccountsToTopup();
+        if (isset($_POST['TopupForm'])) {
+            $formModel->attributes = $_POST['TopupForm'];
+            if ($formModel->validate()) {
+                $numberOfAffectedAccounts = $formModel->topupAccounts();
+                Yii::app()->user->setFlash("success","Success! All $numberOfAffectedAccounts account(s) are topped up.");
+                $this->redirect(array('/subSipAccount/topUpSelected'));
+            }
+        }
+        $this->render('topUpSelected',compact('formModel','allSipAccounts'));
+    }
+    /**
+     * 
+     * @return array Accouts to top up
+     */
+    public function getAccountsToTopup()
+    {
+        $accountsCollection = [];
+        $tempContainer = RemoteDataCache::model()->findAll();
+        foreach ($tempContainer as $key => $currentRemoteDataCache) {
+            $accountsCollection[] = $currentRemoteDataCache->sub_user;
+        }
+        return $accountsCollection;
+    }
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed

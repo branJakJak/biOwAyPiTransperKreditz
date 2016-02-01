@@ -31,6 +31,15 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                         // array('label'=>'Campaigns', 'url'=>array('/campaigns/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Manage SIP Accounts', 'url'=>array('remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Top-up <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+                        'items'=>array(
+                            array('label'=>'Selected accounts', 'url'=>array('/subSipAccount/topUpSelected')),
+                            // array('label'=>'My Tasks <span class="badge badge-important pull-right">112</span>', 'url'=>'#'),
+                            // array('label'=>'My Invoices <span class="badge badge-info pull-right">12</span>', 'url'=>'#'),
+                            // array('label'=>'Separated link', 'url'=>'#'),
+                            // array('label'=>'One more separated link', 'url'=>'#'),
+                        )),
+
                         array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
                         array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     ),

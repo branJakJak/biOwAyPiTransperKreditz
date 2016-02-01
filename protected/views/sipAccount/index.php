@@ -41,8 +41,12 @@ $cs->registerScriptFile($baseUrl.'/js/jstz.min.js'  , CClientScript::POS_END);
 /* angular external modules*/
 $cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-moment/angular-moment.min.js'  , CClientScript::POS_END);
-
+// $cs->registerScriptFile($baseUrl.'/bower_components/momentjs/min/locales.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/humanize-duration/humanize-duration.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-timer/dist/angular-timer.min.js'  , CClientScript::POS_END);
+
+
 
 
 
@@ -115,22 +119,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				({{indexCtrl.getTotalBalance() | currency:"&#8364;"}})
 			</small>
 		</h2>
-		<h2>
-			<small>
-				<span class='icon-ok'></span>
-				Active
-				{{  (sipAccounts |filter:{is_active:'ACTIVE'} ).length   }}
-			</small>
-		</h2>
-		<h2>
-			<small>
-				<span class='icon-remove'></span>
-				Inactive
-				{{  (sipAccounts |filter:{is_active:'INACTIVE'} ).length   }}
-			</small>
-		</h2>
 	</div>
-
 	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
 		<h4>
 			<small>
@@ -145,6 +134,28 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				{{value.credits}}
 			</strong>
 		</h4>
+	</div>
+	<div class="clearfix"></div>
+	<div class="span5">
+		<h4>
+			<span class='icon-ok'></span>
+			{{  (sipAccounts|filter:{is_active:"ACTIVE"}:true).length   }}
+			Active Accounts
+		</h4>
+		<h4>
+			<span class='icon-remove'></span>
+			{{  (sipAccounts |filter:{is_active:'INACTIVE'} ).length   }}
+			Inactive Accounts
+				
+		</h4>
+	</div>
+	<div class="span5">
+		<h2>
+			<small>
+				Time till next update : 
+				<timer end-time="endTimeTillNextUpdate">{{minutes}} minutes, {{seconds}} seconds.</timer>
+			</small>
+		</h2>
 	</div>
 	<div class="clearfix"></div>
 </div>

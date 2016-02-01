@@ -410,10 +410,13 @@ start from user  - aside from CROn
 
 @TODO - fix the date of last update
 relative to viewers locale
+@DONE
+
 
 
 @TODO - sync also the , ip  , num of lines and campaign
 this.synchronizeData
+@DONE
 
 
 @TODO export data from apivoip 
@@ -509,14 +512,16 @@ last account will not update
 
 
 
-
-@TODO 
-After deactivation 
-- resend the deactivation code after 30 seconds
-
-use CRON tab
+@TODO - refresh every 5 minutes
 
 
+@TODO - Selective Top-up Button
+	> user clicks the button
+	> new tab will open , 
+	> user selects accounts 
+	> user put amount to topup 
+	> sends
+	> if all is ok , it will prompt the user that credit #### was applied
 
 
 
@@ -525,5 +530,16 @@ allow usern to monitor
 a certain group/record 
 put this in new tab
 
+
+
+@TODO - selective top-up all
+@TEST
+
+
+
+@TODO 
+After deactivation 
+- resend the deactivation code after 30 seconds
+use CRON tab
 
 
