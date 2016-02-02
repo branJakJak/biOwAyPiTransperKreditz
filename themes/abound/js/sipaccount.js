@@ -52,15 +52,13 @@
 				if (  $scope.endTimeTillNextUpdate <= new Date() ) {
 					// @TODO Uncomment for production
 					$scope.endTimeTillNextUpdate = new Date();
-					// $scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
+					$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
 					
-					//@TODO DELETE AT PROD
-					$scope.endTimeTillNextUpdate.setSeconds($scope.endTimeTillNextUpdate.getSeconds()+10);
 
 					//call the sycn account
 					console.log("syncing all accounts");
 					//@TODO uncomment in prod
-					// currentController.syncActiveAccount($scope.sipAccounts);
+					currentController.syncActiveAccount($scope.sipAccounts);
 				}
 				currentController.refreshResyncActiveDisplay();				
 			}, 1000);
@@ -512,7 +510,9 @@
 		// 	//@TODO to be tested
 		// 	currentController.syncActiveAccount($scope.sipAccounts);
 		// }, ( 5 * ( 60 * 1000 ) ) );// 5 minutes
-		currentController.refreshResyncActiveDisplay();
+		// 
+		// @TODO - to be tested soon
+		// currentController.refreshResyncActiveDisplay();
 		
 
 	}]);//end of IndexController
