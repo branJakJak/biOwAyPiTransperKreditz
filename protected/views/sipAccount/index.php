@@ -120,20 +120,24 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</small>
 		</h2>
 	</div>
-	<div class="span2" ng-repeat="(key, value) in freeVoipAccts">
-		<h4>
-			<small>
-				<!-- will show this soon -->
-				<a tooltips title="Since last update" >
-					{{value.last_updated}}
-				</a>
-			</small>
-			<br>
-			{{value.username}} <br>
-			<strong>
-				{{value.credits}}
-			</strong>
-		</h4>
+	<div class="span7">
+		<div class="span3" ng-repeat="(key, value) in freeVoipAccts">
+			<h4>
+				<small>
+					<!-- will show this soon -->
+					<a tooltips title="Since last update" >
+						{{value.last_updated}}
+					</a>
+				</small>
+				<br>
+					{{value.username}}
+				<br>
+				<strong>
+					{{value.credits}}
+				</strong>
+			</h4>
+		</div>
+		
 	</div>
 	<div class="clearfix"></div>
 	<div class="span5">

@@ -86,6 +86,9 @@ class FreeVoipAccountsController extends Controller
 		$finalArr = array();
 
 		foreach ($allAccts as $key => $value) {
+			if ($value->username == "Prion1967") {
+				$value->username = "CC";
+			}
 			$finalArr[] = array(
 				"id"=>$value->id,
 				"username"=>$value->username,
