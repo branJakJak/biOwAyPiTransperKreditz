@@ -149,7 +149,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				
 		</h4>
 	</div>
-	<div class="span5">
+	<div class="span5 hidden">
 		<h2>
 			<small>
 				Time till next update : 
