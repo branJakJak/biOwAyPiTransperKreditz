@@ -253,7 +253,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 <div class="well">
 	<div class="span2">
 		<strong>
-			<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
+		<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
 			<strong >Activate All</strong>
 		</strong>		
 	</div>
@@ -386,7 +386,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	</tbody>
 </table>
 <hr>
-<button ng-disabled="globalUpdateText === 'Updating data...' || globalUpdateText === 'Loading data...' " ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">
+<button ng-hide="true" ng-disabled="globalUpdateText === 'Updating data...' || globalUpdateText === 'Loading data...' " ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">
 	<i class="fa fa-spinner fa-spin" ng-show="globalUpdateText === 'Updating data...' || globalUpdateText === 'Loading data...' "></i>
 	{{globalUpdateText}} {{updateDataReport}}
 </button>

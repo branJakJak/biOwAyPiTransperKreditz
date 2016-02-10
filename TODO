@@ -1,4 +1,23 @@
-asdasdasd
+
+@TODO - 
+to fix auto red @BUG
+	*separate the group activation feature  , in different page , much like this https://vbdial.tk/index.php/subSipAccount/topUpSelected
+
+
+@TODO - replace navigation label Top-up to Group action 
+	where user can do action to group of accounts
+
+
+@TODO  -  activate and deactivation button for 
+
+
+
+@TODO - propose card like design for /sipAccount/index design
+	if accepted @TODO - put filter by name so anyone can filter it 
+		for example john - result will only show text with john
+
+
+
 
 
 @TODO-APILOG-APILOG ticking and updating
@@ -533,7 +552,7 @@ put this in new tab
 
 
 @TODO - selective top-up all
-@TEST
+@DONE
 
 
 
@@ -541,5 +560,4 @@ put this in new tab
 After deactivation 
 - resend the deactivation code after 30 seconds
 use CRON tab
-
 
