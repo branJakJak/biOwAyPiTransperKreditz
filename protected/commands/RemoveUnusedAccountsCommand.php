@@ -37,7 +37,7 @@ class RemoveUnusedAccountsCommand extends CConsoleCommand {
                 ) {
                     Yii::log("RemoteDataCache exists! {$curRemoteDataCacheModel->sub_user} | {$curRemoteDataCacheModel->sub_pass}", CLogger::LEVEL_INFO,'sync_remove');
                     $currentRemoteDataCacheExists = true;
-                    break;
+                    continue;
                 }
             }//end of loop allasteriskmodels
             if (!$currentRemoteDataCacheExists) {

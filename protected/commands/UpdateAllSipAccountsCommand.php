@@ -20,8 +20,8 @@ class UpdateAllSipAccountsCommand extends CConsoleCommand {
                 Yii::log("Checking $currentSubSipAccount->username under $currentModel->username. | " . date("Y-m-d H:i:s"), CLogger::LEVEL_INFO, 'info');
                 $tempSubSip = SubSipAccount::model()->findByPk($currentSubSipAccount->id);
                 if (doubleval($tempSubSip->exact_balance) <= 3) {
-                    $deactivatorObj = new DeactivateVicidialUser($currentModel);
-                    $deactivatorObj->run();
+                    // $deactivatorObj = new DeactivateVicidialUser($currentModel);
+                    // $deactivatorObj->run();
                     mail("hellsing357@gmail.com", 'Account Deactivated', "$currentModel->username deactivated");
                 }
             }
