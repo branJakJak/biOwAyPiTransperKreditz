@@ -25,7 +25,6 @@ class DisableController extends Controller
 	}
 	public function actionAccount($mainusername)
 	{
-		die();
 		$criteria = new CDbCriteria;
 		$criteria->compare("main_user",$mainusername);
 		$remoteDataArr = RemoteDataCache::model()->findAll($criteria);
