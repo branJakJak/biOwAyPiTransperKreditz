@@ -354,12 +354,12 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.num_lines}}
 			</td>
-			
-			<td  ng-hide="true">
+<!-- 			<td ng-hide="true"><input ng-model="topUpCreditsVal" type="number" ></td> -->
+<!-- 			<td  ng-hide="true">
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
 				</select>
-			</td>
+			</td> -->
 			<td>
 				<a  ng-hide="true" class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
 					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
