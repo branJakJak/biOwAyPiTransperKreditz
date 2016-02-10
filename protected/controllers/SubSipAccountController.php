@@ -26,7 +26,7 @@ class SubSipAccountController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('create', 'update', 'view', 'updateBalance', 'activate', 'deactivate', 'ajaxActivate', 'ajaxDeactivate','topUpSelected'),
+                'actions' => array('create', 'update', 'view', 'updateBalance', 'activate', 'deactivate', 'ajaxActivate', 'ajaxDeactivate','topUpSelected','activateGroup','deactivateGroup'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -38,11 +38,38 @@ class SubSipAccountController extends Controller {
             ),
         );
     }
+    public function actionDeactivateGroup(){
+        $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
+        $formModel = new DeactivationFormModel();
+        if(isset($_POST['DeactivationFormModel'])){
+            $formModel->attributes = $_POST['DeactivationFormModel'];
+            if($formModel->validate()){
+                $formModel->run();
+                Yii::app()->user->setFlash("success", "Success! Selected accounts are now deactivated");
+                $this->redirect("/subSipAccount/deactivateGroup");
+            }
+        }
+        $this->render('deactivateGroup',compact('formModel','remoteDataCacheCollection'));
+    }
+
+    public function actionActivateGroup(){
+        $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
+        $formModel = new ActivationFormModel();
+        if(isset($_POST['ActivationFormModel'])){
+            $formModel->attributes = $_POST['ActivationFormModel'];
+            if($formModel->validate()){
+                $formModel->run();
+                Yii::app()->user->setFlash("success", "Success! Selected accounts are now activated");
+                $this->redirect("/subSipAccount/activateGroup");
+            }
+        }
+        $this->render('activateGroup',compact('formModel','remoteDataCacheCollection'));
+    }
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
         /*retrieve all accounts to be topped up*/
-        $allSipAccounts = $this->getAccountsToTopup();
+        $allSipAccounts = $this->getRemoteDataCacheAccounts();
         if (isset($_POST['TopupForm'])) {
             $formModel->attributes = $_POST['TopupForm'];
             if ($formModel->validate()) {
@@ -57,7 +84,7 @@ class SubSipAccountController extends Controller {
      * 
      * @return array Accouts to top up
      */
-    public function getAccountsToTopup()
+    public function getRemoteDataCacheAccounts()
     {
         $accountsCollection = [];
         $tempContainer = RemoteDataCache::model()->findAll();
@@ -230,12 +257,9 @@ class SubSipAccountController extends Controller {
         $sipAccount->vicidial_identification = $model->vici_user;
         $activatorObj = new ActivateVicidialUser($sipAccount);
         $reqREs = $activatorObj->run();
-
-
         /* find the RemoteDataCache and update it too */
         $model->is_active = "ACTIVE";
         $model->save();
-
         echo json_encode(array("success" => true, "message" => "Account activated", "result" => $reqREs));
     }
 

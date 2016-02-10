@@ -31,9 +31,11 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                         // array('label'=>'Campaigns', 'url'=>array('/campaigns/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Manage SIP Accounts', 'url'=>array('remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'Top-up <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"), 
+                        array('label'=>'Group action <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"),
                         'items'=>array(
-                            array('label'=>'Selected accounts', 'url'=>array('/subSipAccount/topUpSelected')),
+                            array('label'=>'Top up', 'url'=>array('/subSipAccount/topUpSelected')),
+                            array('label'=>'Activate', 'url'=>array('/subSipAccount/activateGroup')),
+                            array('label'=>'Deactivate', 'url'=>array('/subSipAccount/deactivateGroup')),
                             // array('label'=>'My Tasks <span class="badge badge-important pull-right">112</span>', 'url'=>'#'),
                             // array('label'=>'My Invoices <span class="badge badge-info pull-right">12</span>', 'url'=>'#'),
                             // array('label'=>'Separated link', 'url'=>'#'),
