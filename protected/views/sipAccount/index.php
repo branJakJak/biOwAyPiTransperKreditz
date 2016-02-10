@@ -317,7 +317,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</th>
 			<th>IP Address</th>
 			<th> # of lines </th>
-			<th>Add Balance</th>
+			<th></th>
 			<th>Get latest balance</th>
 			<th>Last update</th>
 			<th>Delete</th>
