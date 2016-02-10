@@ -317,7 +317,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</th>
 			<th>IP Address</th>
 			<th> # of lines </th>
-			<th></th>
 			<th>Get latest balance</th>
 			<th>Last update</th>
 			<th>Delete</th>
@@ -356,7 +355,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.num_lines}}
 			</td>
-			<td><input ng-model="topUpCreditsVal" type="number" ></td>
+			<td ng-hide="true"><input ng-model="topUpCreditsVal" type="number" ></td>
 			<td  ng-hide="true">
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
