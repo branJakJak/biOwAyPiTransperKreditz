@@ -30,7 +30,7 @@ class DeactivationFormModel extends CFormModel
 
     public function run()
     {
-        //find model by
+        $this->accounts = explode(",", $this->accounts);
         $criteria = new CDbCriteria();
         $criteria->addInCondition("sub_user", $this->accounts);
         $remoteDataCacheCollection = RemoteDataCache::model()->findAll($criteria);
