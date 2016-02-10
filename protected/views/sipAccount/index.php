@@ -339,7 +339,6 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				<input ng-change="" type="checkbox" ng-model="value.is_active"
            			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
-				
 			</td>
 			<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
 				<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
@@ -355,7 +354,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.num_lines}}
 			</td>
-			<td ng-hide="true"><input ng-model="topUpCreditsVal" type="number" ></td>
+			
 			<td  ng-hide="true">
 				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
 					 <option value="">-- Select Account --</option>
