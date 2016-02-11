@@ -10,7 +10,7 @@ class DeactivateVicidialUser extends RemoteVicidialBase implements UpdateRemoteV
                 "source" => "vbdial",
                 "user" => "admin",
                 "pass" => "Mad4itNOW",
-                "remote_user" => $this->remote_user->username,
+                "remote_user" => $this->remote_user->vicidial_identification,
                 "activate" => 'off',
             );
             $curlURL .= http_build_query($httparams);
