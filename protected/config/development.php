@@ -41,6 +41,12 @@ return array(
 
 	// application components
 	'components'=>array(
+		'vicidial_deactivator'=>array(
+			'class'=>'application.components.VicidialDbDeactivator'
+		),		
+		'vicidial_activator'=>array(
+			'class'=>'application.components.VicidialDbActivator'
+		),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
