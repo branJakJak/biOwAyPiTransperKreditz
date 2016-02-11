@@ -16,7 +16,7 @@ class VicidialDbDeactivator  extends CApplicationComponent  implements UpdateRem
          */
         $judgement = false;
         $asteriskDb = Yii::app()->asterisk_db;
-        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='INACTIVE' where user_start=:vicidial_user");
+        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='INACTIVE' where user_start = :vicidial_user");
         $updateCommand->params = array(
             "vicidial_user"=> $this->getVicidialUser()
         );
