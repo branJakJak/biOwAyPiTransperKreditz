@@ -1,15 +1,14 @@
-<?php 
-
+<?php
 /**
-* VicidialDbActivator
-*/
-class VicidialDbActivator extends CApplicationComponent  implements UpdateRemoteVicidialAccount
-{
-    public $vicidialUser;
+ * Created by PhpStorm.
+ * User: kevin
+ * Date: 2/12/2016
+ * Time: 2:35 AM
+ */
 
-    /**
-     *
-     */
+class VicidialDbDeactivator  extends CApplicationComponent  implements UpdateRemoteVicidialAccount{
+
+    public $vicidialUser;
     public function run()
     {
         /**
@@ -17,19 +16,18 @@ class VicidialDbActivator extends CApplicationComponent  implements UpdateRemote
          */
         $judgement = false;
         $asteriskDb = Yii::app()->asterisk_db;
-        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='ACTIVE' where user_start=:vicidial_user");
+        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='INACTIVE' where user_start=:vicidial_user");
         $updateCommand->params = array(
             "vicidial_user"=> $this->getVicidialUser()
         );
         $updateCommand->execute();//execute update
         $updatedStatus = VicidialDbHelper::getStatus($this->getVicidialUser());
         //check status if INACTIVE
-        if($updatedStatus == 'ACTIVE'){
+        if($updatedStatus == 'INACTIVE'){
             $judgement = true;
         }
         return $judgement;
     }
-
 
     /**
      * @return mixed

@@ -45,9 +45,16 @@ class ActivationFormModel extends CFormModel
     {
         $sipAccount = new SipAccount();
         $sipAccount->vicidial_identification = $remoteDataCacheMdl->vici_user;
-        $activatorObj = new ActivateVicidialUser($sipAccount);
-        $reqREs = $activatorObj->run();
-        Yii::log(json_encode($reqREs), CLogger::LEVEL_INFO, "activation");
+        /**
+         * @var VicidialDbDeactivator $deactivator
+         */
+        $activator = Yii::app()->vicidialActivator;
+        $activator->setVicidialUser($sipAccount->vicidial_identification);
+        if ($activator->run()) {
+            Yii::log(json_encode("$sipAccount->vicidial_identification is now activated"), CLogger::LEVEL_INFO, "activation");
+        }else{
+            Yii::log(json_encode("deactivation failed $sipAccount->vicidial_identification"), CLogger::LEVEL_INFO, "activation");
+        }
         /* find the RemoteDataCache and update it too */
         $remoteDataCacheMdl->is_active = "ACTIVE";
         return $remoteDataCacheMdl->save();
