@@ -1,7 +1,14 @@
 
+@TODO - do full test on all feature
+
+
+@TODO - update the status remotely to sql server , so we dont need to do the url
+
+
 @TODO - 
 to fix auto red @BUG
 	*separate the group activation feature  , in different page , much like this https://vbdial.tk/index.php/subSipAccount/topUpSelected
+@DONE
 
 
 @TODO - replace navigation label Top-up to Group action 
