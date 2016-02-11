@@ -17,10 +17,8 @@ class VicidialDbActivator extends CApplicationComponent  implements UpdateRemote
          */
         $judgement = false;
         $asteriskDb = Yii::app()->asterisk_db;
-        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='ACTIVE' where user_start=:vicidial_user");
-        $updateCommand->params = array(
-            "vicidial_user"=> $this->getVicidialUser()
-        );
+        $updateCommand = $asteriskDb->createCommand("UPDATE vicidial_remote_agents SET status='ACTIVE' where user_start = :vicidial_user");
+        $updateCommand->bindParam(":vicidial_user", $this->getVicidialUser(), PDO::PARAM_INT);
         $updateCommand->execute();//execute update
         $updatedStatus = VicidialDbHelper::getStatus($this->getVicidialUser());
         //check status if INACTIVE
