@@ -46,7 +46,7 @@ class DeactivationFormModel extends CFormModel
     {
         $sipAccount = new SipAccount();
         $sipAccount->vicidial_identification = $remoteDataCacheMdl->vici_user;
-        $activatorObj = new ActivateVicidialUser($sipAccount);
+        $activatorObj = new DeactivateVicidialUser($sipAccount);
         $reqREs = $activatorObj->run();
         Yii::log($reqREs, CLogger::LEVEL_INFO, "deactivation");
         /* find the RemoteDataCache and update it too */

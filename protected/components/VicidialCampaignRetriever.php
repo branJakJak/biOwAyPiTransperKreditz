@@ -1,8 +1,6 @@
 <?php
 use Sunra\PhpSimple\HtmlDomParser;
 class VicidialCampaignRetriever {
-
-
     public function retrieve()
     {
     	/*request raw page*/
