@@ -68,6 +68,7 @@ class SubSipAccountController extends Controller {
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
+        $topupLogsTotalToday = 0;
         /*retrieve all accounts to be topped up*/
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
         if (isset($_POST['TopupForm'])) {
@@ -78,7 +79,7 @@ class SubSipAccountController extends Controller {
                 $this->redirect(array('/subSipAccount/topUpSelected'));
             }
         }
-        $this->render('topUpSelected',compact('formModel','allSipAccounts'));
+        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday'));
     }
     /**
      * 

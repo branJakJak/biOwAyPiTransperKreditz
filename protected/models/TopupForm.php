@@ -37,6 +37,7 @@ class TopupForm extends CFormModel
 	{
 		$accountsAffectedInt = 0;
 		$accountsArr = explode(",", $this->accounts);
+		$groupId = uniqid();
 		foreach ($accountsArr as $key => $currentAccountName) {
 			$model = RemoteDataCache::model()->findByAttributes(array('sub_user'=>$currentAccountName));
 			if ($model) {
@@ -50,6 +51,7 @@ class TopupForm extends CFormModel
 					$model->main_user,
 					$this->topupvalue
 				);
+				ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId);
 				if ($remoteAcctUpdated->update()) {
 					$accountsAffectedInt++;
 				}
@@ -72,6 +74,7 @@ class TopupForm extends CFormModel
 	            doubleval($this->topupvalue),
 	            $freeVoipAccount->pincode
 	        );
+	        ViciActionLogger::logAction("MAIN_TOPUP" , "Top upping {$subAccount->main_user}",$this->topupvalue);
         }else{
         	throw new CHttpException(404,"$this->freeVoipAccountUsername doesnt exists");
         }

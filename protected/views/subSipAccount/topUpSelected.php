@@ -4,12 +4,12 @@
 ?>
 
 <div class="row-fluid">
-	<div class="span8 offset2">
-	<?php
-		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Top-up Selected Account',
-		));
-	?>
+	<div class="span5 offset2">
+		<?php
+			$this->beginWidget('zii.widgets.CPortlet', array(
+				'title'=>'Top-up Selected Account',
+			));
+		?>
 		<?php
 		$this->widget('bootstrap.widgets.TbAlert', array(
 		    'block'=>true, // display a larger alert block?
@@ -54,5 +54,41 @@
 		$this->endWidget();
 	?>
 
+	</div>
+	<div class="span3">
+		<?php
+			$this->beginWidget('zii.widgets.CPortlet', array(
+				'title'=>'Topup Logs',
+			));
+		?>
+		<strong>Today's Topup Total</strong> : <?php echo $topupLogsTotalToday ?>
+		<hr>
+		@TODO - grid for logs
+		<?php 
+
+// $this->widget('zii.widgets.grid.CGridView', array(
+//     'dataProvider'=>$dataProvider,
+//     'columns'=>array(
+//         'title',          // display the 'title' attribute
+//         'category.name',  // display the 'name' attribute of the 'category' relation
+//         'content:html',   // display the 'content' attribute as purified HTML
+//         array(            // display 'create_time' using an expression
+//             'name'=>'create_time',
+//             'value'=>'date("M j, Y", $data->create_time)',
+//         ),
+//         array(            // display 'author.username' using an expression
+//             'name'=>'authorName',
+//             'value'=>'$data->author->username',
+//         ),
+//         array(            // display a column with "view", "update" and "delete" buttons
+//             'class'=>'CButtonColumn',
+//         ),
+//     ),
+// ));
+
+		?>
+		<?php
+			$this->endWidget();
+		?>
 	</div>
 </div>

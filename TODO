@@ -567,4 +567,29 @@ put this in new tab
 After deactivation 
 - resend the deactivation code after 30 seconds
 use CRON tab
+@DONE
+
+
+
+
+
+
+
+
+@TODO 
+paki lagay yung date at time kevs, tapos yung by batch
+
+@TODO - Log for top up account action 
+include datetime
+
+@TODO - if top up is batch , put a group name
+
+@TODO - Logs for group Activate and Deactivate
+
+@TODO - 
+Topup daily - at topup group view
+
+
+
+@TODO - test this
 
