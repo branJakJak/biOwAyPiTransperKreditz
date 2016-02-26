@@ -51,7 +51,7 @@ class TopupForm extends CFormModel
 					$model->main_user,
 					$this->topupvalue
 				);
-				ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId);
+				ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId, time());
 				if ($remoteAcctUpdated->update()) {
 					$accountsAffectedInt++;
 				}
