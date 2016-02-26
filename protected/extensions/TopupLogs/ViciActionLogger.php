@@ -5,7 +5,7 @@
 */
 class ViciActionLogger
 {
-	public static function logAction($actionType , $message ,$topUpValue, $batch = uniqid() , $logDate = time());
+	public static function logAction($actionType , $message ,$topUpValue, $batch = uniqid(), $logDate = time()  )
 	{
 		$newRecod = new ViciLogAction();
 		$newRecod->action_type = $actionType;
