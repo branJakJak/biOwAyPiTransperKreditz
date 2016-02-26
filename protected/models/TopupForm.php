@@ -74,7 +74,7 @@ class TopupForm extends CFormModel
 	            doubleval($this->topupvalue),
 	            $freeVoipAccount->pincode
 	        );
-	        ViciActionLogger::logAction("MAIN_TOPUP" , "Top upping {$subAccount->main_user}",$this->topupvalue);
+	        ViciActionLogger::logAction("MAIN_TOPUP" , "Top upping {$subAccount->main_user}",$this->topupvalue,uniqid(),time());
         }else{
         	throw new CHttpException(404,"$this->freeVoipAccountUsername doesnt exists");
         }
