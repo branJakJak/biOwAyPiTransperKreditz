@@ -44,7 +44,8 @@ class RemoteSyncCommand extends CConsoleCommand {
                 /* deactivation check */
                 Yii::log("Checking status code . ", CLogger::LEVEL_INFO, 'sync_log');
 
-                $this->checkStatus($foundModel);
+                //
+                //$this->checkStatus($foundModel);
                 // 
 
                 /* proceed with update */

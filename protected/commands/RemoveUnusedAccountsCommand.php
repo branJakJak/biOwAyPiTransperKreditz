@@ -14,14 +14,21 @@
 class RemoveUnusedAccountsCommand extends CConsoleCommand {
 
     public function actionIndex() {
+
+        /*get all ids*/
+        $remoteDataCacheIds = array();
         // retrieve all records from database 
         $remoteDataCacheModels = RemoteDataCache::model()->findAll();
         //retrieve all records from remote
         $allAsteriskModels = AsteriskCarriers::getData();
 
-        foreach ($remoteDataCacheModels as $currentRemoteDataCache) {
-            $curRemoteDataCacheModel = new RemoteDataCache;
-            $curRemoteDataCacheModel = $currentRemoteDataCache;
+        //collect the id 
+        foreach ($remoteDataCacheModels as $key => $value) {
+            $remoteDataCacheIds[] = $value->id;
+        }
+        $remoteDataCacheModels = null;
+        foreach ($remoteDataCacheIds as $currentRemoteDataCacheId) {
+            $curRemoteDataCacheModel = RemoteDataCache::model()->findByPk($currentRemoteDataCacheId);
             $currentRemoteDataCacheExists = false;
             Yii::log("Checking :  {$curRemoteDataCacheModel->sub_user} | {$curRemoteDataCacheModel->sub_pass}", CLogger::LEVEL_INFO,'sync_remove');
             /**
