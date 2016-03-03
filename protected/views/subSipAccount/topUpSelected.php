@@ -55,7 +55,7 @@
 	?>
 
 	</div>
-	<div class="span3">
+	<div class="span4">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Topup Logs',
@@ -66,7 +66,11 @@
 			$this->widget('zii.widgets.grid.CGridView', array(
 			    'dataProvider'=>$logRecsTodayDataProvider,
 			    'columns'=>array(
-			        'topUpValue'
+			        'topUpValue',
+			        array(
+			        		'header'=>'Account',
+			        		'value'=>'$data->freeVoipAccountUsername',
+			        	),
 			    ),
 			));
 		?>
