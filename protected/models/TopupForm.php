@@ -4,7 +4,7 @@ class TopupForm extends CFormModel
 {
 	public $accounts;
 	public $topupvalue;
-	public $freeVoipAccountUsername;
+	public $freeVoipAccountUsername = 'jawdroppingcalls';
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
