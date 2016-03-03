@@ -66,9 +66,9 @@
 			$this->widget('zii.widgets.grid.CGridView', array(
 			    'dataProvider'=>$logRecsTodayDataProvider,
 			    'columns'=>array(
-			        'topUpValue',
+			        // 'topUpValue',
 			        array(
-			        		'header'=>'Account',
+			        		'header'=>'Log',
 			        		'value'=>'$data->message',
 			        	),
 			    ),
