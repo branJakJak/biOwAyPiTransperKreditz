@@ -69,7 +69,7 @@
 			        'topUpValue',
 			        array(
 			        		'header'=>'Account',
-			        		'value'=>'$data->freeVoipAccountUsername',
+			        		'value'=>'$data->message',
 			        	),
 			    ),
 			));
