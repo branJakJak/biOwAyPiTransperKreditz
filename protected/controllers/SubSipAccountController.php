@@ -49,11 +49,21 @@ class SubSipAccountController extends Controller {
                 $this->redirect("/subSipAccount/deactivateGroup");
             }
         }
-        $this->render('deactivateGroup',compact('formModel','remoteDataCacheCollection'));
+        $criteria = new CDbCriteria;
+        $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE);
+        $deactivateDataProvider = new CActiveDataProvider('ViciLogAction', array(
+            'criteria'=>$criteria,
+        ));
+        $this->render('deactivateGroup',compact('formModel','remoteDataCacheCollection','deactivateDataProvider'));
     }
 
     public function actionActivateGroup(){
         $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
+        $criteria = new CDbCriteria;
+        $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_ACTIVIVATE);
+        $activateDataProvider = new CActiveDataProvider('ViciLogAction', array(
+            'criteria'=>$criteria,
+        ));
         $formModel = new ActivationFormModel();
         if(isset($_POST['ActivationFormModel'])){
             $formModel->attributes = $_POST['ActivationFormModel'];
@@ -63,7 +73,7 @@ class SubSipAccountController extends Controller {
                 $this->redirect("/subSipAccount/activateGroup");
             }
         }
-        $this->render('activateGroup',compact('formModel','remoteDataCacheCollection'));
+        $this->render('activateGroup',compact('formModel','remoteDataCacheCollection','activateDataProvider'));
     }
     public function actionTopUpSelected()
     {

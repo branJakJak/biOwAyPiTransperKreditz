@@ -13,6 +13,12 @@
  */
 class ViciLogAction extends CActiveRecord
 {
+	const VICILOG_ACTION_TOPUP_MAIN = 'MAIN_TOPUP';
+	const VICILOG_ACTION_TOPUP_SUBSIP = 'TOPUP_SUBSIP';
+	const VICILOG_ACTION_SUBSIP_DEACTIVIVATE = 'SUBSIP_DEACTIVIVATE_GROUP';
+	const VICILOG_ACTION_SUBSIP_ACTIVIVATE = 'SUBSIP_ACTIVIVATE_GROUP';
+
+
 	/**
 	 * @return string the associated database table name
 	 */

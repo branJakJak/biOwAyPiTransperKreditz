@@ -6,7 +6,6 @@
  * Time: 6:54 PM
  */
 ?>
-
 <div class="row-fluid">
     <div class="span8 offset2">
         <?php
@@ -49,5 +48,38 @@
         $this->endWidget();
         ?>
 
+    </div>
+</div>
+
+
+
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title'=>'Activated Accounts Log',
+        ));
+        ?>
+
+
+
+        <?php 
+            $this->widget('zii.widgets.grid.CGridView', array(
+                'dataProvider'=>$activateDataProvider,
+                'columns'=>array(
+                    array(
+                            'header'=>'Log',
+                            'value'=>'$data->message',
+                        ),
+                    'logDate',
+                ),
+            ));
+        ?>
+
+
+
+        <?php
+            $this->endWidget();
+        ?>        
     </div>
 </div>

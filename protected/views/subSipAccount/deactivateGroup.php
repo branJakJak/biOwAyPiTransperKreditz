@@ -51,3 +51,33 @@
 
     </div>
 </div>
+
+
+
+
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <?php
+            $this->beginWidget('zii.widgets.CPortlet', array(
+                'title'=>'Deactivate Log',
+            ));
+        ?>
+
+        <?php 
+            $this->widget('zii.widgets.grid.CGridView', array(
+                'dataProvider'=>$deactivateDataProvider,
+                'columns'=>array(
+                    array(
+                            'header'=>'Log',
+                            'value'=>'$data->message',
+                        ),
+                    'logDate',
+                ),
+            ));
+        ?>
+        
+        <?php
+            $this->endWidget();
+        ?>
+    </div>
+</div>

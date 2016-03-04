@@ -51,7 +51,11 @@ class ActivationFormModel extends CFormModel
         $activator = Yii::app()->vicidialActivator;
         $activator->setVicidialUser($sipAccount->vicidial_identification);
         if ($activator->run()) {
-            Yii::log(json_encode("$sipAccount->vicidial_identification is now activated"), CLogger::LEVEL_INFO, "activation");
+
+            $groupId = uniqid();
+            ViciActionLogger::logAction(ViciLogAction::VICILOG_ACTION_SUBSIP_ACTIVIVATE , "$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now activated" , 0  , $groupId, time());
+
+            Yii::log(json_encode("$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now activated"), CLogger::LEVEL_INFO, "activation");
         }else{
             Yii::log(json_encode("deactivation failed $sipAccount->vicidial_identification"), CLogger::LEVEL_INFO, "activation");
         }
