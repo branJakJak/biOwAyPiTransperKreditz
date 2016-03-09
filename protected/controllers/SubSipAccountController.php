@@ -84,8 +84,12 @@ class SubSipAccountController extends Controller {
         $criteria = new CDbCriteria;
         $criteria->compare("date(logDate)",date("Y-m-d"));
         $criteria->compare("action_type",'SUB_ACCOUNT_TOPUP');
+        $criteria->order = "logDate DESC";
         $logRecsTodayDataProvider = new CActiveDataProvider('ViciLogAction', array(
             'criteria'=>$criteria,
+            'pagination'=>array(
+                'pageSize'=>20,
+            )
         ));
 
         //iterate and sum the total topup logs
