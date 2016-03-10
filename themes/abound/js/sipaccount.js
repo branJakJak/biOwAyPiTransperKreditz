@@ -117,6 +117,9 @@
 			if (currentRow.is_active === "INACTIVE") {
 				classNameContainer = "blockedAccount";
 			}
+			else if (currentRow.main_user === 'Piper.Denesik') {
+				classNameContainer = "issueAccount";
+			}
 			return classNameContainer;
 		}
 		this.updateCampaignName = function(currentRow){

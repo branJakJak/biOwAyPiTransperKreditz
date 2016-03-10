@@ -88,6 +88,10 @@ $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-t
 	  background-color: #ff284c !important;
 	  color: white;		
 	}
+	.blockedAccount a.editCampaignLink {
+	  background-color: orange !important;
+	  color: white;		
+	}
 </style>
 
 
