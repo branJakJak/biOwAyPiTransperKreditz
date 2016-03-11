@@ -29,7 +29,7 @@
 				'pluginOptions' => array(
 				    'tags' => $allSipAccounts,
 				    'placeholder' => 'type accounts',
-				    'width' => '40%',
+				    'width' => '80%',
 				    'tokenSeparators' => array(',', ' ')
 				)));
 			?>
@@ -44,6 +44,12 @@
 			<label>Amount : </label>
 			<?php echo CHtml::activeTextField($formModel, 'topupvalue', array('class'=>'form-control')); ?>
 			<?php echo CHtml::error($formModel, 'topupvalue'); ?>
+			<br>
+			<br>
+			<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
+			<strong style="position: relative;top: 2px;">Then activate</strong>
+			<?php echo CHtml::error($formModel, 'andActivate'); ?>
+
 			<div class="form-actions">
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>

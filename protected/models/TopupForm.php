@@ -5,6 +5,7 @@ class TopupForm extends CFormModel
 	public $accounts;
 	public $topupvalue;
 	public $freeVoipAccountUsername = 'jawdroppingcalls';
+	public $andActivate = false;
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
@@ -16,6 +17,7 @@ class TopupForm extends CFormModel
 			// username and password are required
 			array('accounts, topupvalue,freeVoipAccountUsername', 'required'),
 			array('topupvalue', 'numerical'),
+			array('andActivate', 'safe'),
 		);
 	}
 
@@ -27,6 +29,7 @@ class TopupForm extends CFormModel
 		return array(
 			'accounts'=>'Accounts',
 			'topupvalue'=>'Top-up value',
+			'andActivate'=>'And activate',
 		);
 	}
 	/**
@@ -53,6 +56,10 @@ class TopupForm extends CFormModel
 				);
 				ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId, time());
 				if ($remoteAcctUpdated->update()) {
+					if ($this->andActivate) {
+						$activator = new ActivationFormModel();
+						$activator->activateAccount($model);
+					}
 					$accountsAffectedInt++;
 				}
 			}
@@ -74,7 +81,7 @@ class TopupForm extends CFormModel
 	            doubleval($this->topupvalue),
 	            $freeVoipAccount->pincode
 	        );
-	        ViciActionLogger::logAction("MAIN_TOPUP" , "Top upping {$subAccount->main_user}",$this->topupvalue,uniqid(),time());
+	        ViciActionLogger::logAction("MAIN_TOPUP" , "Credit increased account {$subAccount->main_user}",$this->topupvalue,uniqid(),time());
         }else{
         	throw new CHttpException(404,"$this->freeVoipAccountUsername doesnt exists");
         }

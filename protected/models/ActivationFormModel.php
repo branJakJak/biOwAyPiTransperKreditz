@@ -37,7 +37,8 @@ class ActivationFormModel extends CFormModel
     }
 
     /**
-     *
+     * @todo  - would be better if this is refactored and put into separate class
+     * @todo - there are lots of code duplication . please refactor
      * @param RemoteDataCache $remoteDataCacheMdl
      * @return bool
      */

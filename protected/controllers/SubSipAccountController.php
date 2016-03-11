@@ -87,6 +87,7 @@ class SubSipAccountController extends Controller {
     {
         $formModel = new TopupForm;
         $topupLogsTotalToday = 0;
+        $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
         /*get all subsip logs from Vicilogs*/
         $criteria = new CDbCriteria;
@@ -99,13 +100,6 @@ class SubSipAccountController extends Controller {
                 'pageSize'=>20,
             )
         ));
-
-        //iterate and sum the total topup logs
-        foreach ($logRecsTodayDataProvider->data as $key => $value) {
-            $topupLogsTotalToday += $value->topUpValue;
-        }
-
-        $allSipAccounts = $this->getRemoteDataCacheAccounts();
         if (isset($_POST['TopupForm'])) {
             $formModel->attributes = $_POST['TopupForm'];
             if ($formModel->validate()) {
@@ -114,6 +108,10 @@ class SubSipAccountController extends Controller {
                 $this->redirect(array('/subSipAccount/topUpSelected'));
             }
         }
+        foreach ($logRecsTodayDataProvider->data as $key => $value) {
+            $topupLogsTotalToday += $value->topUpValue;
+        }
+        $allSipAccounts = $this->getRemoteDataCacheAccounts();
         $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider'));
     }
     /**
