@@ -51,8 +51,12 @@ class SubSipAccountController extends Controller {
         }
         $criteria = new CDbCriteria;
         $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE);
+        $criteria->order = "logDate DESC";
         $deactivateDataProvider = new CActiveDataProvider('ViciLogAction', array(
             'criteria'=>$criteria,
+            'pagination'=>array(
+                    'pageSize'=>20
+                ),
         ));
         $this->render('deactivateGroup',compact('formModel','remoteDataCacheCollection','deactivateDataProvider'));
     }
@@ -61,8 +65,12 @@ class SubSipAccountController extends Controller {
         $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
         $criteria = new CDbCriteria;
         $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_ACTIVIVATE);
+        $criteria->order = "logDate DESC";
         $activateDataProvider = new CActiveDataProvider('ViciLogAction', array(
             'criteria'=>$criteria,
+            'pagination'=>array(
+                    'pageSize'=>20
+                ),
         ));
         $formModel = new ActivationFormModel();
         if(isset($_POST['ActivationFormModel'])){

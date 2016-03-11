@@ -46,6 +46,7 @@ class DisableController extends Controller
             $logsReq = "";
             if ($deactivator->run()) {
                 $logsReq = "$sipAccount->vicidial_identification is now deactivated";
+                Yii::log(json_encode("$currentRemoteObj->sub_user under $currentRemoteObj->main_user is now deactivated"), CLogger::LEVEL_INFO, "deactivation");
             }else{
                 $logsReq = "deactivation failed $sipAccount->vicidial_identification";
             }
