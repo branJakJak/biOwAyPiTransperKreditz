@@ -336,7 +336,11 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 
 		<tr ng-repeat="(key, value) in sipAccounts | filter:'!Prion1967'" ng-class="indexCtrl.getRowClass(value)">
 			<td>{{key+1}}</td>
-			<td>{{value.main_user}}</td>
+			<td>
+				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_password}}">
+					{{value.main_user}}
+				</a>
+			</td>
 			<td>{{value.sub_user}}</td>
 			<td>{{value.balance}}</td>
 			<td>{{value.vici_user}}</td>
