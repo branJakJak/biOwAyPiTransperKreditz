@@ -45,10 +45,10 @@ class TransactionLog extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('to_username, amount, pincode,freevoip_account,result_string , result_description', 'required'),
+			array('to_username, amount, pincode,freevoip_account', 'required'),
 			array('freevoip_account,amount', 'numerical', 'integerOnly'=>true),
 			array('to_username, amount, pincode', 'length', 'max'=>255),
-			array('date_created, date_updated', 'safe'),
+			array('date_created, date_updated,result_string , result_description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, freevoip_account, to_username, amount, pincode, date_created, date_updated', 'safe', 'on'=>'search'),
