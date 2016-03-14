@@ -58,6 +58,7 @@ class DisableController extends Controller
                 $currentRemoteObj->sub_pass,
                 $logsReq
             );
+            ViciActionLogger::logAction(ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE , "$currentRemoteObj->sub_user under $currentRemoteObj->main_user is now deactivated",0 , uniqid(), time());
             mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage);
             Yii::log($logMessage, CLogger::LEVEL_INFO, 'info');
         }
