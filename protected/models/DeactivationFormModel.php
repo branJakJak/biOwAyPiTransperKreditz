@@ -54,13 +54,11 @@ class DeactivationFormModel extends CFormModel
         $deactivator->setVicidialUser($sipAccount->vicidial_identification);
         if ($deactivator->run()) {
             $groupId = uniqid();
-
-            ViciActionLogger::logAction(ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE , "$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now deactivated" , 0  , $groupId, time());
-            Yii::log(json_encode("$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now deactivated"), CLogger::LEVEL_INFO, "deactivation");
+            ViciActionLogger::logAction(ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE , "$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now deactivated - via remote trigger" , 0  , $groupId, time());
+            Yii::log(json_encode("$remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user is now deactivated - via remote trigger"), CLogger::LEVEL_INFO, "deactivation");
         }else{
-            Yii::log(json_encode("deactivation failed $sipAccount->vicidial_identification"), CLogger::LEVEL_INFO, "deactivation");
+            Yii::log(json_encode("deactivation failed $remoteDataCacheMdl->sub_user under $remoteDataCacheMdl->main_user"), CLogger::LEVEL_INFO, "deactivation");
         }
-
         /* find the RemoteDataCache and update it too */
         $remoteDataCacheMdl->is_active = "INACTIVE";
         return $remoteDataCacheMdl->save();
