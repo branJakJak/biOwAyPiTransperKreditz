@@ -38,11 +38,18 @@ class SubSipAccountController extends Controller {
             ),
         );
     }
+    public function getActivatedAccounts()
+    {
+        $criteria = new CDbCriteria;
+        $criteria->compare("is_active","ACTIVE");
+        return RemoteDataCache::model()->findAll($criteria);
+    }
     public function actionDeactivateGroup(){
-        $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
+        $remoteDataCacheCollection = $this->getActivatedAccounts();
         $formModel = new DeactivationFormModel();
         if(isset($_POST['DeactivationFormModel'])){
             $formModel->attributes = $_POST['DeactivationFormModel'];
+            $formModel->accounts = implode(",",$_POST['accounts']);
             if($formModel->validate()){
                 $formModel->run();
                 Yii::app()->user->setFlash("success", "Success! Selected accounts are now deactivated");
@@ -61,8 +68,25 @@ class SubSipAccountController extends Controller {
         $this->render('deactivateGroup',compact('formModel','remoteDataCacheCollection','deactivateDataProvider'));
     }
 
+    public function getDeactivatedAccounts()
+    {
+        $criteria = new CDbCriteria;
+        $criteria->compare("is_active","INACTIVE");
+        return RemoteDataCache::model()->findAll($criteria);
+    }
     public function actionActivateGroup(){
-        $remoteDataCacheCollection = $this->getRemoteDataCacheAccounts();
+        $remoteDataCacheCollection = $this->getDeactivatedAccounts();
+        $formModel = new ActivationFormModel();
+        if(isset($_POST['ActivationFormModel'])){
+            $formModel->attributes = $_POST['ActivationFormModel'];
+            $formModel->accounts = implode(",", $_POST['accounts']);
+            if($formModel->validate()){
+                $formModel->run();
+                Yii::app()->user->setFlash("success", "Success! Selected accounts are now activated");
+                $this->redirect("/subSipAccount/activateGroup");
+            }
+        }
+
         $criteria = new CDbCriteria;
         $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_ACTIVIVATE);
         $criteria->order = "logDate DESC";
@@ -72,15 +96,7 @@ class SubSipAccountController extends Controller {
                     'pageSize'=>20
                 ),
         ));
-        $formModel = new ActivationFormModel();
-        if(isset($_POST['ActivationFormModel'])){
-            $formModel->attributes = $_POST['ActivationFormModel'];
-            if($formModel->validate()){
-                $formModel->run();
-                Yii::app()->user->setFlash("success", "Success! Selected accounts are now activated");
-                $this->redirect("/subSipAccount/activateGroup");
-            }
-        }
+
         $this->render('activateGroup',compact('formModel','remoteDataCacheCollection','activateDataProvider'));
     }
     public function actionTopUpSelected()

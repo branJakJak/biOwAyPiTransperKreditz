@@ -5,10 +5,22 @@
  * Date: 2/10/2016
  * Time: 7:03 PM
  */
+$remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_user','sub_user');
 ?>
+
+<style type="text/css">
+    label{
+        display: inline-block;
+        margin: 10px 5px;
+        position: relative;
+        top: 3px;        
+    }
+</style>
 
 <div class="row-fluid">
     <div class="span8 offset2">
+
+
         <?php
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title'=>'Deactivate selected account',
@@ -24,19 +36,12 @@
             ),
         )); ?>
         <?php echo CHtml::beginForm(array('/subSipAccount/deactivateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
-        <label>Accounts : </label>
-        <?php
-        $this->widget('yiiwheels.widgets.select2.WhSelect2', array(
-            'model' => $formModel,
-            'attribute' => 'accounts',
-            'asDropDownList' => false,
-            'pluginOptions' => array(
-                'tags' => $remoteDataCacheCollection,
-                'placeholder' => 'type accounts',
-                'width' => '40%',
-                'tokenSeparators' => array(',', ' ')
-            )));
-        ?>
+        <?php echo CHtml::activeHiddenField($formModel, 'accounts', array()); ?>
+        <label>
+            <strong><?php echo count($remoteDataCacheCollection) ?> account(s) : </strong>
+        </label>
+        <hr>
+        <?php echo CHtml::checkBoxList('accounts', '', $remoteDataCacheCollection, array()); ?>
         <?php echo CHtml::error($formModel, 'accounts'); ?>
         <br>
         <div class="form-actions">
