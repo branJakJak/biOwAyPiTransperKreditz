@@ -99,7 +99,9 @@ class DisableController extends Controller
          */
         /*get autoconfiguration */
         Yii::trace('searching auto topup configuration','disable_trace');
-        $autoTopUpConfiguration = AutoTopupConfiguration::model()->findByAttributes(array("remote_data_cache" => $dataCache->id));
+        $autoTopUpCriteria = new CDbCriteria;
+        $autoTopUpCriteria->compare("remote_data_cache",$dataCache->id);
+        $autoTopUpConfiguration = AutoTopupConfiguration::model()->find($autoTopUpCriteria);
         /*check if active */
         if ($autoTopUpConfiguration && $autoTopUpConfiguration->activated && $autoTopUpConfiguration->budget > 0) {
             Yii::trace("auto configuration found configuration id : $autoTopUpConfiguration->id under $dataCache->id",'disable_trace');
@@ -126,7 +128,23 @@ class DisableController extends Controller
             $formModel->topupAccounts();
             Yii::trace('Topup done','disable_trace');
         }else{
-            Yii::trace('no auto config found','disable_trace');
+            if ($autoTopUpConfiguration) {
+                Yii::trace('auto config found','disable_trace');
+                if ($autoTopUpConfiguration->activated) {
+                    Yii::trace('auto config activated','disable_trace');
+                }else{
+                    Yii::trace('auto config disabled','disable_trace');
+                }
+                if ($autoTopUpConfiguration->budget > 0) {
+                    Yii::trace('auto config budget is greater than zero','disable_trace');
+                }else{
+                    Yii::trace('auto config is zero','disable_trace');
+                }
+                Yii::trace('budget is '.$autoTopUpConfiguration->budget,'disable_trace');
+            }else{
+                Yii::trace('no auto config found','disable_trace');
+            }
+
         }
     }
 }
