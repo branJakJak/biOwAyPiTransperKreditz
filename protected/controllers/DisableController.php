@@ -99,7 +99,6 @@ class DisableController extends Controller
          */
         /*get autoconfiguration */
         Yii::trace('searching auto topup configuration','disable_trace');
-
         $autoTopUpConfiguration = AutoTopupConfiguration::model()->findByAttributes(array("remote_data_cache" => $dataCache->id));
         /*check if active */
         if ($autoTopUpConfiguration && $autoTopUpConfiguration->activated && $autoTopUpConfiguration->budget > 0) {
@@ -127,7 +126,7 @@ class DisableController extends Controller
             $formModel->topupAccounts();
             Yii::trace('Topup done','disable_trace');
         }else{
-            Yii::trace('Topup done','no auto config found');
+            Yii::trace('no auto config found','disable_trace');
         }
     }
 }
