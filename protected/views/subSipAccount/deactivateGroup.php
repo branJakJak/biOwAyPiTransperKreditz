@@ -38,7 +38,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
         <?php echo CHtml::beginForm(array('/subSipAccount/deactivateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
         <?php echo CHtml::activeHiddenField($formModel, 'accounts', array()); ?>
         <label>
-            <strong><?php echo count($remoteDataCacheCollection) ?> account(s) : </strong>
+            <strong><?php echo count($remoteDataCacheCollection) ?> active account(s) : </strong>
         </label>
         <hr>
         <?php echo CHtml::checkBoxList('accounts', '', $remoteDataCacheCollection, array()); ?>

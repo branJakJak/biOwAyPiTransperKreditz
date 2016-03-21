@@ -36,7 +36,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
         <?php echo CHtml::beginForm(array('/subSipAccount/activateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
         <label>
             <strong>
-                <?php echo count($remoteDataCacheCollection) ?> account(s) : 
+                <?php echo count($remoteDataCacheCollection) ?> inactive account(s) : 
             </strong>
         </label>
         <hr>
