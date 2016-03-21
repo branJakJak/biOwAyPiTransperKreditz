@@ -69,7 +69,7 @@ class LogsController extends CController
     	header("Content-Transfer-Encoding: binary");
         $criteria = new CDbCriteria;
         $criteria->compare("action_type",'SUB_ACCOUNT_TOPUP');
-        $criteria->addBetweenCondition("logDate",$dateFrom , $dateTo);
+        $criteria->addBetweenCondition("logDate",date("Y-m-d H:i:s",strtotime($dateFrom)), date("Y-m-d H:i:s",strtotime($dateTo)));
         $criteria->order = "logDate DESC";
         $allResult = ViciLogAction::model()->findAll($criteria);
         //header

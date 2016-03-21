@@ -31,8 +31,8 @@
 					<th>Sub Account</th>
 					<th>Vici Id</th>
 					<th>Current Balance</th>
-					<th>Active</th>
-					<th>Topup Value</th>
+					<th>Continue topup</th>
+					<th>Automatic Topup Value</th>
 					<th>Budget</th>
 					<th>Action</th>
 				</tr>
