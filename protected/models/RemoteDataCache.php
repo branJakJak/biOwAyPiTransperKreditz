@@ -132,9 +132,23 @@ class RemoteDataCache extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    protected function afterSave()
+    {
+        if ($this->isNewRecord) {
+            /*create AutoTopUpConfiguration*/
+            $freeVoipObject = FreeVoipAccounts::model()->findByAttributes(array('username'=>'jawdroppingcalls'));
+            $autoTopUpConf = new AutoTopupConfiguration();
+            $autoTopUpConf->activated = false;
+            $autoTopUpConf->budget = 0;
+            $autoTopUpConf->freeVoipAccount = $freeVoipObject->id;
+            $autoTopUpConf->remote_data_cache = $this->id;
+            $autoTopUpConf->topUpValue = 0;
+            $autoTopUpConf->save();
+        }
+        parent::afterSave();
+    }
 
-
-	public function behaviors()
+    public function behaviors()
 	{
 		return array(
 		   'CTimestampBehavior' => array(

@@ -5,8 +5,6 @@
 */
 class ChartController extends Controller
 {
-
-
 	/**
 	 * @return array action filters
 	 */

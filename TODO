@@ -597,25 +597,17 @@ Topup daily - at topup group view
 
 
 @TODO - problem with balance 
-going negative
+Going negative
+@DONE
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:48]
-Nosinden  johnh*Nosinden
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:48]
-Iman197733  johnh*Iman197733
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:48]
-awts
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:48]
-zero na
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:49]
-pero nag topup naman ako ng tig 10 nila kevs
+@TODO - increase trigger for credit limit
+to 3 - 3.5
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:49]
-kasi nag topup ako kanina lang ng tig 10 nila from no.2 up to 22
 
-dsdasd23r123 g23g23gf23g, [01.03.16 00:54]
-tapos pagka kwan kevs eh hindi nag loload yung vbdial, kunwari mag topup ka or mag activate or mag deactivate eh umiikot ikot nalang sya
+@TODO - On credit limit 
+	check whether it is on auto top up 
+		if it is , top up using topup credits set by 
