@@ -126,6 +126,8 @@ class DisableController extends Controller
             Yii::trace('About to topup','disable_trace');
             $formModel->topupAccounts();
             Yii::trace('Topup done','disable_trace');
+        }else{
+            Yii::trace('Topup done','no auto config found');
         }
     }
 }
