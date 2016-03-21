@@ -21,7 +21,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
     <div class="span8 offset2">
         <?php
         $this->beginWidget('zii.widgets.CPortlet', array(
-            'title'=>'Activate selected account',
+            'title'=>'Select account to activate',
         ));
         ?>
         <?php

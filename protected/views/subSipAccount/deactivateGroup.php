@@ -23,7 +23,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
 
         <?php
         $this->beginWidget('zii.widgets.CPortlet', array(
-            'title'=>'Deactivate selected account',
+            'title'=>'Select account to deactivate',
         ));
         ?>
         <?php
