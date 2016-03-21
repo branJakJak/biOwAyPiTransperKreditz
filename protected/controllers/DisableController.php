@@ -98,33 +98,34 @@ class DisableController extends Controller
          * @var AutoTopupConfiguration $autoTopUpConfiguration
          */
         /*get autoconfiguration */
-        Yii::trace('searching auto topup configuration');
+        Yii::trace('searching auto topup configuration','disable_trace');
+
         $autoTopUpConfiguration = AutoTopupConfiguration::model()->findByAttributes(array("remote_data_cache" => $dataCache->id));
         /*check if active */
         if ($autoTopUpConfiguration && $autoTopUpConfiguration->activated && $autoTopUpConfiguration->budget > 0) {
-            Yii::trace("auto configuration found configuration id : $autoTopUpConfiguration->id under $dataCache->id");
+            Yii::trace("auto configuration found configuration id : $autoTopUpConfiguration->id under $dataCache->id",'disable_trace');
             /*topup using topup value*/
             $formModel = new TopupForm;
             $formModel->accounts = $dataCache->sub_user;//load the single account
             $formModel->topupvalue = $autoTopUpConfiguration->topUpValue;
             if ($autoTopUpConfiguration->topUpValue > $autoTopUpConfiguration->budget) {
-                Yii::trace('Budget worned out');
+                Yii::trace('Budget worned out','disable_trace');
                 $formModel->topupvalue = $autoTopUpConfiguration->budget;
                 //no more budget
                 $autoTopUpConfiguration->budget = 0;
             }else{
-                Yii::trace('Decreasing budget');
+                Yii::trace('Decreasing budget','disable_trace');
                 //decrease the allotted budget
                 $autoTopUpConfiguration->budget -= $autoTopUpConfiguration->topUpValue;
             }
-            Yii::trace('Saving budget');
+            Yii::trace('Saving budget','disable_trace');
             $autoTopUpConfiguration->save();//update the allotted budget
-            Yii::trace('Budget saved');
+            Yii::trace('Budget saved','disable_trace');
 
             $formModel->andActivate = true;/*activate account*/
-            Yii::trace('About to topup');
+            Yii::trace('About to topup','disable_trace');
             $formModel->topupAccounts();
-            Yii::trace('Topup done');
+            Yii::trace('Topup done','disable_trace');
         }
     }
 }
