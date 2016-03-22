@@ -55,6 +55,8 @@ class SubSipAccountController extends Controller {
                 Yii::app()->user->setFlash("success", "Success! Selected accounts are now deactivated");
                 $this->redirect("/subSipAccount/deactivateGroup");
             }
+        }else{
+            Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
         }
         $criteria = new CDbCriteria;
         $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE);
@@ -78,13 +80,15 @@ class SubSipAccountController extends Controller {
         $remoteDataCacheCollection = $this->getDeactivatedAccounts();
         $formModel = new ActivationFormModel();
         if(isset($_POST['ActivationFormModel'])){
-            $formModel->attributes = $_POST['ActivationFormModel'];
+            //$formModel->attributes = $_POST['ActivationFormModel'];
             $formModel->accounts = implode(",", $_POST['accounts']);
             if($formModel->validate()){
                 $formModel->run();
                 Yii::app()->user->setFlash("success", "Success! Selected accounts are now activated");
                 $this->redirect("/subSipAccount/activateGroup");
             }
+        }else{
+            Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
         }
 
         $criteria = new CDbCriteria;

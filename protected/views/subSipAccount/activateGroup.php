@@ -31,6 +31,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
             'closeText'=>'×', // close link text - if set to false, no close link is displayed
             'alerts'=>array( // configurations per alert type
                 'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
+                'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
             ),
         )); ?>
         <?php echo CHtml::beginForm(array('/subSipAccount/activateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
