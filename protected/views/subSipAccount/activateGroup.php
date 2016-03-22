@@ -9,19 +9,11 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
 
 $toggleAllScript  = <<<EOL
 jQuery("#checkAllCheckbox").toggle(function() {
-    jQuery(this).prop({
-        checked: 'checked'
-    });
-    jQuery("input[type='checkbox']").prop({
+    jQuery("input[type='checkbox']").not(this).prop({
         checked: 'checked'
     });
 }, function() {
-    
-    jQuery(this).prop({
-        checked: 'checked'
-    });
-
-    jQuery("input[type='checkbox']").removeProp('checked');
+    jQuery("input[type='checkbox']").not(this).removeProp('checked');
 });
 EOL;
 Yii::app()->clientScript->registerScript('toggleAllScript', $toggleAllScript, CClientScript::POS_READY);
