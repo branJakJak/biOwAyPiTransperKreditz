@@ -56,7 +56,7 @@ class SubSipAccountController extends Controller {
                 $this->redirect("/subSipAccount/deactivateGroup");
             }
         }else{
-            Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
+            // Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
         }
         $criteria = new CDbCriteria;
         $criteria->compare("action_type", ViciLogAction::VICILOG_ACTION_SUBSIP_DEACTIVIVATE);
@@ -88,7 +88,7 @@ class SubSipAccountController extends Controller {
                 $this->redirect("/subSipAccount/activateGroup");
             }
         }else{
-            Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
+            // Yii::app()->user->setFlash("error", CHtml::errorSummary($formModel));
         }
 
         $criteria = new CDbCriteria;
