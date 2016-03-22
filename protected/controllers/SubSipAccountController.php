@@ -42,6 +42,7 @@ class SubSipAccountController extends Controller {
     {
         $criteria = new CDbCriteria;
         $criteria->compare("is_active","ACTIVE");
+        $criteria->order = "vici_user ASC";
         return RemoteDataCache::model()->findAll($criteria);
     }
     public function actionDeactivateGroup(){
@@ -74,6 +75,7 @@ class SubSipAccountController extends Controller {
     {
         $criteria = new CDbCriteria;
         $criteria->compare("is_active","INACTIVE");
+        $criteria->order = "vici_user ASC";
         return RemoteDataCache::model()->findAll($criteria);
     }
     public function actionActivateGroup(){

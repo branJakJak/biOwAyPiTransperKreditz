@@ -6,6 +6,29 @@
  * Time: 7:03 PM
  */
 $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_user','sub_user');
+
+
+$toggleAllScript  = <<<EOL
+jQuery("#checkAllCheckbox").toggle(function() {
+
+    jQuery(this).prop({
+        checked: 'checked'
+    });
+
+    jQuery("input[type='checkbox']").prop({
+        checked: 'checked'
+    });
+}, function() {
+
+    jQuery(this).prop({
+        checked: 'checked'
+    });
+
+    jQuery("input[type='checkbox']").removeProp('checked');
+});
+EOL;
+Yii::app()->clientScript->registerScript('toggleAllScript', $toggleAllScript, CClientScript::POS_READY);
+
 ?>
 
 <style type="text/css">
@@ -38,9 +61,17 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
         )); ?>
         <?php echo CHtml::beginForm(array('/subSipAccount/deactivateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
         <?php echo CHtml::activeHiddenField($formModel, 'accounts', array()); ?>
+
         <label>
             <strong><?php echo count($remoteDataCacheCollection) ?> active account(s) : </strong>
         </label>
+        <br>
+        <?php //echo CHtml::button('Toggle box', array('id'=>'checkAllCheckbox')); ?>
+        <?php echo CHtml::checkBox('checkAll', false, array('id'=>'checkAllCheckbox')); ?>
+        <label> 
+            Check all
+        </label>
+        <br>
         <hr>
         <?php echo CHtml::checkBoxList('accounts', '', $remoteDataCacheCollection, array()); ?>
         <?php echo CHtml::error($formModel, 'accounts'); ?>
@@ -87,3 +118,6 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
         ?>
     </div>
 </div>
+
+
+
