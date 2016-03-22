@@ -35,6 +35,7 @@ $remoteDataCacheCollection = CHtml::listData($remoteDataCacheCollection,'sub_use
             ),
         )); ?>
         <?php echo CHtml::beginForm(array('/subSipAccount/activateGroup'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
+        <?php echo CHtml::activeHiddenField($formModel, 'accounts', array()); ?>
         <label>
             <strong>
                 <?php echo count($remoteDataCacheCollection) ?> inactive account(s) : 
