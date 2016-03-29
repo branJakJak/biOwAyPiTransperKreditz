@@ -1,10 +1,11 @@
 <?php 
 
 
+
 ?>
 
 <div class="row-fluid">
-	<div class="span5 offset2">
+	<div class="span5 offset1">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Top-up Selected Account',
@@ -20,7 +21,15 @@
 		    ),
 		)); ?>
 		<?php echo CHtml::beginForm(array('/subSipAccount/topUpSelected'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
-			<label>Accounts : </label>
+			<label>
+				<b style="float:left">
+					Accounts : 
+				</b>
+				<strong style="float:right;position: relative;left: -90px;">
+					<?php echo $numberOfAccounts ?> item(s)
+				</strong>
+				<div class="clearfix"></div>
+			</label>
 			<?php
 				$this->widget('yiiwheels.widgets.select2.WhSelect2', array(
 				'model' => $formModel,
@@ -64,10 +73,9 @@
 	<div class="span4">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
-				'title'=>'Topup Logs',
+				'title'=>'<strong>Today\'s Topup Total : </strong> '.$topupLogsTotalToday,
 			));
 		?>
-
 		<?php 
 			$this->widget('zii.widgets.grid.CGridView', array(
 			    'dataProvider'=>$logRecsTodayDataProvider,
@@ -77,14 +85,13 @@
 			        		'header'=>'Log',
 			        		'value'=>'$data->message',
 			        	),
+			        array(
+			        		'header'=>'Time',
+			        		'value'=>'date("F j, Y, g:i a",strtotime($data->date_created))',
+			        	),
 			    ),
 			));
 		?>
-		<hr>
-		<strong>Today's Topup Total</strong> : 
-		<?php echo $topupLogsTotalToday ?>
-
-		
 		<?php
 			$this->endWidget();
 		?>

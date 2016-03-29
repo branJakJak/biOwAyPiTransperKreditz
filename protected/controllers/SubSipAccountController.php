@@ -108,6 +108,7 @@ class SubSipAccountController extends Controller {
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
+        $numberOfAccounts = RemoteDataCache::model()->count();
         $topupLogsTotalToday = 0;
         $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
@@ -134,7 +135,7 @@ class SubSipAccountController extends Controller {
             $topupLogsTotalToday += $value->topUpValue;
         }
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
-        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider'));
+        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts'));
     }
     /**
      * 

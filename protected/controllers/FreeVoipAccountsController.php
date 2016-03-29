@@ -58,6 +58,9 @@ class FreeVoipAccountsController extends Controller
 		if ($model) {
 			$model->credits = $credits;
 			if ($model->save()) {
+				// $model->updateAttributes(array(
+				// 		"date_updated"=>date("Y-m-d H:i:s",time())
+				// 	));
 				$jsonResponse = array(
 						"success"=>true,
 						"message"=>"Freevoip credit updated"
@@ -89,12 +92,13 @@ class FreeVoipAccountsController extends Controller
 			if ($value->username == "Prion1967") {
 				$value->username = "CC";
 			}
+			$rawDateUpdated = strtotime(strtotime($value->date_updated));
 			$finalArr[] = array(
 				"id"=>$value->id,
 				"username"=>$value->username,
 				"password"=>$value->password,
 				"credits"=>$value->credits,
-				"last_updated"=>VoipTransDateHelper::timeAgo(strtotime($value->date_updated)),
+				"last_updated"=>VoipTransDateHelper::timeAgo($rawDateUpdated),
 				"date_created"=>$value->date_created,
 				"date_updated"=>$value->date_updated,
 			);
