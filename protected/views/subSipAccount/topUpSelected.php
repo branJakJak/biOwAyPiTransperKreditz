@@ -35,7 +35,7 @@ Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CC
 					Accounts : 
 				</b>
 				<strong style="float:right;position: relative;left: -90px;">
-					<i id='numberOfSelectedItems'>0</i> selected item(s)
+					<i id='numberOfSelectedItems'>0</i> item(s) selected
 				</strong>
 				<div class="clearfix"></div>
 			</label>
