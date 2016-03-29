@@ -87,7 +87,7 @@
 			        	),
 			        array(
 			        		'header'=>'Time',
-			        		'value'=>'date("F j, Y, g:i a",strtotime($data->date_created))',
+			        		'value'=>'date("F j, Y, g:i a",strtotime($data->logDate))',
 			        	),
 			    ),
 			));
