@@ -1,9 +1,18 @@
 <?php 
 
-
-
+$listenToEventWh = <<<EOL
+jQuery("#TopupForm_accounts").change(function(){
+	var currentdomVal = jQuery("#TopupForm_accounts").val();
+	if(currentdomVal != ""){
+		numOfItemsSelected = currentdomVal.split(",").length;
+		jQuery("#numberOfSelectedItems").html(numOfItemsSelected);
+	}else{
+		jQuery("#numberOfSelectedItems").html("0");
+	}
+});
+EOL;
+Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);
 ?>
-
 <div class="row-fluid">
 	<div class="span5 offset1">
 		<?php
@@ -26,12 +35,13 @@
 					Accounts : 
 				</b>
 				<strong style="float:right;position: relative;left: -90px;">
-					<?php echo $numberOfAccounts ?> item(s)
+					<i id='numberOfSelectedItems'>0</i> selected item(s)
 				</strong>
 				<div class="clearfix"></div>
 			</label>
 			<?php
 				$this->widget('yiiwheels.widgets.select2.WhSelect2', array(
+				// 'id' => 'allSipAccountsWh2',
 				'model' => $formModel,
 				'attribute' => 'accounts',
 				'asDropDownList' => false,
