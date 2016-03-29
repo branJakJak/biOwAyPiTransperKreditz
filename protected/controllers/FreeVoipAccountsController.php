@@ -46,7 +46,7 @@ class FreeVoipAccountsController extends Controller
 	}
 	public function actionCreditsUpdate()
 	{
-		header("Access-Control-Allow-Origin: *");	
+		header("Access-Control-Allow-Origin: *");
 		header("Content-Type: application/json");
 		$mainVoipUsername = @$_GET['mainVoipUsername'];
 		$credits = @$_GET['credits'];
@@ -92,7 +92,7 @@ class FreeVoipAccountsController extends Controller
 			if ($value->username == "Prion1967") {
 				$value->username = "CC";
 			}
-			$rawDateUpdated = strtotime(strtotime($value->date_updated));
+			$rawDateUpdated = strtotime($value->date_updated);
 			$finalArr[] = array(
 				"id"=>$value->id,
 				"username"=>$value->username,
