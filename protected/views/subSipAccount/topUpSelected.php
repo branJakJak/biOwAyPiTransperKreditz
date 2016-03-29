@@ -70,7 +70,7 @@
 	?>
 
 	</div>
-	<div class="span4">
+	<div class="span5">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'<strong>Today\'s Topup Total : </strong> '.$topupLogsTotalToday,
