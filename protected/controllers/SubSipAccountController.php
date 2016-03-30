@@ -105,11 +105,53 @@ class SubSipAccountController extends Controller {
 
         $this->render('activateGroup',compact('formModel','remoteDataCacheCollection','activateDataProvider'));
     }
+    public function loadDataSources()
+    {
+        $chartInitialData = array();
+        $sipAccountNames = array();
+        $chartSeriesData = array();
+        $criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
+
+        $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
+        foreach ($allRemoteModels as $key => $currentRemoteData) {
+            $tempColorContainer = "red";
+            //collect sip accounts
+            $sipAccountNames[$key] = $currentRemoteData->sub_user;
+            //register chart data array
+            $chartInitialData = array(
+                "name"=>$currentRemoteData->sub_user,
+                "data"=>$currentRemoteData->exact_balance,
+            );
+            if(doubleval($currentRemoteData->exact_balance)  >= 5){
+                $tempColorContainer = "#7CB5EC";
+            }else{
+                if ($currentRemoteData->exact_balance > 3) {
+                    $tempColorContainer = "orange";
+                }
+            }
+            //register series data
+            $chartSeriesData[$key] = array(
+                "y"=>doubleval($currentRemoteData->exact_balance),
+                "color"=>$tempColorContainer,
+            );
+        }
+        return array(
+                'iniChartData'=>$chartInitialData,
+                'sipAccountStr'=>$sipAccountNames,
+                'chartSeriesData'=>$chartSeriesData,
+            );
+    }
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
         $numberOfAccounts = RemoteDataCache::model()->count();
         $topupLogsTotalToday = 0;
+        $datasources = $this->loadDataSources();
+        $chartInitialData = $datasources['iniChartData'];
+        $sipAccountsStr = json_encode($datasources['sipAccountStr']);
+        $seriesDataStr = json_encode($datasources['chartSeriesData']);
+
         $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
         /*get all subsip logs from Vicilogs*/
@@ -135,7 +177,7 @@ class SubSipAccountController extends Controller {
             $topupLogsTotalToday += $value->topUpValue;
         }
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
-        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts'));
+        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr'));
     }
     /**
      * 

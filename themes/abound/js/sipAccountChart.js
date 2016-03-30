@@ -30,4 +30,3 @@ window.updateChartData = function(data) {
 	/*start blink interval*/
 	window.blinkerInterval = setInterval(window.chartBlink, 600);
 }
-

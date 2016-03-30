@@ -3,18 +3,12 @@
 
 $baseUrl = Yii::app()->theme->baseUrl; 
 $cs = Yii::app()->getClientScript();
-
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
-
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
 $cs->registerCssFile($baseUrl.'/css/alertify.css');
-
-
 $cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
 $javascriptCode = <<<EOL
-
 	window.originalColorMap = new Object();
-
 	window.options = {
             chart: {
             	renderTo:"chartContainer",
