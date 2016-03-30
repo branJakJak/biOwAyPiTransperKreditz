@@ -1,212 +1,103 @@
 <?php
+
+
+
 /* @var $this SipAccountController */
 /* @var $dataProvider CActiveDataProvider */
+$baseUrl = Yii::app()->theme->baseUrl; 
+$cs = Yii::app()->getClientScript();
+
+
+// ==================================================================
+//
+// Declare some supplementary data to widgets
+//
+// ------------------------------------------------------------------
 
 $this->breadcrumbs=array(
 	'Sip Accounts',
 );
 $this->menu=array(
-	array('label'=>'<i class="icon-plus-sign"></i> Register new SIP Account', 'url'=>array('create')),
-	//array('label'=>'Manage SipAccount', 'url'=>array('admin')),
+	array('label'=>'Manage SIP Account', 'url'=>array('create')),
 );
 
-$baseUrl = Yii::app()->theme->baseUrl; 
-$cs = Yii::app()->getClientScript();
+
+// ==================================================================
+//
+// Include scripts
+//
+// ------------------------------------------------------------------
+
+/*angular*/
+$cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.js'  , CClientScript::POS_END);
+/*moment js library */
+$cs->registerScriptFile($baseUrl.'/bower_components/moment/min/moment-with-locales.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/moment-timezone/moment-timezone.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/moment/min/moment-timezone-data.js'  , CClientScript::POS_END);
+
+// jstz
+$cs->registerScriptFile($baseUrl.'/js/jstz.min.js'  , CClientScript::POS_END);
+
+/* angular external modules*/
+$cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-moment/angular-moment.min.js'  , CClientScript::POS_END);
+// $cs->registerScriptFile($baseUrl.'/bower_components/momentjs/min/locales.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/humanize-duration/humanize-duration.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/bower_components/angular-timer/dist/angular-timer.min.js'  , CClientScript::POS_END);
+
+
+
+
+
+
+/*dumb logic codes*/
+$cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
+
+
+
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
-$cs->registerCssFile($baseUrl.'/css/alertify.min.css');
-$cs->registerScriptFile($baseUrl.'/bower_components/highcharts-release/highcharts.js'  , CClientScript::POS_END);
+$cs->registerCssFile($baseUrl.'/css/alertify.css');
 
-// $cs->registerCssFile($baseUrl.'/bower_components/angular-chart.js/dist/angular-chart.css');
-// $cs->registerScriptFile($baseUrl.'/bower_components/angular/angular.min.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/bower_components/angular-chart.js/angular-chart.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/js/Chart.min.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
-Yii::app()->clientScript->registerScript('liveupdatelistview', '
+$cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 
-	function updateListViewData() {
-		alertify.success("Updating data.. Please wait....");
-		$.fn.yiiListView.update("sipAccountListView");
-		setTimeout(updateListViewData, 60 * 1000);
-		setTimeout(updateChartData, 3 * 1000);
-	}
-	setTimeout(updateListViewData, 60 * 1000);
-
-', CClientScript::POS_READY);
+$cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.css');
 
 
 
 
-$sipAccounts = SipAccount::getSipAccountsAsArr();
-$sipAccountsStr = "[";
-foreach ($sipAccounts as $currentSipAccount) {
-	$sipAccountsStr .= "\"$currentSipAccount\"".',';
-}
-rtrim($sipAccountsStr,',');
-$sipAccountsStr .= ']';
-
-$seriesData = SipAccount::getSeriesDataAsArr();
-foreach ($seriesData as $key => $currentSeriesData) {
-    $curDataContainer = array();
-    if($currentSeriesData >= 10){
-		$curDataContainer = array("y"=>$currentSeriesData,"color"=>"#7CB5EC");
-    }else{
-    	$curDataContainer = array("y"=>$currentSeriesData,"color"=>"red");
-    }
-    
-    $seriesData[$key] = $curDataContainer;
-}
-
-$seriesDataStr = json_encode($seriesData);
 
 
-$javascriptCode = <<<EOL
-
-	window.originalColorMap = new Object();
-
-	window.options = {
-            chart: {
-            	renderTo:"chartContainer",
-                type: 'bar'
-            },
-	 		title: {
-	            text: 'Credit Balance'
-	        },
-			credits: {
-			   enabled: false
-			},
-            legend: { enabled: false},
-            xAxis: {
-                categories: $sipAccountsStr,
-	  			title: {
-	                text: null
-	            },
-	            labels:{
-	            	formatter:function(){
-	            		this.getRandomColor = function() {
-						    var letters = '0123456789ABCDEF'.split('');
-						    var color = '#';
-						    for (var i = 0; i < 6; i++ ) {
-						        color += letters[Math.floor(Math.random() * 16)];
-						    }
-						    return color;
-						}
-						if (!window.originalColorMap[this.value]) {
-							window.originalColorMap[this.value] = this.getRandomColor();
-						}
-	            		/*generate random color*/
-	            		return '<span style="color: '+window.originalColorMap[this.value]+';">' + this.value + '</span>';
-	            	}
-	            }
-            },
-	 		yAxis: {
-	            title: {
-	                text: null,
-	            },
-	        },
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000',
-                        style: {fontWeight: 'bolder'},
-                        //formatter: function() {return this.x + ': ' this.y},
-                        inside: true,
-                        //rotation: 270
-                    },
-                    pointPadding: 0.1,
-                    groupPadding: 0
-                }
-            },
-
-            series: [{
-                data: $seriesDataStr
-            }]
-        };
-	
-	
-	//iterate all original color
-	// jQuery.each(window.options.series[0].data, function(index, val) {
-	// 	window.originalColor.push(val.color);
-	// 	if (val.y < 10) {
-	// 		window.options.series[0].data[index].color = "red";
-	// 	}
-	//   //iterate through array or object
-	// });
-
-	window.chartObj = new Highcharts.Chart(window.options);
 
 
-EOL;
-Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
 
-Yii::app()->clientScript->registerScript('updateChartData', '
-	setTimeout(updateChartData, 3 * 1000);
-	', CClientScript::POS_READY);
 
 ?>
 
-<style type="text/css">
-	.account-panels {
-		min-width : 350px;
-		max-width : 450px;
-		float:left;
-		margin: 10px 5px;
 
-		padding: 10px;
+<style type="text/css">
+	.topUpAllContainer{
+		margin: 0px 5px;
 	}
-	.list-view .summary {
-		text-align: left;
+	.topUpAllContainer > input{
+	    width: 138px;
+	}
+	.blockedAccount a.editCampaignLink {
+	  background-color: #ff284c !important;
+	  color: white;		
+	}
+	.blockedAccount a.editCampaignLink {
+	  background-color: orange !important;
+	  color: white;		
 	}
 </style>
 
 
-<script type="text/javascript">
-	function updateChartData () {
-		jQuery.ajax({
-		  url: '/sipAccount/getBarChartReportData',
-		  type: 'GET',
-		  dataType: 'json',
-		  success: function(data, textStatus, xhr) {
 
-			jQuery.each(data, function(index, val) {
-				//console.log(val.y)
-			  if (val.y < 10) {
-			  	data[index].color =  "red";
-			  }else if(val.y >= 10 && window.chartObj.series[0].data[index].color == "red"){
-			  	data[index].color = "#7CB5EC";
-
-			  	// if (window.chartObj.series[0].data[index].color == 'red') {
-			  	// 	//@TDODO - load color before
-			  	// 	window.chartObj.series[0].data[index].color = window.originalColor[index];
-			  	// }else{
-			  	// 	data[index].color = window.chartObj.series[0].data[index].color;
-			  	// 	//val.color = window.chartObj.series[0].data[index].color;
-			  	// }
-			  }else{
-			  	data[index].color = window.chartObj.series[0].data[index].color;
-			  }
-			});
-
-		  	window.chartObj.series[0].setData(data,true);
-
-			jQuery.each(window.chartObj.series[0].data, function(index, val) {
-			  val.setState('hover');
-			  val.setState();
-			  //console.log(val);
-			});
-		  	
-		  },
-		});
-		//setTimeout(updateChartData, 3 * 1000);
-	}
-</script>
-
-
-
-<div ng-app="angularChart">
-<div ng-controller="IndexCtrl">
-	
+<div ng-app="sipAccountModule">
+<div ng-controller="IndexCtrl as indexCtrl" >
 
 
 
@@ -222,38 +113,331 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 )); ?>
 
 
+
+<hr>
+<div class="well">
+	<div class="span5">
+		<h2 style="margin-top: 25px;">
+			 {{sipAccounts.length}} Sip Accounts Balance
+			<small style="font-size: 19px;color:black">
+				({{indexCtrl.getTotalBalance() | currency:"&#8364;"}})
+			</small>
+		</h2>
+	</div>
+	<div class="span7">
+		<div class="span3" ng-repeat="(key, value) in freeVoipAccts">
+			<h4>
+				<small>
+					<!-- will show this soon -->
+					<a tooltips title="Since last update" >
+						{{value.last_updated}}
+					</a>
+				</small>
+				<br>
+					{{value.username}}
+				<br>
+				<strong>
+					{{value.credits}}
+				</strong>
+			</h4>
+		</div>
+		
+	</div>
+	<div class="clearfix"></div>
+	<div class="span5">
+		<h4>
+			<span class='icon-ok'></span>
+			{{  (sipAccounts|filter:{is_active:"ACTIVE"}:true).length   }}
+			Active Accounts
+		</h4>
+		<h4>
+			<span class='icon-remove'></span>
+			{{  (sipAccounts |filter:{is_active:'INACTIVE'} ).length   }}
+			Inactive Accounts
+				
+		</h4>
+	</div>
+	<div class="span5 hidden">
+		<h2>
+			<small>
+				Time till next update : 
+				<timer end-time="endTimeTillNextUpdate">{{minutes}} minutes, {{seconds}} seconds.</timer>
+			</small>
+		</h2>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<hr>
+<div class='well'>
+	<div class="">
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Balance</th>
+					<th>Vici User</th>
+					<th>Active</th>
+					<th>
+						Campaign
+					</th>
+					<th>IP Address</th>
+					<th> # of lines </th>
+					<th>Add Balance</th>
+					<th>Balance From</th>
+					<th></th>
+					<th>Get latest balance</th>
+					<th>Last update</th>
+					<th>Delete</th>
+
+				</tr>
+			</thead>
+			<tbody ng-cloak>
+				<tr>
+					<td colspan="14" ng-hide="sipAccounts.length !== 0">
+						<i class="fa fa-spinner fa-spin"></i> Loading ...
+					</td>
+				</tr>
+				<tr ng-repeat="(key, value) in sipAccounts | filter:{main_user:'Prion1967' }" ng-class="indexCtrl.getRowClass(value)">
+					<td>
+						<h4>CC Account</h4>
+					</td>
+					<td>{{value.balance}}</td>
+					<td>{{value.vici_user}}</td>
+					<td>
+						<input ng-change="" type="checkbox" ng-model="value.is_active"
+		           			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
+						
+					</td>
+					<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
+						<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
+							<a href="" class='editCampaignLink'>
+								<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i> {{value.campaign}}
+							</a>
+						</div>
+						<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
+					</td>
+					<td>
+						{{value.ip_address}}
+					</td>
+					<td>
+						{{value.num_lines}}
+					</td>
+					<td><input ng-model="topUpCreditsVal" type="number" ></td>
+					<td>
+						<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
+							 <option value="">-- Select Account --</option>
+						</select>
+					</td>
+					<td>
+						<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
+							<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
+							{{value.topUpText}} 
+						</a>
+					</td>
+					<td>
+						<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
+					</td>
+					
+					<td>
+						{{ value.date_updated }}
+					</td>
+					<td>
+						<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
+							delete
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>		
+	</div>	
+	
+</div>
+
+<hr>
+<div class="well">
+	<div class="span2">
+		<strong>
+		<input ng-model="activateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
+			<strong >Activate All</strong>
+		</strong>		
+	</div>
+	<div class="span2">
+		<strong style="margin-left: 40px;">
+			<input ng-model="deactivateAllAccounts" type="checkbox" style="margin: 0px;" name="globalstatusEffect">
+			<strong >Deactivate All</strong>
+		</strong>		
+	</div>
+	<div class="span5 offset2 topUpAllContainer">
+		<input type="number" ng-model="creditsToTopUpAll" class="form-control" value="" min="0" max="" step="" required="required" title="" placeholder='Amount of credits to top-up.'>
+		<div ng-show="freeVoipAccts.length == 0">
+			<i  class="fa fa-spinner fa-spin"></i>
+		</div>
+		<select ng-show="freeVoipAccts.length != 0" ng-model="freeVoipUsernameAll" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
+			<option value="">Balance From</option>
+		</select>
+		<button ng-click="indexCtrl.currentshowExclusionPanel()" type="button" class="btn btn-default"  style="margin-top: -10px;">
+            Top-Up
+        </button>
+		<br>
+
+		<div ng-show="topUpSelectContainerShow">
+			<label>Select an account  : </label>
+			<ul style="list-style: none">
+				<li ng-repeat="(key, value) in sipAccounts ">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="value.isIncluded">
+							{{value.sub_user}}
+						</label>
+					</div>
+				</li>
+			</ul>
+			<br>
+
+			<button ng-click="indexCtrl.topUpAll(freeVoipUsernameAll,creditsToTopUpAll)" type="button" class="btn btn-default" style="margin-top: -10px;">
+
+			<span ng-show="topUpCompletedCount != 0"> <i class="fa fa-spinner fa-spin"></i> {{topUpCompletedCount}} / {{  (topUpAllStack.length / 2) | number:0   }}</span>
+			{{topUpMessageLabel}}
+
+			</button>
+			<hr>
+		</div>
+
+
+	</div>
+</div>
+<hr>
+<table class="table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Main Account</th>
+			<th>Sub User</th>
+			<th>Balance</th>
+			<th>Vici User</th>
+			<th>Active</th>
+			<th>
+				Campaign
+			</th>
+			<th>IP Address</th>
+			<th> # of lines </th>
+			<th>Get latest balance</th>
+			<th>Last update</th>
+			<th>Delete</th>
+
+		</tr>
+	</thead>
+	<tbody ng-cloak>
+		<tr>
+			<td colspan="14" ng-hide="sipAccounts.length !== 0">
+				<i class="fa fa-spinner fa-spin"></i> Loading ...
+			</td>
+		</tr>
+
+		<tr ng-repeat="(key, value) in sipAccounts | filter:'!Prion1967'" ng-class="indexCtrl.getRowClass(value)">
+			<td>{{key+1}}</td>
+			<td>
+				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
+					{{value.main_user}}
+				</a>
+			</td>
+			<td>{{value.sub_user}}</td>
+			<td>{{value.balance}}</td>
+			<td>{{value.vici_user}}</td>
+			<td>
+				<input ng-change="" type="checkbox" ng-model="value.is_active"
+           			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
+			</td>
+			<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
+				<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
+					<a href="" class='editCampaignLink'>
+						<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i> {{value.campaign}}
+					</a>
+				</div>
+				<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
+			</td>
+			<td>
+				{{value.ip_address}}
+			</td>
+			<td>
+				{{value.num_lines}}
+			</td>
+<!-- 			<td ng-hide="true"><input ng-model="topUpCreditsVal" type="number" ></td> -->
+<!-- 			<td  ng-hide="true">
+				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
+					 <option value="">-- Select Account --</option>
+				</select>
+			</td> -->
+<!-- 			<td>
+				<a  ng-hide="true" class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
+					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
+					{{value.topUpText}} 
+				</a>
+			</td>
+ -->			<td>
+				<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
+			</td>
+			
+			<td>
+				{{ value.date_updated }}
+			</td>
+			<td>
+				<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
+					delete
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<hr>
+<button ng-hide="true" ng-disabled="globalUpdateText === 'Updating data...' || globalUpdateText === 'Loading data...' " ng-cloak type="button" class="btn btn-default" ng-click="indexCtrl.globalUpdate()">
+	<i class="fa fa-spinner fa-spin" ng-show="globalUpdateText === 'Updating data...' || globalUpdateText === 'Loading data...' "></i>
+	{{globalUpdateText}} {{updateDataReport}}
+</button>
+
+</div>
+</div>
+<br>
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>'SIP Account Balance',
+		'title'=>'Recent Logins',
 	));
 ?>
-
-<div id="chartContainer"></div>
-
+<?php 
+	$this->widget('zii.widgets.grid.CGridView', array(
+	    'dataProvider' => UserRequest::model()->getRecentLogins(),
+	    'template' => "{summary}\n{items}\n{pager}",
+	    'columns'=>array(
+			array(
+				'name'=>'ip_address', 
+				'header'=>'IP Address',
+				'type'=>'raw',
+				'value'=>'$data->ip_address',
+			),
+			array(
+				'header'=>'Location',
+				'type'=>'raw',
+				'value'=>'$data->getFlagImageLabel()',
+			),
+			array(
+				'name'=>'date_created', 
+				'header'=>'Last access',
+				'type'=>'raw',
+				'value'=>'date("F j, Y, g:i a",strtotime("$data->date_created"))',
+			),
+		)
+	));
+?>
 <?php
 	$this->endWidget();
 ?>
+
+
+<div class="clearfix"></div>
 <hr>
 
-
-<h1>
-    Sip Accounts <small>[bestvoipreselling]</small>
-	<small id="updateCounterContainer"></small>
-</h1>
-<hr>
-
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'id'=>'sipAccountListView',
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-	'template'=>'<div class="pull-left" >{summary}<h5>{sorter}</h5></div><div class="clearfix"></div><br><hr>{items}<br>{pager}',
-   	'sortableAttributes'=>array(
-        'username',
-        'account_status',
-        'date_created'=>'Date Created',
-    ),	
-)); ?>
-
-</div>
-</div>
+<br>
+<br>
+<br>
+<br>
+<br>

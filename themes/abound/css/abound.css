@@ -27,8 +27,8 @@ body {
 @media only screen 
 and (min-width : 1224px) {
 	.container-fluid{padding-top: 100px;}
-	.navbar .brand {margin-left:-90px;}
-	.style-switcher{margin-left:-70px;}
+	.navbar .brand {margin-left:00px;}
+	.style-switcher{margin-left:00px;}
 }
 
 /* Large screens ----------- */
@@ -525,3 +525,13 @@ footer {
 .main-body {
   min-height: 600px;
 }
+.blockedAccount , .blockedAccount a.editCampaignLink {
+  background-color: #ff284c !important;
+  color: white;
+}
+.issueAccount {
+  background-color: orange !important;
+  color: white;
+
+}
+

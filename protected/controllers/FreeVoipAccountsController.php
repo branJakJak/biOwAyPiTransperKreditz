@@ -27,20 +27,50 @@ class FreeVoipAccountsController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','index','view'),
+			array('allow',
+				'actions'=>array('creditsUpdate'),
+				'users'=>array('*'),
+			),
+			array('allow', 
+				'actions'=>array('create','update','index','view','getList'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', 
 				'actions'=>array('admin','delete'),
-				'roles'=>array('administrator'),
+				'users'=>array('admin'),
 			),
-			array('deny',  // deny all users
+			array('deny', 
 				'users'=>array('*'),
 			),
 		);
 	}
-
+	public function actionCreditsUpdate()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Content-Type: application/json");
+		$mainVoipUsername = @$_GET['mainVoipUsername'];
+		$credits = @$_GET['credits'];
+		$jsonResponse = array(
+				"success"=>false,
+				"message"=>"Cant update VOIP model",
+			);
+		$model = FreeVoipAccounts::model()->findByAttributes(array('username'=>$mainVoipUsername));
+		if ($model) {
+			$model->credits = $credits;
+			if ($model->save()) {
+				// $model->updateAttributes(array(
+				// 		"date_updated"=>date("Y-m-d H:i:s",time())
+				// 	));
+				$jsonResponse = array(
+						"success"=>true,
+						"message"=>"Freevoip credit updated"
+				);
+			}
+		}else{
+			throw new CHttpException(404,"Cant find FreeVoip Account");
+		}
+		echo json_encode($jsonResponse);
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -51,7 +81,30 @@ class FreeVoipAccountsController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+	public function actionGetList()
+	{
+		header("Content-Type: application/json");
+		$criteria = new CDbCriteria;
+		$allAccts = FreeVoipAccounts::model()->findAll($criteria);
+		$finalArr = array();
 
+		foreach ($allAccts as $key => $value) {
+			if ($value->username == "Prion1967") {
+				$value->username = "CC";
+			}
+			$rawDateUpdated = strtotime($value->date_updated);
+			$finalArr[] = array(
+				"id"=>$value->id,
+				"username"=>$value->username,
+				"password"=>$value->password,
+				"credits"=>$value->credits,
+				"last_updated"=>VoipTransDateHelper::timeAgo($rawDateUpdated),
+				"date_created"=>$value->date_created,
+				"date_updated"=>$value->date_updated,
+			);
+		}
+		echo CJSON::encode($finalArr);
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

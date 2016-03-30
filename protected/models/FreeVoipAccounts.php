@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property string $credits
  * @property string $date_created
  * @property string $date_updated
  *
@@ -15,6 +16,8 @@
  */
 class FreeVoipAccounts extends CActiveRecord
 {
+	public $pincode = 2580;
+	public $credits;
 	/**
 	 * 
 	 * @return string the associated database table name
@@ -34,9 +37,7 @@ class FreeVoipAccounts extends CActiveRecord
 		return array(
 			array('username, password', 'required'),
 			array('username, password', 'length', 'max'=>255),
-			array('date_created, date_updated', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			array('credits,date_created, date_updated', 'safe'),
 			array('id, username, password, date_created, date_updated', 'safe', 'on'=>'search'),
 		);
 	}
@@ -62,6 +63,7 @@ class FreeVoipAccounts extends CActiveRecord
 			'id' => 'ID',
 			'username' => 'Username',
 			'password' => 'Password',
+			'credits' => 'Credit',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -88,6 +90,7 @@ class FreeVoipAccounts extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
+		$criteria->compare('credits',$this->credits,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 

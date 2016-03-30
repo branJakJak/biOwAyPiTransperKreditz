@@ -13,34 +13,34 @@ class SiteController extends Controller
 			'accessControl', 
 		);
 	}	
-/**
- * Specifies the access control rules.
- * This method is used by the 'accessControl' filter.
- * @return array access control rules
- */
-public function accessRules()
-{
-	return array(
-		array('allow',  // allow all users to perform 'index' and 'view' actions
-			'actions'=>array('error','login','logout','test'),
-			'users'=>array('*'),
-		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-			'actions'=>array('index'),
-			'users'=>array('@'),
-		),
-		array('deny',  // deny all users
-			'users'=>array('*'),
-		),
-	);
-}
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('error','login','logout','test'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('index','generate'),
+				'users'=>array('@'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 	/**
 	 * This is the default 'index' action that is invOked
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
 	{
-		
+		// $this->redirect(array('/sipAccount/index'));
         $transactionLogMdl = new TransactionLog();
         if (isset($_POST['TransactionLog'])) {
             $transactionLogMdl->attributes = $_POST['TransactionLog'];
@@ -55,6 +55,9 @@ public function accessRules()
             		$transactionLogMdl->pincode
         		);
         		$newTransactionlink = CHtml::link('Transaction Log', array('transactionLog/view','id'=>$transactionLogMdl->id)); 
+        		$transactionLogMdl->result_string = $remoteResult->resultstring;
+        		$transactionLogMdl->result_description = $remoteResult->description;
+        		$transactionLogMdl->save();
         		if ($remoteResult->resultstring == 'success') {
         			Yii::app()->user->setFlash('success', '<strong>Success!</strong> Credit transfered . '.$newTransactionlink);
         		}else if ($remoteResult->resultstring == 'failure') {
@@ -64,7 +67,7 @@ public function accessRules()
         			}
         			Yii::app()->user->setFlash('error', '<strong>Transaction Failed!</strong> We met some error while transferring the amount . <br>But here is your transaction log '.$newTransactionlink . ' , you can resend it later. <br>Reason of failure : '.$reasonOfFailure);
         		}
-            	$this->redirect("/");
+            	$this->redirect("/site/index");
             }
         }
 		$voipAccountsCount = FreeVoipAccounts::model()->count();
@@ -122,19 +125,13 @@ public function accessRules()
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-	public function actionTest()
+	public function actionGenerate()
 	{
-		$to = "hellsing357@gmail.com";
-		$from = "notif@apivoip.com";
-		$message = "test message";
-
-		// mail($to, $subject, $message);
-		// $mail = new YiiMailer();
-		// $mail->setFrom('notif@apivoip.ml', 'apivoip notifier');
-		// $mail->setTo($to);
-		// $mail->setSubject('APIVOIP - credit limit');
-		// $mail->setBody($message);
-		// $mail->setSmtp('smtp.gmail.com', 465, 'ssl', true, 'apivoipnotifier@gmail.com', 'notifyusplease');
-		// $mail->send();
+		$allModels = RemoteDataCache::model()->findAll();
+		foreach ($allModels as $key => $currentModel) {
+			$urlStr = sprintf("https://apivoip.ml/disable/account?mainusername=%s&mainpassword=%s", $currentModel->main_user,$currentModel->main_pass);
+			echo $urlStr."<br>";
+		}
+		die();
 	}
 }

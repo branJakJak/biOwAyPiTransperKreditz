@@ -1,21 +1,33 @@
+window.chartBlink = function(){
+	dataClone = window.chartObj.series[0].data;
+	/*iterate data*/
+	jQuery.each(window.chartObj.series[0].data, function(index, val) {
+		/*if value is between 4 and 3*/
+		if (val.y < 5 && val.y > 2 ) {
+			if (val.color == "orange") {
+				dataClone[index].color = "yellow";
+			}else if (val.color == "yellow") {
+				dataClone[index].color = "orange";
+			}
+		}
+	});
+	window.chartObj.series[0].setData(dataClone,true);
+	jQuery.each(window.chartObj.series[0].data, function(index, val) {
+	  val.setState('hover');
+	  val.setState();
+	});
 
-/**
-* angular chart` Module
-*
-* Description
-*/
-var angularChart = angular.module('angularChart', ['chart.js']);
-angularChart.controller('IndexCtrl', ['$scope','$http', function($scope,$http){
+}
 
-	$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-	$scope.series = ['Series A', 'Series B'];
+window.updateChartData = function(data) {
+	/*flush blink interval*/
+	window.blinkerInterval = null;
+	window.chartObj.series[0].setData(data,true);
+	jQuery.each(window.chartObj.series[0].data, function(index, val) {
+	  val.setState('hover');
+	  val.setState();
+	});
+	/*start blink interval*/
+	window.blinkerInterval = setInterval(window.chartBlink, 600);
+}
 
-	$scope.data = [
-	    [65, 59, 80, 81, 56, 55, 40, 40, 40, 40, 40, 40],
-	  ];
-
-	this.retrieveReportData = function(){
-		
-	}
-	
-}])

@@ -1,6 +1,5 @@
 protected/runtime/*
-assets/*
-data/
+/protected/data/*
 *.bat
 protected/components/UserIdentity.php
 protected/vendor/
@@ -10,3 +9,9 @@ protected/config/main.php
 protected/config/console.php
 .phpintel
 .idea
+error_log
+TODO/
+dev/
+sms_data/
+/nbproject/private/
+/assets

@@ -22,6 +22,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.extensions.TopupLogs.*',
 		'ext.YiiMailer.YiiMailer',
 	),
 
@@ -41,6 +42,12 @@ return array(
 
 	// application components
 	'components'=>array(
+		'vicidial_deactivator'=>array(
+			'class'=>'application.components.VicidialDbDeactivator'
+		),		
+		'vicidial_activator'=>array(
+			'class'=>'application.components.VicidialDbActivator'
+		),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -83,7 +90,7 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
+					'class'=>'CWebLogRoute',
 					'levels'=>'error, warning',
 				),
 				// uncomment the following to show log messages on web pages

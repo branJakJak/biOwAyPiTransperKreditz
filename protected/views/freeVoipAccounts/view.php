@@ -24,6 +24,7 @@ $this->menu=array(
 		'id',
 		'username',
 		'password',
+		'credits',
 		'date_created',
 		'date_updated',
 	),

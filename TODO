@@ -1,0 +1,613 @@
+
+@TODO - do full test on all feature
+
+
+@TODO - update the status remotely to sql server , so we dont need to do the url
+
+
+@TODO - 
+to fix auto red @BUG
+	*separate the group activation feature  , in different page , much like this https://vbdial.tk/index.php/subSipAccount/topUpSelected
+@DONE
+
+
+@TODO - replace navigation label Top-up to Group action 
+	where user can do action to group of accounts
+
+
+@TODO  -  activate and deactivation button for 
+
+
+
+@TODO - propose card like design for /sipAccount/index design
+	if accepted @TODO - put filter by name so anyone can filter it 
+		for example john - result will only show text with john
+
+
+
+
+
+@TODO-APILOG-APILOG ticking and updating
+what i was thinking aswel is a
+button on bottom for a global submit 
+as in say we wanted to deactivate 
+all the accounts or just say 2 accounts 
+then we can untick the boxes 
+and to a global submit. 
+@DONE
+
+
+
+@TODO-APILOG 
+AsteriskCarriers::getData
+@DONE
+
+retrieve all data and show to table 
+@DONE
+
+@TODO-APILOG activate and deactivate 
+when clicked  , do the same 
+action
+@DONE
+
+
+
+
+@TODO-APILOG transfer / top up 
+freevoip ---> bestvoip  credits transfer pala yun
+on top up , when user top up a credit 
+using the process freevoip to bestvoip 
+the sub account should also be topped up 
+with the same amount of the one used 
+@DONE
+
+@TODO-APILOG balance from 
+balance from is what freevoip account 
+we want the balance to be from 
+ ie 
+ drop down contents 
+ helpdirect-uk 
+ and callnetamerica3
+@DONE
+
+
+@TODO-APILOG show ip address
+sorry ip of the vici dialer that the vici user is linked to
+@DONE
+
+
+
+@TODO - during updating / activating / deactivating 
+show user that an update is ongoing
+@DONE
+
+
+
+@NEXT  -activate all accounts 
+when clicked iterates data 
+at update their account_status to activated
+@DONE
+
+
+
+@Tturn on chart update 
+@DONE
+
+@TODO - 
+trigger also 
+@DONE
+
+
+@TODO
+ one update and one topup or better still put update button next to the chcheck box and replace modify with top up button ??
+
+
+
+@TODO
+
+just realising aswell later on we may need to add a exrta coloum to say what type of vb the user is doing as boss man had me to add new type of vb just now ...but that can come later ..
+
+- say what type of vb the user is doing-
+as in vb we started on was the type of message and what product its for as in say user 100 - 1200 is currently on accidents vb message now tone tool 1300 has just been put on Debt message.
+Like a type of campaign, Idealy the mor info we see the better for managing so many users, its only litrally just happened with new type of vb message
+we can just add them ion the sql view later on down the road
+@DONE
+
+
+
+@TODO - when check all is click
+@DONE
+
+
+@TODO - all the data get it from 
+do all the work is just done in vici,
+@DONE
+
+
+the apivoip adds the 
+info and we use the api voip only for topping up
+
+
+
+
+
+@TODO - get the information from Vici
+so instead of managing it through here it would be better for to taking the INFO from Vici
+
+
+
+
+https://77.72.173.130/API/Request.ashx?command=getuserinfo&username=mslopportunity&password=Iich3tail&customer=mich*mslopportunity&customerpassword=Iich3tail&
+
+defer  = $q.defer();
+updateStack  = [];
+$q.all(updateStack)
+
+
+@TODO - global 
+adding of credits
+jawdroppingcalls
+Mad4itNOW!!
+@DONE
+
+
+@TODO
+you havnt got the auto deactivate 
+if less than 3EU
+@DONE
+
+
+@TODO
+check for me please if on or not coz strange its showing 11 in the sub acocunt
+@DONE
+
+
+
+
+@TODO
+yes but we never logged into the actually BestVoip to check
+@DONE
+
+Leighton Power, [07.10.15 21:55]
+and the info center
+
+Leighton Power, [07.10.15 21:55]
+i mean you/me should have checked that and the actual balances
+
+Leighton Power, [07.10.15 21:56]
+yes as thats where the credit is
+
+Leighton Power, [07.10.15 21:57]
+yes but vici has nothing at all to do with the credits
+
+Leighton Power, [07.10.15 21:58]
+you cant pull credits or do anything through vici , please check the api that was used on this
+
+@DONE
+
+
+@TODO
+UPDATE user_carrier SET campaign='the value to update to '
+
+
+
+
+@TODO - only show the logins of current day
+@DONE
+
+
+
+<<<<<<< HEAD
+@TODO = create migration  , 
+add the credit attribute 
+
+
+
+@TODO = update model 
+to include the credit attribute
+
+
+@TODO - implement actionCreditsUpdate
+ - find using username
+  - update credit
+=======
+@TODO - 
+
+create table for 
+RemoteDataCache
+
+id
+main_user
+main_pass
+sub_user
+sub_pass
+vici_user
+is_active
+balance
+exact_balance
+ip_address
+num_lines
+@DONE
+
+
+
+@TODO  - CRON
+fetch all data 
+check if exists in the database , if exists
+update data
+else if it doesnt crreate new record
+@DONE
+
+
+
+
+
+
+@TODO = transfer balance checking
+at cron
+@DONE
+
+
+
+
+@TODO  - change backend 
+for actionSipData to get data from 
+database table not remotely
+@done
+
+
+@TODO - change chart ajax remote datasource
+@DONE
+
+@TODO - change ajax sipData
+@DONE
+
+
+@TODO - sipController index , 
+@DONE
+
+
+
+
+@TODO - Change ChartReportdata 
+datasource to database table
+@done
+
+
+
+
+@update client sciprt code
+-topUpMainSip
+-topUpSubSip
+@DONE
+
+
+@TODO - remove check credit status
+@DONE
+
+@TODO this.alertUserStatusChange
+@DONE
+
+
+
+@TODO 
+this.syncWithRemoteApi
+@DONE
+
+@TODO
+$scope.continueConstantRefresh
+@DONE
+
+
+@TODO
+this.notifyAccount
+@DONE
+
+
+
+
+@TODO - bug when clicking topup all , 
+make sure it is one time click
+
+
+@TODO - create 
+cron that will run 
+every minute for 1 minute 
+To refresh the data
+
+
+>>>>>>> 84bf9d6335488c016c5a94b1312595b3ef5acd9f
+
+
+
+
+
+
+
+
+
+
+
+php -f yiic.php  remotesync
+
+
+'application.models.*',
+'application.components.*',
+'application.components.bestvoipAPI.*',
+'application.components.dataprovider.*',
+'application.modules.user.models.*',
+'application.modules.user.components.*',
+'application.modules.rights.*',
+'application.modules.rights.components.*',
+'bootstrap.behaviors.TbWidget',
+'ext.YiiMailer.YiiMailer',
+
+
+array(
+    'class' => 'CFileLogRoute',
+    'levels' => 'info',
+    'categories' => 'sync_log',
+),
+
+
+		'log' => array(
+		    'class' => 'CLogRouter',
+		    'routes' => array(
+				array(
+				    'class' => 'CFileLogRoute',
+				    'levels' => 'info',
+				    'categories' => 'sync_log',
+				),
+		    ),
+		),
+
+
+@TODO - save last balance checkded
+
+
+Neo gallery , less 10 
+
+
+
+@TODO
+Apivoip tweaks . 
+
+- patabain yung bar chart or kung ano yung maganda
+@DONE
+- iseparate yung bar chart sa sip accounts
+@DONE
+
+
+@TODO - fix and and record show campaign
+
+$newModel->vici_user = doubleval($currentFetchedData['vici_user']);
+$newModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
+$newModel->ip_address = $currentFetchedData['server_ip'];
+$newModel->campaign = $currentFetchedData["campaign"];
+
+
+@TODO - fix, show and record
+@DIBE
+@TODO - pati narin pala yung pang minus ng balance kevs (y)
+@DIBE
+@TODO - add column date created
+@DIBE
+@TODO - add column date updated
+@DIBE
+@TODo - allow user to subtract data
+@DIBE
+
+@TODO - single update
+
+@TODO - after toping up one , 
+update individual - update only single account
+
+
+@TODO  -sync our remote to our database
+@DONE
+
+
+@TODO - test deactivate 
+
+@TODO -  test notification
+
+
+@TODO - bulk update
+@DONE
+
+@TODO - bulk topup
+@DONE
+
+@TODO - run cron for 1 minute
+then die 
+@DONE
+
+
+
+
+@TODO - move the checking of 
+credit balanace and notification to 
+start from user  - aside from CROn
+@DONE
+
+
+
+
+
+@TODO - fix the date of last update
+relative to viewers locale
+@DONE
+
+
+
+@TODO - sync also the , ip  , num of lines and campaign
+this.synchronizeData
+@DONE
+
+
+@TODO export data from apivoip 
+so we can test it here in local machine 
+@DNE
+
+
+
+@TODO
+when remote data deleted something 
+we need a way to recognize the deleted data from remote 
+-so we can fully reflect it from our table records
+
+
+@TODO - 
+https://apivoip.ml/disable/account?mainusername=replaceMainUsernameHere&mainpassword=replaceMainPasswordHere
+https://apivoip.ml/disable/account?mainusername=scottsdalecorp&mainpassword=EiRe5Elohkee
+
+
+
+@TODO
+Disabling Account 
+Url : https://apivoip.ml/disable/account?
+@DONE
+
+
+
+
+
+
+@TODO - retain current row position on update of 
+balance
+@DONE
+
+
+
+
+
+@TODO - this.syncActiveAccount - @TEST @POSTPONED
+
+@TODO 
+sync every 5 minutes
+for active accounts only
+foreach account  as acurrentAccount
+	acurrentAccount.sync()  to API and db 
+@TEST      @POSTPONE
+
+@TODO - put number at /sipAccount/index - @DONE
+
+
+
+
+@TODO - CRON that will delete 
+all non existing records from 
+vbdial to user_carrier
+@DONE
+php -f /home/vbdial/public_html/protected/yiic.php removeunusedaccounts
+
+
+@TODO - 
+after user clicked update balance
+update the status also
+@DONE
+
+
+@TODO 
+hover background color 
+body > section.main-body > div > div > div > div.ng-scope > div > table > tbody > tr:hover {
+	background-color: #b4d455 !important;
+    color: white;
+}
+@DONE
+
+
+
+
+@TODO - bug at 
+https://vbdial.tk/index.php/sipAccount/index
+after updating the account ... it went up 
+possibly the order of status
+@DONE
+
+
+
+@TODO - 
+bug when updating using global update 
+the last account 
+57/58
+last account will not update 
+ = NEED to recreate scenario
+
+
+
+
+
+@TODO - refresh every 5 minutes
+
+
+@TODO - Selective Top-up Button
+	> user clicks the button
+	> new tab will open , 
+	> user selects accounts 
+	> user put amount to topup 
+	> sends
+	> if all is ok , it will prompt the user that credit #### was applied
+@DONE
+
+
+@TODO 
+allow usern to monitor 
+a certain group/record 
+put this in new tab
+
+
+
+@TODO - selective top-up all
+@DONE
+
+
+
+@TODO 
+After deactivation 
+- resend the deactivation code after 30 seconds
+use CRON tab
+@DONE
+
+
+
+
+
+
+
+
+@TODO 
+paki lagay yung date at time kevs, tapos yung by batch
+
+@TODO - Log for top up account action 
+include datetime
+
+@TODO - if top up is batch , put a group name
+
+@TODO - Logs for group Activate and Deactivate
+
+@TODO - 
+Topup daily - at topup group view
+
+
+
+@TODO - test this
+
+
+
+
+@TODO - problem with balance 
+Going negative
+@DONE
+
+
+
+
+
+@TODO - increase trigger for credit limit
+to 3 - 3.5
+
+
+@TODO - On credit limit 
+	check whether it is on auto top up 
+		if it is , top up using topup credits set by 
