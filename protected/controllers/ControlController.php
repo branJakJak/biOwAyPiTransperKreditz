@@ -5,6 +5,7 @@
  */
 class ControlController extends CController
 {
+	public $layout = "dashboard_template";
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -14,10 +15,10 @@ class ControlController extends CController
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','view'),
+				'actions'=>array('index','updateChannel'),
 				'users'=>array('*'),
 			),
-			array('deny',  // deny all users
+			array('deny',
 				'users'=>array('*'),
 			),
 		);
@@ -33,8 +34,27 @@ class ControlController extends CController
 	}
     public function actionIndex()
     {
+    	Yii::app()->theme = "metro";
+    	$totalNumberOfAgents = 0;
     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
     	$datasource = $controlDatasourceRetriever->fetchdata();
-        $this->render('index',compact('datasource'));
+    	foreach ($datasource->data as $key => $value) {
+    		$totalNumberOfAgents += intval($value['agents']);
+    	}
+        $this->render('index',compact('datasource','totalNumberOfAgents'));
+    }
+    public function actionUpdateChannel($campaign_id , $agents , $channels,$throttleValue,$slider)
+    {
+    	$channelUpdater = Yii::createComponent("application.components.NumberOfLinesUpdater");
+		$channelUpdater->campaign_id = $campaign_id;
+		$channelUpdater->agents = $agents;
+		$channelUpdater->channels = $channels;
+		$channelUpdater->throttleValue = $throttleValue;
+		$channelUpdater->slider    	 = $slider;
+    	if ($channelUpdater->update()) {
+    		echo "Succes! $campaign_id updated";
+    	}else{
+    		echo "Failed! There was a problem while updating $campaign_id";
+    	}
     }
 }
