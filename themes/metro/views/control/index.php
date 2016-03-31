@@ -94,7 +94,10 @@
 					<h1><?php echo $value['agents'] ?>/<?php echo $totalNumberOfAgents ?></h1>
 					<center>
 						<small>
-							2058 MAX
+							<?php 
+								$totalCalc = intval($value['agents']) * 49;
+							?>
+							<?php echo number_format($totalCalc) ?> MAX
 						</small>
 					</center>
 				</div>
