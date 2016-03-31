@@ -14,7 +14,8 @@ class ControlDataSourceRetriever extends CComponent
 		$sqlCommand = <<<EOL
 SELECT vicidial_remote_agents.campaign_id,
        COUNT(vicidial_remote_agents.user_start) AS agents,
-       SUM(vicidial_remote_agents.number_of_lines) AS channels
+       SUM(vicidial_remote_agents.number_of_lines) AS channels,
+       number_of_lines
   FROM asterisk.vicidial_remote_agents vicidial_remote_agents
        INNER JOIN asterisk.vicidial_campaigns vicidial_campaigns
           ON (vicidial_remote_agents.campaign_id =
@@ -23,6 +24,7 @@ GROUP BY vicidial_remote_agents.campaign_id
 EOL;
 		$commandObj = Yii::app()->asterisk_db->createCommand($sqlCommand);
 		$returnedResult = $commandObj->queryAll();
+
 		return new CArrayDataProvider($returnedResult , array(
 				'keyField'=>'campaign_id',
 				'id'=>'campaign_id',

@@ -106,7 +106,7 @@
 					</center>
 
 					<h1 class="slider<?php echo $key?>">
-						0
+						<?php echo $value['number_of_lines'] ?>
 					</h1>
 					<?php
 						$slideFunctionTemplate = <<<EOL
@@ -151,7 +151,7 @@ EOL;
 						$this->widget('zii.widgets.jui.CJuiSliderInput', array(
 						    'id'=>'slider'.$key,
 						    'name'=>'slider',
-						    'value'=>0,
+						    'value'=>$value['number_of_lines'],
 						    'event'=>'change',
 						    'options'=>array(
 						        'range'=>'min',
