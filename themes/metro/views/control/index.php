@@ -117,7 +117,7 @@ js:function(event,ui){
 EOL;
 						$askPermission = <<<EOL
 js:function(event,ui){ 
-	if (confirm("Would you like to save the changes ?")) {
+	if (confirm("Do you want to save changes you made ?")) {
 		jQuery.ajax({
 		  url: '/control/updateChannel',
 		  type: 'get',
