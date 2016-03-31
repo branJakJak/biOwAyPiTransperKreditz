@@ -17,10 +17,10 @@
 <div class="grid">
  <div class="row col-md-12">
       <div class="tile tile-purple col-md-3 col-xs-12"  >
-      		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       			@TODO - chart here
       		</div>
-      		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      		<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 				<h1 class='top-report-dashboard'>
 					0
 					<br>
