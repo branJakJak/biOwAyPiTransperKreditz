@@ -35,13 +35,18 @@ class ControlController extends CController
     public function actionIndex()
     {
     	Yii::app()->theme = "metro";
+		$activeCallReport= Yii::app()->activeCallReport->getData();
+		$ringingReport= Yii::app()->ringingReport->getData();
+		$liveCallReport= Yii::app()->liveCallReport->getData();
+		$channelReport= Yii::app()->channelReport->getData();
+
     	$totalNumberOfAgents = 0;
     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
     	$datasource = $controlDatasourceRetriever->fetchdata();
     	foreach ($datasource->data as $key => $value) {
     		$totalNumberOfAgents += intval($value['agents']);
     	}
-        $this->render('index',compact('datasource','totalNumberOfAgents'));
+        $this->render('index',compact('datasource','totalNumberOfAgents','activeCallReport','ringingReport','liveCallReport','channelReport'));
     }
     public function actionUpdateChannel($campaign_id , $agents , $channels,$throttleValue,$slider)
     {

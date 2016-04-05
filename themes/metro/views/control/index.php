@@ -22,7 +22,7 @@
       		</div>
       		<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 				<h1 class='top-report-dashboard'>
-					0
+					<?php echo $activeCallReport ?>
 					<br>
 					<small>Active Call</small>
 				</h1>
@@ -34,7 +34,7 @@
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					0
+					<?php echo $ringingReport ?>
 					<br>
 					<small>Ringing</small>
 				</h1>
@@ -46,7 +46,7 @@
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					0
+					<?php echo $liveCallReport ?>
 					<br>
 					<small>Live Calls</small>
 				</h1>
@@ -58,7 +58,7 @@
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					0
+					<?php echo $channelReport ?>
 					<br>
 		      		<small>Channels</small>
 				</h1>
