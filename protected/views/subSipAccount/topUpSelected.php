@@ -185,9 +185,9 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			<?php echo CHtml::error($formModel, 'andActivate'); ?>
 			<br>
 			<br>
-			
+
 			<label>Force Agent : </label>
-			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', array("VBpi8"=>"Injury Campaign","PBAVB6"=>"PBA Campaign")); ?>
+			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', array("VBpi8"=>"Injury Campaign","PBAVB6"=>"PBA Campaign","LIFEbz"=>"LIFE")); ?>
 			<br>
 			<br>
 			<div class="form-actions">
