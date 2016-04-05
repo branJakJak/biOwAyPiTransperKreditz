@@ -1,4 +1,4 @@
-<?php 
+ex<?php 
 
 
 $baseUrl = Yii::app()->theme->baseUrl; 
@@ -70,7 +70,7 @@ function updateChartDataInterval(){
 	  },
 	});
 }
-setTimeout(updateChartDataInterval, 30 * 1000);
+setTimeout(updateChartDataInterval, 1 * 1000);
 ', CClientScript::POS_READY);
 
 
