@@ -1,4 +1,5 @@
 window.chartBlink = function(){
+	return true;
 	dataClone = window.chartObj.series[0].data;
 	/*iterate data*/
 	jQuery.each(window.chartObj.series[0].data, function(index, val) {
