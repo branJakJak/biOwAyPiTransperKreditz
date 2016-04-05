@@ -105,11 +105,12 @@ setTimeout(updateChartDataInterval, 1 * 1000);
 
 <script type="text/javascript">
 	function updateInformation() {
-		document.getElementById("updateInformationBtn").innerHtml = "Updating...";
+		var updateInformationBtn = jQuery("#updateInformationBtn");
+		updateInformationBtn.html("Updating...");
 		setTimeout(function() {
-			document.getElementById("updateInformationBtn").innerHtml = "Content updated";
+			updateInformationBtn.html("Content updated");
 			setTimeout(function() {
-				document.getElementById("updateInformationBtn").innerHtml = "Update Information";
+				updateInformationBtn.html("Update Information");
 			}, 500);
 		}, 1000);
 	}
