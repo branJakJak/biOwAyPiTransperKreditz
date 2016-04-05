@@ -6,6 +6,7 @@ class TopupForm extends CFormModel
 	public $topupvalue;
 	public $freeVoipAccountUsername = 'jawdroppingcalls';
 	public $andActivate = false;
+	public $forceAgent;
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
@@ -17,7 +18,7 @@ class TopupForm extends CFormModel
 			// username and password are required
 			array('accounts, topupvalue,freeVoipAccountUsername', 'required'),
 			array('topupvalue', 'numerical'),
-			array('andActivate', 'safe'),
+			array('andActivate,forceAgent', 'safe'),
 		);
 	}
 
@@ -30,6 +31,7 @@ class TopupForm extends CFormModel
 			'accounts'=>'Accounts',
 			'topupvalue'=>'Top-up value',
 			'andActivate'=>'And activate',
+			'forceAgent'=>'Force agent'
 		);
 	}
 	/**
@@ -59,6 +61,10 @@ class TopupForm extends CFormModel
 					if ($this->andActivate) {
 						$activator = new ActivationFormModel();
 						$activator->activateAccount($model);
+
+						$campaignForcer = Yii::app()->campaignForcer;
+						$campaignForcer->update($this->forceAgent , $model->sub_user);
+
 					}
 					$accountsAffectedInt++;
 				}

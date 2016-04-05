@@ -183,7 +183,13 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
 			<strong style="position: relative;top: 2px;">Then activate</strong>
 			<?php echo CHtml::error($formModel, 'andActivate'); ?>
-
+			<br>
+			<br>
+			
+			<label>Force Agent : </label>
+			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', array("VBpi8"=>"Injury Campaign","PBAVB6"=>"PBA Campaign")); ?>
+			<br>
+			<br>
 			<div class="form-actions">
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
