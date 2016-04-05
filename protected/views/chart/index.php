@@ -94,8 +94,24 @@ setTimeout(updateChartDataInterval, 1 * 1000);
 
 <div id="chartContainer" style="height: 1500px"></div>
 
+<hr>
+<button type="button" class="btn btn-default btn-info btn-block" onclick="updateInformation(this)">
+	Update Information
+</button>
 <?php
 	$this->endWidget();
 ?>
 <hr>
 
+<script type="text/javascript">
+	function updateInformation(curDom) {
+		var currentDom = curDom;
+		currentDom.innerHtml = "Updating...";
+		setTimeout(function() {
+			currentDom.innerHtml = "Content updated";
+			setTimeout(function() {
+				currentDom.innerHtml = "Update Information";
+			}, 500);
+		}, 1000);
+	}
+</script>
