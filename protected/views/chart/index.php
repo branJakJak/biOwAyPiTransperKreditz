@@ -1,4 +1,4 @@
-ex<?php 
+<?php 
 
 
 $baseUrl = Yii::app()->theme->baseUrl; 
@@ -62,11 +62,9 @@ function updateChartDataInterval(){
 	  url: "/sipAccount/getBarChartReportData",
 	  type: "POST",
 	  dataType: "json",
-	  complete: function(xhr, textStatus) {
-	    setTimeout(updateChartDataInterval, 1000);
-	  },
 	  success: function(data, textStatus, xhr) {
 	  	window.updateChartData(data);
+	  	setTimeout(updateChartDataInterval, 1000);
 	  },
 	});
 }
