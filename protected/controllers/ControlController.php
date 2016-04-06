@@ -15,7 +15,7 @@ class ControlController extends CController
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','updateChannel'),
+				'actions'=>array('index','updateChannel','liveFeed'),
 				'users'=>array('*'),
 			),
 			array('deny',
@@ -61,5 +61,13 @@ class ControlController extends CController
     	}else{
     		echo "Failed! There was a problem while updating $campaign_id";
     	}
+    }
+    public function actionLiveFeed()
+    {
+    	header("Content-Type: application/json");
+     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
+    	$datasource = $controlDatasourceRetriever->fetchdata();
+    	echo json_encode($datasource->data);
+    	Yii::app()->end();
     }
 }

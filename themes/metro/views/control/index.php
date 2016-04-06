@@ -1,6 +1,8 @@
 <?php
 
 
+Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientScript::POS_READY);
+
 ?>
 <style type="text/css">
 	.campaign-ratio-value , .campaign-throttle , .campaign-title{
@@ -12,8 +14,36 @@
 	.top-report-dashboard small{
 		color: white;
 	}
+	.tile {
+		opacity: 1 !important;
+	}
 </style>
-
+<script type="text/javascript">
+	function liveFeed () {
+		setTimeout(function() {
+			jQuery.ajax({
+			  url: '/control/liveFeed',
+			  type: 'POST',
+			  dataType: 'json',
+			  success: function(data, textStatus, xhr) {
+			  	jQuery.each(data, function(index, val) {
+			  	  jQuery("."+val.campaign_id+"-numAgents").html(val.agents);
+			  	  jQuery("."+val.campaign_id+"-totalNumAgents").html(val.number_of_lines);
+			  	  jQuery("#slider"+index+"_slider").slider("value",val.channels);
+			  	  jQuery("h1.slider0"+index).html(val.channels);
+			  	});
+			    liveFeed();
+			  },
+			  error: function(xhr, textStatus, errorThrown) {
+			    console.log(xhr);
+			    console.log(textStatus);
+			    console.log(errorThrown);
+			    alert("Something went wrong during ajax call");
+			  }
+			});
+		}, 20 * 1000);
+	}
+</script>
 <div class="grid">
  <div class="row col-md-12">
       <div class="tile tile-purple col-md-3 col-xs-12"  >
@@ -91,7 +121,11 @@
 							LIVE/AVAIL
 						</small>
 					</center>
-					<h1><?php echo $value['agents'] ?>/<?php echo $totalNumberOfAgents ?></h1>
+					<h1>
+						<b class='<?php echo $value['campaign_id'] ?>-numAgents'><?php echo $value['agents'] ?> </b>
+						/ 
+						<b class='<?php echo $value['campaign_id'] ?>-totalNumAgents'><?php echo $totalNumberOfAgents ?></b>
+					</h1>
 					<center>
 						<small>
 							<?php 
