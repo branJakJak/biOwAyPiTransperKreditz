@@ -21,26 +21,29 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 <script type="text/javascript">
 	function liveFeed () {
 		setTimeout(function() {
-			jQuery.ajax({
-			  url: '/control/liveFeed',
-			  type: 'POST',
-			  dataType: 'json',
-			  success: function(data, textStatus, xhr) {
-			  	jQuery.each(data, function(index, val) {
-			  	  jQuery("."+val.campaign_id+"-numAgents").html(val.agents);
-			  	  jQuery("."+val.campaign_id+"-totalNumAgents").html(val.number_of_lines);
-			  	  jQuery("#slider"+index+"_slider").slider("value",val.channels);
-			  	  jQuery("h1.slider0"+index).html(val.channels);
-			  	});
-			    liveFeed();
-			  },
-			  error: function(xhr, textStatus, errorThrown) {
-			    console.log(xhr);
-			    console.log(textStatus);
-			    console.log(errorThrown);
-			    alert("Something went wrong during ajax call");
-			  }
-			});
+
+			if (!window.SLIDER_UPDATING) {
+				jQuery.ajax({
+				  url: '/control/liveFeed',
+				  type: 'POST',
+				  dataType: 'json',
+				  success: function(data, textStatus, xhr) {
+				  	jQuery.each(data, function(index, val) {
+				  	  jQuery("."+val.campaign_id+"-numAgents").html(val.agents);
+				  	  jQuery("."+val.campaign_id+"-totalNumAgents").html(val.number_of_lines);
+				  	  jQuery("#slider"+index+"_slider").slider("value",val.channels);
+				  	  jQuery("h1.slider0"+index).html(val.channels);
+				  	});
+				    liveFeed();
+				  },
+				  error: function(xhr, textStatus, errorThrown) {
+				    console.log(xhr);
+				    console.log(textStatus);
+				    console.log(errorThrown);
+				    alert("Something went wrong during ajax call");
+				  }
+				});
+			}
 		}, 20 * 1000);
 	}
 </script>
@@ -154,6 +157,8 @@ js:function(event,ui){
 EOL;
 						$askPermission = <<<EOL
 js:function(event,ui){ 
+	window.SLIDER_UPDATING = false;
+	console.log(window.SLIDER_UPDATING);
 	if (confirm("Do you want to save changes you made ?")) {
 		jQuery.ajax({
 		  url: '/control/updateChannel',
@@ -185,6 +190,12 @@ js:function(event,ui){
 	}
 }
 EOL;
+$sliderStartScript = <<<EOL
+js:function(event,ui){
+	window.SLIDER_UPDATING = true;
+	console.log(window.SLIDER_UPDATING);
+}
+EOL;
 						$this->widget('zii.widgets.jui.CJuiSliderInput', array(
 						    'id'=>'slider'.$key,
 						    'name'=>'slider',
@@ -195,7 +206,8 @@ EOL;
 						        'min'=>0,
 						        'max'=>49,
 						        'slide'=>$slideFunctionTemplate,
-						        'stop'=>$askPermission
+						        'stop'=>$askPermission,
+						        'start'=>$sliderStartScript
 						    ),
 						    // slider css options
 						    'htmlOptions'=>array(
