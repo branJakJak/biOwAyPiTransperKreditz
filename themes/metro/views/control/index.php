@@ -20,10 +20,11 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 </style>
 <script type="text/javascript">
 	window.SLIDER_UPDATING = false;
-	window.WAITING_TIME = 2* 1000;
+	window.WAITING_TIME = 20 * 1000;
+	window.DASH_VAL_WAIT_TIME = 10 * 1000;
+
 	function liveFeed () {
 		setTimeout(function() {
-
 			if (!window.SLIDER_UPDATING) {
 				jQuery.ajax({
 				  url: '/control/liveFeed',
@@ -49,8 +50,31 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 		}, window.WAITING_TIME);
 	}
 	function updateDashVals () {
-		
+		setTimeout(function() {
+			jQuery.ajax({
+			  url: '/control/dashboardPanelData',
+			  type: 'POST',
+			  dataType: 'json',
+			  data: {param1: 'value1'},
+			  complete: function(xhr, textStatus) {
+			    console.log("dash updated");
+			  },
+			  success: function(data, textStatus, xhr) {
+			    //called when successful
+			    jQuery("#activeCallReportData").html(data.activeCallReport);
+			    jQuery("#ringingReportData").html(data.ringingReport);
+			    jQuery("#liveCallReportData").html(data.liveCallReport);
+			    jQuery("#channelReportData").html(data.channelReport);
+			    setTimeout(updateDashVals, window.DASH_VAL_WAIT_TIME);
+			  },
+			  error: function(xhr, textStatus, errorThrown) {
+			    alert("An error occured while reloading dashboard data.");
+			  }
+			});
+			
+		}, window.DASH_VAL_WAIT_TIME);
 	}
+	updateDashVals();
 </script>
 <div class="grid">
  <div class="row col-md-12">
@@ -60,7 +84,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
       		</div>
       		<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 				<h1 class='top-report-dashboard'>
-					<?php echo $activeCallReport ?>
+					<b id="activeCallReportData"><?php echo $activeCallReport ?></b>
 					<br>
 					<small>Active Call</small>
 				</h1>
@@ -72,7 +96,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					<?php echo $ringingReport ?>
+					<b id="ringingReportData"><?php echo $ringingReport ?></b>
 					<br>
 					<small>Ringing</small>
 				</h1>
@@ -84,7 +108,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					<?php echo $liveCallReport ?>
+					<b id="liveCallReportData"><?php echo $liveCallReport ?></b>
 					<br>
 					<small>Live Calls</small>
 				</h1>
@@ -96,7 +120,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
       		</div>
       		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<h1 class='top-report-dashboard'>
-					<?php echo $channelReport ?>
+					<b id="channelReportData"><?php echo $channelReport ?></b>
 					<br>
 		      		<small>Channels</small>
 				</h1>

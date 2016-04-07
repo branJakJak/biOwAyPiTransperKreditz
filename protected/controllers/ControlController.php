@@ -15,8 +15,8 @@ class ControlController extends CController
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','updateChannel','liveFeed'),
-				'users'=>array('*'),
+				'actions'=>array('index','updateChannel','liveFeed','dashboardPanelData'),
+				'users'=>array('@'),
 			),
 			array('deny',
 				'users'=>array('*'),
@@ -39,7 +39,7 @@ class ControlController extends CController
 		$ringingReport= Yii::app()->ringingReport->getData();
 		$liveCallReport= Yii::app()->liveCallReport->getData();
 		$channelReport= Yii::app()->channelReport->getData();
-		
+
 
     	$totalNumberOfAgents = 0;
     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
@@ -48,6 +48,17 @@ class ControlController extends CController
     		$totalNumberOfAgents += intval($value['agents']);
     	}
         $this->render('index',compact('datasource','totalNumberOfAgents','activeCallReport','ringingReport','liveCallReport','channelReport'));
+    }
+    public function actionDashboardPanelData()
+    {
+    	header("Content-Type: application/json");
+		$activeCallReport= Yii::app()->activeCallReport->getData();
+		$ringingReport= Yii::app()->ringingReport->getData();
+		$liveCallReport= Yii::app()->liveCallReport->getData();
+		$channelReport= Yii::app()->channelReport->getData();
+		$datasource = compact('activeCallReport','ringingReport','liveCallReport','channelReport');
+		echo json_encode($datasource);
+    	Yii::app()->end();
     }
     public function actionUpdateChannel($campaign_id , $agents , $channels,$throttleValue,$slider)
     {
