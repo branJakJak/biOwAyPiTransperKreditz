@@ -39,6 +39,7 @@ class ControlController extends CController
 		$ringingReport= Yii::app()->ringingReport->getData();
 		$liveCallReport= Yii::app()->liveCallReport->getData();
 		$channelReport= Yii::app()->channelReport->getData();
+		
 
     	$totalNumberOfAgents = 0;
     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;

@@ -19,6 +19,8 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 	}
 </style>
 <script type="text/javascript">
+	window.SLIDER_UPDATING = false;
+	window.WAITING_TIME = 2* 1000;
 	function liveFeed () {
 		setTimeout(function() {
 
@@ -44,7 +46,10 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 				  }
 				});
 			}
-		}, 20 * 1000);
+		}, window.WAITING_TIME);
+	}
+	function updateDashVals () {
+		
 	}
 </script>
 <div class="grid">
@@ -162,7 +167,7 @@ js:function(event,ui){
 	if (confirm("Do you want to save changes you made ?")) {
 		jQuery.ajax({
 		  url: '/control/updateChannel',
-		  type: 'get',
+		  type: 'GET',
 		  data: jQuery("#form$key").serialize(),
 		  beforeSend:function(){
 			$.notify({
