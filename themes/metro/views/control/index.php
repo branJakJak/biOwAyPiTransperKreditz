@@ -35,7 +35,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 				  	  jQuery("."+val.campaign_id+"-numAgents").html(val.agents);
 				  	  jQuery("."+val.campaign_id+"-totalNumAgents").html(val.number_of_lines);
 				  	  jQuery("#slider"+index+"_slider").slider("value",val.channels);
-				  	  jQuery("h1.slider0"+index).html(val.channels);
+				  	  jQuery("h1.slider"+index).html(val.number_of_lines);
 				  	});
 				    liveFeed();
 				  },
