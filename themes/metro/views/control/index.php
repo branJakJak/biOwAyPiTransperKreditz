@@ -33,8 +33,8 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 				  success: function(data, textStatus, xhr) {
 				  	jQuery.each(data, function(index, val) {
 				  	  jQuery("."+val.campaign_id+"-numAgents").html(val.agents);
-				  	  jQuery("."+val.campaign_id+"-totalNumAgents").html(val.number_of_lines);
-				  	  jQuery("#slider"+index+"_slider").slider("value",val.channels);
+				  	  jQuery("."+val.campaign_id+"-channelPerAgent").html(val.channels);
+				  	  jQuery("#slider"+index+"_slider").slider("value",val.num_of_channels);
 				  	  jQuery("h1.slider"+index).html(val.number_of_lines);
 				  	});
 				    liveFeed();
@@ -156,9 +156,8 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 					<h1>
 						<b class='<?php echo $value['campaign_id'] ?>-numAgents'><?php echo $value['agents'] ?> </b>
 						/ 
-						<b style="display: none" class='<?php echo $value['campaign_id'] ?>-totalNumAgents'><?php echo $totalNumberOfAgents ?></b>
-						<b class='channelReportData'>
-							<?php echo $channelReport ?> 
+						<b class='<?php echo $value['campaign_id'] ?>-channelPerAgent'>
+							<?php echo $value['channels'] ?>
 						</b>
 					</h1>
 					<center>
