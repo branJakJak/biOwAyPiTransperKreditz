@@ -64,7 +64,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 			    jQuery("#activeCallReportData").html(data.activeCallReport);
 			    jQuery("#ringingReportData").html(data.ringingReport);
 			    jQuery("#liveCallReportData").html(data.liveCallReport);
-			    jQuery("#channelReportData").html(data.channelReport);
+			    jQuery("#channelReportData , .channelReportData").html(data.channelReport);
 			    setTimeout(updateDashVals, window.DASH_VAL_WAIT_TIME);
 			  },
 			  error: function(xhr, textStatus, errorThrown) {
@@ -156,7 +156,10 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 					<h1>
 						<b class='<?php echo $value['campaign_id'] ?>-numAgents'><?php echo $value['agents'] ?> </b>
 						/ 
-						<b class='<?php echo $value['campaign_id'] ?>-totalNumAgents'><?php echo $totalNumberOfAgents ?></b>
+						<b style="display: none" class='<?php echo $value['campaign_id'] ?>-totalNumAgents'><?php echo $totalNumberOfAgents ?></b>
+						<b class='channelReportData'>
+							<?php echo $channelReport ?> 
+						</b>
 					</h1>
 					<center>
 						<small>
