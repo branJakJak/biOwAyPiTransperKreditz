@@ -1,4 +1,6 @@
 
+
+
 @TODO - do full test on all feature
 
 
@@ -637,12 +639,12 @@ add also notification
 
 @TODO 
 we will need it so that the  channels are controlled by a slider.  
-
+@DONE
 
 @TODO
 so on the slider it would have to be if it 
 when up by 1 then it would apply that one to all
-
+@DONE
 
 @TODO 
 ideally slider would output as a percentage... 
@@ -651,52 +653,19 @@ the max amount of channels would be 49
 (number of channges) / 49 
 
 the percentage would be 49 being 100%
-
+@DONE
 
 
 @TODO
 update vicidial_remote_agents set number_of_lines='slider value' 
 where campaign_id='$campaign id'
-
+@DONE
 
 @TODO 
 slider value will be the chanels / amount of agents.
-
-then when the sldier is moved its updates using the sql i just gave.
+@DONE
 
 =========
-
-
-
-@TODO
-
-Paul, [08.04.16 20:35]
-what ill need is the call centers hopper lead count
-
-Paul, [08.04.16 20:35]
-in them
-
-Paul, [08.04.16 20:36]
-so curently we have PI and PBA we got normal leads and the live so will need it so its like PI leads 5/205  
-
-5 being live leads 205 being normal data
-
-Paul, [08.04.16 20:41]
- i have done a view for the data thats needed
-
-Paul, [08.04.16 20:42]
-the view name is hopper_combined
-
-Paul, [08.04.16 20:42]
-even ifits just a mini table in one section showing the data as is will be fine
-
-
-Paul, [08.04.16 20:44]
-even if its just a single box will be fine but would be nice like 2 boxes split dialadnally with live in top half and normal in bottom 
-
-Paul, [08.04.16 20:45]
-scrap that just do it like the green boc in center but on the top  that be fab
-
-
-
-http://149.202.73.207/vicidial/hopper_list.php?ADD=hopper_list&user=willthebest
+@TOD
+-live feed for leads 
+@DONE
