@@ -15,7 +15,7 @@ class ControlController extends CController
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','updateChannel','liveFeed','dashboardPanelData'),
+				'actions'=>array('index','updateChannel','liveFeed','dashboardPanelData','leadsReport'),
 				'users'=>array('@'),
 			),
 			array('deny',
@@ -80,6 +80,13 @@ class ControlController extends CController
      	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
     	$datasource = $controlDatasourceRetriever->fetchdata();
     	echo json_encode($datasource->data);
+    	Yii::app()->end();
+    }
+    public function actionLeadsReport()
+    {
+    	header("Content-Type: application/json");
+    	$hopperListData = Yii::app()->hopperListData->getData();
+    	echo json_encode($hopperListData);
     	Yii::app()->end();
     }
 }

@@ -27,6 +27,35 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 	window.SLIDER_UPDATING = false;
 	window.WAITING_TIME = 20 * 1000;
 	window.DASH_VAL_WAIT_TIME = 10 * 1000;
+	window.CAMPAIGN_DATA_LIVE_UPDATE_TIME = 10 * 1000;
+
+
+	function campaignDataLiveUpdate() {
+		jQuery.ajax({
+		  url: '/control/leadsReport',
+		  type: 'POST',
+		  dataType: 'json',
+		  complete: function(xhr, textStatus) {
+		  },
+		  success: function(data, textStatus, xhr) {
+		  	jQuery.each(data, function(index, val) {
+		  		if (val && val.current_leads) {
+					jQuery("#"+index+"-current-lead").html(val.current_leads);
+		  		}
+		  		if (val && val.live) {
+					jQuery("#"+index+"-live-lead").html(val.live);
+		  		}
+		  	});
+		    setTimeout(function() {
+		    	window.campaignDataLiveUpdate();
+		    }, window.CAMPAIGN_DATA_LIVE_UPDATE_TIME);
+		  },
+		  error: function(xhr, textStatus, errorThrown) {
+		    
+		  }
+		});
+		
+	}
 
 	function liveFeed () {
 		setTimeout(function() {
@@ -79,6 +108,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 			
 		}, window.DASH_VAL_WAIT_TIME);
 	}
+	campaignDataLiveUpdate();
 	updateDashVals();
 </script>
 <div class="grid">
@@ -266,18 +296,25 @@ EOL;
 	<div class="row col-md-12">
 	<?php foreach ($hopperListData as $key => $current): ?>
 		<div class="tile tile-blue col-md-3 col-xs-12"  >
-			<h1 class='lead-report-panel'>
+			<h1 class='lead-report-panel' >
 				<strong><?php echo $key ?></strong>
 				<br>
 					<small class='lead-report-value'>
 					<?php if (isset($current['current_leads'])): ?>
-						<?php echo $current['current_leads'] ?> \ 
+					<b id='<?php echo $key?>-current-lead'>
+						<?php echo $current['current_leads'] ?>
+					</b>
+					\
 					<?php endif ?>
 					<?php if (isset($current['live'])): ?>
+					<b id="<?php echo $key?>-live-lead">
 						<?php echo $current['live'] ?> 
+					</b>
 					<?php endif ?>
 					<?php if (!isset($current['live'])): ?>
-						0
+						<b id="<?php echo $key?>-live-lead">
+							0
+						</b>
 					<?php endif ?>
 					</small>
 					<br>
