@@ -8,14 +8,19 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 	.campaign-ratio-value , .campaign-throttle , .campaign-title{
 		min-height:130px;
 	}
-	.top-report-dashboard {
+	.top-report-dashboard , .lead-report-panel {
 		text-align: right;
 	}
-	.top-report-dashboard small{
+	.top-report-dashboard small , .lead-report-value , .lead-report-label{
 		color: white;
 	}
 	.tile {
 		opacity: 1 !important;
+	}
+	.lead-report-label{
+	    font-size: 12px;
+	    position: relative;
+	    top: -17px;		
 	}
 </style>
 <script type="text/javascript">
@@ -259,12 +264,28 @@ EOL;
 
 <div class="grid">
 	<div class="row col-md-12">
-      <div class="tile tile-blue col-md-3 col-xs-12"  >
-			<h1 class='top-report-dashboard'>
-				<b id="activeCallReportData"><?php echo $activeCallReport ?></b>
+	<?php foreach ($hopperListData as $key => $current): ?>
+		<div class="tile tile-blue col-md-3 col-xs-12"  >
+			<h1 class='lead-report-panel'>
+				<strong><?php echo $key ?></strong>
 				<br>
-				<small>Active Call</small>
+					<small class='lead-report-value'>
+					<?php if (isset($current['current_leads'])): ?>
+						<?php echo $current['current_leads'] ?> \ 
+					<?php endif ?>
+					<?php if (isset($current['live'])): ?>
+						<?php echo $current['live'] ?> 
+					<?php endif ?>
+					<?php if (!isset($current['live'])): ?>
+						0
+					<?php endif ?>
+					</small>
+					<br>
+					<small class='lead-report-label'>
+						Current \ Live
+					</small>
 			</h1>
-      </div>
+		</div>
+	<?php endforeach ?>
 	</div>
 </div>
