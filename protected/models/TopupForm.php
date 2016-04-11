@@ -61,13 +61,11 @@ class TopupForm extends CFormModel
 					if ($this->andActivate) {
 						$activator = new ActivationFormModel();
 						$activator->activateAccount($model);
-
-						$campaignForcer = Yii::app()->campaignForcer;
-						$campaignForcer->update($this->forceAgent , $model->sub_user);
-
 					}
 					$accountsAffectedInt++;
 				}
+				$campaignForcer = Yii::app()->campaignForcer;
+				$campaignForcer->update($this->forceAgent , $model->sub_user);
 			}
 		}
 		return $accountsAffectedInt;

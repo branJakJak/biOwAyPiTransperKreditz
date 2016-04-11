@@ -664,4 +664,39 @@ slider value will be the chanels / amount of agents.
 
 then when the sldier is moved its updates using the sql i just gave.
 
+=========
 
+
+
+@TODO
+
+Paul, [08.04.16 20:35]
+what ill need is the call centers hopper lead count
+
+Paul, [08.04.16 20:35]
+in them
+
+Paul, [08.04.16 20:36]
+so curently we have PI and PBA we got normal leads and the live so will need it so its like PI leads 5/205  
+
+5 being live leads 205 being normal data
+
+Paul, [08.04.16 20:41]
+ i have done a view for the data thats needed
+
+Paul, [08.04.16 20:42]
+the view name is hopper_combined
+
+Paul, [08.04.16 20:42]
+even ifits just a mini table in one section showing the data as is will be fine
+
+
+Paul, [08.04.16 20:44]
+even if its just a single box will be fine but would be nice like 2 boxes split dialadnally with live in top half and normal in bottom 
+
+Paul, [08.04.16 20:45]
+scrap that just do it like the green boc in center but on the top  that be fab
+
+
+
+http://149.202.73.207/vicidial/hopper_list.php?ADD=hopper_list&user=willthebest
