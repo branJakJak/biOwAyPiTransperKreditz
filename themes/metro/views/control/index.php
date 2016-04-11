@@ -295,7 +295,7 @@ EOL;
 <div class="grid">
 	<div class="row col-md-12">
 	<?php foreach ($hopperListData as $key => $current): ?>
-		<div class="tile tile-blue col-md-3 col-xs-12"  >
+		<div class="tile tile-pink col-md-3 col-xs-12"  >
 			<h1 class='lead-report-panel' >
 				<strong><?php echo $key ?></strong>
 				<br>
