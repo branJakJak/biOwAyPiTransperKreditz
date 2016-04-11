@@ -255,3 +255,16 @@ EOL;
 	  <?php endforeach ?>
   </div>
 </div>
+
+
+<div class="grid">
+	<div class="row col-md-12">
+      <div class="tile tile-blue col-md-3 col-xs-12"  >
+			<h1 class='top-report-dashboard'>
+				<b id="activeCallReportData"><?php echo $activeCallReport ?></b>
+				<br>
+				<small>Active Call</small>
+			</h1>
+      </div>
+	</div>
+</div>

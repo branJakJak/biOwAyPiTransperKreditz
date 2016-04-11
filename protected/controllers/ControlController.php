@@ -39,7 +39,7 @@ class ControlController extends CController
 		$ringingReport= Yii::app()->ringingReport->getData();
 		$liveCallReport= Yii::app()->liveCallReport->getData();
 		$channelReport= Yii::app()->channelReport->getData();
-
+		$hopperListData = Yii::app()->hopperListData->getData();
 
     	$totalNumberOfAgents = 0;
     	$controlDatasourceRetriever = Yii::app()->controlDataSourceRetirever;
@@ -47,7 +47,7 @@ class ControlController extends CController
     	foreach ($datasource->data as $key => $value) {
     		$totalNumberOfAgents += intval($value['agents']);
     	}
-        $this->render('index',compact('datasource','totalNumberOfAgents','activeCallReport','ringingReport','liveCallReport','channelReport'));
+        $this->render('index',compact('datasource','totalNumberOfAgents','activeCallReport','ringingReport','liveCallReport','channelReport','hopperListData'));
     }
     public function actionDashboardPanelData()
     {
