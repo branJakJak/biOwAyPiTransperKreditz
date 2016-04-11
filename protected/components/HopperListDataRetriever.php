@@ -40,7 +40,7 @@ class HopperListDataRetriever extends CComponent
 // 		$sampleLeadsDatasource = <<<EOL
 // [{"campaign":"LIVEA","Live":"10"},{"campaign":"PBA","Live":"117"}]
 // EOL;
-		$leadsData = json_decode($sampleLeadsDatasource, true);
+		// $leadsData = json_decode($sampleLeadsDatasource, true);
 		return $leadsData;
 	}
 	public function getLiveLeads()
@@ -54,7 +54,7 @@ class HopperListDataRetriever extends CComponent
 // 		$sampleLiveDatasource = <<<EOL
 // [{"campaign":"LIVEA","Live":"2"}]
 // EOL;
-		$liveLeads = json_decode($sampleLiveDatasource, true);
+		// $liveLeads = json_decode($sampleLiveDatasource, true);
 		return $liveLeads;
 	}
 
