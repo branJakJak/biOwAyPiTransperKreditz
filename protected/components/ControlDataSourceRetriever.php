@@ -25,6 +25,14 @@ GROUP BY vicidial_remote_agents.campaign_id
 EOL;
 		$commandObj = Yii::app()->asterisk_db->createCommand($sqlCommand);
 		$returnedResult = $commandObj->queryAll();
+		foreach ($returnedResult as $key => $value) {
+			if ($value['campaign_id'] === 'PBAVB6') {
+				$returnedResult[$key]['new_label'] = 'PBA';
+			}
+			if ($value['campaign_id'] === 'VBInjury') {
+				$returnedResult[$key]['new_label'] = 'INJURY';
+			}
+		}
 
 		return new CArrayDataProvider($returnedResult , array(
 				'keyField'=>'campaign_id',

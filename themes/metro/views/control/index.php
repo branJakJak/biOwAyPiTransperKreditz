@@ -6,7 +6,7 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 ?>
 <style type="text/css">
 	.campaign-ratio-value , .campaign-throttle , .campaign-title{
-		min-height:130px;
+		min-height:170px;
 	}
 	.top-report-dashboard , .lead-report-panel {
 		text-align: right;
@@ -168,19 +168,64 @@ Yii::app()->clientScript->registerScript('liveFeedCall', 'liveFeed();', CClientS
 				<?php echo CHtml::hiddenField('channels', $value['channels']); ?>
 				<?php echo CHtml::hiddenField('throttleValue', 0 , array('id'=>'throttle'.$key)); ?>
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 tile tile-blue campaign-title">
-					<center>
-						<small>
-							Throttle Control
-						</small>
-					</center>
-					<h1 class='campaign-id-label'style="margin-top: 2px;font-size: 60px;">
-						<?php echo $value['campaign_id'] ?>
-					</h1>
-					<center>
-						<small>
-							200 Live / 1000 Max
-						</small>
-					</center>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-lg-offset-3">
+						<center>
+							<small>
+								Throttle Control
+							</small>
+						</center>
+						<h1 class='campaign-id-label'style="margin-top: 2px;font-size: 60px;">
+							<?php echo $value['new_label'] ?>
+						</h1>
+						<center>
+							<small>
+								200 Live / 1000 Max
+							</small>
+						</center>					
+					</div>
+
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<?php 
+							$leadReportPanelTitle = "";
+							$current = array();
+							if ($value['new_label'] === 'PBA') {
+								$current  = $hopperListData['PBA'];
+								$leadReportPanelTitle = 'PBA';
+							}
+							if ($value['new_label'] === 'INJURY') {
+								$current  = $hopperListData['LIVEA'];
+								$leadReportPanelTitle = 'LIVEA';
+							}
+						?>
+						<div class="" >
+							<h1 class='lead-report-panel' >
+								<strong><?php echo $leadReportPanelTitle ?></strong>
+								<br>
+									<small class='lead-report-value'>
+									<?php if (isset($current['current_leads'])): ?>
+									<b id='<?php echo $leadReportPanelTitle?>-current-lead'>
+										<?php echo $current['current_leads'] ?>
+									</b>
+									\
+									<?php endif ?>
+									<?php if (isset($current['live'])): ?>
+									<b id="<?php echo $leadReportPanelTitle?>-live-lead">
+										<?php echo $current['live'] ?> 
+									</b>
+									<?php endif ?>
+									<?php if (!isset($current['live'])): ?>
+										<b id="<?php echo $leadReportPanelTitle?>-live-lead">
+											0
+										</b>
+									<?php endif ?>
+									</small>
+									<br>
+									<small class='lead-report-label'>
+										Current \ Live
+									</small>
+							</h1>
+						</div>						
+					</div>
 				</div>
 				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 tile tile-green campaign-ratio-value">
 					<center>
@@ -292,7 +337,7 @@ EOL;
 </div>
 
 
-<div class="grid">
+<div class="grid hidden">
 	<div class="row col-md-12">
 	<?php foreach ($hopperListData as $key => $current): ?>
 		<div class="tile tile-pink col-md-3 col-xs-12"  >
