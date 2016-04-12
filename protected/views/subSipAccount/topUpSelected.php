@@ -13,6 +13,7 @@ Array.prototype.clean = function(deleteValue) {
 EOL;
 Yii::app()->clientScript->registerScript('cleanArrProto', $cleanArrProto, CClientScript::POS_HEAD);
 
+
 $listenToEventWh = <<<EOL
 jQuery("#TopupForm_accounts").change(function(){
 	var currentdomVal = jQuery("#TopupForm_accounts").val();
@@ -51,7 +52,7 @@ $javascriptCode = <<<EOL
 			},
             legend: { enabled: false},
             xAxis: {
-                categories: $sipAccountsStr,
+                categories: $chartLabels,
 	  			title: {
 	                text: null
 	            },
@@ -68,9 +69,10 @@ $javascriptCode = <<<EOL
 	                	events:{
 	                		click:function(evt){
 								var tempContainer = jQuery('#TopupForm_accounts').val();
+								var tempCategoryContainer = this.category.split("-")[1].trimLeft();
 								tempArrContainer = tempContainer.split(",");
 								tempArrContainer.clean("");
-								tempArrContainer.push(this.category);
+								tempArrContainer.push(tempCategoryContainer);
 								jQuery('#TopupForm_accounts').val(tempArrContainer.join(","));
 								jQuery('#TopupForm_accounts').trigger('change.select2');
 	                		}
