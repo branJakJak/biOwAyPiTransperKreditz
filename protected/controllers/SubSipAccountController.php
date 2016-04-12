@@ -149,7 +149,15 @@ class SubSipAccountController extends Controller {
         $topupLogsTotalToday = 0;
         $datasources = $this->loadDataSources();
         $chartInitialData = $datasources['iniChartData'];
-        $sipAccountsStr = json_encode($datasources['sipAccountStr']);
+
+
+        $sipAccountTempContainer = $datasources['sipAccountStr'];
+        //append the current campaign 
+        foreach ($sipAccountTempContainer as $key => $currentAccount) {
+            $campaignInformationRetriever = Yii::app()->campaignInformationRetriever;
+            $sipAccountTempContainer[$key] = $campaignInformationRetriever->getInformation($currentAccount) . " - ".$sipAccountTempContainer[$key];
+        }
+        $sipAccountsStr = json_encode($sipAccountTempContainer);
         $seriesDataStr = json_encode($datasources['chartSeriesData']);
 
         $allSipAccounts = array();
@@ -177,6 +185,8 @@ class SubSipAccountController extends Controller {
             $topupLogsTotalToday += $value->topUpValue;
         }
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
+        //append current campaign
+        
         $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr'));
     }
     /**
