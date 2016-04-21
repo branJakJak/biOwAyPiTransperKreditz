@@ -54,6 +54,8 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 						success: function(data, textStatus, xhr) {
 							if (data.success) {
 								window.ACCOUNT_MODELS[currentIndex] = data.model;
+								jQuery("#"+data.model.sub_user+"-balance").html(data.balance);
+								jQuery("#"+data.model.sub_user+"-last_updated").html(data.date_updated);
 							}
 						},
 						error: function(xhr, textStatus, errorThrown) {
@@ -120,8 +122,8 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 					<?php foreach ($accountsToMonitor as $key => $currentAccountModel): ?>
 					<tr>
 						<td><?php echo $currentAccountModel->sub_user ?></td>
-						<td><?php echo $currentAccountModel->balance ?></td>
-						<td><?php echo $currentAccountModel->date_updated ?></td>
+						<td id="<?php echo $currentAccountModel->sub_user?>-balance"><?php echo $currentAccountModel->balance ?></td>
+						<td id="<?php echo $currentAccountModel->sub_user ?>-last_updated"><?php echo $currentAccountModel->date_updated ?></td>
 						<td>
 							<?php echo CHtml::checkBox($currentAccountModel->sub_user.$key, false, array('onClick'=>'pauseUpdate('.CJSON::encode($currentAccountModel).')')); ?>
 						</td>

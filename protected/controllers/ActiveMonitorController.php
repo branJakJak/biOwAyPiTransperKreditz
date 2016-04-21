@@ -60,6 +60,7 @@ class ActiveMonitorController extends Controller
 			$this->redirect(array('/activeMonitor/index'));
 		}
 	}
+	
 	public function actionClear()
 	{
 		unset(Yii::app()->request->cookies['monitoredAccounts']);
