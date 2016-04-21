@@ -29,6 +29,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 	window.ACCOUNT_MODEL = [];
 	window.DELAY_SECONDS = 10;
 	window.HOLD_UPDATE_COLLECTION = [];
+	window.CONTINUE_REQUEST = true;
 	function updateBalance () {
 		//not global pause
 		if (window.CONTINUE_REQUEST) {
@@ -58,7 +59,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 					});
 				}
 				//temporary , just to stop the execution 
-				window.CONTINUE_REQUEST = false;
+				// window.CONTINUE_REQUEST = false;
 			});
 		}
 		setTimeout(updateBalance, window.DELAY_SECONDS * 1000 );
