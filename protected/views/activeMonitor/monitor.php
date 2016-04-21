@@ -61,7 +61,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 				window.CONTINUE_REQUEST = false;
 			});
 		}
-		//setTimeout(updateBalance, window.DELAY_SECONDS * 1000 );
+		setTimeout(updateBalance, window.DELAY_SECONDS * 1000 );
 	}
 	function isPaused(objectToCheck) {
 		//check object is in pause mode
