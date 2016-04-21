@@ -677,3 +677,12 @@ slider value will be the chanels / amount of agents.
 @TODO 
 Auto refresh toggle 
 for each account 
+
+
+
+@TODO
+activeMonitor / monitor
+	- allow user to change the refresh rate
+	- request to update balalnce  - possibley updat SynController::actionSingle , to return the updated model as json
+	- update the model after request for update balance
+	

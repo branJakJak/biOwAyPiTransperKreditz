@@ -22,7 +22,7 @@ class SyncController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('single'),
+                'actions' => array('single','updateAccountBalance'),
                 'users' => array('@'),
             ),
             array('deny',
@@ -46,6 +46,33 @@ class SyncController extends Controller {
         } else {
             throw new Exception("Cant find subsip account");
         }
+    }
+    public function actionUpdateAccountBalance($mainUsername,$mainPassword,$subUsername,$subPassword)
+    {
+        header("Content-Type: application/json");
+        $model = new RemoteDataCache;
+        $jsonReply = array(
+            "success"=>false,
+            "message"=>"Can't find model",
+            "model"=>$model
+        );
+        $criteria = new CDbCriteria;
+        $criteria->compare("main_user", $mainUsername);
+        $criteria->compare("main_pass", $mainPassword);
+        $criteria->compare("sub_user", $subUsername);
+        $criteria->compare("sub_pass", $subPassword);
+        $model = RemoteDataCache::model()->find($criteria);
+        if ($model) {
+            $sync = new SyncSingleSubSip;
+            $sync->sync($model);
+            $jsonReply = array(
+                "success"=>true,
+                "message"=>"Can't find model",
+                "model"=>$model
+            );
+        }
+       echo CJSON::encode($jsonReply);
+       Yii::app()->end();
     }
 
 }

@@ -29,9 +29,8 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                         array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Control', 'url'=>array('/control/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Charts', 'url'=>array('/chart'),'visible'=>!Yii::app()->user->isGuest),
-                        // array('label'=>'Campaigns', 'url'=>array('/campaigns/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
-                        // array('label'=>'Remote Accounts', 'url'=>array('remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Active Monitor', 'url'=>array('/activeMonitor'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Group action <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"),
                         'items'=>array(
                             array('label'=>'Top up', 'url'=>array('/subSipAccount/topUpSelected')),

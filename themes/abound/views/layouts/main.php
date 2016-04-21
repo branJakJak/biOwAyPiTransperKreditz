@@ -67,8 +67,5 @@
 <!-- Require the footer -->
 <?php //require_once('tpl_footer.php') ?>
 
-
-  
-
   </body>
 </html>
