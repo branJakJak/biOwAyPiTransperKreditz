@@ -22,6 +22,9 @@ $refreshRateDropdownChange = <<<EOL
 EOL;
 Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRateDropdownChange, CClientScript::POS_READY);
 
+Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClientScript::POS_READY);
+
+
 ?>
 
 
@@ -30,7 +33,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 	window.DELAY_SECONDS = 10;
 	window.HOLD_UPDATE_COLLECTION = [];
 	window.CONTINUE_REQUEST = true;
-	function updateBalance () {
+	function updateBalance() {
 		//not global pause
 		if (window.CONTINUE_REQUEST) {
 			window.ACCOUNT_MODEL.forEach(function(currentValue , currentIndex){
@@ -68,7 +71,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 		//check object is in pause mode
 		var isPaused = false;
 		window.HOLD_UPDATE_COLLECTION.forEach(function(currentValue , currentIndex){
-			if (JSON.stringify(objectToPause) == JSON.stringify(currentValue)) {
+			if (JSON.stringify(objectToCheck) == JSON.stringify(currentValue)) {
 				isPaused = true;
 			}
 		});
@@ -88,7 +91,7 @@ Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRa
 		}//else has duplicate
 		console.log(window.HOLD_UPDATE_COLLECTION);
 	}
-	updateBalance();
+	
 </script>
 <div class="row">
 	<div class="span9 offset2">
