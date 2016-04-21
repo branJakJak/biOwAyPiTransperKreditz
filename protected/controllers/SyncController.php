@@ -77,7 +77,7 @@ class SyncController extends Controller {
          */
         $jsonReply['model'] = RemoteDataCache::model()->findByPk($model->id);
         echo CJSON::encode($jsonReply);
-        Yii::app()->end();
+        // Yii::app()->end();
     }
 
 }
