@@ -67,7 +67,7 @@ class SyncController extends Controller {
             $sync->sync($model);
             $jsonReply = array(
                 "success"=>true,
-                "message"=>"Can't find model",
+                "message"=>"Record updated",
                 "model"=>$model
             );
         }

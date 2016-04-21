@@ -12,7 +12,7 @@ $accountsModelScript = <<<EOL
 	window.ACCOUNT_MODELS = $accountsModelJs;
 EOL;
 Yii::app()->clientScript->registerScript('accountsModel',$accountsModelScript, CClientScript::POS_READY);	
-Yii::app()->clientScript->registerScript('delaySeconds', 'window.DELAY_SECONDS = 10', CClientScript::POS_READY);
+Yii::app()->clientScript->registerScript('delaySeconds', 'window.DELAY_SECONDS = 30', CClientScript::POS_READY);
 Yii::app()->clientScript->registerScript('continueRequest', 'window.CONTINUE_REQUEST = true', CClientScript::POS_READY);
 
 $refreshRateDropdownChange = <<<EOL
@@ -30,7 +30,7 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 
 <script type="text/javascript">
 	window.ACCOUNT_MODELS = [];
-	window.DELAY_SECONDS = 10;
+	window.DELAY_SECONDS = 30;
 	window.HOLD_UPDATE_COLLECTION = [];
 	window.CONTINUE_REQUEST = true;
 	function updateBalance() {
@@ -104,7 +104,7 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 
 			<?php 
 				$refreshRateList = array_combine(array_values(range(1, 50, 1)), array_values(range(1, 50,1)));
-				echo CHtml::dropDownList('refreshRate', 10, $refreshRateList, array('id'=>'refreshRateDropdown')); 
+				echo CHtml::dropDownList('refreshRate', 30, $refreshRateList, array('id'=>'refreshRateDropdown')); 
 			?>
 			<hr>
 			<table class="table table-hover table-condensed">
