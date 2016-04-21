@@ -9,7 +9,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
 $accountsModelJs = CJSON::encode($accountsToMonitor);
 $accountsModelScript = <<<EOL
-	window.ACCOUNTS_MODEL = $accountsModelJs;
+	window.ACCOUNT_MODELS = $accountsModelJs;
 EOL;
 Yii::app()->clientScript->registerScript('accountsModel',$accountsModelScript, CClientScript::POS_READY);	
 Yii::app()->clientScript->registerScript('delaySeconds', 'window.DELAY_SECONDS = 10', CClientScript::POS_READY);
@@ -29,14 +29,14 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 
 
 <script type="text/javascript">
-	window.ACCOUNT_MODEL = [];
+	window.ACCOUNT_MODELS = [];
 	window.DELAY_SECONDS = 10;
 	window.HOLD_UPDATE_COLLECTION = [];
 	window.CONTINUE_REQUEST = true;
 	function updateBalance() {
 		//not global pause
 		if (window.CONTINUE_REQUEST) {
-			window.ACCOUNT_MODEL.forEach(function(currentValue , currentIndex){
+			window.ACCOUNT_MODELS.forEach(function(currentValue , currentIndex){
 				//not actively pause by user
 				if (  ! isPaused(currentValue)   ) {
 					jQuery.ajax({
@@ -53,7 +53,7 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 						},
 						success: function(data, textStatus, xhr) {
 							if (data.success) {
-								window.ACCOUNT_MODEL[currentIndex] = data.model;
+								window.ACCOUNT_MODELS[currentIndex] = data.model;
 							}
 						},
 						error: function(xhr, textStatus, errorThrown) {
