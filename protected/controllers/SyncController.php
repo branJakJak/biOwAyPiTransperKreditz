@@ -71,8 +71,13 @@ class SyncController extends Controller {
                 "model"=>$model
             );
         }
-       echo CJSON::encode($jsonReply);
-       Yii::app()->end();
+        /**
+         * @todo  
+         * Retrieve the updated model 
+         */
+        $jsonReply['model'] = RemoteDataCache::model()->findByPk($model->id);
+        echo CJSON::encode($jsonReply);
+        Yii::app()->end();
     }
 
 }
