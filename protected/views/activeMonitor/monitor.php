@@ -54,8 +54,8 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 						success: function(data, textStatus, xhr) {
 							if (data.success) {
 								window.ACCOUNT_MODELS[currentIndex] = data.model;
-								jQuery("#"+data.model.sub_user+"-balance").html(data.balance);
-								jQuery("#"+data.model.sub_user+"-last_updated").html(data.date_updated);
+								jQuery("#"+data.model.sub_user+"-balance").html(data.model.balance);
+								jQuery("#"+data.model.sub_user+"-last_updated").html(data.model.date_updated);
 							}
 						},
 						error: function(xhr, textStatus, errorThrown) {
