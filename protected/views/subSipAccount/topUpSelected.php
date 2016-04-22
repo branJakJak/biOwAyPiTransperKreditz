@@ -69,7 +69,7 @@ $javascriptCode = <<<EOL
 	                	events:{
 	                		click:function(evt){
 								var tempContainer = jQuery('#TopupForm_accounts').val();
-								var tempCategoryContainer = this.category.split("-")[1].trimLeft();
+								var tempCategoryContainer = this.category.split("-")[2].trimLeft();
 								tempArrContainer = tempContainer.split(",");
 								tempArrContainer.clean("");
 								tempArrContainer.push(tempCategoryContainer);

@@ -51,6 +51,6 @@ class ConfigController extends Controller
         $criteria->addCondition("main_user <> 'Prion1967'");
         $criteria->order = "vici_user ASC";
         $allRemoteDataCache = RemoteDataCache::model()->findAll($criteria);
-        $this->render('autoTopUp',compact('allRemoteDataCache'));
+        $this->render('//control/config/autoTopUp',compact('allRemoteDataCache'));
     }
 } 
