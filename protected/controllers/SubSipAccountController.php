@@ -1,5 +1,4 @@
-topUpSelected<?php
-
+<?php
 class SubSipAccountController extends Controller {
 
     /**
@@ -155,7 +154,7 @@ class SubSipAccountController extends Controller {
         //append the current campaign 
         foreach ($sipAccountTempContainer as $key => $currentAccount) {
             $campaignInformationRetriever = Yii::app()->campaignInformationRetriever;
-            $sipAccountTempContainer[$key] = $campaignInformationRetriever->getInformation($currentAccount) . " - ".$sipAccountTempContainer[$key];
+            $sipAccountTempContainer[$key] = ($key + 1) ." - ".$campaignInformationRetriever->getInformation($currentAccount) . " - ".$sipAccountTempContainer[$key];
         }
         $sipAccountsStr = json_encode($datasources['sipAccountStr']);
         $chartLabels = json_encode($sipAccountTempContainer);
