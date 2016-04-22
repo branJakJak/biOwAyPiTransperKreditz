@@ -1,5 +1,10 @@
 <?php 
 
+
+$baseUrl = Yii::app()->theme->baseUrl; 
+Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/underscore-min.js', CClientScript::POS_HEAD);
+
+
 $cleanArrProto = <<<EOL
 Array.prototype.clean = function(deleteValue) {
   for (var i = 0; i < this.length; i++) {
@@ -15,15 +20,18 @@ Yii::app()->clientScript->registerScript('cleanArrProto', $cleanArrProto, CClien
 
 
 $listenToEventWh = <<<EOL
-jQuery("#TopupForm_accounts").change(function(){
-	var currentdomVal = jQuery("#TopupForm_accounts").val();
-	if(currentdomVal != ""){
-		numOfItemsSelected = currentdomVal.split(",").length;
-		jQuery("#numberOfSelectedItems").html(numOfItemsSelected);
-	}else{
-		jQuery("#numberOfSelectedItems").html("0");
-	}
-});
+window.newCategoryAdded = function(newCategory){
+	var currentCat = _.uniq(newCategory);
+	jQuery("#numberOfSelectedItems").html(currentCat.length);
+	
+	// var currentdomVal = jQuery("#TopupForm_accounts").val();
+	// if(currentdomVal != ""){
+	// 	numOfItemsSelected = currentdomVal.split(",").length;
+		
+	// }else{
+	// 	jQuery("#numberOfSelectedItems").html("0");
+	// }
+}
 EOL;
 Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);
 
@@ -73,6 +81,7 @@ $javascriptCode = <<<EOL
 								tempArrContainer = tempContainer.split(",");
 								tempArrContainer.clean("");
 								tempArrContainer.push(tempCategoryContainer);
+								window.newCategoryAdded(tempArrContainer);
 								jQuery('#TopupForm_accounts').val(tempArrContainer.join(","));
 								jQuery('#TopupForm_accounts').trigger('change.select2');
 	                		}
