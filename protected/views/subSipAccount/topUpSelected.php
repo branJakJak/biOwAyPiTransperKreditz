@@ -27,7 +27,6 @@ window.newCategoryAdded = function(newCategory){
 	// var currentdomVal = jQuery("#TopupForm_accounts").val();
 	// if(currentdomVal != ""){
 	// 	numOfItemsSelected = currentdomVal.split(",").length;
-		
 	// }else{
 	// 	jQuery("#numberOfSelectedItems").html("0");
 	// }

@@ -148,8 +148,6 @@ class SubSipAccountController extends Controller {
         $topupLogsTotalToday = 0;
         $datasources = $this->loadDataSources();
         $chartInitialData = $datasources['iniChartData'];
-
-
         $sipAccountTempContainer = $datasources['sipAccountStr'];
         //append the current campaign 
         foreach ($sipAccountTempContainer as $key => $currentAccount) {

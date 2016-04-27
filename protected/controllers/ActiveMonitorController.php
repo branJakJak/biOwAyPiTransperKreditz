@@ -32,8 +32,21 @@ class ActiveMonitorController extends Controller
 	public function actionIndex()
 	{
 		$form = new ActiveMonitorForm();
+		$datasources = $this->loadDataSources();
 		$allSipAccounts = array();
 		$tempContainer = RemoteDataCache::model()->findAll();
+        $chartInitialData = $datasources['iniChartData'];
+        $sipAccountTempContainer = $datasources['sipAccountStr'];
+		$seriesDataStr = json_encode($datasources['chartSeriesData']);
+		$chartLabels = json_encode($sipAccountTempContainer);
+        $sipAccountTempContainer = $datasources['sipAccountStr'];
+        //append the current campaign 
+        foreach ($sipAccountTempContainer as $key => $currentAccount) {
+            $campaignInformationRetriever = Yii::app()->campaignInformationRetriever;
+            $sipAccountTempContainer[$key] = ($key + 1) ." - ".$campaignInformationRetriever->getInformation($currentAccount) . " - ".$sipAccountTempContainer[$key];
+        }
+        $chartLabels = json_encode($sipAccountTempContainer);
+
         foreach ($tempContainer as $key => $currentRemoteDataCache) {
             $allSipAccounts[] = $currentRemoteDataCache->sub_user;
         }
@@ -44,8 +57,46 @@ class ActiveMonitorController extends Controller
 				$this->redirect(array('/activeMonitor/monitor'));
 			}
 		}
-		$this->render('index',compact('form','allSipAccounts'));
+		$this->render('index',compact('form','allSipAccounts','seriesDataStr','chartLabels'));
 	}
+    public function loadDataSources()
+    {
+        $chartInitialData = array();
+        $sipAccountNames = array();
+        $chartSeriesData = array();
+        $criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
+
+        $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
+        foreach ($allRemoteModels as $key => $currentRemoteData) {
+            $tempColorContainer = "red";
+            //collect sip accounts
+            $sipAccountNames[$key] = $currentRemoteData->sub_user;
+            //register chart data array
+            $chartInitialData = array(
+                "name"=>$currentRemoteData->sub_user,
+                "data"=>$currentRemoteData->exact_balance,
+            );
+            if(doubleval($currentRemoteData->exact_balance)  >= 5){
+                $tempColorContainer = "#7CB5EC";
+            }else{
+                if ($currentRemoteData->exact_balance > 3) {
+                    $tempColorContainer = "orange";
+                }
+            }
+            //register series data
+            $chartSeriesData[$key] = array(
+                "y"=>doubleval($currentRemoteData->exact_balance),
+                "color"=>$tempColorContainer,
+            );
+        }
+        return array(
+                'iniChartData'=>$chartInitialData,
+                'sipAccountStr'=>$sipAccountNames,
+                'chartSeriesData'=>$chartSeriesData,
+            );
+    }
+
 	public function actionMonitor()
 	{
 		//check if cookie is present , 

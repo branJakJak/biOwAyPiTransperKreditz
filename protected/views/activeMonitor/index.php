@@ -1,10 +1,110 @@
 <?php
 /* @var $this ActiveMonitorController */
-
 $this->breadcrumbs=array(
 	'Active Monitor'=>array("/activeMonitor/index"),
 );
 $hasSelectedMonitoredAccounts = false;
+$baseUrl = Yii::app()->theme->baseUrl;
+$cs = Yii::app()->getClientScript();
+
+Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/underscore-min.js', CClientScript::POS_HEAD);
+$cleanArrProto = <<<EOL
+Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
+EOL;
+Yii::app()->clientScript->registerScript('cleanArrProto', $cleanArrProto, CClientScript::POS_HEAD);
+
+$listenToEventWh = <<<EOL
+window.newCategoryAdded = function(newCategory){
+	var currentCat = _.uniq(newCategory);
+	jQuery("#numberOfSelectedItems").html(currentCat.length);
+	
+	// var currentdomVal = jQuery("#TopupForm_accounts").val();
+	// if(currentdomVal != ""){
+	// 	numOfItemsSelected = currentdomVal.split(",").length;
+	// }else{
+	// 	jQuery("#numberOfSelectedItems").html("0");
+	// }
+}
+EOL;
+Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);
+
+
+
+$cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
+$cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
+$cs->registerCssFile($baseUrl.'/css/alertify.css');
+$cs->registerScriptFile('//code.highcharts.com/highcharts.src.js', CClientScript::POS_END);
+$javascriptCode = <<<EOL
+	window.originalColorMap = new Object();
+	window.options = {
+            chart: {
+            	renderTo:"chartContainer",
+                type: 'bar'
+            },
+	 		title: {
+	            text: 'Credit Balance'
+	        },
+			credits: {
+			   enabled: false
+			},
+            legend: { enabled: false},
+            xAxis: {
+                categories: $chartLabels,
+	  			title: {
+	                text: null
+	            },
+            },
+	 		yAxis: {
+	            title: {
+	                text: null,
+	            },
+	        },
+            plotOptions: {
+                series: {
+	                cursor: 'pointer',
+	                point:{
+	                	events:{
+	                		click:function(evt){
+								var tempContainer = jQuery('#ActiveMonitorForm_accountsMonitor').val();
+								var tempCategoryContainer = this.category.split("-")[2].trimLeft();
+								tempArrContainer = tempContainer.split(",");
+								tempArrContainer.clean("");
+								tempArrContainer.push(tempCategoryContainer);
+								window.newCategoryAdded(tempArrContainer);
+								jQuery('#ActiveMonitorForm_accountsMonitor').val(tempArrContainer.join(","));
+								jQuery('#ActiveMonitorForm_accountsMonitor').trigger('change.select2');
+	                		}
+	                	}
+	                },
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000',
+                        style: {fontWeight: 'bolder'},
+                        inside: true,
+                    },
+                    pointPadding: 0.1,
+                    groupPadding: 0
+                }
+            },
+
+            series: [{
+                data: $seriesDataStr
+            }]
+        };
+	window.chartObj = new Highcharts.Chart(window.options);
+EOL;
+Yii::app()->clientScript->registerScript('sipAccountCharts', $javascriptCode, CClientScript::POS_READY);
+
+
+
 //get all cookies , if monitorAccount is present
 if (isset(Yii::app()->request->cookies['monitoredAccounts'])) {
 	$hasSelectedMonitoredAccounts = true;
@@ -39,7 +139,7 @@ if (isset(Yii::app()->request->cookies['monitoredAccounts'])) {
 	$this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
 <div class="row-fluid">
-	<div class="span6 offset3">
+	<div class="span5 offset1">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Monitor Account',
@@ -70,4 +170,22 @@ if (isset(Yii::app()->request->cookies['monitoredAccounts'])) {
 			$this->endWidget();
 		?>
 	</div>
+	<div class="span5">
+		<div>
+			<?php
+				$this->beginWidget('zii.widgets.CPortlet', array(
+					'title'=>'Accounts and credits',
+					'htmlOptions'=>array(
+							'style'=>"height: 458px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+						),
+				));
+			?>
+			<div id="chartContainer" style="height: 1500px"></div>
+			<div class="clearfix"></div>
+			<?php
+				$this->endWidget();
+			?>
+		</div>
+		<div class="clearfix"></div>
+	</div>	
 </div>
