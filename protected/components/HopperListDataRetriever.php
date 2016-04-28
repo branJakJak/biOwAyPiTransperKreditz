@@ -32,7 +32,7 @@ class HopperListDataRetriever extends CComponent
 	public function getCurrentLeads()
 	{
 		$leadsData = array();
-		$curlURL = "http://149.202.73.207/vicidial/hopper_list.php?ADD=hopper_list&user=leads";
+		$curlURL = "http://81.138.138.57/vicidial/hopper_list.php?ADD=hopper_list&user=leads";
 		$curlres = curl_init($curlURL);
 		curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
 		$curlResRaw = curl_exec($curlres);
@@ -46,7 +46,7 @@ class HopperListDataRetriever extends CComponent
 	public function getLiveLeads()
 	{
 		$liveLeads = array();
-		$curlURL = "http://149.202.73.207/vicidial/hopper_list.php?ADD=hopper_list&user=live";
+		$curlURL = "http://81.138.138.57/vicidial/hopper_list.php?ADD=hopper_list&user=live";
 		$curlres = curl_init($curlURL);
 		curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
 		$curlResRaw = curl_exec($curlres);
