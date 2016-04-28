@@ -184,8 +184,12 @@ class SubSipAccountController extends Controller {
         }
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
         //append current campaign
-        
-        $this->render('topUpSelected',compact('chartLabels','formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr'));
+
+        //List of force agent options
+        $forceAgentModelAll = ForceAgentTable::model()->findAll();
+        // $listForceAgentCollection = array("VBpi8"=>"Injury Campaign","PBAVB6"=>"PBA Campaign","LIFEbz"=>"LIFE","VBInjury"=>"Injury TEST","PBATEST"=>"PBA TEST" , "PiFORM"=>"Injury Form","PBAFORM"=>"PBA Form","DELAY8"=>"DELAY8");
+        $listForceAgentCollection = CHtml::listData($forceAgentModelAll, 'force_agent_value', 'force_agent_lbl');
+        $this->render('topUpSelected',compact('chartLabels','formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr','listForceAgentCollection'));
     }
     /**
      * 
