@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
 	'Sip Accounts',
 );
 $this->menu=array(
-	array('label'=>'Manage SIP Account', 'url'=>array('create')),
+	array('label'=>'Manage SIP Account', 'url'=>array('/remoteDataCache/admin')),
 );
 
 
