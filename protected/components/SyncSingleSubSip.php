@@ -20,9 +20,9 @@ class SyncSingleSubSip {
         $model->last_balance = $last_balance;
         $model->save();
         /* check notification */
-        $this->checkNotification($model);
+        // $this->checkNotification($model);
         /* check status */
-        $this->checkStatus($model);
+        // $this->checkStatus($model);
     }
 
     /**

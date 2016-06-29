@@ -85,6 +85,7 @@ class FreeVoipAccountsController extends Controller
 	{
 		header("Content-Type: application/json");
 		$criteria = new CDbCriteria;
+		$criteria->addNotInCondition("username",array("lj2016888"));
 		$allAccts = FreeVoipAccounts::model()->findAll($criteria);
 		$finalArr = array();
 

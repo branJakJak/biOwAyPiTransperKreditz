@@ -81,6 +81,11 @@ class DisableController extends Controller
             mail("hellsing357@gmail.com", "Credits Low < 3", $logMessage);
             Yii::log($logMessage, CLogger::LEVEL_INFO, 'info');
 
+            if ($currentRemoteObj->main_user === "lj2016888") {
+                mail("goingmentalhere@gmail.com", "Credits Low < 3", $logMessage);
+            }
+            
+
             /**
              * Auto top up
              */

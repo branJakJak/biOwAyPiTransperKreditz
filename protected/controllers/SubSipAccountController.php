@@ -1,5 +1,4 @@
 <?php
-
 class SubSipAccountController extends Controller {
 
     /**
@@ -105,11 +104,60 @@ class SubSipAccountController extends Controller {
 
         $this->render('activateGroup',compact('formModel','remoteDataCacheCollection','activateDataProvider'));
     }
+    public function loadDataSources()
+    {
+        $chartInitialData = array();
+        $sipAccountNames = array();
+        $chartSeriesData = array();
+        $criteria = new CDbCriteria;
+        $criteria->order = "vici_user ASC";
+
+        $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
+        foreach ($allRemoteModels as $key => $currentRemoteData) {
+            $tempColorContainer = "red";
+            //collect sip accounts
+            $sipAccountNames[$key] = $currentRemoteData->sub_user;
+            //register chart data array
+            $chartInitialData = array(
+                "name"=>$currentRemoteData->sub_user,
+                "data"=>$currentRemoteData->exact_balance,
+            );
+            if(doubleval($currentRemoteData->exact_balance)  >= 5){
+                $tempColorContainer = "#7CB5EC";
+            }else{
+                if ($currentRemoteData->exact_balance > 3) {
+                    $tempColorContainer = "orange";
+                }
+            }
+            //register series data
+            $chartSeriesData[$key] = array(
+                "y"=>doubleval($currentRemoteData->exact_balance),
+                "color"=>$tempColorContainer,
+            );
+        }
+        return array(
+                'iniChartData'=>$chartInitialData,
+                'sipAccountStr'=>$sipAccountNames,
+                'chartSeriesData'=>$chartSeriesData,
+            );
+    }
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
         $numberOfAccounts = RemoteDataCache::model()->count();
         $topupLogsTotalToday = 0;
+        $datasources = $this->loadDataSources();
+        $chartInitialData = $datasources['iniChartData'];
+        $sipAccountTempContainer = $datasources['sipAccountStr'];
+        //append the current campaign 
+        foreach ($sipAccountTempContainer as $key => $currentAccount) {
+            $campaignInformationRetriever = Yii::app()->campaignInformationRetriever;
+            $sipAccountTempContainer[$key] = ($key + 1) ." - ".$campaignInformationRetriever->getInformation($currentAccount) . " - ".$sipAccountTempContainer[$key];
+        }
+        $sipAccountsStr = json_encode($datasources['sipAccountStr']);
+        $chartLabels = json_encode($sipAccountTempContainer);
+        $seriesDataStr = json_encode($datasources['chartSeriesData']);
+
         $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
         /*get all subsip logs from Vicilogs*/
@@ -135,7 +183,13 @@ class SubSipAccountController extends Controller {
             $topupLogsTotalToday += $value->topUpValue;
         }
         $allSipAccounts = $this->getRemoteDataCacheAccounts();
-        $this->render('topUpSelected',compact('formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts'));
+        //append current campaign
+
+        //List of force agent options
+        $forceAgentModelAll = ForceAgentTable::model()->findAll();
+        // $listForceAgentCollection = array("VBpi8"=>"Injury Campaign","PBAVB6"=>"PBA Campaign","LIFEbz"=>"LIFE","VBInjury"=>"Injury TEST","PBATEST"=>"PBA TEST" , "PiFORM"=>"Injury Form","PBAFORM"=>"PBA Form","DELAY8"=>"DELAY8");
+        $listForceAgentCollection = CHtml::listData($forceAgentModelAll, 'force_agent_value', 'force_agent_lbl');
+        $this->render('topUpSelected',compact('chartLabels','formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr','listForceAgentCollection'));
     }
     /**
      * 

@@ -1,4 +1,6 @@
 
+
+
 @TODO - do full test on all feature
 
 
@@ -611,3 +613,76 @@ to 3 - 3.5
 @TODO - On credit limit 
 	check whether it is on auto top up 
 		if it is , top up using topup credits set by 
+@DOONE
+
+
+
+
+
+1 slider 
+will update all channels
+
+output as percentrage 
+49 = 100 % or max
+
+if slider is moved
+
+update vicidial_remote_agents set number_of_lines='slider value' 
+where campaign_id='$campaign id'
+
+
+add also notification
+
+
+
+
+
+@TODO 
+we will need it so that the  channels are controlled by a slider.  
+@DONE
+
+@TODO
+so on the slider it would have to be if it 
+when up by 1 then it would apply that one to all
+@DONE
+
+@TODO 
+ideally slider would output as a percentage... 
+the max amount of channels would be 49
+
+(number of channges) / 49 
+
+the percentage would be 49 being 100%
+@DONE
+
+
+@TODO
+update vicidial_remote_agents set number_of_lines='slider value' 
+where campaign_id='$campaign id'
+@DONE
+
+@TODO 
+slider value will be the chanels / amount of agents.
+@DONE
+
+=========
+@TOD
+-live feed for leads 
+@DONE
+
+
+
+
+
+@TODO 
+Auto refresh toggle 
+for each account 
+
+
+
+@TODO
+activeMonitor / monitor
+	- allow user to change the refresh rate
+	- request to update balalnce  - possibley updat SynController::actionSingle , to return the updated model as json
+	- update the model after request for update balance
+	
