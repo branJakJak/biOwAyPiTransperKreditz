@@ -23,13 +23,6 @@ $listenToEventWh = <<<EOL
 window.newCategoryAdded = function(newCategory){
 	var currentCat = _.uniq(newCategory);
 	jQuery("#numberOfSelectedItems").html(currentCat.length);
-	
-	// var currentdomVal = jQuery("#TopupForm_accounts").val();
-	// if(currentdomVal != ""){
-	// 	numOfItemsSelected = currentdomVal.split(",").length;
-	// }else{
-	// 	jQuery("#numberOfSelectedItems").html("0");
-	// }
 }
 EOL;
 Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);

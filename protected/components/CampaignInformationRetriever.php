@@ -10,6 +10,7 @@ class CampaignInformationRetriever extends CComponent
 	}
 	public function getInformation($accountName)
 	{
+		return "temp";
 		$tempAccountNameContainer = $accountName;
 		$resultContainer = "";
 		$sqlCommandStr = <<<EOL
