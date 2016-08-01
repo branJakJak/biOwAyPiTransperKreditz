@@ -46,23 +46,23 @@
 			$scope.$broadcast('timer-resume');
         });
 
-		currentController.refreshResyncActiveDisplay = function(){
-			$timeout(function(){
-				$scope.$broadcast('timer-resume');
-				if (  $scope.endTimeTillNextUpdate <= new Date() ) {
-					// @TODO Uncomment for production
-					$scope.endTimeTillNextUpdate = new Date();
-					$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
+		// currentController.refreshResyncActiveDisplay = function(){
+		// 	$timeout(function(){
+		// 		$scope.$broadcast('timer-resume');
+		// 		if (  $scope.endTimeTillNextUpdate <= new Date() ) {
+		// 			// @TODO Uncomment for production
+		// 			$scope.endTimeTillNextUpdate = new Date();
+		// 			$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
 					
 
-					//call the sycn account
-					console.log("syncing all accounts");
-					//@TODO uncomment in prod
-					currentController.syncActiveAccount($scope.sipAccounts);
-				}
-				currentController.refreshResyncActiveDisplay();				
-			}, 1000);
-		}
+		// 			//call the sycn account
+		// 			console.log("syncing all accounts");
+		// 			//@TODO uncomment in prod
+		// 			currentController.syncActiveAccount($scope.sipAccounts);
+		// 		}
+		// 		currentController.refreshResyncActiveDisplay();				
+		// 	}, 1000);
+		// }
 
 		currentController.updateTimerValues = function(){
 			$scope.startingTimeTillNextUpdate = new Date();
@@ -76,7 +76,7 @@
 			angular.forEach(sipAccountsCollection, function(currentSipAccount, index){
 				if (currentSipAccount.is_active === 'ACTIVE') {
 					$timeout(function(){
-						currentController.quickUpdateBalance(currentSipAccount);
+						currentController.quickUpdateBalance(currentSipAccount );
 					}, timeOutMillis);
 					timeOutMillis = timeOutMillis + 1000;//add 1 second gap
 				}
@@ -368,6 +368,7 @@
 		}
 		this.quickUpdateBalance = function(model){
 			var promiseCollection = [];
+			var passedModel = model;
 			//syn to apI
 			syncPromise  = $http.post("/sync/single",{
 			        'mainUsername' : model.main_user,
@@ -382,6 +383,14 @@
 			            model.balance = response.data.balance;
 			            model.is_active = response.data.is_active;
 			            model.last_updated = response.data.last_update;
+			            /*
+			            * Loop through the collection and update the data
+		             	*/
+						angular.forEach($scope.sipAccounts, function(curData, index){
+							if (curData.sub_pass == model.sub_pass && curData.sub_user == model.sub_user) {
+								$scope.sipAccounts[index] = model;
+							}
+						});
 			        });
 			promiseCollection.push(retrievePromise);
 			$q.all(promiseCollection);
