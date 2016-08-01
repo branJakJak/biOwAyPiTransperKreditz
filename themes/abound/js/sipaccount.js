@@ -381,6 +381,7 @@
 					.then(function(response){
 			            model.balance = response.data.balance;
 			            model.is_active = response.data.is_active;
+			            model.last_updated = response.data.last_update;
 			        });
 			promiseCollection.push(retrievePromise);
 			$q.all(promiseCollection);
