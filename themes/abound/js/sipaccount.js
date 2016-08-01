@@ -187,7 +187,6 @@
 		 * Constantly refresh balance , exact balance
 		 */
 		this.constantDataRefresh = function(){
-			
 			$scope.currentRefreshPromise = $timeout(function(){
 				/*get fresh balance data*/
 				$http.get("/sipAccount/sipData").then(function(response){
@@ -234,7 +233,6 @@
 				if (value.balance < 3) {
 					value.is_active = "INACTIVE";
 
-					//@TODO
 					currentController.deactivateCurrentAccount(value);
 					console.log('deactivating user : '+value.sub_user);
 				}
@@ -369,6 +367,7 @@
 		this.quickUpdateBalance = function(model){
 			var promiseCollection = [];
 			var passedModel = model;
+
 			//syn to apI
 			syncPromise  = $http.post("/sync/single",{
 			        'mainUsername' : model.main_user,
@@ -380,20 +379,11 @@
 			//sync to local db
 			retrievePromise =  $http.post("/sipAccount/retrieveSingleData",model)
 					.then(function(response){
-			            model.balance = response.data.balance;
-			            model.is_active = response.data.is_active;
-			            model.last_updated = response.data.last_update;
-			            /*
-			            * Loop through the collection and update the data
-		             	*/
-						angular.forEach($scope.sipAccounts, function(curData, index){
-							if (curData.sub_pass == model.sub_pass && curData.sub_user == model.sub_user) {
-								$scope.sipAccounts[index] = model;
-							}
-						});
+						currentController.synchronizeData();
 			        });
 			promiseCollection.push(retrievePromise);
 			$q.all(promiseCollection);
+			
 		}
 
 		this.updateSingleRow = function(currentRow){
@@ -469,9 +459,7 @@
 		 * Updates the data value
 		 */
 		this.synchronizeData = function(){
-
 			updateStack  = [];
-			
 			promise1 =  $http.get("/freeVoipAccounts/getList")
 			.then(function(response){
 				$scope.freeVoipAccts = response.data;
@@ -502,10 +490,7 @@
 				alertify.error("We met some problems while retrieving the data");
 				$scope.globalUpdateText = "Global Update";
 			});
-
 			updateStack.push(promise2);
-
-
 			return $q.all(updateStack).then(function(){
 			}, function(){
 				alertify.error('We met some problems while setting the value of SIP Data');
@@ -515,7 +500,10 @@
 		/*initialize data*/
 		$scope.globalUpdateText = "Loading data...";
 
-		this.synchronizeData();//initialize sip data and freevoip accounts
+		/**
+		 * initialize sip data and freevoip accounts
+		 */
+		this.synchronizeData();
 
 		//Synchonize only the active accounts
 

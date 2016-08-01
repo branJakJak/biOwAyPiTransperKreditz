@@ -686,3 +686,45 @@ activeMonitor / monitor
 	- request to update balalnce  - possibley updat SynController::actionSingle , to return the updated model as json
 	- update the model after request for update balance
 	
+
+
+
+		this.constantDataRefresh = function(){
+			$scope.currentRefreshPromise = $timeout(function(){
+				/*get fresh balance data*/
+				$http.get("/sipAccount/sipData").then(function(response){
+					if ($scope.continueConstantRefresh) {
+						/* iterate through data and set teh fresh data to sipAccounts*/
+						angular.forEach(response.data, function(freshData, index){
+							angular.forEach($scope.sipAccounts, function(oldData, index){
+								if (  freshData.vici_user === oldData.vici_user  ) {
+									oldData.balance = freshData.balance;
+									oldData.exact_balance = freshData.exact_balance;
+									// oldData.is_active = freshData.is_active;
+									oldData.ip_address = freshData.ip_address;
+									oldData.num_lines = freshData.num_lines;
+									oldData.campaign = freshData.campaign;
+									oldData.date_updated = freshData.date_updated;
+								}
+							});
+						});
+					}
+				}, function(response){
+					if ($scope.continueConstantRefresh) {
+						alertify.error("We met some problems while retrieving the data");
+						$scope.globalUpdateText = "Global Update";
+					}
+
+				})
+				.then(function(){
+					//currentController.constantDataRefresh();
+				}, function(){
+					//error 
+				})
+				.then(function(){
+					currentController.checkCreditStatus();
+				}, function(){
+
+				});
+			}, 20 * 1000);
+		}
