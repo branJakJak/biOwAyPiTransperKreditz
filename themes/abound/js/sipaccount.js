@@ -13,6 +13,7 @@
 		$scope.APPLICATION_FIRST_RUN = true;
 		
 		$scope.endTimeTillNextUpdate = new Date();
+
 		// $scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
 		$scope.endTimeTillNextUpdate.setSeconds($scope.endTimeTillNextUpdate.getSeconds()+10);
 		
@@ -34,6 +35,22 @@
 		  		currentController.activateAllAccountsFunc();
 		  	}
 		});
+
+		$scope.customFilter = function(currentRemoteDataCache){
+			isValid = false;
+			if (currentRemoteDataCache.sub_user === 'krustyclown*lj2016888' || currentRemoteDataCache.sub_user === 'Euzae6eeQu*Famenig44' ) {
+				isValid = true;
+			}
+			return isValid;
+		}
+		$scope.mainRemoteDataCacheFilter = function(currentRemoteDataCache){
+			isValid = false;
+			if (currentRemoteDataCache.sub_user != 'krustyclown*lj2016888' && currentRemoteDataCache.sub_user != 'Euzae6eeQu*Famenig44' ) {
+				isValid = true;
+			}
+			return isValid;
+		}
+
 		$scope.$watch('deactivateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
 		  		/* get all sip accounts */

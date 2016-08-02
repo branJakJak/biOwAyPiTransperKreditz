@@ -46,37 +46,16 @@ $cs->registerScriptFile($baseUrl.'/bower_components/angular-tooltips/dist/angula
 $cs->registerScriptFile($baseUrl.'/bower_components/humanize-duration/humanize-duration.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-timer/dist/angular-timer.min.js'  , CClientScript::POS_END);
 
-
-
-
-
-
 /*dumb logic codes*/
 $cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
-
-
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
 $cs->registerCssFile($baseUrl.'/css/alertify.css');
-
-
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
-
 $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.css');
 
-
-
-
-
-
-
-
-
-
 ?>
-
-
 <style type="text/css">
 	.topUpAllContainer{
 		margin: 0px 5px;
@@ -98,9 +77,6 @@ $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-t
 
 <div ng-app="sipAccountModule">
 <div ng-controller="IndexCtrl as indexCtrl" >
-
-
-
 <?php 
 
 $this->widget('bootstrap.widgets.TbAlert', array(
@@ -168,90 +144,79 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	<div class="clearfix"></div>
 </div>
 <hr>
-<div class='well'>
-	<div class="">
-		<table class="table">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Balance</th>
-					<th>Vici User</th>
-					<th>Active</th>
-					<th>
-						Campaign
-					</th>
-					<th>IP Address</th>
-					<th> # of lines </th>
-					<th>Add Balance</th>
-					<th>Balance From</th>
-					<th></th>
-					<th>Get latest balance</th>
-					<th>Last update</th>
-					<th>Delete</th>
 
-				</tr>
-			</thead>
-			<tbody ng-cloak>
-				<tr>
-					<td colspan="14" ng-hide="sipAccounts.length !== 0">
-						<i class="fa fa-spinner fa-spin"></i> Loading ...
-					</td>
-				</tr>
-				<tr ng-repeat="(key, value) in sipAccounts | filter:{main_user:'Prion1967' }" ng-class="indexCtrl.getRowClass(value)">
-					<td>
-						<h4>CC Account</h4>
-					</td>
-					<td>{{value.balance}}</td>
-					<td>{{value.vici_user}}</td>
-					<td>
-						<input ng-change="" type="checkbox" ng-model="value.is_active"
-		           			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
-						
-					</td>
-					<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
-						<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
-							<a href="" class='editCampaignLink'>
-								<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i> {{value.campaign}}
-							</a>
-						</div>
-						<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
-					</td>
-					<td>
-						{{value.ip_address}}
-					</td>
-					<td>
-						{{value.num_lines}}
-					</td>
-					<td><input ng-model="topUpCreditsVal" type="number" ></td>
-					<td>
-						<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
-							 <option value="">-- Select Account --</option>
-						</select>
-					</td>
-					<td>
-						<a class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
-							<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
-							{{value.topUpText}} 
-						</a>
-					</td>
-					<td>
-						<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
-					</td>
-					
-					<td>
-						{{ value.date_updated }}
-					</td>
-					<td>
-						<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
-							delete
-						</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>		
-	</div>	
-	
-</div>
+<table class="table">
+	<!-- Excluded from main RemoteDataCache showing -->
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Main Account</th>
+			<th>Sub User</th>
+			<th>Balance</th>
+			<th>Vici User</th>
+			<th>Active</th>
+			<th>
+				Campaign
+			</th>
+			<th>IP Address</th>
+			<th> # of lines </th>
+			<th>Get latest balance</th>
+			<th>Last update</th>
+			<th>Delete</th>
+
+		</tr>
+	</thead>
+	<tbody ng-cloak>
+		<tr>
+			<td colspan="14" ng-hide="sipAccounts.length !== 0">
+				<i class="fa fa-spinner fa-spin"></i> Loading ...
+			</td>
+		</tr>
+		<tr ng-repeat="(key, value) in sipAccounts | filter: customFilter" ng-class="indexCtrl.getRowClass(value)">
+			<td>{{key+1}}</td>
+			<td>
+				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
+					{{value.main_user}}
+				</a>
+			</td>
+			<td>{{value.sub_user}}</td>
+			<td>{{value.balance}}</td>
+			<td>{{value.vici_user}}</td>
+			<td>
+				<input ng-change="" type="checkbox" ng-model="value.is_active"
+           			ng-true-value="'ACTIVE'" ng-false-value="'INACTIVE'">
+			</td>
+			<td ng-init="value.showEditCampaign = false;value.showEditCampaignLoadingImg = false">
+				<div ng-click="value.showEditCampaign = true" ng-show="!value.showEditCampaign">
+					<a href="" class='editCampaignLink'>
+						<i ng-show="value.showEditCampaignLoadingImg" class="fa fa-spinner fa-spin"></i> {{value.campaign}}
+					</a>
+				</div>
+				<input ng-show="value.showEditCampaign" ng-blur="indexCtrl.updateCampaignName(value)" ng-model="value.campaign" type="text" class="form-control" required="required" placeholder="Campaign">
+			</td>
+			<td>
+				{{value.ip_address}}
+			</td>
+			<td>
+				{{value.num_lines}}
+			</td>
+			<td>
+				<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
+			</td>
+			
+			<td>
+				{{ value.date_updated }}
+			</td>
+			<td>
+				<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
+					delete
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
 
 <hr>
 <div class="well">
@@ -307,6 +272,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 	</div>
 </div>
 <hr>
+<!-- Main Remote Data Cache -->
 <table class="table">
 	<thead>
 		<tr>
@@ -334,7 +300,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 		</tr>
 
-		<tr ng-repeat="(key, value) in sipAccounts | filter:'!Prion1967'" ng-class="indexCtrl.getRowClass(value)">
+		<tr ng-repeat="(key, value) in sipAccounts | filter: mainRemoteDataCacheFilter" ng-class="indexCtrl.getRowClass(value)">
 			<td>{{key+1}}</td>
 			<td>
 				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
@@ -362,19 +328,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<td>
 				{{value.num_lines}}
 			</td>
-<!-- 			<td ng-hide="true"><input ng-model="topUpCreditsVal" type="number" ></td> -->
-<!-- 			<td  ng-hide="true">
-				<select ng-model="freeVoipUsername" ng-options="currentAcct.username for currentAcct in freeVoipAccts">
-					 <option value="">-- Select Account --</option>
-				</select>
-			</td> -->
-<!-- 			<td>
-				<a  ng-hide="true" class="btn btn-default" href=""  ng-click="indexCtrl.topUpCredits(value,freeVoipUsername,value.main_user,value.main_pass, value.sub_user,value.sub_pass  ,topUpCreditsVal)" ng-init="value.topUpText='Top-up'">
-					<i class="fa fa-spinner fa-spin" ng-show="value.topUpText !== 'Top-up' "></i>
-					{{value.topUpText}} 
-				</a>
-			</td>
- -->			<td>
+			<td>
 				<a class="btn btn-default" href="" ng-click="indexCtrl.quickUpdateBalance(value)"> Update balance</a>
 			</td>
 			
