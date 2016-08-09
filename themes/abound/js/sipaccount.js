@@ -14,7 +14,6 @@
 		
 		$scope.endTimeTillNextUpdate = new Date();
 
-		// $scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
 		$scope.endTimeTillNextUpdate.setSeconds($scope.endTimeTillNextUpdate.getSeconds()+10);
 		
 		$scope.activateAllAccounts = false;
@@ -27,8 +26,6 @@
 
 		$scope.updateDataReport = "";
 		$scope.topUpMessageLabel = "Top-up All";
-
-
 
 		$scope.$watch('activateAllAccounts',function(newVal, oldVal){
 		  	if (newVal) {
@@ -63,43 +60,13 @@
 			$scope.$broadcast('timer-resume');
         });
 
-		// currentController.refreshResyncActiveDisplay = function(){
-		// 	$timeout(function(){
-		// 		$scope.$broadcast('timer-resume');
-		// 		if (  $scope.endTimeTillNextUpdate <= new Date() ) {
-		// 			// @TODO Uncomment for production
-		// 			$scope.endTimeTillNextUpdate = new Date();
-		// 			$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
-					
-
-		// 			//call the sycn account
-		// 			console.log("syncing all accounts");
-		// 			//@TODO uncomment in prod
-		// 			currentController.syncActiveAccount($scope.sipAccounts);
-		// 		}
-		// 		currentController.refreshResyncActiveDisplay();				
-		// 	}, 1000);
-		// }
-
-		currentController.updateTimerValues = function(){
-			$scope.startingTimeTillNextUpdate = new Date();
-			$scope.endTimeTillNextUpdate = new Date();
-			$scope.endTimeTillNextUpdate.setMinutes(  $scope.endTimeTillNextUpdate.getMinutes() + 6 );//add 6 minutes
-		}
-
-		//Sync only the ACTIVE accounts
-		this.syncActiveAccount = function(sipAccountsCollection){
-			var timeOutMillis = 1000;
-			angular.forEach(sipAccountsCollection, function(currentSipAccount, index){
-				if (currentSipAccount.is_active === 'ACTIVE') {
-					$timeout(function(){
-						currentController.quickUpdateBalance(currentSipAccount );
-					}, timeOutMillis);
-					timeOutMillis = timeOutMillis + 1000;//add 1 second gap
-				}
-			});
-		}
-
+        currentController.getCreditUsed = function(remoteDataCacheModel){
+        	var creditUsed = 0;
+        	if (remoteDataCacheModel.last_balance_since_topup !=0) {
+        		creditUsed = remoteDataCacheModel.last_balance_since_topup - remoteDataCacheModel.exact_balance; 
+        	}
+        	return creditUsed;
+        }
 
 		this.activateAllAccountsFunc = function(){
 			angular.forEach($scope.sipAccounts, function(curData, index){
@@ -522,16 +489,6 @@
 		 */
 		this.synchronizeData();
 
-		//Synchonize only the active accounts
-
-		// $interval(function(){
-		// 	//@TODO to be tested
-		// 	currentController.syncActiveAccount($scope.sipAccounts);
-		// }, ( 5 * ( 60 * 1000 ) ) );// 5 minutes
-		// 
-		// @TODO - to be tested soon
-		// currentController.refreshResyncActiveDisplay();
-		
 
 	}]);//end of IndexController
 

@@ -1,7 +1,4 @@
 <?php
-
-
-
 /* @var $this SipAccountController */
 /* @var $dataProvider CActiveDataProvider */
 $baseUrl = Yii::app()->theme->baseUrl; 
@@ -41,22 +38,25 @@ $cs->registerScriptFile($baseUrl.'/js/jstz.min.js'  , CClientScript::POS_END);
 /* angular external modules*/
 $cs->registerScriptFile($baseUrl.'/js/angular-cookies.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-moment/angular-moment.min.js'  , CClientScript::POS_END);
-// $cs->registerScriptFile($baseUrl.'/bower_components/momentjs/min/locales.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/humanize-duration/humanize-duration.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/bower_components/angular-timer/dist/angular-timer.min.js'  , CClientScript::POS_END);
 
-/*dumb logic codes*/
+/*sip account*/
 $cs->registerScriptFile($baseUrl.'/js/sipaccount.js'  , CClientScript::POS_END);
 $cs->registerScriptFile($baseUrl.'/js/sipAccountChart.js'  , CClientScript::POS_END);
 
+/*Alertify js scripts*/
 $cs->registerScriptFile($baseUrl.'/js/alertify.min.js'  , CClientScript::POS_END);
+
+/*css */
 $cs->registerCssFile($baseUrl.'/css/alertify.css');
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.css');
-
 ?>
+
 <style type="text/css">
+	/* View specific css */
 	.topUpAllContainer{
 		margin: 0px 5px;
 	}
@@ -78,7 +78,6 @@ $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-t
 <div ng-app="sipAccountModule">
 <div ng-controller="IndexCtrl as indexCtrl" >
 <?php 
-
 $this->widget('bootstrap.widgets.TbAlert', array(
     'fade'=>true, 
     'closeText'=>'×',
@@ -153,11 +152,10 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Main Account</th>
 			<th>Sub User</th>
 			<th>Balance</th>
+			<th>Credit Used</th>
 			<th>Vici User</th>
 			<th>Active</th>
-			<th>
-				Campaign
-			</th>
+			<th>Campaign</th>
 			<th>IP Address</th>
 			<th> # of lines </th>
 			<th>Get latest balance</th>
@@ -181,6 +179,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 			<td>{{value.sub_user}}</td>
 			<td>{{value.balance}}</td>
+			<td>{{ indexCtrl.getCreditUsed(value) }}</td>
 			<td>{{value.vici_user}}</td>
 			<td>
 				<input ng-change="" type="checkbox" ng-model="value.is_active"
@@ -280,6 +279,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			<th>Main Account</th>
 			<th>Sub User</th>
 			<th>Balance</th>
+			<th>Credit used</th>
 			<th>Vici User</th>
 			<th>Active</th>
 			<th>
@@ -309,6 +309,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 			<td>{{value.sub_user}}</td>
 			<td>{{value.balance}}</td>
+			<td>{{ indexCtrl.getCreditUsed(value)  }}</td>
 			<td>{{value.vici_user}}</td>
 			<td>
 				<input ng-change="" type="checkbox" ng-model="value.is_active"

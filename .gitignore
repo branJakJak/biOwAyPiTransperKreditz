@@ -10,7 +10,6 @@ protected/config/console.php
 .phpintel
 .idea
 error_log
-TODO/
 dev/
 sms_data/
 /nbproject/private/

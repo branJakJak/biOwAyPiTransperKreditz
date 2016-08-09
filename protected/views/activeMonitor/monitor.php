@@ -21,10 +21,7 @@ $refreshRateDropdownChange = <<<EOL
 	});
 EOL;
 Yii::app()->clientScript->registerScript('refreshRateDropdownChange', $refreshRateDropdownChange, CClientScript::POS_READY);
-
 Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClientScript::POS_READY);
-
-
 ?>
 
 
@@ -64,7 +61,7 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 					});
 				}
 				//temporary , just to stop the execution 
-				// window.CONTINUE_REQUEST = false;
+				window.CONTINUE_REQUEST = false;
 			});
 		}
 		setTimeout(updateBalance, window.DELAY_SECONDS * 1000 );
@@ -103,8 +100,7 @@ Yii::app()->clientScript->registerScript('callInit', 'updateBalance();', CClient
 			));
 		?>
 			Refresh Rate <strong>(seconds)</strong>: 
-
-			<?php 
+			<?php
 				$refreshRateList = array_combine(array_values(range(1, 50, 1)), array_values(range(1, 50,1)));
 				echo CHtml::dropDownList('refreshRate', 30, $refreshRateList, array('id'=>'refreshRateDropdown')); 
 			?>

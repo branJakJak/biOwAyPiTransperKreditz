@@ -1,6 +1,4 @@
 
-
-
 @TODO - do full test on all feature
 
 
@@ -592,12 +590,6 @@ include datetime
 Topup daily - at topup group view
 
 
-
-@TODO - test this
-
-
-
-
 @TODO - problem with balance 
 Going negative
 @DONE
@@ -673,58 +665,30 @@ slider value will be the chanels / amount of agents.
 
 
 
-
-@TODO 
-Auto refresh toggle 
-for each account 
-
-
-
 @TODO
 activeMonitor / monitor
-	- allow user to change the refresh rate
-	- request to update balalnce  - possibley updat SynController::actionSingle , to return the updated model as json
-	- update the model after request for update balance
-	
+	- allow user to change the refresh rate - @DONE
+	- update the model after request for update balance - @DONE
+
+
+@TODO -
+A button to retrieve the consumed credits
+
+
+     - trigger this after , the user topped up
+        after top up ,
+            if last balance top up is not 0
+
+            else if 0
+                get the top up the account then get the balance
+
+            set the current balance
 
 
 
-		this.constantDataRefresh = function(){
-			$scope.currentRefreshPromise = $timeout(function(){
-				/*get fresh balance data*/
-				$http.get("/sipAccount/sipData").then(function(response){
-					if ($scope.continueConstantRefresh) {
-						/* iterate through data and set teh fresh data to sipAccounts*/
-						angular.forEach(response.data, function(freshData, index){
-							angular.forEach($scope.sipAccounts, function(oldData, index){
-								if (  freshData.vici_user === oldData.vici_user  ) {
-									oldData.balance = freshData.balance;
-									oldData.exact_balance = freshData.exact_balance;
-									// oldData.is_active = freshData.is_active;
-									oldData.ip_address = freshData.ip_address;
-									oldData.num_lines = freshData.num_lines;
-									oldData.campaign = freshData.campaign;
-									oldData.date_updated = freshData.date_updated;
-								}
-							});
-						});
-					}
-				}, function(response){
-					if ($scope.continueConstantRefresh) {
-						alertify.error("We met some problems while retrieving the data");
-						$scope.globalUpdateText = "Global Update";
-					}
 
-				})
-				.then(function(){
-					//currentController.constantDataRefresh();
-				}, function(){
-					//error 
-				})
-				.then(function(){
-					currentController.checkCreditStatus();
-				}, function(){
+get the balance from remote
+if last_balance_since_topup is not null or zero
+    compute the charges (last_balance_since_topup - current_balance from api call)
+then update the attribute last_balance_since_topup
 
-				});
-			}, 20 * 1000);
-		}

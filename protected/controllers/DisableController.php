@@ -53,6 +53,7 @@ class DisableController extends Controller
              * */
             $currentRemoteObj->is_active = "INACTIVE";
             $currentRemoteObj->save();
+
 //            $sipAccount = new SipAccount();
 //            $sipAccount->username = $mainusername;
 //            $sipAccount->vicidial_identification = $currentRemoteObj->vici_user;

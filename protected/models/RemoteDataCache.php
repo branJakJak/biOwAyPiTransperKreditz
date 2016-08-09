@@ -17,11 +17,13 @@
  * @property string $ip_address
  * @property integer $num_lines
  * @property string $campaign
+ * @property double $last_balance_since_topup
  * @property datetime $date_created
  * @property datetime $date_updated
  */
 class RemoteDataCache extends CActiveRecord
 {
+    public $last_balance_since_topup;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,13 +40,13 @@ class RemoteDataCache extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
-			array('balance, exact_balance,last_balance', 'numerical'),
+			array('vici_user, num_lines,last_balance_since_topup', 'numerical', 'integerOnly'=>true),
+			array('balance, exact_balance,last_balance,last_balance_since_topup', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
 			array('campaign, date_created,date_updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines', 'safe', 'on'=>'search'),
+			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines,last_balance_since_topup', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +80,7 @@ class RemoteDataCache extends CActiveRecord
 			'ip_address' => 'Ip Address',
 			'num_lines' => 'Num Lines',
 			'campaign' => 'Campaign',
+			'last_balance_since_topup' => 'Last balance since topup',
 			'date_created' => 'Date created',
 			'date_updated' => 'Date updated',
 		);
@@ -114,6 +117,7 @@ class RemoteDataCache extends CActiveRecord
 		$criteria->compare('ip_address',$this->ip_address,true);
 		$criteria->compare('num_lines',$this->num_lines);
 		$criteria->compare('campaign',$this->campaign);
+		$criteria->compare('last_balance_since_topup',$this->last_balance_since_topup);
 		$criteria->compare('date_created',$this->date_created);
 		$criteria->compare('date_updated',$this->date_updated);
 

@@ -26,9 +26,10 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
 					'itemCssClass'=>'item-test',
                     'encodeLabel'=>false,
                     'items'=>array(
-                        array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'Control', 'url'=>array('/control/index'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'Charts', 'url'=>array('/chart'),'visible'=>!Yii::app()->user->isGuest),
+                        // array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Credits Used', 'url'=>array('/creditsUsed/index'),'visible'=>!Yii::app()->user->isGuest),
+                        // array('label'=>'Control', 'url'=>array('/control/index'),'visible'=>!Yii::app()->user->isGuest),
+                        // array('label'=>'Charts', 'url'=>array('/chart'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Active Monitor', 'url'=>array('/activeMonitor'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Group action <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"),
@@ -41,7 +42,7 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                         'items'=>array(
                             array('label'=>'Auto top-up Configuration', 'url'=>array('/config/autoTopUp')),
                         )),
-                        array('label'=>'Logs', 'url'=>array('/logs'),'visible'=>!Yii::app()->user->isGuest),                            
+                        // array('label'=>'Logs', 'url'=>array('/logs'),'visible'=>!Yii::app()->user->isGuest),                            
                         array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
                         array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     ),
@@ -55,14 +56,13 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
     <div class="navbar-inner">
     	<div class="container">
             <?php if (isset($this->menu)): ?>
-
                 <?php 
                     if (!Yii::app()->user->isGuest) {
     
                         $this->menu = array_merge(
                             array(
-                                array('label'=>'<i class="icon icon-home"></i>  Dashboard ', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
-                                array('label'=>'<i class=" icon-list"></i>  List Accounts ', 'url'=>array('/sipAccount/index'),'itemOptions'=>array('class'=>'')),
+                                // array('label'=>'<i class="icon icon-home"></i>  Dashboard ', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
+                                // array('label'=>'<i class=" icon-list"></i>  List Accounts ', 'url'=>array('/sipAccount/index'),'itemOptions'=>array('class'=>'')),
                             ),$this->menu);
                     }
                 ?>

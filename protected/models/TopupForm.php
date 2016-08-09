@@ -34,21 +34,35 @@ class TopupForm extends CFormModel
 			'forceAgent'=>'Force agent'
 		);
 	}
-	/**
-	 * 
-	 * @return integer Returns number of updated accounts
-	 */
+
+    /**
+     *
+     * @throws Exception
+     * @return integer Returns number of updated accounts
+     */
 	public function topupAccounts()
 	{
 		$accountsAffectedInt = 0;
 		$accountsArr = explode(",", $this->accounts);
 		$groupId = uniqid();
 		foreach ($accountsArr as $key => $currentAccountName) {
-			$model = RemoteDataCache::model()->findByAttributes(array('sub_user'=>$currentAccountName));
+            /**
+             * @var $model RemoteDataCache
+             */
+            $model = RemoteDataCache::model()->findByAttributes(array('sub_user'=>$currentAccountName));
 			if ($model) {
 				//topup the main account
-				$this->topUpMainAccount($model);
-				//topup the sub accounts
+                /**
+                 * @var $topUpMainAccount TopUpMainAccount
+                 */
+                $topUpMainAccount = Yii::app()->topUpMainAccount;
+                $topUpMainAccount->topUp( $this->freeVoipAccountUsername,$this->topupvalue, $model);
+				//$this->topUpMainAccount($model); // topup the main account  , old implementation
+
+				//TOPUP the sub accounts
+                /**
+                 * @TODO - use Yii component , put this to yii component
+                 */
 				$remoteAcctUpdated = new ApiRemoteUpdateBalance(
 					$model->sub_pass,
 					$model->sub_user,
@@ -56,16 +70,60 @@ class TopupForm extends CFormModel
 					$model->main_user,
 					$this->topupvalue
 				);
-				ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId, time());
+                /**
+                 * Logger
+                 */
+                ViciActionLogger::logAction("SUB_ACCOUNT_TOPUP" , "Top upping {$model->sub_user} with {$this->topupvalue}" , $this->topupvalue , $groupId, time());
+
+                /**
+                 * @TODO - use Yii component
+                 */
 				if ($remoteAcctUpdated->update()) {
+
 					if ($this->andActivate) {
-						$activator = new ActivationFormModel();
+                        /**
+                         * @TODO - use Yii component
+                         */
+                        $activator = new ActivationFormModel();
 						$activator->activateAccount($model);
 					}
 				}
-				$campaignForcer = Yii::app()->campaignForcer;
+                /**
+                 * Force the RemoteDataCache instance to update its current campaign
+                 */
+                $campaignForcer = Yii::app()->campaignForcer;
 				$campaignForcer->update($this->forceAgent , $model->sub_user);
-				$accountsAffectedInt++;
+
+                /**
+                 * Get the latest data from remote api
+                 */
+                $lastBalance = $model->last_balance;
+                $voipInfoRetriever = new BestVOIPInformationRetriever();
+                $remoteVoipResult = $voipInfoRetriever->getInfo($model->main_user, $model->main_pass, $model->sub_user, $model->sub_pass);
+
+                /**
+                 * Checking
+                 */
+                if($model->last_balance_since_topup !== 0 && !is_null($model->last_balance_since_topup)){
+                    /**
+                     * Create a charge log for certain remote data cache
+                     */
+                    $newChargeLog = new AccountChargeLog();
+                    $newChargeLog->account_id = $model->id;
+                    $newChargeLog->charge = doubleval($model->last_balance_since_topup - $remoteVoipResult->getSpecificBalance());
+                    if (!$newChargeLog->save()) {
+                        throw new Exception(CHtml::errorSummary($newChargeLog));
+                    }
+                }
+                $model->balance = doubleval($remoteVoipResult->getBalance());
+                $model->exact_balance = doubleval($remoteVoipResult->getSpecificBalance());
+                $model->last_balance = $lastBalance;
+                $model->last_balance_since_topup = $lastBalance;
+                $model->save();
+                /**
+                 * Update the counter
+                 */
+                $accountsAffectedInt++;
 			}
 		}
 		return $accountsAffectedInt;
