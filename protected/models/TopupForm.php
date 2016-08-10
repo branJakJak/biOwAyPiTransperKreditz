@@ -97,7 +97,7 @@ class TopupForm extends CFormModel
                 /**
                  * Get the latest data from remote api
                  */
-                $lastBalance = $model->last_balance;
+                $lastBalance = $model->balance;
                 $voipInfoRetriever = new BestVOIPInformationRetriever();
                 $remoteVoipResult = $voipInfoRetriever->getInfo($model->main_user, $model->main_pass, $model->sub_user, $model->sub_pass);
 
@@ -110,7 +110,7 @@ class TopupForm extends CFormModel
                      */
                     $newChargeLog = new AccountChargeLog();
                     $newChargeLog->account_id = $model->id;
-                    $newChargeLog->charge = doubleval($model->last_balance_since_topup - $remoteVoipResult->getSpecificBalance());
+                    $newChargeLog->charge = doubleval($model->last_balance_since_topup) - doubleval($model->exact_balance);
                     if (!$newChargeLog->save()) {
                         throw new Exception(CHtml::errorSummary($newChargeLog));
                     }
@@ -118,7 +118,7 @@ class TopupForm extends CFormModel
                 $model->balance = doubleval($remoteVoipResult->getBalance());
                 $model->exact_balance = doubleval($remoteVoipResult->getSpecificBalance());
                 $model->last_balance = $lastBalance;
-                $model->last_balance_since_topup = $lastBalance;
+                $model->last_balance_since_topup = $remoteVoipResult->getSpecificBalance();
                 $model->save();
                 /**
                  * Update the counter

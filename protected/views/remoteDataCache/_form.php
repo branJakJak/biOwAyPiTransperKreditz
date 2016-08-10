@@ -84,6 +84,11 @@
 		<?php echo $form->textField($model,'num_lines'); ?>
 		<?php echo $form->error($model,'num_lines'); ?>
 	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'last_balance_since_topup'); ?>
+		<?php echo $form->textField($model,'last_balance_since_topup'); ?>
+		<?php echo $form->error($model,'last_balance_since_topup'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
