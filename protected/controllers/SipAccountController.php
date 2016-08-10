@@ -170,15 +170,20 @@ class SipAccountController extends Controller
     public function actionSipData()
     {
         header("Content-Type: application/json");
-        $criteria = new CDbCriteria;
-        // $criteria->order = "is_active ASC  , balance DESC";
-        $criteria->order = "vici_user ASC";
-        $allremoteData = RemoteDataCache::model()->findAll($criteria);
-        $updatedData = array();
-        /*format some data*/
-        foreach ($allremoteData as $curObj) {
-            $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
-            $updatedData[] = $curObj;
+        if (!isset(Yii::app()->user->returnUrl)) {
+            throw new CHttpException(500,"Invalid request");
+            
+        }else{
+            $criteria = new CDbCriteria;
+            // $criteria->order = "is_active ASC  , balance DESC";
+            $criteria->order = "vici_user ASC";
+            $allremoteData = RemoteDataCache::model()->findAll($criteria);
+            $updatedData = array();
+            /*format some data*/
+            foreach ($allremoteData as $curObj) {
+                $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
+                $updatedData[] = $curObj;
+            }
         }
         echo CJSON::encode($updatedData);
     }
