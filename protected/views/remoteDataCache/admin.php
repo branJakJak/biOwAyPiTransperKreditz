@@ -61,8 +61,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'ip_address',
 		'num_lines',
 		'campaign',
+		'last_balance_since_topup',
 		'date_created',
-		'date_updated',
+		// 'date_updated',
 		/*
 		*/
 		array(
