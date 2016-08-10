@@ -39,9 +39,9 @@ $this->menu = array();
             ?>
             <h2>
                 Overall Used Credits
-                <p class="small">
+                <small class="small">
                     {{ indexCtrl.getTotalCreditsUsed() }}
-                </p>
+                </small>
             </h2>
             <?php
                 $this->endWidget();
