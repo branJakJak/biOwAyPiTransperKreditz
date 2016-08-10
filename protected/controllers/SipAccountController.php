@@ -15,7 +15,7 @@ class SipAccountController extends Controller
     {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'ajaxOnly + sipData', // ajax only for sipData
+            // 'ajaxOnly + sipData', // ajax only for sipData
             'postOnly + notifyAccount,updateCampaignName', // perform access control for CRUD operations
             'postOnly + delete', // we only allow deletion via POST request
         );
