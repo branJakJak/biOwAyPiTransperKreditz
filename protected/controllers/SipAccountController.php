@@ -169,10 +169,10 @@ class SipAccountController extends Controller
     }
     public function actionSipData()
     {
-        header("Content-Type: application/json");
         if (!isset(Yii::app()->request->urlReferrer)) {
             throw new CHttpException(500,"Invalid request");
         }else{
+            header("Content-Type: application/json");
             $criteria = new CDbCriteria;
             // $criteria->order = "is_active ASC  , balance DESC";
             $criteria->order = "vici_user ASC";
@@ -183,8 +183,9 @@ class SipAccountController extends Controller
                 $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
                 $updatedData[] = $curObj;
             }
+            echo CJSON::encode($updatedData);
+            Yii::app()->end();
         }
-        echo CJSON::encode($updatedData);
     }
     private function simpleAgoHelper($time){
        $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
