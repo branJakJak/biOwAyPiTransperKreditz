@@ -32,6 +32,10 @@ $this->menu=array(
 		'balance',
 		'exact_balance',
 		'ip_address',
+		'last_balance',
+		'balance',
+		'exact_balance',
+		'last_balance_since_topup',
 		'num_lines',
 	),
 )); ?>
