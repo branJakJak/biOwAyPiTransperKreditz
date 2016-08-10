@@ -31,6 +31,24 @@ $this->menu = array();
 
 <div ng-app="sipAccountModule">
     <div ng-controller="IndexCtrl as indexCtrl">
+        <div class="span3 text-center">
+            <?php
+                $this->beginWidget('zii.widgets.CPortlet', array(
+                    'title'=>' ',
+                ));
+            ?>
+            <h2>
+                Overall Used Credits
+                <p class="small">
+                    {{ indexCtrl.getTotalCreditsUsed() }}
+                </p>
+            </h2>
+            <?php
+                $this->endWidget();
+            ?>
+        </div>
+        
+
         <!-- Main Remote Data Cache -->
         <table class="table">
             <thead>

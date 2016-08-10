@@ -55,11 +55,6 @@
 		  	}
 		});
 
-        $scope.$on('timer-stop', function () {
-        	//resume the timer
-			$scope.$broadcast('timer-resume');
-        });
-
         currentController.getCreditUsed = function(remoteDataCacheModel){
         	var creditUsed = 0;
         	if (remoteDataCacheModel.last_balance_since_topup !=0) {
@@ -79,11 +74,20 @@
 				curData.is_active = "INACTIVE";
 			});
 		}
-		this.deactivateCurrentAccount = function(currAccount){
-			return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
-		}
-		this.activateCurrentAccount = function(currAccount){
-			return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
+
+		// this.deactivateCurrentAccount = function(currAccount){
+		// 	return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
+		// }
+
+		// this.activateCurrentAccount = function(currAccount){
+		// 	return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
+		// }
+		this.getTotalCreditsUsed = function(){
+			tempTotalContainer = 0;
+			angular.forEach($scope.sipAccounts, function(curData, index){
+				tempTotalContainer += currentController.getCreditUsed(curData)
+			});
+			return tempTotalContainer;
 		}
 		this.getTotalBalance = function(){
 			var total = 0;
