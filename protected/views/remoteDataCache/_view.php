@@ -33,7 +33,6 @@
 	<?php echo CHtml::encode($data->is_active); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('last_balance')); ?>:</b>
 	<?php echo CHtml::encode($data->last_balance); ?>
 	<br />
@@ -45,6 +44,14 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('exact_balance')); ?>:</b>
 	<?php echo CHtml::encode($data->exact_balance); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('last_balance_since_topup')); ?>:</b>
+	<?php echo CHtml::encode($data->last_balance_since_topup); ?>
+	<br />
+
+	<?php /*
+
+
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ip_address')); ?>:</b>
 	<?php echo CHtml::encode($data->ip_address); ?>
