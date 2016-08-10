@@ -170,9 +170,8 @@ class SipAccountController extends Controller
     public function actionSipData()
     {
         header("Content-Type: application/json");
-        if (!isset(Yii::app()->user->returnUrl)) {
+        if (!isset(Yii::app()->request->urlReferrer)) {
             throw new CHttpException(500,"Invalid request");
-            
         }else{
             $criteria = new CDbCriteria;
             // $criteria->order = "is_active ASC  , balance DESC";
