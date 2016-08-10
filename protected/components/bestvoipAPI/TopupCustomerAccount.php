@@ -7,6 +7,10 @@
  */
 
 class TopupCustomerAccount extends CComponent{
+	public function init()
+	{
+		
+	}
 
     public function topUp(){
         /*

@@ -54,7 +54,6 @@ $cs->registerCssFile($baseUrl.'/css/alertify.css');
 $cs->registerCssFile($baseUrl.'/css/sipAccount.css');
 $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-tooltips.min.css');
 ?>
-
 <style type="text/css">
 	/* View specific css */
 	.topUpAllContainer{

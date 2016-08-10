@@ -7,6 +7,10 @@
  */
 
 class TopUpMainAccount extends CComponent{
+    public function init()
+    {
+        
+    }
     /**
      * @param $freeVoipAccountUsername
      * @param $topupValue
