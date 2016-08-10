@@ -49,7 +49,7 @@ $this->menu = array();
                 </td>
             </tr>
 
-            <tr ng-repeat="(key, value) in sipAccounts | filter: mainRemoteDataCacheFilter" ng-class="indexCtrl.getRowClass(value)">
+            <tr ng-repeat="(key, value) in sipAccounts " ng-class="indexCtrl.getRowClass(value)">
                 <td>{{key+1}}</td>
                 <td>
                     <a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
