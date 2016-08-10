@@ -40,7 +40,7 @@ class RemoteDataCache extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vici_user, num_lines,last_balance_since_topup', 'numerical', 'integerOnly'=>true),
+			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
 			array('balance, exact_balance,last_balance,last_balance_since_topup', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
 			array('campaign, date_created,date_updated', 'safe'),
