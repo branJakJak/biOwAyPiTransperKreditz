@@ -184,7 +184,9 @@ class SipAccountController extends Controller
                  * @var $curObj ORemoteDataCache
                  */
                 $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
-                $last_credit_update = AccountChargeLog::model()->find(['account_id' => $curObj->id]);
+                $criteria = new CDbCriteria();
+                $criteria->compare("account_id", $curObj->id);
+                $last_credit_update = AccountChargeLog::model()->find($criteria);
                 $curObj->last_credit_update = '';//
                 if($last_credit_update){
                     $curObj->last_credit_update = date("F j, Y, g:i a",$last_credit_update->last_credit_update);
