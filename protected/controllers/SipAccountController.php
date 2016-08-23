@@ -186,10 +186,11 @@ class SipAccountController extends Controller
                 $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
                 $criteria = new CDbCriteria();
                 $criteria->compare("account_id", $curObj->id);
-                $last_credit_update = AccountChargeLog::model()->find($criteria);
+                $criteria->order = "date_created DESC";
+                $last_credit_update = AccountChargeLog::model()->find($criteria);//get just one from the bottom , the latest
                 $curObj->last_credit_update = '';//
                 if($last_credit_update){
-                    $curObj->last_credit_update = date("F j, Y, g:i a",$last_credit_update->last_credit_update);
+                    $curObj->last_credit_update = date("F j, Y, g:i a",$last_credit_update->date_created);
                 }
                 $updatedData[] = $curObj;
             }
