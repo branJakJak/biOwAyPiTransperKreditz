@@ -154,6 +154,7 @@ class RemoteDataCache extends CActiveRecord
             $autoTopUpConf->topUpValue = 0;
             $autoTopUpConf->save();
         }
+
         parent::afterSave();
     }
 
