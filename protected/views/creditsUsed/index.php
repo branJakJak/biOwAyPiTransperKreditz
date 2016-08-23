@@ -71,7 +71,7 @@ $this->menu = array();
             <tr ng-repeat="(key, value) in sipAccounts " ng-class="indexCtrl.getRowClass(value)">
                 <td>{{key+1}}</td>
                 <td>
-                    <a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
+                    <a target="_blank" href="/index.php/remoteDataCache/{{value.id}}">
                         {{value.main_user}}
                     </a>
                 </td>
