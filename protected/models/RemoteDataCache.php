@@ -47,7 +47,7 @@ class RemoteDataCache extends CActiveRecord
 			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
 			array('balance, exact_balance,last_balance,last_balance_since_topup', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
-			array('campaign, date_created,date_updated', 'safe'),
+			array('campaign, date_created,date_updated,last_credit_update', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines,last_balance_since_topup', 'safe', 'on'=>'search'),
@@ -85,6 +85,7 @@ class RemoteDataCache extends CActiveRecord
 			'num_lines' => 'Num Lines',
 			'campaign' => 'Campaign',
 			'last_balance_since_topup' => 'Last balance since topup',
+			'last_credit_update' => 'Last balance since topup date',
 			'date_created' => 'Date created',
 			'date_updated' => 'Date updated',
 		);
