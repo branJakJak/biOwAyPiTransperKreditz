@@ -190,7 +190,7 @@ class SipAccountController extends Controller
                 $last_credit_update = AccountChargeLog::model()->find($criteria);//get just one from the bottom , the latest
                 $curObj->last_credit_update = '';//
                 if($last_credit_update){
-                    $curObj->last_credit_update = date("F j, Y, g:i a",$last_credit_update->date_created);
+                    $curObj->last_credit_update = date("F j, Y, g:i a",strtotime($last_credit_update->date_created));
                 }
                 $updatedData[] = CMap::mergeArray($curObj->attributes, ["last_credit_update" => $curObj->last_credit_update]);
             }
