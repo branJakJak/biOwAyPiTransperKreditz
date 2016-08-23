@@ -43,11 +43,11 @@ class SipAccountController extends Controller
         );
     }
     public function actionQuickDelete($cacheid){
-    $model = RemoteDataCache::model()->findByPk($cacheid);
-    if($model){
-        $model->delete();   
-    }
-    $this->redirect('/sipAccount/index');
+        $model = RemoteDataCache::model()->findByPk($cacheid);
+        if($model){
+            $model->delete();   
+        }
+        $this->redirect('/sipAccount/index');
     }
 
     public function actionRetrieveSingleData(){
@@ -180,7 +180,15 @@ class SipAccountController extends Controller
             $updatedData = array();
             /*format some data*/
             foreach ($allremoteData as $curObj) {
+                /**
+                 * @var $curObj ORemoteDataCache
+                 */
                 $curObj->date_updated = $this->simpleAgoHelper(  strtotime($curObj->date_updated)  );
+                $last_credit_update = AccountChargeLog::model()->find(['account_id' => $curObj->id]);
+                $curObj->last_credit_update = '';//
+                if($last_credit_update){
+                    $curObj->last_credit_update = date("F j, Y, g:i a",$curObj->last_credit_update);
+                }
                 $updatedData[] = $curObj;
             }
             echo CJSON::encode($updatedData);

@@ -77,6 +77,9 @@ $this->menu = array();
                 <td>{{value.sub_user}}</td>
                 <td>{{value.balance}}</td>
                 <td>{{ indexCtrl.getCreditUsed(value)  }}</td>
+
+                <td>{{ value.last_credit_update  }}</td>
+
             </tr>
             </tbody>
         </table>

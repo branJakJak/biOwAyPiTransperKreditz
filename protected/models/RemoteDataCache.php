@@ -24,6 +24,10 @@
 class RemoteDataCache extends CActiveRecord
 {
     public $last_balance_since_topup;
+    /**
+     * @var string Contains the date since the last credit update.
+     */
+    public $last_credit_update;
 	/**
 	 * @return string the associated database table name
 	 */
