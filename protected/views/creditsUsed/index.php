@@ -58,6 +58,7 @@ $this->menu = array();
                 <th>Sub User</th>
                 <th>Balance</th>
                 <th>Credit used</th>
+                <th>Date</th>
             </tr>
             </thead>
             <tbody ng-cloak>

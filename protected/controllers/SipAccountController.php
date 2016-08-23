@@ -187,7 +187,7 @@ class SipAccountController extends Controller
                 $last_credit_update = AccountChargeLog::model()->find(['account_id' => $curObj->id]);
                 $curObj->last_credit_update = '';//
                 if($last_credit_update){
-                    $curObj->last_credit_update = date("F j, Y, g:i a",$curObj->last_credit_update);
+                    $curObj->last_credit_update = date("F j, Y, g:i a",$last_credit_update->last_credit_update);
                 }
                 $updatedData[] = $curObj;
             }
