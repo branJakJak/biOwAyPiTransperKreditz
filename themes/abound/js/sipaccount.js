@@ -35,14 +35,18 @@
 
 		$scope.customFilter = function(currentRemoteDataCache){
 			isValid = false;
-			if (currentRemoteDataCache.sub_user === 'krustyclown*lj2016888' || currentRemoteDataCache.sub_user === 'Euzae6eeQu*Famenig44'  && currentRemoteDataCache.sub_user === 'Thelma.Bins57cd8e24a1' ) {
+			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Thelma.Bins57cd8e24a1'];
+			//found
+			if (filterUser.indexOf(currentRemoteDataCache.sub_user) !== -1 ) {
 				isValid = true;
 			}
 			return isValid;
 		}
 		$scope.mainRemoteDataCacheFilter = function(currentRemoteDataCache){
 			isValid = false;
-			if (currentRemoteDataCache.sub_user != 'krustyclown*lj2016888' && currentRemoteDataCache.sub_user != 'Euzae6eeQu*Famenig44' ) {
+			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Thelma.Bins57cd8e24a1'];
+			// not found
+			if (filterUser.indexOf(currentRemoteDataCache.sub_user) === -1 ) {
 				isValid = true;
 			}
 			return isValid;

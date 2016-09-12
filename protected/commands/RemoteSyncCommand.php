@@ -33,14 +33,11 @@ class RemoteSyncCommand extends CConsoleCommand {
             if ($foundModel) {
                 $last_balance = $foundModel->balance;
                 Yii::log("Current Data . " . json_encode($currentFetchedData), CLogger::LEVEL_INFO, 'sync_log');
-
                 Yii::log("Model found . ", CLogger::LEVEL_INFO, 'sync_log');
                 /* check current data before saving */
                 /* notification check */
                 Yii::log("Checking data for notification . ", CLogger::LEVEL_INFO, 'sync_log');
-
                 $this->checkNotification($foundModel);
-
                 /* deactivation check */
                 Yii::log("Checking status code . ", CLogger::LEVEL_INFO, 'sync_log');
 
@@ -61,8 +58,6 @@ class RemoteSyncCommand extends CConsoleCommand {
                 $foundModel->campaign = $currentFetchedData["campaign"];
                 //Removing this for now to prevent fresh data from updating deactivated record
                 // $foundModel->is_active = $currentFetchedData["status"];
-
-
                 if ($foundModel->save()) {
                     Yii::log("Found Model Updated . ", CLogger::LEVEL_INFO, 'sync_log');
                 } else {

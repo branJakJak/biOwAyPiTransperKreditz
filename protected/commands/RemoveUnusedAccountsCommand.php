@@ -9,7 +9,7 @@
 /**
  * Description of RemoteUnusedAccountsCommand
  *
- * @author hi
+ * @author 
  */
 class RemoveUnusedAccountsCommand extends CConsoleCommand {
 
