@@ -75,7 +75,12 @@ $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-t
 
 
 <div ng-app="sipAccountModule">
-<div ng-controller="IndexCtrl as indexCtrl" >
+
+
+<div ng-show="false">
+	
+</div>
+<div ng-controller="IndexCtrl as indexCtrl" ng-cloak >
 <?php 
 $this->widget('bootstrap.widgets.TbAlert', array(
     'fade'=>true, 
