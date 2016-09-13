@@ -27,7 +27,8 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                     'encodeLabel'=>false,
                     'items'=>array(
                         // array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>'SIP Accounts', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Home', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Accounts', 'url'=>array('/remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Credits Used', 'url'=>array('/creditsUsed/index'),'visible'=>!Yii::app()->user->isGuest),
                         // array('label'=>'Control', 'url'=>array('/control/index'),'visible'=>!Yii::app()->user->isGuest),
                         // array('label'=>'Charts', 'url'=>array('/chart'),'visible'=>!Yii::app()->user->isGuest),
@@ -58,21 +59,12 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
             <?php if (isset($this->menu)): ?>
                 <?php 
                     if (!Yii::app()->user->isGuest) {
-    
                         $this->menu = array_merge(
                             array(
-                                // array('label'=>'<i class="icon icon-home"></i>  Dashboard ', 'url'=>array('/site/index'),'itemOptions'=>array('class'=>'')),
-                                // array('label'=>'<i class=" icon-list"></i>  List Accounts ', 'url'=>array('/sipAccount/index'),'itemOptions'=>array('class'=>'')),
                             ),$this->menu);
                     }
                 ?>
-                <?php $this->widget('zii.widgets.CMenu',array(
-                        'htmlOptions'=>array('class'=>'pull-left nav mySubNav'),
-                        'submenuHtmlOptions'=>array('class'=>'dropdown-menu'),
-                        'itemCssClass'=>'item-test',
-                        'encodeLabel'=>false,
-                        'items'=>$this->menu,
-                )); ?>
+
             <?php endif ?>
     	</div><!-- container -->
     </div><!-- navbar-inner -->

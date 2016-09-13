@@ -24,7 +24,7 @@ class FreeVoipAccounts extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{freevoip_accounts}}';
+		return 'tbl_freevoip_accounts';
 	}
 
 	/**

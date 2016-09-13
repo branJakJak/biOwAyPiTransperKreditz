@@ -77,7 +77,7 @@ $cs->registerCssFile($baseUrl.'/bower_components/angular-tooltips/dist/angular-t
 <div ng-app="sipAccountModule">
 
 
-<div ng-show="false">
+<div ng-show="false" style="text-align:center">
 	
 </div>
 <div ng-controller="IndexCtrl as indexCtrl" ng-cloak >

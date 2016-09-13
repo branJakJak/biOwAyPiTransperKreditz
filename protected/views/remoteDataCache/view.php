@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List RemoteDataCache', 'url'=>array('index')),
-	array('label'=>'Create RemoteDataCache', 'url'=>array('create')),
-	array('label'=>'Update RemoteDataCache', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete RemoteDataCache', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage RemoteDataCache', 'url'=>array('admin')),
+	array('label'=>'List accounts', 'url'=>array('index')),
+	array('label'=>'Create accounts', 'url'=>array('create')),
+	array('label'=>'Update accounts', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Delete accounts', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage accounts', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View RemoteDataCache #<?php echo $model->id; ?></h1>
+<h1>View accounts #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

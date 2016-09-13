@@ -7,14 +7,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create RemoteDataCache', 'url'=>array('create')),
-	array('label'=>'Manage RemoteDataCache', 'url'=>array('admin')),
+	array('label'=>'Create accounts', 'url'=>array('create')),
+	array('label'=>'Manage accounts', 'url'=>array('admin')),
 );
 ?>
 
 <h1>Remote Data Caches</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
+	'template'=>'{summary}{pager}{items}{pager}',
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>

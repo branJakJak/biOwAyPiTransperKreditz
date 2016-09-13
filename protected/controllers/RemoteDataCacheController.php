@@ -6,7 +6,12 @@ class RemoteDataCacheController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	
+	// public $layout = Yii::getPathOfAlias("abound_theme.views.layouts.manage");
+	public $layout = "//../../../themes/abound/views/layouts/manage";
+
+	public $sideMenu = array();
+
 
 	/**
 	 * @return array action filters
@@ -55,7 +60,6 @@ class RemoteDataCacheController extends Controller
 	public function actionCreate()
 	{
 		$model=new RemoteDataCache;
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -64,6 +68,13 @@ class RemoteDataCacheController extends Controller
 			$model->attributes=$_POST['RemoteDataCache'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
+		} else {
+			$model->last_balance = 0;
+			$model->balance = 0;
+			$model->exact_balance = 0;
+			$model->last_balance_since_topup = 0;
+			$model->last_credit_update = 0;
+			$model->ip_address = '1.2.3.4';
 		}
 
 		$this->render('create',array(

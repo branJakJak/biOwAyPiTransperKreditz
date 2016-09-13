@@ -3,13 +3,13 @@
 /* @var $model RemoteDataCache */
 
 $this->breadcrumbs=array(
-	'Remote Data Caches'=>array('index'),
+	'Accounts'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List RemoteDataCache', 'url'=>array('index')),
-	array('label'=>'Manage RemoteDataCache', 'url'=>array('admin')),
+	array('label'=>'List accounts', 'url'=>array('index')),
+	array('label'=>'Manage accounts', 'url'=>array('admin')),
 );
 ?>
 

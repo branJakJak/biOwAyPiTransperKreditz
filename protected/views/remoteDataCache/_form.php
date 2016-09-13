@@ -19,80 +19,101 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'main_user'); ?>
-		<?php echo $form->textField($model,'main_user',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'main_user'); ?>
-	</div>
+	<fieldset>
+		<legend>Account Information : </legend>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'main_user'); ?>
+				<?php echo $form->textField($model,'main_user',array('size'=>60,'maxlength'=>255)); ?>
+				<?php echo $form->error($model,'main_user'); ?>
+			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'main_pass'); ?>
+				<?php echo $form->textField($model,'main_pass',array('size'=>60,'maxlength'=>255)); ?>
+				<?php echo $form->error($model,'main_pass'); ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'sub_user'); ?>
+				<?php echo $form->textField($model,'sub_user',array('size'=>60,'maxlength'=>255)); ?>
+				<?php echo $form->error($model,'sub_user'); ?>
+			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'sub_pass'); ?>
+				<?php echo $form->textField($model,'sub_pass',array('size'=>60,'maxlength'=>255)); ?>
+				<?php echo $form->error($model,'sub_pass'); ?>
+			</div>
+		</div>
+	</fieldset>
+	<br>
+	<fieldset>
+		<legend>Balance Information</legend>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'is_active'); ?>
+				<?php echo CHtml::activeDropDownList($model, 'is_active', array('ACTIVE'=>'ACTIVE','INACTIVE'=>"INACTIVE")); ?>
+				<?php echo $form->error($model,'is_active'); ?>
+			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'last_balance'); ?>
+				<?php echo $form->textField($model,'last_balance'); ?>
+				<?php echo $form->error($model,'last_balance'); ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'balance'); ?>
+				<?php echo $form->textField($model,'balance'); ?>
+				<?php echo $form->error($model,'balance'); ?>
+			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'exact_balance'); ?>
+				<?php echo $form->textField($model,'exact_balance'); ?>
+				<?php echo $form->error($model,'exact_balance'); ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'last_balance_since_topup'); ?>
+				<?php echo $form->textField($model,'last_balance_since_topup'); ?>
+				<?php echo $form->error($model,'last_balance_since_topup'); ?>
+			</div>
+		</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'main_pass'); ?>
-		<?php echo $form->textField($model,'main_pass',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'main_pass'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'sub_user'); ?>
-		<?php echo $form->textField($model,'sub_user',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'sub_user'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'sub_pass'); ?>
-		<?php echo $form->textField($model,'sub_pass',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'sub_pass'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'vici_user'); ?>
-		<?php echo $form->textField($model,'vici_user'); ?>
-		<?php echo $form->error($model,'vici_user'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'is_active'); ?>
-		<?php echo $form->textField($model,'is_active',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'is_active'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'last_balance'); ?>
-		<?php echo $form->textField($model,'last_balance'); ?>
-		<?php echo $form->error($model,'last_balance'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'balance'); ?>
-		<?php echo $form->textField($model,'balance'); ?>
-		<?php echo $form->error($model,'balance'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'exact_balance'); ?>
-		<?php echo $form->textField($model,'exact_balance'); ?>
-		<?php echo $form->error($model,'exact_balance'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'ip_address'); ?>
-		<?php echo $form->textField($model,'ip_address',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'ip_address'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'num_lines'); ?>
-		<?php echo $form->textField($model,'num_lines'); ?>
-		<?php echo $form->error($model,'num_lines'); ?>
-	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model,'last_balance_since_topup'); ?>
-		<?php echo $form->textField($model,'last_balance_since_topup'); ?>
-		<?php echo $form->error($model,'last_balance_since_topup'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+	</fieldset>
+	<br>
+	<fieldset>
+		<legend>Other Information</legend>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'vici_user'); ?>
+				<?php echo $form->textField($model,'vici_user'); ?>
+				<?php echo $form->error($model,'vici_user'); ?>
+			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'ip_address'); ?>
+				<?php echo $form->textField($model,'ip_address',array('size'=>60,'maxlength'=>255)); ?>
+				<?php echo $form->error($model,'ip_address'); ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'num_lines'); ?>
+				<?php echo $form->textField($model,'num_lines'); ?>
+				<?php echo $form->error($model,'num_lines'); ?>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend></legend>
+		<div class="row">
+			<div class="span6">
+				<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'btn btn-primary btn-block')); ?>
+			</div>
+		</div>
+	</fieldset>
 
 <?php $this->endWidget(); ?>
 

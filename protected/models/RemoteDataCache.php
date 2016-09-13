@@ -33,7 +33,7 @@ class RemoteDataCache extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{remote_data_cache}}';
+		return 'tbl_remote_data_cache';
 	}
 
 	/**
@@ -44,6 +44,7 @@ class RemoteDataCache extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('main_user, main_pass, sub_user, sub_pass, is_active', 'required'),
 			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
 			array('balance, exact_balance,last_balance,last_balance_since_topup', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
@@ -152,9 +153,8 @@ class RemoteDataCache extends CActiveRecord
             $autoTopUpConf->freeVoipAccount = $freeVoipObject->id;
             $autoTopUpConf->remote_data_cache = $this->id;
             $autoTopUpConf->topUpValue = 0;
-            $autoTopUpConf->save();
+            $autoTopUpConf->save(false);
         }
-
         parent::afterSave();
     }
 

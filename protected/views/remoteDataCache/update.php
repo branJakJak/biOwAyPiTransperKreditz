@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List RemoteDataCache', 'url'=>array('index')),
-	array('label'=>'Create RemoteDataCache', 'url'=>array('create')),
-	array('label'=>'View RemoteDataCache', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage RemoteDataCache', 'url'=>array('admin')),
+	array('label'=>'List accounts', 'url'=>array('index')),
+	array('label'=>'Create accounts', 'url'=>array('create')),
+	array('label'=>'View accounts', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Manage accounts', 'url'=>array('admin')),
 );
 ?>
 

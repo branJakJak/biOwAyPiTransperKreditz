@@ -49,6 +49,7 @@ return array(
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
+            'tablePrefix' => 'tbl_',
         ),
         'user' => array(
             'tableUsers' => 'tbl_users',
