@@ -35,7 +35,7 @@
 
 		$scope.customFilter = function(currentRemoteDataCache){
 			isValid = false;
-			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Zola24','Loweliesxamp'];
+			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Zola24','tesvonrae*raevontes'];
 			//found
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) !== -1 ) {
 				isValid = true;
@@ -44,7 +44,7 @@
 		}
 		$scope.mainRemoteDataCacheFilter = function(currentRemoteDataCache){
 			isValid = false;
-			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Zola24','Loweliesxamp'];
+			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Zola24','tesvonrae*raevontes'];
 			// not found
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) === -1 ) {
 				isValid = true;
