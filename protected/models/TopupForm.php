@@ -88,11 +88,6 @@ class TopupForm extends CFormModel
 						$activator->activateAccount($model);
 					}
 				}
-                /**
-                 * Force the RemoteDataCache instance to update its current campaign
-                 */
-                $campaignForcer = Yii::app()->campaignForcer;
-				$campaignForcer->update($this->forceAgent , $model->sub_user);
 
                 /**
                  * Get the latest data from remote api
@@ -120,6 +115,13 @@ class TopupForm extends CFormModel
                 $model->last_balance = $lastBalance;
                 $model->last_balance_since_topup = $remoteVoipResult->getSpecificBalance();
                 $model->save();
+
+                /**
+                 * Force the RemoteDataCache instance to update its current campaign
+                 */
+                $campaignForcer = Yii::app()->campaignForcer;
+				$campaignForcer->update($this->forceAgent , $model->sub_user);
+
                 /**
                  * Update the counter
                  */
