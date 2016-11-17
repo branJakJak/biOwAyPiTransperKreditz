@@ -49,6 +49,10 @@
 	<?php echo CHtml::encode($data->last_balance_since_topup); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('campaign')); ?>:</b>
+	<?php echo CHtml::encode($data->campaign); ?>
+	<br />
+
 	<?php /*
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ip_address')); ?>:</b>

@@ -35,6 +35,7 @@ $this->menu=array(
 		'last_balance',
 		'balance',
 		'exact_balance',
+		'campaign',
 		'last_balance_since_topup',
 		'num_lines',
 	),

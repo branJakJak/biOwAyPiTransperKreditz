@@ -70,6 +70,10 @@
 		<?php echo $form->label($model,'num_lines'); ?>
 		<?php echo $form->textField($model,'num_lines'); ?>
 	</div>
+	<div class="row">
+		<?php echo $form->label($model,'campaign'); ?>
+		<?php echo $form->textField($model,'campaign'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
