@@ -160,6 +160,7 @@ class SubSipAccountController extends Controller {
 
         $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
+        
         /*get all subsip logs from Vicilogs*/
         $criteria = new CDbCriteria;
         $criteria->compare("date(logDate)",date("Y-m-d"));
