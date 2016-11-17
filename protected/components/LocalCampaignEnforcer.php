@@ -11,9 +11,10 @@ class LocalCampaignEnforcer extends CampaignForcer{
         /**
          * @var $sipAccount RemoteDataCache
          */
-        $sipAccount = RemoteDataCache::model()->findByAttributes(['sub_user' => $subUser]);
+        $criteria=new CDbCriteria;
+        $criteria->compare('sub_user',$subUser);
+        $sipAccount = RemoteDataCache::model()->find($criteria);
         /*find account and update directly its campaign*/
-
         if($sipAccount){
             $sipAccount->campaign = $campaignName;
             $sipAccount->save(false);
