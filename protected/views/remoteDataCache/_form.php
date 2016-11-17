@@ -104,6 +104,11 @@
 				<?php echo $form->textField($model,'num_lines'); ?>
 				<?php echo $form->error($model,'num_lines'); ?>
 			</div>
+			<div class="span3">
+				<?php echo $form->labelEx($model,'campaign'); ?>
+				<?php echo $form->textField($model,'campaign'); ?>
+				<?php echo $form->error($model,'campaign'); ?>
+			</div>
 		</div>
 	</fieldset>
 	<fieldset>
