@@ -7,7 +7,7 @@ class LocalCampaignInformationRetriever extends CampaignInformationRetriever{
         /**
          * @var $remoteDataObj RemoteDataCache
          */
-        $remoteDataObj = RemoteDataCache::model()->find(['sub_user' => $accountName]);
+        $remoteDataObj = RemoteDataCache::model()->findByAttributes(['sub_user' => $accountName]);
         if($remoteDataObj){
             $campaignName = $remoteDataObj->campaign;
         }
