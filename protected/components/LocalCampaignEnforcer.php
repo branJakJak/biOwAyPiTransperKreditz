@@ -11,7 +11,7 @@ class LocalCampaignEnforcer extends CampaignForcer{
         /**
          * @var $sipAccount RemoteDataCache
          */
-        $sipAccount = RemoteDataCache::model()->find(['sub_user' => $subUser]);
+        $sipAccount = RemoteDataCache::model()->findByAttributes(['sub_user' => $subUser]);
         /*find account and update directly its campaign*/
 
         if($sipAccount){

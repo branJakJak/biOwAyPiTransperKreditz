@@ -23,7 +23,7 @@ EOL;
 			$resultContainer = $result['campaign'];
 		}else{
 			$resultContainer = "Not Set";
-		}
+		}	
 		return $resultContainer;
 	}
 }
