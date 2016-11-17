@@ -16,7 +16,7 @@ class LocalCampaignEnforcer extends CampaignForcer{
 
         if($sipAccount){
             $sipAccount->campaign = $campaignName;
-            $sipAccount->update(false);
+            $sipAccount->save(false);
             $dataFound = true;
         }
         return $dataFound;
