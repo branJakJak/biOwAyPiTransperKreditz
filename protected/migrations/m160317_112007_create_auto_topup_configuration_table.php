@@ -14,7 +14,8 @@ class m160317_112007_create_auto_topup_configuration_table extends CDbMigration
             "remote_data_cache"=>"int",
             "date_created"=>"datetime",
             "date_updated"=>"datetime"
-        ));
+        ),'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
+        
         /*find free voip account*/
         $freeVoipAccount = Yii::app()->db->createCommand("select * from tbl_freevoip_accounts where username = 'jawdroppingcalls' ")->queryRow();
 

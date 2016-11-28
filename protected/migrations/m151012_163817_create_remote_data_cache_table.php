@@ -18,7 +18,7 @@ class m151012_163817_create_remote_data_cache_table extends CDbMigration
 				"exact_balance"=>"double",
 				"ip_address"=>"string",
 				"num_lines"=>"integer",
-			));
+			),'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
 	}
 
 	public function safeDown()

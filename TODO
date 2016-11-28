@@ -1,8 +1,28 @@
 
+
+@TODO - tick and untick all
+@DONE
+
+
+@TODO - scheduled auto force agent
+
+
+@TODO - CRON for checking scheduled every minute
+
+@TODO - log for CRON process - checking scheduled report
+
 @TODO - do full test on all feature
 
-
 @TODO - update the status remotely to sql server , so we dont need to do the url
+
+
+scheduled_force_agent
+id
+-------
+scheduled_date datetime
+account_id int (fk)
+-------
+
 
 
 @TODO - 

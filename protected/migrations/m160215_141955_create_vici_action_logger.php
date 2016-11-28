@@ -12,7 +12,7 @@ class m160215_141955_create_vici_action_logger extends CDbMigration
 				'topUpValue'=>"double",
 				'batch'=>"string",
 				'logDate'=>"datetime"
-			));
+			),'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
 	}
 
 	public function safeDown()

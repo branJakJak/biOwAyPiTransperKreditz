@@ -4,14 +4,12 @@ class m160809_114021_create_fk_account_charge extends CDbMigration
 {
     public function safeUp()
     {
-        /*@TODO - implement soon . fuckthat MySql#1215 */
-        /*$this->addForeignKey("account_charge_log_account_id_fk", "tbl_account_charge_log", "account_id", "tbl_remote_data_cache", "id");*/
+        $this->addForeignKey("account_charge_log_account_id_fk", "tbl_account_charge_log", "account_id", "tbl_remote_data_cache", "id");
     }
 
     public function safeDown()
     {
-        /*@TODO - implement soon . fuckthat MySql#1215 */
-        /*$this->dropForeignKey("account_charge_log_account_id_fk", "tbl_account_charge_log");*/
+        $this->dropForeignKey("account_charge_log_account_id_fk", "tbl_account_charge_log");
     }
 
 }

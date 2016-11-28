@@ -131,18 +131,26 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 // 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 // ', CClientScript::POS_READY);
 
-
-
-
-
-
-
 ?>
+<script type="text/javascript">
+	function selectAll() {
+		window.chartObj.series[0].data.forEach(function(cur){
+			cur.firePointEvent('click', event);
+		})
+	}
+	function deselectAll() {
+		jQuery('#TopupForm_accounts').val("");
+		jQuery('#TopupForm_accounts').trigger('change.select2');
+	}
+</script>
 <div class="row-fluid">
 	<div class="span5 offset1">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Top-up Selected Account',
+				'htmlOptions'=>array(
+					'style'=>"height: 758px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+				),				
 			));
 		?>
 		<?php
@@ -217,10 +225,30 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 				$this->beginWidget('zii.widgets.CPortlet', array(
 					'title'=>'Accounts and credits',
 					'htmlOptions'=>array(
-							'style'=>"height: 458px;overflow-y: scroll;border: 1px solid #DDDDDD;"
-						),
+						'style'=>"height: 758px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+					),
 				));
 			?>
+			<div style="padding: 18px;">
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="select_all">
+						None
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="select_all" onchange="selectAll()">
+						Select all
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="deselect_all" onchange="deselectAll()">
+						Deselect all
+					</label>
+				</div>				
+			</div>
 			<div id="chartContainer" style="height: 1500px"></div>
 			<div class="clearfix"></div>
 			<?php

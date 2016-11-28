@@ -18,7 +18,7 @@ class UserRequest extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{user_request}}';
+		return "{{user_request}}";
 	}
 
 	/**
