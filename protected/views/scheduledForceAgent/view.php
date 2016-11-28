@@ -26,6 +26,7 @@ $this->menu=array(
 		'account_id',
 		'topup_amount',
 		'activate',
+		'forceAgent',
 		'created_at',
 		'updated_at',
 	),

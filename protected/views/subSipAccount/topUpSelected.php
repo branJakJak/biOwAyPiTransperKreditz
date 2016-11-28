@@ -210,7 +210,14 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 				<strong style="position: relative;top: 2px;">Then activate</strong>
 				<?php echo CHtml::error($formModel, 'andActivate'); ?>
 			</label>
+
 			<br>
+			<label>Force Agent:</label>
+			<?php echo CHtml::activeTextField($formModel, 'forceAgent', array('class'=>'form-control')); ?>
+			<?php echo CHtml::error($formModel, 'forceAgent'); ?>
+			<br>
+			<br>
+
 			<div class="checkbox">
 				<label>
 					<?php echo CHtml::activeCheckBox($formModel, 'scheduleForceAgent',array('onchange'=>'toggleSchedule(this)')); ?>
