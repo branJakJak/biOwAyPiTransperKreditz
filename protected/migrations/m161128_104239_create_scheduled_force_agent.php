@@ -8,7 +8,7 @@ class m161128_104239_create_scheduled_force_agent extends CDbMigration
 		$this->createTable('scheduled_force_agent', [
 		    'id' => 'pk',
 		    'scheduled_date'=>'datetime',
-		    'account_id'=>'int',
+		    'account_id'=>'integer',
 		    'topup_amount'=>'double',
 		    'activate'=>'boolean',
 			'created_at' => 'datetime',
