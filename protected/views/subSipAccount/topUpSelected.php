@@ -235,7 +235,7 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 					    'flat'=>true,
 					    'options'=>array(
 					        'showAnim'=>'slide',
-					        'minDate'=>'new Date();'
+					        'minDate'=>'new Date(new Date().setDate(new Date().getDate()-1));'
 					    ),
 					    'htmlOptions'=>array(
 					        'class'=>'form-control'
