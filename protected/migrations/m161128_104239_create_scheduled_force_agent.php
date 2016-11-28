@@ -14,12 +14,10 @@ class m161128_104239_create_scheduled_force_agent extends CDbMigration
 			'created_at' => 'datetime',
 		    'updated_at' => 'datetime',
 		], $tableOptions);
-		$this->addForeignKey("scheduled_force_agent_fk",'scheduled_force_agent','account_id','tbl_remote_data_cache','id','CASCADE','CASCADE');
 	}
 
 	public function down()
 	{
-        $this->dropForeignKey("scheduled_force_agent_fk", 'scheduled_force_agent');
         $this->dropTable('scheduled_force_agent');
 	}
 
