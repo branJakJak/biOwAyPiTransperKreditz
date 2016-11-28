@@ -27,6 +27,16 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'topup_amount'); ?>
+		<?php echo $form->textField($model,'topup_amount'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'activate'); ?>
+		<?php echo $form->textField($model,'activate'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'created_at'); ?>
 		<?php echo $form->textField($model,'created_at'); ?>
 	</div>

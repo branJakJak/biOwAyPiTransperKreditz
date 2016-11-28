@@ -7,6 +7,8 @@
  * @property integer $id
  * @property string $scheduled_date
  * @property integer $account_id
+ * @property double $topup_amount
+ * @property integer $activate
  * @property string $created_at
  * @property string $updated_at
  */
@@ -28,11 +30,12 @@ class ScheduledForceAgent extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('account_id', 'numerical', 'integerOnly'=>true),
+			array('account_id, activate', 'numerical', 'integerOnly'=>true),
+			array('topup_amount', 'numerical'),
 			array('scheduled_date, created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, scheduled_date, account_id, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, scheduled_date, account_id, topup_amount, activate, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +59,8 @@ class ScheduledForceAgent extends CActiveRecord
 			'id' => 'ID',
 			'scheduled_date' => 'Scheduled Date',
 			'account_id' => 'Account',
+			'topup_amount' => 'Topup Amount',
+			'activate' => 'Activate',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -82,6 +87,8 @@ class ScheduledForceAgent extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('scheduled_date',$this->scheduled_date,true);
 		$criteria->compare('account_id',$this->account_id);
+		$criteria->compare('topup_amount',$this->topup_amount);
+		$criteria->compare('activate',$this->activate);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 
@@ -100,4 +107,15 @@ class ScheduledForceAgent extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    public function behaviors()
+    {
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_at',
+                'updateAttribute' => 'updated_at',
+            )
+        );
+    }
+
 }

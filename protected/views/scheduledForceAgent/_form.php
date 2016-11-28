@@ -32,6 +32,18 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'topup_amount'); ?>
+		<?php echo $form->textField($model,'topup_amount'); ?>
+		<?php echo $form->error($model,'topup_amount'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'activate'); ?>
+		<?php echo $form->textField($model,'activate'); ?>
+		<?php echo $form->error($model,'activate'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'created_at'); ?>
 		<?php echo $form->textField($model,'created_at'); ?>
 		<?php echo $form->error($model,'created_at'); ?>

@@ -24,6 +24,8 @@ $this->menu=array(
 		'id',
 		'scheduled_date',
 		'account_id',
+		'topup_amount',
+		'activate',
 		'created_at',
 		'updated_at',
 	),

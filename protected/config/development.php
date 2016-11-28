@@ -98,7 +98,7 @@ $yiiApplicationConfiguration = array(
             'class'=>'application.components.ChannelReport'
         ),
         'campaignForcer' => array(
-            'class' => 'application.components.CampaignForcer'
+            'class' => 'application.components.RemoteCampaignEnforcer'
         ),
         'vicidialDbHelper' => array(
             'class' => 'application.components.VicidialDbHelper'
@@ -185,6 +185,12 @@ $yiiApplicationConfiguration = array(
                     'levels' => 'info',
                     'categories' => 'activation',
                     'logFile' => 'activation_log',
+                ),
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'info',
+                    'categories' => 'scheduled_force_agent',
+                    'logFile' => 'scheduled_force_agent_log',
                 ),
                 array(
                     'class' => 'CFileLogRoute',

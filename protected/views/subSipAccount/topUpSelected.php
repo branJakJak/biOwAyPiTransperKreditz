@@ -142,6 +142,13 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 		jQuery('#TopupForm_accounts').val("");
 		jQuery('#TopupForm_accounts').trigger('change.select2');
 	}
+	function toggleSchedule(curDom) {
+		if (jQuery(curDom).is(":checked")) {
+			jQuery("#scheduleTimeField").show();
+		} else {
+			jQuery("#scheduleTimeField").hide();
+		}
+	}
 </script>
 <div class="row-fluid">
 	<div class="span5 offset1">
@@ -198,16 +205,55 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			<?php echo CHtml::error($formModel, 'topupvalue'); ?>
 			<br>
 			<br>
-			<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
-			<strong style="position: relative;top: 2px;">Then activate</strong>
-			<?php echo CHtml::error($formModel, 'andActivate'); ?>
+			<label>
+				<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
+				<strong style="position: relative;top: 2px;">Then activate</strong>
+				<?php echo CHtml::error($formModel, 'andActivate'); ?>
+			</label>
 			<br>
+			<div class="checkbox">
+				<label>
+					<?php echo CHtml::activeCheckBox($formModel, 'scheduleForceAgent',array('onchange'=>'toggleSchedule(this)')); ?>
+					<?php echo CHtml::error($formModel, 'scheduleForceAgent'); ?>
+					<strong>Schedule</strong>
+				</label>
+			</div>
 			<br>
-
-			<label>Force Agent : </label>
-			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', $listForceAgentCollection); ?>
-			<?php echo CHtml::link('Add more', array('/forceAgentTable/create'), array('target'=>'_blank')); ?>
-			<br>
+			<div style="display:none" id='scheduleTimeField'>
+				<label>Schedule Time : </label>
+				<?php
+					$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					    'model'=>$formModel,
+					    'attribute'=>'scheduleTime',
+					    'flat'=>true,
+					    'options'=>array(
+					        'showAnim'=>'slide',
+					        'minDate'=>'new Date();'
+					    ),
+					    'htmlOptions'=>array(
+					        'class'=>'form-control'
+					    ),
+					));
+				?>
+				<label>Hour</label>
+				<select name="scheduleHour" id="inputScheduleHour" class="form-control">
+					<?php foreach (range(1, 12) as $key => $value): ?>
+						<option value="<?= $value ?>"><?= $value ?></option>
+					<?php endforeach ?>
+				</select>
+				<label>Minute</label>
+				<select name="scheduleMinute" id="inputScheduleMinute" class="form-control">
+					<?php foreach (range(0, 60) as $key => $value): ?>
+						<option value="<?= sprintf("%02d",$value) ?>"><?= sprintf("%02d",$value) ?></option>
+					<?php endforeach ?>
+					<option value=""></option>
+				</select>
+				<select name="ampm" id="inputAmpm" class="form-control">
+					<option value="AM">AM</option>
+					<option value="PM">PM</option>
+				</select>
+				<?php echo CHtml::error($formModel, 'scheduleTime'); ?>				
+			</div>
 			<br>
 			<div class="form-actions">
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>

@@ -17,6 +17,14 @@
 	<?php echo CHtml::encode($data->account_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('topup_amount')); ?>:</b>
+	<?php echo CHtml::encode($data->topup_amount); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('activate')); ?>:</b>
+	<?php echo CHtml::encode($data->activate); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created_at')); ?>:</b>
 	<?php echo CHtml::encode($data->created_at); ?>
 	<br />

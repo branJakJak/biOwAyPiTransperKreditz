@@ -48,8 +48,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'scheduled_date',
 		'account_id',
+		'topup_amount',
+		'activate',
 		'created_at',
+		/*
 		'updated_at',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
