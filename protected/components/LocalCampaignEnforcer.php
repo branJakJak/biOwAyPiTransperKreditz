@@ -1,7 +1,7 @@
 <?php
 
 
-class LocalCampaignEnforcer extends CampaignForcer{
+class LocalCampaignEnforcer extends RemoteCampaignEnforcer{
     /**
      * @inheritdoc
      */

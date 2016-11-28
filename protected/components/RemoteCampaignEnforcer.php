@@ -2,7 +2,7 @@
 /**
 * CampaignForcer
 */
-class CampaignForcer extends CComponent
+class RemoteCampaignEnforcer extends CComponent
 {
 	public function init()
 	{

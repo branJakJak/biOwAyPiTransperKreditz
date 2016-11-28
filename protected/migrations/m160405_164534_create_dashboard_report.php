@@ -10,7 +10,7 @@ class m160405_164534_create_dashboard_report extends CDbMigration
 				'dashboard_value'=>"string",
 				'date_created'=>"datetime",
 				'date_updated'=>"datetime"
-			));
+			),'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
 	}
 	public function safeDown()
 	{

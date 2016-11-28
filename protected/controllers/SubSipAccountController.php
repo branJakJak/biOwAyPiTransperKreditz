@@ -177,6 +177,12 @@ class SubSipAccountController extends Controller {
          */
         if (isset($_POST['TopupForm'])) {
             $formModel->attributes = $_POST['TopupForm'];
+            //parse the date
+            $tempHourContainer = isset($_POST['scheduleHour']) ? $_POST['scheduleHour'] : '01';
+            $tempMinuteContainer = isset($_POST['scheduleMinute']) ? $_POST['scheduleMinute'] : '00';
+            $tempMeridiemContainer = isset($_POST['ampm']) ? $_POST['ampm'] : 'AM';
+            $rawFormattedTime = $formModel->scheduleTime.' '.sprintf("%s:%s:00 %s", $tempHourContainer, $tempMinuteContainer, $tempMeridiemContainer);
+            $formModel->scheduleTime = date("Y-m-d H:i:s", strtotime($rawFormattedTime));
             if ($formModel->validate()) {
                 $numberOfAffectedAccounts = $formModel->topupAccounts();
                 Yii::app()->user->setFlash("success","Success! All $numberOfAffectedAccounts account(s) are topped up.");

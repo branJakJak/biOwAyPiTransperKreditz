@@ -131,18 +131,33 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 // 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 // ', CClientScript::POS_READY);
 
-
-
-
-
-
-
 ?>
+<script type="text/javascript">
+	function selectAll() {
+		window.chartObj.series[0].data.forEach(function(cur){
+			cur.firePointEvent('click', event);
+		})
+	}
+	function deselectAll() {
+		jQuery('#TopupForm_accounts').val("");
+		jQuery('#TopupForm_accounts').trigger('change.select2');
+	}
+	function toggleSchedule(curDom) {
+		if (jQuery(curDom).is(":checked")) {
+			jQuery("#scheduleTimeField").show();
+		} else {
+			jQuery("#scheduleTimeField").hide();
+		}
+	}
+</script>
 <div class="row-fluid">
 	<div class="span5 offset1">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Top-up Selected Account',
+				'htmlOptions'=>array(
+					'style'=>"height: 758px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+				),				
 			));
 		?>
 		<?php
@@ -190,16 +205,55 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			<?php echo CHtml::error($formModel, 'topupvalue'); ?>
 			<br>
 			<br>
-			<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
-			<strong style="position: relative;top: 2px;">Then activate</strong>
-			<?php echo CHtml::error($formModel, 'andActivate'); ?>
+			<label>
+				<?php echo CHtml::activeCheckBox($formModel, 'andActivate'); ?>
+				<strong style="position: relative;top: 2px;">Then activate</strong>
+				<?php echo CHtml::error($formModel, 'andActivate'); ?>
+			</label>
 			<br>
+			<div class="checkbox">
+				<label>
+					<?php echo CHtml::activeCheckBox($formModel, 'scheduleForceAgent',array('onchange'=>'toggleSchedule(this)')); ?>
+					<?php echo CHtml::error($formModel, 'scheduleForceAgent'); ?>
+					<strong>Schedule</strong>
+				</label>
+			</div>
 			<br>
-
-			<label>Force Agent : </label>
-			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', $listForceAgentCollection); ?>
-			<?php echo CHtml::link('Add more', array('/forceAgentTable/create'), array('target'=>'_blank')); ?>
-			<br>
+			<div style="display:none" id='scheduleTimeField'>
+				<label>Schedule Time : </label>
+				<?php
+					$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					    'model'=>$formModel,
+					    'attribute'=>'scheduleTime',
+					    'flat'=>true,
+					    'options'=>array(
+					        'showAnim'=>'slide',
+					        'minDate'=>'new Date();'
+					    ),
+					    'htmlOptions'=>array(
+					        'class'=>'form-control'
+					    ),
+					));
+				?>
+				<label>Hour</label>
+				<select name="scheduleHour" id="inputScheduleHour" class="form-control">
+					<?php foreach (range(1, 12) as $key => $value): ?>
+						<option value="<?= $value ?>"><?= $value ?></option>
+					<?php endforeach ?>
+				</select>
+				<label>Minute</label>
+				<select name="scheduleMinute" id="inputScheduleMinute" class="form-control">
+					<?php foreach (range(0, 60) as $key => $value): ?>
+						<option value="<?= sprintf("%02d",$value) ?>"><?= sprintf("%02d",$value) ?></option>
+					<?php endforeach ?>
+					<option value=""></option>
+				</select>
+				<select name="ampm" id="inputAmpm" class="form-control">
+					<option value="AM">AM</option>
+					<option value="PM">PM</option>
+				</select>
+				<?php echo CHtml::error($formModel, 'scheduleTime'); ?>				
+			</div>
 			<br>
 			<div class="form-actions">
 			    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
@@ -217,10 +271,30 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 				$this->beginWidget('zii.widgets.CPortlet', array(
 					'title'=>'Accounts and credits',
 					'htmlOptions'=>array(
-							'style'=>"height: 458px;overflow-y: scroll;border: 1px solid #DDDDDD;"
-						),
+						'style'=>"height: 758px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+					),
 				));
 			?>
+			<div style="padding: 18px;">
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="select_all">
+						None
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="select_all" onchange="selectAll()">
+						Select all
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="multiple_action" id="inputMultiple_action" value="deselect_all" onchange="deselectAll()">
+						Deselect all
+					</label>
+				</div>				
+			</div>
 			<div id="chartContainer" style="height: 1500px"></div>
 			<div class="clearfix"></div>
 			<?php
