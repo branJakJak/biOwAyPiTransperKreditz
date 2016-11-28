@@ -46,6 +46,11 @@
 		<?php echo $form->textField($model,'updated_at'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'forceAgent'); ?>
+		<?php echo $form->textField($model,'forceAgent'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

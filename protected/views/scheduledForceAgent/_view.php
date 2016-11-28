@@ -34,4 +34,9 @@
 	<br />
 
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('forceAgent')); ?>:</b>
+	<?php echo CHtml::encode($data->forceAgent); ?>
+	<br />
+
+
 </div>

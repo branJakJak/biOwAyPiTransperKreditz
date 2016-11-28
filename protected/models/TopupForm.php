@@ -59,6 +59,7 @@ class TopupForm extends CFormModel
                 if ($this->scheduleForceAgent) {
                     /*schedule the topup and force agent*/
                     $newScheduledTopup = new ScheduledForceAgent();
+                    $newScheduledTopup->forceAgent = $this->forceAgent;
                     $newScheduledTopup->activate = intval($this->andActivate);
                     $newScheduledTopup->topup_amount = $this->topupvalue;
                     $newScheduledTopup->scheduled_date = $this->scheduleTime;

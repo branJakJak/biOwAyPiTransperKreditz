@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'scheduled_force_agent':
  * @property integer $id
  * @property string $scheduled_date
+ * @property string $forceAgent
  * @property integer $account_id
  * @property double $topup_amount
  * @property integer $activate
@@ -32,7 +33,7 @@ class ScheduledForceAgent extends CActiveRecord
 		return array(
 			array('account_id, activate', 'numerical', 'integerOnly'=>true),
 			array('topup_amount', 'numerical'),
-			array('scheduled_date, created_at, updated_at', 'safe'),
+			array('forceAgent,scheduled_date, created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, scheduled_date, account_id, topup_amount, activate, created_at, updated_at', 'safe', 'on'=>'search'),
@@ -60,6 +61,7 @@ class ScheduledForceAgent extends CActiveRecord
 			'scheduled_date' => 'Scheduled Date',
 			'account_id' => 'Account',
 			'topup_amount' => 'Topup Amount',
+			'forceAgent' => 'Force Agent',
 			'activate' => 'Activate',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -86,6 +88,7 @@ class ScheduledForceAgent extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('scheduled_date',$this->scheduled_date,true);
+		$criteria->compare('forceAgent',$this->forceAgent);
 		$criteria->compare('account_id',$this->account_id);
 		$criteria->compare('topup_amount',$this->topup_amount);
 		$criteria->compare('activate',$this->activate);
