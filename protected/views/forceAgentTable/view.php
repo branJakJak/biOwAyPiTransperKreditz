@@ -30,12 +30,17 @@ EOL;
 
 <div class="row-fluid">
 	<div class="span9 offset2">
+
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>"<strong class='porlet-title'>".$model->force_agent_lbl."</strong>".CHtml::link('<span class="icon icon-list-alt"></span> Show all options', array('/forceAgentTable/admin'), array('class'=>'btn btn-default pull-right')).'<div class="clearfix"></div>',
 				'htmlOptions'=>array('class'=>'span10 portlet')
 			));
 		?>
+		<a type="button" class="btn btn-primary" href="/">
+			Home
+		</a>
+		<div class="clearfix"></div>		
 		<h1>View Option #<?php echo $model->force_agent_lbl; ?></h1>
 		<?php $this->widget('zii.widgets.CDetailView', array(
 			'data'=>$model,
