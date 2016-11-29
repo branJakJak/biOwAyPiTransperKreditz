@@ -212,9 +212,9 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			</label>
 
 			<br>
-			<label>Force Agent:</label>
-			<?php echo CHtml::activeTextField($formModel, 'forceAgent', array('class'=>'form-control')); ?>
-			<?php echo CHtml::error($formModel, 'forceAgent'); ?>
+			<label>Force Agent : </label>
+			<?php echo CHtml::activeDropDownList($formModel, 'forceAgent', $listForceAgentCollection); ?>
+			<?php echo CHtml::link('Add more', array('/forceAgentTable/create'), array('target'=>'_blank')); ?>
 			<br>
 			<br>
 
