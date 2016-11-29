@@ -110,6 +110,7 @@ class SubSipAccountController extends Controller {
         $sipAccountNames = array();
         $chartSeriesData = array();
         $criteria = new CDbCriteria;
+        $criteria->condition = "balance > 0";
         $criteria->order = "vici_user ASC";
 
         $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
@@ -144,7 +145,10 @@ class SubSipAccountController extends Controller {
     public function actionTopUpSelected()
     {
         $formModel = new TopupForm;
-        $numberOfAccounts = RemoteDataCache::model()->count();
+        $criteria = new CDbCriteria();
+        $criteria->condition = "balance > 0";
+        $tempCon123 = RemoteDataCache::model()->findAll($criteria);
+        $numberOfAccounts = count($tempCon123);
         $topupLogsTotalToday = 0;
         $datasources = $this->loadDataSources();
         $chartInitialData = $datasources['iniChartData'];
@@ -196,6 +200,8 @@ class SubSipAccountController extends Controller {
         //append current campaign
 
         //List of force agent options
+
+
         $forceAgentModelAll = ForceAgentTable::model()->findAll();
         $listForceAgentCollection = CHtml::listData($forceAgentModelAll, 'force_agent_value', 'force_agent_lbl');
         $this->render('topUpSelected',compact('chartLabels','formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr','listForceAgentCollection'));
@@ -207,7 +213,9 @@ class SubSipAccountController extends Controller {
     public function getRemoteDataCacheAccounts()
     {
         $accountsCollection = [];
-        $tempContainer = RemoteDataCache::model()->findAll();
+        $criteria = new CDbCriteria();
+        $criteria->condition = "balance > 0";
+        $tempContainer = RemoteDataCache::model()->findAll($criteria);
         foreach ($tempContainer as $key => $currentRemoteDataCache) {
             $accountsCollection[] = $currentRemoteDataCache->sub_user;
         }
