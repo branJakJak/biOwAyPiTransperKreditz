@@ -110,7 +110,7 @@ class SubSipAccountController extends Controller {
         $sipAccountNames = array();
         $chartSeriesData = array();
         $criteria = new CDbCriteria;
-        $criteria->condition = "balance > 0";
+        // $criteria->condition = "balance > 0";
         $criteria->order = "vici_user ASC";
 
         $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
@@ -146,7 +146,7 @@ class SubSipAccountController extends Controller {
     {
         $formModel = new TopupForm;
         $criteria = new CDbCriteria();
-        $criteria->condition = "balance > 0";
+        // $criteria->condition = "balance > 0";
         $tempCon123 = RemoteDataCache::model()->findAll($criteria);
         $numberOfAccounts = count($tempCon123);
         $topupLogsTotalToday = 0;
