@@ -56,6 +56,7 @@ class RemoteSyncCommand extends CConsoleCommand {
                 $foundModel->num_lines = doubleval(@$currentFetchedData['number_of_lines']);
                 $foundModel->ip_address = $currentFetchedData['server_ip'];
                 $foundModel->campaign = $currentFetchedData["campaign"];
+
                 //Removing this for now to prevent fresh data from updating deactivated record
                 // $foundModel->is_active = $currentFetchedData["status"];
                 if ($foundModel->save()) {
