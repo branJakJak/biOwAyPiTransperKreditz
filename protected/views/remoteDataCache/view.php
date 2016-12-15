@@ -17,7 +17,7 @@ $this->menu=array(
 ?>
 
 <h1>View accounts #<?php echo $model->id; ?></h1>
-
+<hr>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -38,5 +38,21 @@ $this->menu=array(
 		'campaign',
 		'last_balance_since_topup',
 		'num_lines',
+		[
+			'label'=>'Disable URL',
+			'type'=>'raw',
+			'value'=>'https://portal23.xyz/disable/account?mainusername='.$model->main_user
+		],
+		[
+			'label'=>'VOIP Infocenter Login',
+			'type'=>'raw',
+			'value'=>'https://www.voipinfocenter.com/Login.aspx?username='.$model->main_user.'&password='.$model->main_pass
+		]
 	),
 )); ?>
+
+
+<br>
+<br>
+<br>
+<br>
