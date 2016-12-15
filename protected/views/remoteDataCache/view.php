@@ -41,15 +41,16 @@ $this->menu=array(
 		[
 			'label'=>'Disable URL',
 			'type'=>'raw',
-			'value'=>'https://portal23.xyz/disable/account?mainusername='.$model->main_user
+			'value'=>CHtml::link('https://portal23.xyz/disable/account?mainusername='.$model->main_user , 'https://portal23.xyz/disable/account?mainusername='.$model->main_user)
 		],
 		[
 			'label'=>'VOIP Infocenter Login',
-			'type'=>'raw',
-			'value'=>'https://www.voipinfocenter.com/Login.aspx?username='.$model->main_user.'&password='.$model->main_pass
+			'type'=>'raw',			
+			'value'=>CHtml::link('https://www.voipinfocenter.com/Login.aspx?username='.$model->main_user.'&password='.$model->main_pass,'https://www.voipinfocenter.com/Login.aspx?username='.$model->main_user.'&password='.$model->main_pass)
 		]
 	),
 )); ?>
+
 
 
 <br>
