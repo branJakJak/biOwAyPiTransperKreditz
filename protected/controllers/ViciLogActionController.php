@@ -29,7 +29,7 @@ class ViciLogActionController extends Controller
 		return array(
 			array('allow',
 				'actions'=>array('admin','delete','create','update','index','view'),
-				'roles'=>array('administrator'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
