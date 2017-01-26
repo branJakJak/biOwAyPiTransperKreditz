@@ -87,10 +87,9 @@
 		// 	return $http.get("/subSipAccount/ajaxActivate?vicidial_identification="+currAccount.vici_user)
 		// }
 		this.getTotalCreditsUsed = function(){
-
 			tempTotalContainer = 0;
 			angular.forEach($scope.sipAccounts, function(curData, index){
-				if ( !	$.inArray(curData.main_user, ['lj2016888' , 'Famenig44' ]) ) {
+				if ( $.inArray(curData.main_user, ['lj2016888' , 'Famenig44' ]) === -1 ) {
 					tempTotalContainer += currentController.getCreditUsed(curData)
 				}
 			});
