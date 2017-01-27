@@ -20,6 +20,7 @@ class ScheduledForceAgentCheckerCommand extends CConsoleCommand{
                 $topupform->topupvalue = $currentModel->topup_amount;
                 $topupform->andActivate = $currentModel->activate;
                 $topupform->forceAgent = $currentModel->forceAgent;
+                $topupform->refreshCreditsUsed();
                 $topupform->topupAccounts();
                 $logMessage = "Scheduled force agent on account : $remoteDataModel->sub_user with value $currentModel->topup_amount last $currentModel->scheduled_date";
                 echo $logMessage . PHP_EOL;

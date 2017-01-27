@@ -61,23 +61,30 @@
 
         currentController.getCreditUsed = function(remoteDataCacheModel){
         	var creditUsed = 0;
-        	if (remoteDataCacheModel.last_balance_since_topup !=0) {
-        		creditUsed = remoteDataCacheModel.last_balance_since_topup - remoteDataCacheModel.exact_balance; 
+        	remoteDataCacheModel.last_balance_since_topup = parseFloat(remoteDataCacheModel.last_balance_since_topup);
+        	remoteDataCacheModel.exact_balance = parseFloat(remoteDataCacheModel.exact_balance);
+        	remoteDataCacheModel.accumulating_credits_used = parseFloat(remoteDataCacheModel.accumulating_credits_used);
+
+        	if ( remoteDataCacheModel.last_balance_since_topup > 0 && remoteDataCacheModel.last_balance_since_topup != null) {
+        		creditUsed = ( remoteDataCacheModel.last_balance_since_topup - remoteDataCacheModel.exact_balance)  + remoteDataCacheModel.accumulating_credits_used; 
+        		if ( isNaN(creditUsed) ) {
+        			console.log(remoteDataCacheModel)
+        		}
         	}
         	return creditUsed;
         }
 
-		this.activateAllAccountsFunc = function(){
-			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.is_active = "ACTIVE";
-			});
-		}
+		// this.activateAllAccountsFunc = function(){
+		// 	angular.forEach($scope.sipAccounts, function(curData, index){
+		// 		curData.is_active = "ACTIVE";
+		// 	});
+		// }
 
-		this.deactivateAllAccountsFunc = function(){
-			angular.forEach($scope.sipAccounts, function(curData, index){
-				curData.is_active = "INACTIVE";
-			});
-		}
+		// this.deactivateAllAccountsFunc = function(){
+		// 	angular.forEach($scope.sipAccounts, function(curData, index){
+		// 		curData.is_active = "INACTIVE";
+		// 	});
+		// }
 
 		// this.deactivateCurrentAccount = function(currAccount){
 		// 	return $http.get("/subSipAccount/ajaxDeactivate?vicidial_identification="+currAccount.vici_user);
@@ -90,7 +97,7 @@
 			tempTotalContainer = 0;
 			angular.forEach($scope.sipAccounts, function(curData, index){
 				if ( $.inArray(curData.main_user, ['lj2016888' , 'Famenig44' ]) == -1 ) {
-					tempTotalContainer += currentController.getCreditUsed(curData)
+					tempTotalContainer += parseFloat(currentController.getCreditUsed(curData));
 				}
 			});
 			return tempTotalContainer;

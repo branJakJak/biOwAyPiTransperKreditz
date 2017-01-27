@@ -18,12 +18,14 @@
  * @property integer $num_lines
  * @property string $campaign
  * @property double $last_balance_since_topup
+ * @property double $accumulating_credits_used
  * @property datetime $date_created
  * @property datetime $date_updated
  */
 class RemoteDataCache extends CActiveRecord
 {
     public $last_balance_since_topup;
+    public $accumulating_credits_used;
     /**
      * @var string Contains the date since the last credit update.
      */
@@ -46,7 +48,7 @@ class RemoteDataCache extends CActiveRecord
 		return array(
 			array('main_user, main_pass, sub_user, sub_pass, is_active', 'required'),
 			array('vici_user, num_lines', 'numerical', 'integerOnly'=>true),
-			array('balance, exact_balance,last_balance,last_balance_since_topup', 'numerical'),
+			array('balance, exact_balance,last_balance,last_balance_since_topup,accumulating_credits_used', 'numerical'),
 			array('main_user, main_pass, sub_user, sub_pass, is_active, ip_address', 'length', 'max'=>255),
 			array('campaign, date_created,date_updated,last_credit_update', 'safe'),
 			// The following rule is used by search().
@@ -87,6 +89,7 @@ class RemoteDataCache extends CActiveRecord
 			'campaign' => 'Campaign',
 			'last_balance_since_topup' => 'Last balance since topup',
 			'last_credit_update' => 'Last balance since topup date',
+			'accumulating_credits_used' => 'Accumulating credits used',
 			'date_created' => 'Date created',
 			'date_updated' => 'Date updated',
 		);
@@ -124,6 +127,7 @@ class RemoteDataCache extends CActiveRecord
 		$criteria->compare('num_lines',$this->num_lines);
 		$criteria->compare('campaign',$this->campaign);
 		$criteria->compare('last_balance_since_topup',$this->last_balance_since_topup);
+		$criteria->compare('accumulating_credits_used',$this->accumulating_credits_used);
 		$criteria->compare('date_created',$this->date_created);
 		$criteria->compare('date_updated',$this->date_updated);
 

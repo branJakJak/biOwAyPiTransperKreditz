@@ -37,6 +37,7 @@ $this->menu=array(
 		'exact_balance',
 		'campaign',
 		'last_balance_since_topup',
+		'accumulating_credits_used',
 		'num_lines',
 		[
 			'label'=>'Disable URL',

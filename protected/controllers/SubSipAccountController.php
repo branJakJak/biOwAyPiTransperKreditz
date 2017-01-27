@@ -161,10 +161,8 @@ class SubSipAccountController extends Controller {
         $sipAccountsStr = json_encode($datasources['sipAccountStr']);
         $chartLabels = json_encode($sipAccountTempContainer);
         $seriesDataStr = json_encode($datasources['chartSeriesData']);
-
         $allSipAccounts = array();
         /*retrieve all accounts to be topped up*/
-        
         /*get all subsip logs from Vicilogs*/
         $criteria = new CDbCriteria;
         $criteria->compare("date(logDate)",date("Y-m-d"));
@@ -188,6 +186,7 @@ class SubSipAccountController extends Controller {
             $rawFormattedTime = $formModel->scheduleTime.' '.sprintf("%s:%s:00 %s", $tempHourContainer, $tempMinuteContainer, $tempMeridiemContainer);
             $formModel->scheduleTime = date("Y-m-d H:i:s", strtotime($rawFormattedTime));
             if ($formModel->validate()) {
+                $formModel->refreshCreditsUsed();
                 $numberOfAffectedAccounts = $formModel->topupAccounts();
                 Yii::app()->user->setFlash("success","Success! All $numberOfAffectedAccounts account(s) are topped up.");
                 $this->redirect(array('/subSipAccount/topUpSelected'));

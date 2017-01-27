@@ -164,4 +164,29 @@ class TopupForm extends CFormModel
         }
 
     }
+
+    public function refreshCreditsUsed()
+    {
+        /**
+         * @var $currentModel RemoteDataCache
+         */
+        $allRemoteDataCacheModels = RemoteDataCache::model()->findAll();
+        foreach ($allRemoteDataCacheModels as $currentModel) {
+            //get credit used ,
+            $currentModel->last_balance_since_topup = floatval($currentModel->last_balance_since_topup);
+            $currentModel->exact_balance = floatval($currentModel->exact_balance);
+            $currentModel->accumulating_credits_used = floatval($currentModel->accumulating_credits_used);
+            $creditsUsed = (  $currentModel->last_balance_since_topup - $currentModel->exact_balance) + $currentModel->accumulating_credits_used;
+            // add it to current occumulating credits used
+            if ($creditsUsed > 0) {
+                $currentModel->accumulating_credits_used = $creditsUsed;
+            } else {
+                $currentModel->accumulating_credits_used = 0;
+            }
+            //done
+            $currentModel->update();
+            $traceMessage = sprintf("Updated occumulated credits used of %s using record %s", $currentModel->accumulating_credits_used, $currentModel->id);
+            Yii::trace($traceMessage);
+        }
+    }
 }

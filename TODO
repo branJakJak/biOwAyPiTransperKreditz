@@ -694,7 +694,6 @@ activeMonitor / monitor
 @TODO -
 A button to retrieve the consumed credits
 
-
      - trigger this after , the user topped up
         after top up ,
             if last balance top up is not 0
@@ -714,6 +713,25 @@ then update the attribute last_balance_since_topup
 
 
 
+@TODO 
+accumulating_credit_used
+before topup compute for the credit used
+
+increase accumulating credits used , using current credit used
+
+
+
+
+
+@TODO
+make a reset button for all accounts
+
+@TODO
+make a reset button for selected account
 
 @TODO 
-export data from production and import to dev env
+make a reset button on each account
+
+@TODO
+once we topup on a certain account, the credits used must not turn zero instead it must add-up on while being used as the used credits, the credits used view will only turn zero once it was reset
+

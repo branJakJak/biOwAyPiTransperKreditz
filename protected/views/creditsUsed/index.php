@@ -28,17 +28,23 @@ $this->menu = array();
 ?>
 
 
+<?php if (Yii::app()->user->hasFlash('success')): ?>
+<div class="alert in fade alert-success">
+    <a href="#" class="close" data-dismiss="alert">×</a>
+        <?php echo Yii::app()->user->getFlash('success') ?>
+</div>
+
+<?php endif ?>
 
 <div ng-app="sipAccountModule">
     <div ng-controller="IndexCtrl as indexCtrl">
         <div class="span3 text-center">
             <?php
                 $this->beginWidget('zii.widgets.CPortlet', array(
-                    'title'=>' ',
+                    'title'=>'<strong class="pull-left">Overall Used Credits</strong> <a href="resetAll" class="pull-right">Reset All</a> <div class="clearfix"></div> ',
                 ));
             ?>
             <h2>
-                Overall Used Credits
                 <small class="small">
                     {{ indexCtrl.getTotalCreditsUsed() }}
                 </small>
@@ -59,6 +65,7 @@ $this->menu = array();
                 <th>Balance</th>
                 <th>Credit used</th>
                 <th>Date</th>
+                <th></th>
             </tr>
             </thead>
             <tbody ng-cloak>
@@ -80,6 +87,9 @@ $this->menu = array();
                 <td>{{ indexCtrl.getCreditUsed(value)  }}</td>
 
                 <td>{{ value.last_credit_update  }}</td>
+                <td>
+                    <a target='_blank' class='btn btn-sm' href="reset?account={{ value.id }}">Reset Credit Used</a>
+                </td>
 
             </tr>
             </tbody>
