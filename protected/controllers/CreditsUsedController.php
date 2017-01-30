@@ -44,7 +44,7 @@ class CreditsUsedController extends Controller
         $dbCriteria->compare("id", $account);
         $model = RemoteDataCache::model()->find();
         if ($model) {
-            $model->last_balance_since_topup = $model->exact_balance;
+            // $model->last_balance_since_topup = $model->exact_balance;
             $model->accumulating_credits_used = 0;
             $model->update();
         }
@@ -55,7 +55,7 @@ class CreditsUsedController extends Controller
     {
         $models = RemoteDataCache::model()->findAll();
         foreach ($models as $currentModel) {
-            $model->last_balance_since_topup = $model->exact_balance;
+            // $model->last_balance_since_topup = $model->exact_balance;
             $currentModel->accumulating_credits_used = 0;
             $currentModel->update();
         }
