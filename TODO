@@ -725,13 +725,26 @@ increase accumulating credits used , using current credit used
 
 @TODO
 make a reset button for all accounts
+@DONE
 
 @TODO
 make a reset button for selected account
+@DONE
 
 @TODO 
 make a reset button on each account
+@DONE
 
 @TODO
 once we topup on a certain account, the credits used must not turn zero instead it must add-up on while being used as the used credits, the credits used view will only turn zero once it was reset
+@DONE
 
+
+@TODO
+every hour ,  log the credit used by certain account
+(last top up balance - exact balance)  + accumulating credits
+
+credits_used_logs
+--id
+credits_used : double
+log_date : datetime
