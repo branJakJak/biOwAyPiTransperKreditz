@@ -46,7 +46,7 @@ class CreditsUsedController extends Controller
         if ($model) {
             // $model->last_balance_since_topup = $model->exact_balance;
             $model->accumulating_credits_used = 0;
-            if (!$model->save()) {
+            if (!$model->save(false)) {
                 throw new Exception(CHtml::errorSummary($model));
             }
         }
@@ -59,7 +59,7 @@ class CreditsUsedController extends Controller
         foreach ($models as $currentModel) {
             // $model->last_balance_since_topup = $model->exact_balance;
             $currentModel->accumulating_credits_used = 0;
-            if (!$currentModel->save()) {
+            if (!$currentModel->save(false)) {
                 throw new Exception(CHtml::errorSummary($currentModel));
             }
         }
