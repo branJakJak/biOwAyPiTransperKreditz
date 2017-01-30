@@ -46,11 +46,12 @@ class CreditsUsedController extends Controller
         if ($model) {
             // $model->last_balance_since_topup = $model->exact_balance;
             $model->accumulating_credits_used = 0;
-            if (!$model->save(false)) {
-                throw new Exception(CHtml::errorSummary($model));
+            if (!$model->save()) {
+                Yii::app()->user->setFlash("error",CHtml::errorSummary($model));
+            } else {
+                Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
             }
         }
-        Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
         $this->redirect("/creditsUsed/index");
     }
     public function actionResetAll()
@@ -59,11 +60,12 @@ class CreditsUsedController extends Controller
         foreach ($models as $currentModel) {
             // $model->last_balance_since_topup = $model->exact_balance;
             $currentModel->accumulating_credits_used = 0;
-            if (!$currentModel->save(false)) {
-                throw new Exception(CHtml::errorSummary($currentModel));
+            if (!$currentModel->save()) {
+                Yii::app()->user->setFlash("error",CHtml::errorSummary($currentModel));
+            }else{
+                Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
             }
         }
-        Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
         $this->redirect("/creditsUsed/index");
     }
 	public function actionIndex()
