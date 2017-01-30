@@ -88,7 +88,7 @@ $this->menu = array();
 
                 <td>{{ value.last_credit_update  }}</td>
                 <td>
-                    <a target='_blank' class='btn btn-sm' href="reset?account={{ value.id }}">Reset Credit Used</a>
+                    <a class='btn btn-sm' href="reset?account={{ value.id }}">Reset Credit Used</a>
                 </td>
 
             </tr>
