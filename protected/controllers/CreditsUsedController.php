@@ -45,7 +45,7 @@ class CreditsUsedController extends Controller
         $model = RemoteDataCache::model()->find();
         if ($model) {
             $model->last_balance_since_topup = $model->exact_balance;
-            $model->accumulating_credit_used = 0;
+            $model->accumulating_credits_used = 0;
             $model->update();
         }
         Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
@@ -56,7 +56,7 @@ class CreditsUsedController extends Controller
         $models = RemoteDataCache::model()->findAll();
         foreach ($models as $currentModel) {
             $model->last_balance_since_topup = $model->exact_balance;
-            $currentModel->accumulating_credit_used = 0;
+            $currentModel->accumulating_credits_used = 0;
             $currentModel->update();
         }
         Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
