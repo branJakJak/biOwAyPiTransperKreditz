@@ -42,7 +42,7 @@ class CreditsUsedController extends Controller
          */
         $dbCriteria = new CDbCriteria();
         $dbCriteria->compare("id", $account);
-        $model = RemoteDataCache::model()->find();
+        $model = RemoteDataCache::model()->find($dbCriteria);
         if ($model) {
             // $model->last_balance_since_topup = $model->exact_balance;
             $model->accumulating_credits_used = 0;
