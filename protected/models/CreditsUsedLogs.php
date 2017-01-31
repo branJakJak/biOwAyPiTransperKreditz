@@ -82,7 +82,7 @@ class CreditsUsedLogs extends CActiveRecord
 		$criteria->compare('credit_used',$this->credit_used);
 		$criteria->compare('log_date',$this->log_date,true);
 		$criteria->compare('remote_data_cache_accout_id',$this->remote_data_cache_accout_id);
-
+		$criteria->order = 'log_date DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
