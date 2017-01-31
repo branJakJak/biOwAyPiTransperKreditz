@@ -44,7 +44,7 @@ class CreditsUsedController extends Controller
         $dbCriteria->compare("id", $account);
         $model = RemoteDataCache::model()->find($dbCriteria);
         if ($model) {
-            // $model->last_balance_since_topup = $model->exact_balance;
+            $model->last_balance_since_topup = $model->exact_balance;
             $model->accumulating_credits_used = 0;
             if (!$model->save()) {
                 Yii::app()->user->setFlash("error",CHtml::errorSummary($model));
@@ -60,7 +60,7 @@ class CreditsUsedController extends Controller
     {
         $models = RemoteDataCache::model()->findAll();
         foreach ($models as $currentModel) {
-            // $model->last_balance_since_topup = $model->exact_balance;
+            $model->last_balance_since_topup = $model->exact_balance;
             $currentModel->accumulating_credits_used = 0;
             if (!$currentModel->save()) {
                 Yii::app()->user->setFlash("error",CHtml::errorSummary($currentModel));
