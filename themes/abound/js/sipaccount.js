@@ -39,9 +39,9 @@
 			//found
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) !== -1 ) {
 				isValid = true;
-			}
-			if (!currentRemoteDataCache.is_hidden) {
-				isValid = true;
+				if (!currentRemoteDataCache.is_hidden) {
+					isValid = true;
+				}
 			}
 			return isValid;
 		}
