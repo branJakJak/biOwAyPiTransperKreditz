@@ -33,13 +33,31 @@ class RemoteDataCacheController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('admin','delete','create','update','index','view'),
+				'actions'=>array('admin','delete','create','update','index','view','hide','hidden','unhide'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
+	}
+	/**
+	 * Displays all hidden accounts
+	 */
+	public function actionHidden()
+	{
+		$this->layout = 'main';
+		$model=new RemoteDataCache('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['RemoteDataCache'])){
+			$model->attributes=$_GET['RemoteDataCache'];
+		}
+		$model->is_hidden = true;
+		$data = $model->search();
+		$this->render('hidden',array(
+			'model'=>$model,
+			'data'=>$data
+		));
 	}
 
 	/**
@@ -80,6 +98,61 @@ class RemoteDataCacheController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+	public function actionHide($account)
+	{
+		$dbCriteria = new CDbCriteria();
+		$dbCriteria->compare("id",$account);
+		$message = [
+			'status'=>'error',
+			'message'=>'Can\'t proceed with the request'
+		];
+		if (RemoteDataCache::model()->exists($dbCriteria)) {
+			$model = RemoteDataCache::model()->findByPk($account);
+			$model->is_hidden = true;
+			if ($model->save()) {
+				$message = [
+					'status'=>'success',
+					'message'=>'Account updated'
+				];			
+			} else {
+				$message = [
+					'status'=>'error',
+					'message'=>'An error occured',
+					'errors'=>$model->getErrors()
+				];
+			}
+		}
+		echo CJSON::encode($message);
+	}
+	public function actionUnhide($account)
+	{
+		$dbCriteria = new CDbCriteria();
+		$dbCriteria->compare("id",$account);
+		$message = [
+			'status'=>'error',
+			'message'=>'Can\'t proceed with the request'
+		];
+		if (RemoteDataCache::model()->exists($dbCriteria)) {
+			$model = RemoteDataCache::model()->findByPk($account);
+			$model->is_hidden = false;
+			if ($model->save()) {
+				$message = [
+					'status'=>'success',
+					'message'=>'Account updated'
+				];			
+			} else {
+				$message = [
+					'status'=>'error',
+					'message'=>'An error occured',
+					'errors'=>$model->getErrors()
+				];
+			}
+			Yii::app()->user->setFlash("success","Account $model->sub_user is now visible");
+		} else {
+			Yii::app()->user->setFlash("error","Can't find account");
+		}
+		$this->redirect(array('/remoteDataCache/hidden'));
 	}
 
 	/**

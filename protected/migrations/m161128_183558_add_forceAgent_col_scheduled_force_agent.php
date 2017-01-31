@@ -11,5 +11,4 @@ class m161128_183558_add_forceAgent_col_scheduled_force_agent extends CDbMigrati
 	{
         $this->dropColumn("scheduled_force_agent", "forceAgent");
 	}
-
 }

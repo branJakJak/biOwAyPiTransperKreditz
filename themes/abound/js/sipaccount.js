@@ -40,15 +40,28 @@
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) !== -1 ) {
 				isValid = true;
 			}
+			if (!currentRemoteDataCache.is_hidden) {
+				isValid = true;
+			}
 			return isValid;
 		}
 		$scope.mainRemoteDataCacheFilter = function(currentRemoteDataCache){
 			isValid = false;
+
 			var filterUser = ['krustyclown*lj2016888','Euzae6eeQu*Famenig44','Zola24','tesvonrae*raevontes'];
 			// not found
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) === -1 ) {
 				isValid = true;
 			}
+			// console.log('hidden')
+			// console.log(currentRemoteDataCache.is_hidden)
+			if (currentRemoteDataCache.is_hidden == 1) {
+				isValid = false;
+				console.log('hide it!')
+			} else {
+				isValid = true;
+				console.log('show it!')
+			}		
 			return isValid;
 		}
 
@@ -72,6 +85,17 @@
         		}
         	}
         	return creditUsed;
+        }
+        currentController.hideAccount = function(remoteDataCacheModel){
+        	/*send ajax get that contains the id to hide*/
+			$http({
+			  method: 'GET',
+			  url: '/remoteDataCache/hide?account='+remoteDataCacheModel.id
+			}).then(function successCallback(response) {
+				currentController.synchronizeData();
+			});
+        	/*refresh the accounts in the list*/
+        	/*done*/
         }
 
 		// this.activateAllAccountsFunc = function(){

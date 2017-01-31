@@ -102,4 +102,9 @@ class CreditsUsedLogs extends CActiveRecord
 	{
 		return RemoteDataCache::model()->findByPk($this->remote_data_cache_accout_id);
 	}
+	public function getAccountName()
+	{
+		$remoteDataCacheModel = $this->getRemoteDataCache();
+		return $remoteDataCacheModel->sub_user;
+	}
 }

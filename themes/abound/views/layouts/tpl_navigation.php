@@ -38,6 +38,7 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                             array('label'=>'Top up', 'url'=>array('/subSipAccount/topUpSelected')),
                             array('label'=>'Activate', 'url'=>array('/subSipAccount/activateGroup')),
                             array('label'=>'Deactivate', 'url'=>array('/subSipAccount/deactivateGroup')),
+                            array('label'=>'Hidden Accounts', 'url'=>array('/remoteDataCache/hidden')),
                         )),
                         array('label'=>'Configuration <span class="caret"></span>','visible'=>!Yii::app()->user->isGuest ,'url'=>'#','itemOptions'=>array('class'=>'dropdown','tabindex'=>"-1"),'linkOptions'=>array('class'=>'dropdown-toggle','data-toggle'=>"dropdown"),
                         'items'=>array(

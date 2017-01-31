@@ -16,8 +16,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>View accounts #<?php echo $model->id; ?></h1>
+<h1>View account<?php echo $model->sub_user; ?></h1>
 <hr>
+<?php echo CHtml::link('<i class="icon-th-list"></i> View Credits Used Logs', array('/creditsUsedLogs/record','account'=>$model->id,'log_date'=>date('Y-m-d')), array('class'=>'btn btn-default')); ?>
+<br>
+<br>
+
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -39,6 +43,7 @@ $this->menu=array(
 		'last_balance_since_topup',
 		'accumulating_credits_used',
 		'num_lines',
+		'is_hidden',
 		[
 			'label'=>'Disable URL',
 			'type'=>'raw',

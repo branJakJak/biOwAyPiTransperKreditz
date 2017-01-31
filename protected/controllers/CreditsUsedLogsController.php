@@ -27,12 +27,8 @@ class CreditsUsedLogsController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','index','view','record'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,7 +40,25 @@ class CreditsUsedLogsController extends Controller
 			),
 		);
 	}
-
+	/**
+	 * List all logs on credit used by specific account
+	 */
+	public function actionRecord($account,$log_date)
+	{
+		$model=new CreditsUsedLogs('search');
+		$model->unsetAttributes();
+		if (isset($_GET['account']) && isset($_GET['log_date'])) {
+			$model->log_date = $_GET['log_date'];
+		}else{	
+			$model->log_date = date('Y-m-d');
+		}
+		$model->remote_data_cache_accout_id = intval($account);
+		// var_dump($model->attributes);
+		// die();
+		$this->render('record',array(
+			'model'=>$model
+		));
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed

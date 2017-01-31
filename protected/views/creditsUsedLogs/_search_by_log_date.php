@@ -10,15 +10,17 @@
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
+	<?php echo CHtml::hiddenField('account', $remote_data_cache); ?>
+
 	<div class="row">
 		<div class="span4">
-			<?php echo $form->label($model,'log_date'); ?>
+			<label>Log Date</label>
 			<?php
 			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-			    'model'=>$model,
-			    'attribute'=>'log_date',
+			    'name'=>'log_date',
 			    'language'=>'en',
 			    'options'=>[
+			    	'dateFormat' => 'yy-mm-dd',
 			    	'changeMonth'=>true,
 			    	'changeYear'=>true
 			    ]
