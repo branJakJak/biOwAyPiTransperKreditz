@@ -60,7 +60,7 @@ class CreditsUsedController extends Controller
     {
         $models = RemoteDataCache::model()->findAll();
         foreach ($models as $currentModel) {
-            $currentModel->last_balance_since_topup = $model->exact_balance;
+            $currentModel->last_balance_since_topup = $currentModel->exact_balance;
             $currentModel->accumulating_credits_used = 0;
             if (!$currentModel->save()) {
                 Yii::app()->user->setFlash("error",CHtml::errorSummary($currentModel));
