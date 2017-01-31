@@ -33,7 +33,12 @@ $this->menu = array();
     <a href="#" class="close" data-dismiss="alert">×</a>
         <?php echo Yii::app()->user->getFlash('success') ?>
 </div>
-
+<?php endif ?>
+<?php if (Yii::app()->user->hasFlash('error')): ?>
+<div class="alert in fade alert-warning">
+    <a href="#" class="close" data-dismiss="alert">×</a>
+        <?php echo Yii::app()->user->getFlash('error') ?>
+</div>
 <?php endif ?>
 
 <div ng-app="sipAccountModule">

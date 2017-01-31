@@ -51,6 +51,8 @@ class CreditsUsedController extends Controller
             } else {
                 Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
             }
+            /*trigger logging here */
+            $this->logCreditUsed($model);
         }
         $this->redirect("/creditsUsed/index");
     }
@@ -66,7 +68,32 @@ class CreditsUsedController extends Controller
                 Yii::app()->user->setFlash("success", 'Sucessfully resetted credits used ');
             }
         }
+        /*trigger logging here */
+        $this->logAllCreditUsed();
         $this->redirect("/creditsUsed/index");
+    }
+    protected function logCreditUsed(RemoteDataCache $remoteDataCache)
+    {
+        $currentCreditsUsed = ($remoteDataCache->last_balance_since_topup  - $remoteDataCache->exact_balance) + $remoteDataCache->accumulating_credits_used;
+        $newLog = new CreditsUsedLogs();
+        $newLog->credit_used = floatval($currentCreditsUsed);
+        $newLog->remote_data_cache_accout_id = $remoteDataCache->id;
+        // create log with timestamp
+        $newLog->log_date = date("Y-m-d H:i:s");
+        if (!$newLog->save()) {
+            echo "Can't an error occured while creating new log";
+        }else{
+            $messageLog = sprintf('Log created | %s | log identification : %s', $newLog->log_date , $newLog->id);
+            Yii::log($messageLog, CLogger::LEVEL_INFO,'log_credits');
+            echo $messageLog. PHP_EOL;
+        }
+    }
+    protected function logAllCreditUsed()
+    {
+        $allModels = RemoteDataCache::model()->findAll();
+        foreach ($allModels as $key => $currentModel) {
+            $this->logCreditUsed($currentModel);
+        }
     }
 	public function actionIndex()
 	{

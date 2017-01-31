@@ -53,7 +53,7 @@ class RemoteDataCache extends CActiveRecord
 			array('campaign, date_created,date_updated,last_credit_update', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines,last_balance_since_topup', 'safe', 'on'=>'search'),
+			array('id, main_user, main_pass, sub_user, sub_pass, vici_user, is_active, balance, exact_balance, ip_address, num_lines,last_balance_since_topup,accumulating_credits_used', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -159,7 +159,7 @@ class RemoteDataCache extends CActiveRecord
             $autoTopUpConf->topUpValue = 0;
             $autoTopUpConf->save(false);
         }
-        return parent::afterSave();
+        parent::afterSave();
     }
 
     public function behaviors()

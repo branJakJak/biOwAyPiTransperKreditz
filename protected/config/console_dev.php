@@ -174,6 +174,12 @@ return array(
                 array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'info',
+                    'categories' => 'log_credits',
+                    'logFile' => 'log_credits',
+                ),
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'info',
                 ),
 
             ),
