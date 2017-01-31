@@ -52,16 +52,12 @@
 			// not found
 			if (filterUser.indexOf(currentRemoteDataCache.sub_user) === -1 ) {
 				isValid = true;
+				if (currentRemoteDataCache.is_hidden == 1) {
+					isValid = false;
+				} else {
+					isValid = true;
+				}
 			}
-			// console.log('hidden')
-			// console.log(currentRemoteDataCache.is_hidden)
-			if (currentRemoteDataCache.is_hidden == 1) {
-				isValid = false;
-				console.log('hide it!')
-			} else {
-				isValid = true;
-				console.log('show it!')
-			}		
 			return isValid;
 		}
 
