@@ -110,6 +110,7 @@ class SubSipAccountController extends Controller {
         $sipAccountNames = array();
         $chartSeriesData = array();
         $criteria = new CDbCriteria;
+        $criteria->compare("is_hidden",false);//show only the visible account
         // $criteria->condition = "balance > 0";
         $criteria->order = "vici_user ASC";
 
@@ -199,8 +200,6 @@ class SubSipAccountController extends Controller {
         //append current campaign
 
         //List of force agent options
-
-
         $forceAgentModelAll = ForceAgentTable::model()->findAll();
         $listForceAgentCollection = CHtml::listData($forceAgentModelAll, 'force_agent_value', 'force_agent_lbl');
         $this->render('topUpSelected',compact('chartLabels','formModel','allSipAccounts','topupLogsTotalToday','logRecsTodayDataProvider','numberOfAccounts','sipAccountsStr','sipAccountsStr','seriesDataStr','listForceAgentCollection'));
