@@ -211,7 +211,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				{{ value.date_updated }}
 			</td>
 			<td>
-				<a class="btn btn-default" href="" ng-click="indexCtrl.hideAccount(value)"> Update balance</a>
+				<a class="btn btn-default" href="" ng-click="indexCtrl.hideAccount(value)"> Hide</a>
 <!-- 				<a class="btn btn-default" href="/sipAccount/quickDelete?cacheid={{value.id}}" onclick="return confirm('Are you sure you want to delete this ? ')">
 					delete
 				</a> -->
