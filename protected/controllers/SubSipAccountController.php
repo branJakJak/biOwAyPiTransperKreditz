@@ -110,7 +110,7 @@ class SubSipAccountController extends Controller {
         $sipAccountNames = array();
         $chartSeriesData = array();
         $criteria = new CDbCriteria;
-        $criteria->compare("is_hidden",false);//show only the visible account
+        $criteria->compare("is_hidden",0);//show only the visible account
         // $criteria->condition = "balance > 0";
         $criteria->order = "vici_user ASC";
 
@@ -148,6 +148,7 @@ class SubSipAccountController extends Controller {
         $formModel = new TopupForm;
         $criteria = new CDbCriteria();
         // $criteria->condition = "balance > 0";
+        $criteria->compare("is_hidden",0);//show only the visible account
         $tempCon123 = RemoteDataCache::model()->findAll($criteria);
         $numberOfAccounts = count($tempCon123);
         $topupLogsTotalToday = 0;
@@ -213,6 +214,7 @@ class SubSipAccountController extends Controller {
         $accountsCollection = [];
         $criteria = new CDbCriteria();
         $criteria->condition = "balance > 0";
+        $criteria->compare("is_hidden",0);//show only the visible account
         $tempContainer = RemoteDataCache::model()->findAll($criteria);
         foreach ($tempContainer as $key => $currentRemoteDataCache) {
             $accountsCollection[] = $currentRemoteDataCache->sub_user;
