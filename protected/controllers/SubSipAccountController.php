@@ -112,6 +112,7 @@ class SubSipAccountController extends Controller {
         $criteria = new CDbCriteria;
         $criteria->compare("is_hidden",0);//show only the visible account
         // $criteria->condition = "balance > 0";
+        
         $criteria->order = "vici_user ASC";
 
         $allRemoteModels = RemoteDataCache::model()->findAll($criteria);
@@ -213,7 +214,7 @@ class SubSipAccountController extends Controller {
     {
         $accountsCollection = [];
         $criteria = new CDbCriteria();
-        $criteria->condition = "balance > 0";
+        // $criteria->condition = "balance > 0";
         $criteria->compare("is_hidden",0);//show only the visible account
         $tempContainer = RemoteDataCache::model()->findAll($criteria);
         foreach ($tempContainer as $key => $currentRemoteDataCache) {
