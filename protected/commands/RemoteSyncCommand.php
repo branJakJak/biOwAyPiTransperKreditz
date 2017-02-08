@@ -80,6 +80,7 @@ class RemoteSyncCommand extends CConsoleCommand {
                 $newModel->ip_address = $currentFetchedData['server_ip'];
                 $newModel->campaign = $currentFetchedData["campaign"];
                 $newModel->is_active = $currentFetchedData["status"];
+                $newModel->is_hidden = 0;//safer that using false
                 if ($newModel->save()) {
                     Yii::log("New Model Saved . ", CLogger::LEVEL_INFO, 'sync_log');
                 } else {
