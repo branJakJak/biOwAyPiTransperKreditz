@@ -23,13 +23,6 @@ $listenToEventWh = <<<EOL
 window.newCategoryAdded = function(newCategory){
 	var currentCat = _.uniq(newCategory);
 	jQuery("#numberOfSelectedItems").html(currentCat.length);
-	
-	// var currentdomVal = jQuery("#TopupForm_accounts").val();
-	// if(currentdomVal != ""){
-	// 	numOfItemsSelected = currentdomVal.split(",").length;
-	// }else{
-	// 	jQuery("#numberOfSelectedItems").html("0");
-	// }
 }
 EOL;
 Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);
@@ -131,6 +124,11 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 // 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 // ', CClientScript::POS_READY);
 
+$topUpValueList = [];
+foreach (range(10,50,10) as $key => $value) {
+	$topUpValueList[$value] = $value;
+}
+
 ?>
 <script type="text/javascript">
 	function selectAll() {
@@ -149,7 +147,26 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			jQuery("#scheduleTimeField").hide();
 		}
 	}
+	function toggleManualInputTopUpValue (curDom) {
+		if (jQuery(curDom).is(":checked")) {
+			jQuery("#manualInputTopUpValue").show();
+		} else {
+			jQuery("#manualInputTopUpValue").hide();
+		}
+	}
 </script>
+<style type="text/css">
+	#TopupForm_topupvalue label { 
+		display: inline;
+		margin-left: 10px;
+	}
+	#TopupForm_topupvalue input[type="radio"] {
+		margin-top: -3px;
+	}
+	#TopupForm_topupvalue radio-separator {
+		margin: 5px 0px;
+	}
+</style>
 <div class="row-fluid">
 	<div class="span5 offset1">
 		<?php
@@ -201,8 +218,18 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 			<br>
 			<br>
 			<label>Amount : </label>
-			<?php echo CHtml::activeTextField($formModel, 'topupvalue', array('class'=>'form-control')); ?>
+			<br>
+			<?php echo CHtml::activeRadioButtonList($formModel, 'topupvalue', $topUpValueList, array('class'=>'form-control','template'=>'{input}{label}<div class="radio-separator"></div>')); ?>
 			<?php echo CHtml::error($formModel, 'topupvalue'); ?>
+			<br>
+			<?php echo CHtml::checkBox('is_manual_input', false, array('onchange'=>'toggleManualInputTopUpValue(this)')); ?>
+			<label style="
+    display: inline;
+    position: relative;
+    top: 3px;
+">Toggle Manual Input</label>
+			<br>
+			<?php echo CHtml::textField('manualInputTopUpValue', '', array('class'=>'form-control','style'=>'display:none','id'=>'manualInputTopUpValue')); ?>
 			<br>
 			<br>
 			<label>

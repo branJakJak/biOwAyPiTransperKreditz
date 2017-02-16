@@ -74,7 +74,12 @@ class TopupForm extends CFormModel
                      * @var $topUpMainAccount TopUpMainAccount
                      */
                     $topUpMainAccount = Yii::app()->topUpMainAccount;
-                    $topUpMainAccount->topUp($this->freeVoipAccountUsername, $this->topupvalue, $model);
+                    $topUpValueTempContainer = 0;
+                    try {
+                        $topUpMainAccount->topUp($this->freeVoipAccountUsername, $this->topupvalue, $model);
+                    } catch (Exception $e) {
+                        
+                    }
                     //$this->topUpMainAccount($model); // topup the main account  , old implementation
 
                     //TOPUP the sub accounts
