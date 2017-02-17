@@ -182,8 +182,6 @@ class SubSipAccountController extends Controller {
             if (isset($_POST['is_manual_input']) && $_POST['is_manual_input'] == 1) {
                 $formModel->topupvalue = intval($_POST['manualInputTopUpValue']);
             }
-            print_r($formModel->attributes);
-            die();
             //parse the date
             $tempHourContainer = isset($_POST['scheduleHour']) ? $_POST['scheduleHour'] : '01';
             $tempMinuteContainer = isset($_POST['scheduleMinute']) ? $_POST['scheduleMinute'] : '00';
