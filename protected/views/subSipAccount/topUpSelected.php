@@ -2,9 +2,14 @@
 
 
 $baseUrl = Yii::app()->theme->baseUrl; 
+
+$numSelectedItems = <<<EOL
+window.numberOfSelectedItems = 0;
+EOL;
+Yii::app()->clientScript->registerScript('numSelectedItemsVars', $numSelectedItems, CClientScript::POS_HEAD);
+
+
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/underscore-min.js', CClientScript::POS_HEAD);
-
-
 $cleanArrProto = <<<EOL
 Array.prototype.clean = function(deleteValue) {
   for (var i = 0; i < this.length; i++) {
@@ -22,7 +27,9 @@ Yii::app()->clientScript->registerScript('cleanArrProto', $cleanArrProto, CClien
 $listenToEventWh = <<<EOL
 window.newCategoryAdded = function(newCategory){
 	var currentCat = _.uniq(newCategory);
-	jQuery("#numberOfSelectedItems").html(currentCat.length);
+	console.log(currentCat);
+	window.numberOfSelectedItems = currentCat.length;
+	jQuery("#numberOfSelectedItems").html(window.numberOfSelectedItems);
 }
 EOL;
 Yii::app()->clientScript->registerScript('listenToEventWh', $listenToEventWh, CClientScript::POS_READY);
@@ -124,6 +131,20 @@ setTimeout(updateChartDataInterval, (60*60) * 1000);
 // 		window.blinkerInterval = setInterval(window.chartBlink, 600);
 // ', CClientScript::POS_READY);
 
+
+/*Listen for manual selection value change*/
+$manualAccountInput = <<<EOL
+	jQuery('#TopupForm_accounts').on('change', function(event) {
+		window.numberOfSelectedItems = jQuery('#TopupForm_accounts').val().split(",").filter(function(e){return e}).length;
+		jQuery("#numberOfSelectedItems").html(parseInt(window.numberOfSelectedItems));
+	});
+EOL;
+Yii::app()->clientScript->registerScript('manualAccountInput', $manualAccountInput, CClientScript::POS_READY);
+
+
+
+
+
 $topUpValueList = [];
 foreach (range(10,50,10) as $key => $value) {
 	$topUpValueList[$value] = $value;
@@ -139,6 +160,7 @@ foreach (range(10,50,10) as $key => $value) {
 	function deselectAll() {
 		jQuery('#TopupForm_accounts').val("");
 		jQuery('#TopupForm_accounts').trigger('change.select2');
+		jQuery("#numberOfSelectedItems").html(parseInt(window.numberOfSelectedItems));
 	}
 	function toggleSchedule(curDom) {
 		if (jQuery(curDom).is(":checked")) {
@@ -154,6 +176,31 @@ foreach (range(10,50,10) as $key => $value) {
 			jQuery("#manualInputTopUpValue").hide();
 		}
 	}
+	$(document).ready(function() {
+
+		jQuery("#topUpForm").submit(function(event) {
+			/* Act on the event */
+			event.preventDefault();
+			var topUpValue = 0 + 'EUR';
+			if (jQuery("#is_manual_input").is(":checked")) {
+				topUpValue = jQuery("#manualInputTopUpValue").val();
+				topUpValue = parseFloat(topUpValue);
+				topUpValue += ' EUR';
+			} else {
+				if (jQuery("#TopupForm_topupvalue input[type=radio]:checked").size() > 0) {
+					topUpValue = jQuery("#TopupForm_topupvalue input[type=radio]:checked").val();
+					topUpValue = parseFloat(topUpValue);
+					topUpValue += ' EUR';				
+				}
+			}
+			var confirmRetVal = confirm("Are you sure you want to topup "+topUpValue+" on "+window.numberOfSelectedItems+' account(s)');
+			var confirmSubmittion = false;
+			if (confirmRetVal) {
+				confirmSubmittion = !confirmSubmittion;
+			}
+			return confirmSubmittion;
+		});
+	});
 </script>
 <style type="text/css">
 	#TopupForm_topupvalue label { 
@@ -173,7 +220,7 @@ foreach (range(10,50,10) as $key => $value) {
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Top-up Selected Account',
 				'htmlOptions'=>array(
-					'style'=>"height: 758px;overflow-y: scroll;border: 1px solid #DDDDDD;"
+					'style'=>"height: 835px;overflow-y: scroll;border: 1px solid #DDDDDD;"
 				),				
 			));
 		?>
@@ -186,7 +233,7 @@ foreach (range(10,50,10) as $key => $value) {
 			    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
 		    ),
 		)); ?>
-		<?php echo CHtml::beginForm(array('/subSipAccount/topUpSelected'), 'post',['style'=>'padding: 30px;padding-bottom: 0px;']); ?>
+		<?php echo CHtml::beginForm(array('/subSipAccount/topUpSelected'), 'post',['id'=>'topUpForm','style'=>'padding: 30px;padding-bottom: 0px;']); ?>
 			<label>
 				<b style="float:left">
 					Accounts : 
