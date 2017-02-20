@@ -180,7 +180,7 @@ foreach (range(10,50,10) as $key => $value) {
 
 		jQuery("#topUpForm").submit(function(event) {
 			/* Act on the event */
-			event.preventDefault();
+			
 			var topUpValue = 0 + 'EUR';
 			if (jQuery("#is_manual_input").is(":checked")) {
 				topUpValue = jQuery("#manualInputTopUpValue").val();
@@ -195,10 +195,12 @@ foreach (range(10,50,10) as $key => $value) {
 			}
 			var confirmRetVal = confirm("Are you sure you want to topup "+topUpValue+" on "+window.numberOfSelectedItems+' account(s)');
 			var confirmSubmittion = false;
-			if (confirmRetVal) {
-				confirmSubmittion = !confirmSubmittion;
+			if (!!confirmRetVal) {
+				return true;
+			}else{
+				event.preventDefault();
+				return false;
 			}
-			return confirmSubmittion;
 		});
 	});
 </script>
