@@ -31,32 +31,30 @@ $('.search-form form').submit(function(){
 <?php 
 $data =$model->search();
 $data->pagination = false;
+
+$cols = array(
+	'id',
+	'main_user',
+	// 'main_pass',
+	'sub_user',
+	// 'sub_pass',
+	'vici_user',
+	'is_active',
+	// 'last_balance',
+	// 'balance',
+	// 'exact_balance',
+	'ip_address',
+);
+if (Yii::app()->user->name === 'root') {
+	$cols[] = 	array(
+		'class'=>'CButtonColumn',
+	);
+}
+
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'remote-data-cache-grid',
 	'dataProvider'=>$data,
 	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'main_user',
-		// 'main_pass',
-		'sub_user',
-		// 'sub_pass',
-		'vici_user',
-		'is_active',
-		// 'last_balance',
-		// 'balance',
-		// 'exact_balance',
-		'ip_address'
-		// 'num_lines',
-		// 'campaign',
-		// 'last_balance_since_topup',
-		// 'date_created',
-		// 'date_updated',
-		/*
-		*/
-		// array(
-		// 	'class'=>'CButtonColumn',
-		// ),
-	),
+	'columns'=>$cols
 	// 'htmlOptions'=>array('class'=>'table table-bordered')
 )); ?>
