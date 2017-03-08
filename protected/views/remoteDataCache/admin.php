@@ -36,7 +36,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$data,
 	'filter'=>$model,
 	'columns'=>array(
-		// 'id',
+		'id',
 		'main_user',
 		// 'main_pass',
 		'sub_user',
