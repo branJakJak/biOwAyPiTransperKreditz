@@ -17,13 +17,16 @@ class RemoteSyncCommand extends CConsoleCommand {
          * @var RemoteDataCache $foundModel
          */
         $fetchData = new ChartInfoDataArr();
+        echo "Fetching data from remote source.".PHP_EOL;
         Yii::log("Fetching data from remote source.", CLogger::LEVEL_INFO, 'sync_log');
         $fetchedData = $fetchData->getData();
         Yii::log("Data Fetched from remote source", CLogger::LEVEL_INFO, 'sync_log');
+        echo "Data Fetched from remote source".PHP_EOL;
         foreach ($fetchedData as $currentFetchedData) {
             Yii::log(
                     sprintf("Processing data - %s - %s - %s - %s", $currentFetchedData['main_user'], $currentFetchedData['main_pass'], $currentFetchedData['sub_user'], $currentFetchedData['sub_pass'])
                     , CLogger::LEVEL_INFO, 'sync_log');
+            echo sprintf("Processing data - %s - %s - %s - %s", $currentFetchedData['main_user'], $currentFetchedData['main_pass'], $currentFetchedData['sub_user'], $currentFetchedData['sub_pass']).PHP_EOL;
             $criteria = new CDbCriteria();
             $criteria->compare("main_user", $currentFetchedData['main_user']);
             $criteria->compare("main_pass", $currentFetchedData['main_pass']);
@@ -68,6 +71,7 @@ class RemoteSyncCommand extends CConsoleCommand {
                 Yii::log(
                         sprintf("Model not found  , saving as new model instead - %s - %s - %s - %s", $currentFetchedData['main_user'], $currentFetchedData['main_pass'], $currentFetchedData['sub_user'], $currentFetchedData['sub_pass'])
                         , CLogger::LEVEL_INFO, 'sync_log');
+                echo sprintf("Model not found  , saving as new model instead - %s - %s - %s - %s", $currentFetchedData['main_user'], $currentFetchedData['main_pass'], $currentFetchedData['sub_user'], $currentFetchedData['sub_pass']) . PHP_EOL;
                 $newModel = new RemoteDataCache();
                 $newModel->main_user = $currentFetchedData['main_user'];
                 $newModel->main_pass = $currentFetchedData['main_pass'];

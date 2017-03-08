@@ -211,8 +211,9 @@ class RemoteDataCacheController extends Controller
 	{
 		$model=new RemoteDataCache('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['RemoteDataCache']))
+		if(isset($_GET['RemoteDataCache'])){
 			$model->attributes=$_GET['RemoteDataCache'];
+		}
 
 		$this->render('admin',array(
 			'model'=>$model,
