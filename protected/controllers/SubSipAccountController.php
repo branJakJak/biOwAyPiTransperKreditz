@@ -41,6 +41,7 @@ class SubSipAccountController extends Controller {
     {
         $criteria = new CDbCriteria;
         $criteria->compare("is_active","ACTIVE");
+        $criteria->compare("is_hidden",false);
         $criteria->order = "vici_user ASC";
         return RemoteDataCache::model()->findAll($criteria);
     }
@@ -74,6 +75,7 @@ class SubSipAccountController extends Controller {
     {
         $criteria = new CDbCriteria;
         $criteria->compare("is_active","INACTIVE");
+        $criteria->compare("is_hidden",false);
         $criteria->order = "vici_user ASC";
         return RemoteDataCache::model()->findAll($criteria);
     }
