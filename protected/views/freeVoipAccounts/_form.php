@@ -37,6 +37,12 @@
 		<?php echo $form->error($model,'credits'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'description'); ?>
+		<?php echo $form->textArea($model,'description'); ?>
+		<?php echo $form->error($model,'description'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'btn btn-primary')); ?>
 	</div>

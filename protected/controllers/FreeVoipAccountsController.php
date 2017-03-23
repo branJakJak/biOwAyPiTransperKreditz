@@ -99,6 +99,7 @@ class FreeVoipAccountsController extends Controller
 				"username"=>$value->username,
 				"password"=>$value->password,
 				"credits"=>$value->credits,
+				"description"=>$value->description,
 				"last_updated"=>VoipTransDateHelper::timeAgo($rawDateUpdated),
 				"date_created"=>$value->date_created,
 				"date_updated"=>$value->date_updated,

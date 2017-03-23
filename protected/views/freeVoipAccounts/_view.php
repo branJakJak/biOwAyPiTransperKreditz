@@ -26,6 +26,10 @@
 					<td><?php echo CHtml::encode($data->credits); ?></td>
 				</tr>
 				<tr>
+					<td><b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b></td>
+					<td><?php echo CHtml::encode($data->description); ?></td>
+				</tr>
+				<tr>
 					<td><b><?php echo CHtml::encode($data->getAttributeLabel('date_created')); ?>:</b></td>
 					<td><?php echo CHtml::encode($data->date_created); ?></td>
 				</tr>

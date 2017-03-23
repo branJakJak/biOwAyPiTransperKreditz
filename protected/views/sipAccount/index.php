@@ -113,7 +113,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 					</a>
 				</small>
 				<br>
-					{{value.username}}
+					{{value.username}} - {{value.description}}
 				<br>
 				<strong>
 					{{value.credits}}

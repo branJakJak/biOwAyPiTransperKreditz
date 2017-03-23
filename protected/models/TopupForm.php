@@ -4,7 +4,7 @@ class TopupForm extends CFormModel
 {
     public $accounts;
     public $topupvalue;
-    public $freeVoipAccountUsername = 'Anistring';
+    public $freeVoipAccountUsername = 'Hiscroped';
     public $andActivate = false;
     public $forceAgent;
     public $scheduleForceAgent = false;

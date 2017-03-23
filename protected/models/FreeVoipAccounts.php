@@ -8,6 +8,7 @@
  * @property string $username
  * @property string $password
  * @property string $credits
+ * @property string $description
  * @property string $date_created
  * @property string $date_updated
  *
@@ -37,8 +38,8 @@ class FreeVoipAccounts extends CActiveRecord
 		return array(
 			array('username, password', 'required'),
 			array('username, password', 'length', 'max'=>255),
-			array('credits,date_created, date_updated', 'safe'),
-			array('id, username, password, date_created, date_updated', 'safe', 'on'=>'search'),
+			array('credits,date_created,description ,date_updated', 'safe'),
+			array('id, username, password,description ,date_created, date_updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +65,7 @@ class FreeVoipAccounts extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'credits' => 'Credit',
+			'description' => 'Description',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
 		);
@@ -91,6 +93,7 @@ class FreeVoipAccounts extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('credits',$this->credits,true);
+		$criteria->compare('description',$this->description,true);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_updated',$this->date_updated,true);
 
