@@ -174,7 +174,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 				<i class="fa fa-spinner fa-spin"></i> Loading ...
 			</td>
 		</tr>
-		<tr ng-repeat="(key, value) in sipAccounts | filter: {priority:'top'}" ng-class="indexCtrl.getRowClass(value)">
+		<tr ng-repeat="(key, value) in sipAccounts | filter: {priority:'top',is_hidden:'0'}" ng-class="indexCtrl.getRowClass(value)">
 			<td>{{key+1}}</td>
 			<td>
 				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
@@ -305,7 +305,7 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			</td>
 		</tr>
 
-		<tr ng-repeat="(key, value) in sipAccounts | filter: {priority:'bottom'}" ng-class="indexCtrl.getRowClass(value)">
+		<tr ng-repeat="(key, value) in sipAccounts | filter: {priority:'bottom',is_hidden:'0'}" ng-class="indexCtrl.getRowClass(value)">
 			<td>{{key+1}}</td>
 			<td>
 				<a target="_blank" href="https://www.voipinfocenter.com/Login.aspx?username={{value.main_user}}&password={{value.main_pass}}">
