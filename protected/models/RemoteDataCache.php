@@ -165,6 +165,12 @@ class RemoteDataCache extends CActiveRecord
             $autoTopUpConf->remote_data_cache = $this->id;
             $autoTopUpConf->topUpValue = 0;
             $autoTopUpConf->save(false);
+
+
+            if (!isset($this->is_hidden) || empty($this->is_hidden)) {
+            	$this->is_hidden = false;
+            }
+
         }
         parent::afterSave();
     }

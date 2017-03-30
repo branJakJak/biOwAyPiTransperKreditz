@@ -121,6 +121,17 @@
 				<?php echo $form->error($model,'campaign'); ?>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="span3">
+				<?php echo $form->labelEx($model,'is_hidden'); ?>
+				<?php echo CHtml::activeDropDownList($model, 'is_hidden', array(0=>'Show',1=>'Hide')); ?>
+				<?php echo $form->error($model,'is_hidden'); ?>
+			</div>
+
+		</div>
+
+
 	</fieldset>
 	<fieldset>
 		<legend></legend>
