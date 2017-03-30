@@ -32,12 +32,8 @@ class FreeVoipAccountsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', 
-				'actions'=>array('create','update','index','view','getList'),
+				'actions'=>array('create','update','index','view','getList','admin','delete'),
 				'users'=>array('@'),
-			),
-			array('allow', 
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny', 
 				'users'=>array('*'),
@@ -173,10 +169,11 @@ class FreeVoipAccountsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('FreeVoipAccounts');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->redirect("/freeVoipAccounts/admin");
+	// $dataProvider=new CActiveDataProvider('FreeVoipAccounts');
+	// $this->render('index',array(
+	// 	'dataProvider'=>$dataProvider,
+	// ));
 	}
 
 	/**

@@ -33,12 +33,8 @@ class RemoteDataCacheController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('admin','index','view','hide','hidden','unhide'),
+				'actions'=>array('admin','index','view','hide','hidden','unhide','delete','create','update'),
 				'users'=>array('@'),
-			),
-			array('allow',
-				'actions'=>array('delete','create','update'),
-				'users'=>array('root'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

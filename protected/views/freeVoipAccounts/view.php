@@ -16,17 +16,26 @@ $this->menu=array(
 );
 ?>
 
-<h1>View FreeVoipAccounts #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'username',
-		'password',
-		'credits',
-		'description',
-		'date_created',
-		'date_updated',
-	),
-)); ?>
+<div class="row">
+	<div class="span2"></div>
+	<div class="span8 well" style='padding-left: 50px'>
+	<?php echo CHtml::link('Back', array('/freeVoipAccounts/admin'), array('class'=>'')); ?> | 
+	<?php echo CHtml::link('Add Another', array('/freeVoipAccounts/create'), array('class'=>'')); ?>
+		<h1>View FreeVoipAccounts #<?php echo $model->id; ?></h1>
+		<?php $this->widget('zii.widgets.CDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				'id',
+				'username',
+				'password',
+				'credits',
+				'description',
+				'date_created',
+				'date_updated',
+			),
+		)); ?>
+	</div>
+</div>
+
+

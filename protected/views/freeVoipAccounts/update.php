@@ -16,6 +16,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update FreeVoipAccounts <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="span4"></div>
+	<div class="span4 well" style='padding-left: 50px'>
+		<h1>Update <?php echo $model->username; ?></h1>
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>
+
+

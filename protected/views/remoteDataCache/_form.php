@@ -18,6 +18,17 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+	<fieldset>
+		<legend>Position</legend>
+		<div class="row">
+			<div class="span6">
+				<?php echo $form->labelEx($model,'priority'); ?>
+				<?php echo CHtml::activeDropDownList($model, 'priority', array('top'=>'Top','bottom'=>'Bottom')); ?>
+				<?php echo $form->error($model,'priority'); ?>
+			</div>
+		</div>
+	</fieldset>
+
 
 	<fieldset>
 		<legend>Account Information : </legend>

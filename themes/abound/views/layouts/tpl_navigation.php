@@ -28,6 +28,7 @@ Yii::app()->clientScript->registerCss('quickNavFix', '
                     'items'=>array(
                         // array('label'=>'Dashboard', 'url'=>array('/site/index'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Home', 'url'=>array('/sipAccount/index'),'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'FreeVoip Accounts ', 'url'=>array('/freeVoipAccounts/admin'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Accounts', 'url'=>array('/remoteDataCache/admin'),'visible'=>!Yii::app()->user->isGuest),
                         array('label'=>'Credits Used', 'url'=>array('/creditsUsed/index'),'visible'=>!Yii::app()->user->isGuest),
                         // array('label'=>'Control', 'url'=>array('/control/index'),'visible'=>!Yii::app()->user->isGuest),

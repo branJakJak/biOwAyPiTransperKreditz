@@ -13,6 +13,12 @@ $this->menu=array(
 );
 ?>
 
-<h1><i class="fa fa-user"></i>Create new account</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="span4"></div>
+	<div class="span4 well" style='padding-left: 50px'>
+		<h1>
+		Create new account
+		</h1>
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

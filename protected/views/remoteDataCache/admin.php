@@ -45,11 +45,11 @@ $cols = array(
 	// 'exact_balance',
 	'ip_address',
 );
-if (Yii::app()->user->name === 'root') {
+// if (Yii::app()->user->name === 'root') {
 	$cols[] = 	array(
 		'class'=>'CButtonColumn',
 	);
-}
+// }
 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'remote-data-cache-grid',
