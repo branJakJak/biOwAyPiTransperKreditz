@@ -20,6 +20,7 @@
  * @property double $last_balance_since_topup
  * @property double $accumulating_credits_used
  * @property integer $is_hidden
+ * @property string $priority
  * @property datetime $date_created
  * @property datetime $date_updated
  */
