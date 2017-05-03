@@ -22,6 +22,9 @@ class BestVOIPInformationRetriever {
         curl_setopt($curlres, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlres, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curlres, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+
         $curlResRaw = curl_exec($curlres);
         return new RemoteVoipResult(simplexml_load_string($curlResRaw));
     }
