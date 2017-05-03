@@ -26,6 +26,12 @@ class BestVOIPInformationRetriever {
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
 
         $curlResRaw = curl_exec($curlres);
+
+        // an error occured
+        if (curl_error($curlres)) {
+            $curlError = curl_error($curlres);
+            throw new Exception($curlError, __LINE__);
+        }
         return new RemoteVoipResult(simplexml_load_string($curlResRaw));
     }
 }
