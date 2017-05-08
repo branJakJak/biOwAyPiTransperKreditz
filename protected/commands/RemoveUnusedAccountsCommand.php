@@ -48,14 +48,20 @@ class RemoveUnusedAccountsCommand extends CConsoleCommand {
                 }
             }//end of loop allasteriskmodels
             if (!$currentRemoteDataCacheExists) {
-                $logMessage = sprintf("Deleting record : %s | %s | %s | %s" ,
+                $logMessage = sprintf("Hiding record : %s | %s | %s | %s" ,
                         $curRemoteDataCacheModel->main_user,
                         $curRemoteDataCacheModel->main_pass,
                         $curRemoteDataCacheModel->sub_user,
                         $curRemoteDataCacheModel->sub_pass
                         );
                 Yii::log($logMessage , CLogger::LEVEL_INFO,"sync_remove");
-                $curRemoteDataCacheModel->delete();
+
+                /*hide the accounts instead*/
+                $curRemoteDataCacheModel->is_hidden = true;
+                $curRemoteDataCacheModel->save(false);
+
+
+                // $curRemoteDataCacheModel->delete();
             }
         }//end of remotedatacache loop
     }
