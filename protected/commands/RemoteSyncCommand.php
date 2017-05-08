@@ -33,7 +33,7 @@ class RemoteSyncCommand extends CConsoleCommand {
             $criteria->compare("sub_user", $currentFetchedData['sub_user']);
             $criteria->compare("sub_pass", $currentFetchedData['sub_pass']);
             $foundModel = RemoteDataCache::model()->find($criteria);
-            if ($foundModel && $currentFetchedData['campaign'] !== 'PLH_TEST') {
+            if ($foundModel && $currentFetchedData['campaign'] != 'PLH_TEST') {
                 $last_balance = $foundModel->balance;
                 Yii::log("Current Data . " . json_encode($currentFetchedData), CLogger::LEVEL_INFO, 'sync_log');
                 Yii::log("Model found . ", CLogger::LEVEL_INFO, 'sync_log');
@@ -86,10 +86,12 @@ class RemoteSyncCommand extends CConsoleCommand {
                 $newModel->campaign = $currentFetchedData["campaign"];
                 $newModel->is_active = $currentFetchedData["status"];
                 $newModel->is_hidden = 0;//safer that using false
-                if ($newModel->save()) {
-                    Yii::log("New Model Saved . ", CLogger::LEVEL_INFO, 'sync_log');
-                } else {
-                    Yii::log("Cant save new model because :  " . CHtml::errorSummary($newModel), CLogger::LEVEL_INFO, 'sync_log');
+                if ($currentFetchedData['campaign'] != 'PLH_TEST') {
+                    if ($newModel->save()) {
+                        Yii::log("New Model Saved . ", CLogger::LEVEL_INFO, 'sync_log');
+                    } else {
+                        Yii::log("Cant save new model because :  " . CHtml::errorSummary($newModel), CLogger::LEVEL_INFO, 'sync_log');
+                    }
                 }
             }
         }
